@@ -9084,8 +9084,8 @@ b46455 DEFW 26752    ; Background 1 Bitmap pointer to #R26752
 ; Graphics bytes are in #R26752 for Stage 1 and #R30112 for Stage 2.
 @label=bg_2_attr_data
 b46467 DEFB 1,98,3,96,1,124,2,125         ; {#HTML(<span>Background 2
- 46475 DEFB 1,104,14,111,4,108,1,68       ; Attributes.</span></br><img
- 46483 DEFB 1,100,255,1,98,3,96,1         ; src="../images/bg/bg2_attrs.png">)
+ 46475 DEFB 1,104,14,111,4,108,1,68       ; Attributes.</span></br>)#IMG(bg/bg2_attrs.png)
+ 46483 DEFB 1,100,255,1,98,3,96,1         ;
  46491 DEFB 100,2,124,14,111,3,108,1      ;
  46499 DEFB 100,1,108,1,68,1,100,255      ;
  46507 DEFB 4,96,1,108,15,124,5,108       ;
@@ -9104,8 +9104,8 @@ b46467 DEFB 1,98,3,96,1,124,2,125         ; {#HTML(<span>Background 2
  46611 DEFB 22,112,255                    ; }
 @label=bg_1_attr_data
  46614 DEFB 1,82,26,86,1,84,255,1         ; {#HTML(<span>Background 1
- 46622 DEFB 82,26,86,1,84,255,3,81        ; Attributes.</span></br><img
- 46630 DEFB 4,86,1,113,2,89,1,113         ; src="../images/bg/bg1_attrs.png">)
+ 46622 DEFB 82,26,86,1,84,255,3,81        ; Attributes.</span></br>)#IMG(bg/bg1_attrs.png)
+ 46630 DEFB 4,86,1,113,2,89,1,113         ;
  46638 DEFB 14,86,3,81,255,1,89,3         ;
  46646 DEFB 81,3,86,1,113,2,89,1          ;
  46654 DEFB 113,13,86,3,81,1,89,255       ;
