@@ -1,0 +1,33 @@
+name: Build & Deploy
+
+on:
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar Skoolkit 9.6
+        run: pip install skoolkit==9.6
+
+      - name: Recrear estructura ../skoolkit-9.6/
+        run: |
+          mkdir -p ../skoolkit-9.6
+          curl -sL https://github.com/skoolkid/skoolkit/archive/refs/tags/9.6.tar.gz \
+            | tar -xz --strip-components=1 -C ../skoolkit-9.6
+
+      - name: Construir HTML
+        run: make html HTML_OPTIONS="-toOa"
+
+      - name: Publicar en gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/html
+          publish_branch: gh-pages
