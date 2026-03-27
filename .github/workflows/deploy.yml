@@ -25,6 +25,13 @@ jobs:
             | tar -xz --strip-components=1 -C ../skoolkit-9.6
           make html HTML_OPTIONS="-toOa"
 
+      - name: Listar build/html
+        run: |
+          echo "Contenido de build:"
+          ls -R build || echo "NO EXISTE build"
+          echo "Contenido de build/html:"
+          ls -R build/html || echo "NO EXISTE build/html"
+
       - name: Publicar en gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
