@@ -1,0 +1,12 @@
+; tap2sna.py file for Barbarian the Ultimate Warrior P1. Run
+;
+;   $ tap2sna.py @barbariantheultimatewarriorp1.t2s
+;
+; to create a Z80 snapshot.
+
+https://tzxvault.org/Spectrum/TZX/Barbarian.zip
+BarbariantheUltimateWarriorP1.z80
+
+--tape-name "Barbarian - Part 1.tzx"
+--tape-sum d0d43cfe67ed7ab50d1c1e11f785b2b0
+--start 0x89A8

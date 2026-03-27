@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 38547</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="38500.html">38500</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#38547">Map</a></td>
+<td class="next">
+Next: <a href="38624.html">38624</a>
+</td>
+</tr>
+</table>
+<div class="description">38547: Copy stage background to framebuffer.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="35240.html">entry_point</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="38547"></span>
+<div class="comments">
+<div class="paragraph">
+Fills the <a href="24066.html">framebuffer</a> with the active stage background graphics each frame, ready for sprite rendering.
+</div>
+<div class="paragraph">
+Copies 94 scanlines of 28 bytes each via 28 unrolled LDI instructions per row. After each row, four INC DE instructions skip the 4-byte border gap, keeping the destination aligned to the next framebuffer row (stride 32, graphics width 28).
+</div>
+<div class="paragraph">
+INPUT: None. OUTPUT: None. DESTROYS AF, BC, DE, HL.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">copy_bg_to_frmbuff</td>
+<td class="address-2"><span id="38547"></span>38547</td>
+<td class="instruction">LD HL,(46459)</td>
+<td class="comment-1" rowspan="3">Load active background address from <a href="46455.html#46459">active_bg_bitmap_ptr</a> into HL, it adds the offset of the upper (not updatable part).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38550"></span>38550</td>
+<td class="instruction">LD DE,1008</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38553"></span>38553</td>
+<td class="instruction">ADD HL,DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38554"></span>38554</td>
+<td class="instruction">LD DE,24066</td>
+<td class="comment-1" rowspan="1">Set DE to <a href="24066.html">framebuffer</a>, framebuffer start.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38557"></span>38557</td>
+<td class="instruction">LD B,94</td>
+<td class="comment-1" rowspan="1">B = 94, total scanline rows to copy.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38559"></span>38559</td>
+<td class="instruction">LD C,0</td>
+<td class="comment-1" rowspan="1">C = 0, initialises BC so LDI decrements BC correctly each copy.</td>
+</tr>
+<tr>
+<td class="asm-label">copy_bg_to_frmbuff_0</td>
+<td class="address-2"><span id="38561"></span>38561</td>
+<td class="instruction">LDI</td>
+<td class="comment-1" rowspan="28">Copy one 28-byte scanline via 28 unrolled LDI instructions.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38563"></span>38563</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38565"></span>38565</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38567"></span>38567</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38569"></span>38569</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38571"></span>38571</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38573"></span>38573</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38575"></span>38575</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38577"></span>38577</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38579"></span>38579</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38581"></span>38581</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38583"></span>38583</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38585"></span>38585</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38587"></span>38587</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38589"></span>38589</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38591"></span>38591</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38593"></span>38593</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38595"></span>38595</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38597"></span>38597</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38599"></span>38599</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38601"></span>38601</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38603"></span>38603</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38605"></span>38605</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38607"></span>38607</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38609"></span>38609</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38611"></span>38611</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38613"></span>38613</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38615"></span>38615</td>
+<td class="instruction">LDI</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38617"></span>38617</td>
+<td class="instruction">INC DE</td>
+<td class="comment-1" rowspan="4">Skip the 4-byte border gap to align DE to the next framebuffer row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38618"></span>38618</td>
+<td class="instruction">INC DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38619"></span>38619</td>
+<td class="instruction">INC DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38620"></span>38620</td>
+<td class="instruction">INC DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38621"></span>38621</td>
+<td class="instruction">DJNZ <a href="38547.html#38561">copy_bg_to_frmbuff_0</a></td>
+<td class="comment-1" rowspan="1">Repeat for all 94 scanlines.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38623"></span>38623</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="38500.html">38500</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#38547">Map</a></td>
+<td class="next">
+Next: <a href="38624.html">38624</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/9693.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

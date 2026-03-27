@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at 46096</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="45991.html">45991</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#46096">Map</a></td>
+<td class="next">
+Next: <a href="46201.html">46201</a>
+</td>
+</tr>
+</table>
+<div class="description">46096: Hit section: attacker frame 38.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Hitbox active when attacker animation frame index = 38. Pairs: (defender_frame, hit_type index into <a href="46308.html">hit_type_table</a>). Terminated by 0xFF.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="46096"></span>
+<div class="comments">
+<div class="paragraph">
+Upward headcut sword frame. Exclusively type 20 (fall+slash+dmg/near) on all matched defender frames.
+</div>
+<div class="paragraph">
+Near range (dist0-2) uniform across all entries. No guard frames and no range exceptions.
+</div>
+<div class="paragraph">
+Used by <a href="39468.html">hit_detection</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">hit_frame_38</td>
+<td class="address-1"><span id="46096"></span>46096</td>
+<td class="instruction">DEFB 0,17,1,17,2,17,3,17</td>
+<td class="comment-1" rowspan="1">fr0:fall+slash+dmg/near fr1:fall+slash+dmg/near fr2:fall+slash+dmg/near fr3:fall+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46104"></span>46104</td>
+<td class="instruction">DEFB 4,17,5,17,6,17,7,17</td>
+<td class="comment-1" rowspan="1">fr4:fall+slash+dmg/near fr5:fall+slash+dmg/near fr6:fall+slash+dmg/near fr7:fall+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46112"></span>46112</td>
+<td class="instruction">DEFB 10,17,11,17,12,17,13,17</td>
+<td class="comment-1" rowspan="1">fr8:fall+slash+dmg/near fr10:fall+slash+dmg/near fr11:fall+slash+dmg/near fr13:fall+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46120"></span>46120</td>
+<td class="instruction">DEFB 14,17,15,17,16,17,21,17</td>
+<td class="comment-1" rowspan="1">fr14:fall+slash+dmg/near fr15:fall+slash+dmg/near fr16:fall+slash+dmg/near fr21:fall+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46128"></span>46128</td>
+<td class="instruction">DEFB 22,17,23,17,24,17,25,17</td>
+<td class="comment-1" rowspan="1">fr22:fall+slash+dmg/near fr23:fall+slash+dmg/near fr24:fall+slash+dmg/near fr25:fall+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46136"></span>46136</td>
+<td class="instruction">DEFB 26,17,28,18,31,17,32,17</td>
+<td class="comment-1" rowspan="1">fr26:fall+slash+dmg/near fr28:fall+slash+dmg/near fr31:fall+slash+dmg/near fr32:fall+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46144"></span>46144</td>
+<td class="instruction">DEFB 50,17,51,17,52,17,53,17</td>
+<td class="comment-1" rowspan="1">fr50:fall+slash+dmg/near fr51:fall+slash+dmg/near fr52:fall+slash+dmg/near fr53:fall+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46152"></span>46152</td>
+<td class="instruction">DEFB 54,17,55,17,57,17,58,17</td>
+<td class="comment-1" rowspan="1">fr54:fall+slash+dmg/near fr55:fall+slash+dmg/near fr57:fall+slash+dmg/near fr58:fall+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46160"></span>46160</td>
+<td class="instruction">DEFB 59,17,60,17,61,17,65,17</td>
+<td class="comment-1" rowspan="1">fr59:fall+slash+dmg/near fr60:fall+slash+dmg/near fr61:fall+slash+dmg/near fr65:fall+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46168"></span>46168</td>
+<td class="instruction">DEFB 66,17,67,17,68,17,69,17</td>
+<td class="comment-1" rowspan="1">fr66:fall+slash+dmg/near fr67:fall+slash+dmg/near fr68:fall+slash+dmg/near fr69:fall+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46176"></span>46176</td>
+<td class="instruction">DEFB 72,17,73,17,74,17,75,17</td>
+<td class="comment-1" rowspan="1">fr72:fall+slash+dmg/near fr73:fall+slash+dmg/near fr74:fall+slash+dmg/near fr75:fall+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46184"></span>46184</td>
+<td class="instruction">DEFB 80,17,81,17,82,17,83,17</td>
+<td class="comment-1" rowspan="1">fr80:fall+slash+dmg/near fr81:fall+slash+dmg/near fr82:fall+slash+dmg/near fr83:fall+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46192"></span>46192</td>
+<td class="instruction">DEFB 84,17,85,17,88,17,96,17</td>
+<td class="comment-1" rowspan="1">fr84:fall+slash+dmg/near fr85:fall+slash+dmg/near fr88:fall+slash+dmg/near fr96:fall+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46200"></span>46200</td>
+<td class="instruction">DEFB 255</td>
+<td class="comment-1" rowspan="1">End-of-section terminator (0xFF).</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="45991.html">45991</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#46096">Map</a></td>
+<td class="next">
+Next: <a href="46201.html">46201</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/B410.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

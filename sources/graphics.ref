@@ -1,0 +1,80 @@
+; SkoolKit ref file for Barbarian - Graphics and Sound
+
+[Index:GraphicSound:Graphics and Sounds]
+Loading Screen
+Stage 1 Background
+Stage 2 Background
+Snake sprite data (Hud)
+Barbarian sprite tileset
+Barbarian Spritesheet
+Frame sequences (animation data)
+Other Sprites tiles (P2, heads, goblin, Drax, Princess)
+Graphics
+Music & Sound
+
+[Page:Loading Screen]
+Content=asm/#N16384.html
+
+[Page:Stage 1 Background]
+Content=asm/#N26752.html
+
+[Page:Stage 2 Background]
+Content=asm/#N30112.html
+
+[Page:Snake sprite data (Hud)]
+Content=asm/#N33472.html
+
+[Page:Barbarian sprite tileset]
+Content=asm/#N49152.html
+
+[Page:Barbarian Spritesheet]
+Content=asm/#N43772.html
+
+[Page:Frame sequences (animation data)]
+Content=asm/#N44501.html
+
+[Page:Other Sprites tiles (P2, heads, goblin, Drax, Princess)]
+Content=asm/#N40192.html
+
+[Page:Music & Sound]
+SectionPrefix=Audio
+
+[Audio:Main Menu Music]
+#AUDIO(music.ogg)
+2-channel music for the beeper (More information in #R33911).
+
+[Audio:Melody (Only Channel 1)]
+#AUDIO(melody.ogg)
+Main melody sequence for channel 1. (More information in #R34105).
+
+[Audio:Bass (Only Channel 2)]
+#AUDIO(bass.ogg)
+Bass sequence for channel 2. (More information in #R34671).
+
+[Audio:Sound 1 - Tackle]
+#AUDIO(tackle.wav)
+Sound Effect: #R39926
+
+[Audio:Sound 2 - Kick]
+#AUDIO(kick.wav)
+Sound Effect: #R39932
+
+[Audio:Sound 3 - Slash]
+#AUDIO(slash.wav)
+Sound Effect: #R39938
+
+[Audio:Sound 4 - Head cut]
+#AUDIO(head_cut.wav)
+Sound Effect: #R39944
+
+[Audio:Sound 5 - Guard 1]
+#AUDIO(guard_1.wav)
+Sound Effect: #R39950
+
+[Audio:Sound 6 - Guard 2]
+#AUDIO(guard_2.wav)
+Sound Effect: #R39956
+
+[Audio:Sound 7 - Round end]
+#AUDIO(end_round.wav)
+Sound Effect: #R39962

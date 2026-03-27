@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 36347</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="36212.html">36212</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#36347">Map</a></td>
+<td class="next">
+Next: <a href="36363.html">36363</a>
+</td>
+</tr>
+</table>
+<div class="description">36347: P2 controller setup for key-assignment.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="36508.html">two_player_mode</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="36347"></span>
+<div class="comments">
+<div class="paragraph">
+Sets P2 controller type to Keyboard and jumps to <a href="36363.html">key_assign</a> to define keyboard.
+</div>
+<div class="paragraph">
+Called from <a href="36508.html">two_player_mode</a> (2P mode, options 2 and 3: P1 Sinclair + P2 Keyboard, P1 Kempston + P2 Keyboard).
+</div>
+<div class="paragraph">
+INPUT: None. OUTPUT: None (falls through to <a href="36363.html">key_assign</a>). DESTROYS: AF, IX.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">control_setup</td>
+<td class="address-2"><span id="36347"></span>36347</td>
+<td class="instruction">LD IX,47440</td>
+<td class="comment-1" rowspan="1">IX=<a href="47440.html">p2_keyboard_table</a>: P2 keyboard scancodes table.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36351"></span>36351</td>
+<td class="instruction">LD A,2</td>
+<td class="comment-1" rowspan="2">Write controller type 2 (P2 keyboard) to P2 state block <a href="46434.html">p2_controller_type</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36353"></span>36353</td>
+<td class="instruction">LD (46434),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36356"></span>36356</td>
+<td class="instruction">LD A,2</td>
+<td class="comment-1" rowspan="2">Write "2 " to Menu String <a href="48795.html#48824">player_header_1</a> so it will be printed "SELECT KEYS PLAYER2".</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36358"></span>36358</td>
+<td class="instruction">LD (48824),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36361"></span>36361</td>
+<td class="instruction">JR <a href="36363.html">key_assign</a></td>
+<td class="comment-1" rowspan="1">Jump to shared key-assignment loop at <a href="36363.html">key_assign</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="36212.html">36212</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#36347">Map</a></td>
+<td class="next">
+Next: <a href="36363.html">36363</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/8DFB.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

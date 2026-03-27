@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 35825</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="35765.html">35765</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#35825">Map</a></td>
+<td class="next">
+Next: <a href="35878.html">35878</a>
+</td>
+</tr>
+</table>
+<div class="description">35825: Human controller input reader.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Called by <a href="35713.html">input_ai_dispatcher</a> with A = controller type (IY+0) and IY pointing to the character state block. For keyboard/Sinclair controllers, reads 5 scancodes (Fire, Up, Down, Left, Right) from the table for this controller type and builds a key-state bitmask.
+</div>
+<div class="paragraph">
+For Kempston, reads the joystick port directly. Returns A with bits 0-4 set for pressed keys: bit 0 = Right, bit 1 = Left, bit 2 = Down, bit 3 = Up, bit 4 = Fire.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="35825"></span>
+<div class="comments">
+<div class="paragraph">
+IN A = controller type (1-5). IY = character state block.
+</div>
+<div class="paragraph">
+OUT A = key state bitmask (bits 0-4). (Caller stores it in IY+1).
+</div>
+<div class="paragraph">
+DESTROYS AF, BC, DE, HL.
+</div>
+<div class="paragraph">
+Scancode tables: 1 = P1 keyboard <a href="47433.html">p1_keyboard_table</a>, 2 = P2 keyboard <a href="47440.html">p2_keyboard_table</a> (Sinclair2 defaults), 3 = Sinclair2 fixed <a href="47445.html">sinclair_joystick_2_table</a> (keys 6-0), 4 = Sinclair1 fixed <a href="47450.html">sinclair_joystick_1_table</a> (keys 1-5), 5 = Kempston joystick (port 31).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">human_input_reader</td>
+<td class="address-2"><span id="35825"></span>35825</td>
+<td class="instruction">LD HL,47433</td>
+<td class="comment-1" rowspan="1">HL = P1 keyboard scancode table <a href="47433.html">p1_keyboard_table</a> (default for type 1).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35828"></span>35828</td>
+<td class="instruction">CP 1</td>
+<td class="comment-1" rowspan="1">Is controller type = 1?</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35830"></span>35830</td>
+<td class="instruction">JR Z,<a href="35825.html#35861">human_input_reader_0</a></td>
+<td class="comment-1" rowspan="1">Yes: use P1 keyboard table at <a href="47433.html">p1_keyboard_table</a> (jump to scan loop).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35832"></span>35832</td>
+<td class="instruction">LD HL,47440</td>
+<td class="comment-1" rowspan="1">HL = P2 keyboard scancode table <a href="47440.html">p2_keyboard_table</a> (type 2).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35835"></span>35835</td>
+<td class="instruction">CP 2</td>
+<td class="comment-1" rowspan="1">Is controller type = 2?</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35837"></span>35837</td>
+<td class="instruction">JR Z,<a href="35825.html#35861">human_input_reader_0</a></td>
+<td class="comment-1" rowspan="1">Yes: use P2 keyboard table at <a href="47440.html">p2_keyboard_table</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35839"></span>35839</td>
+<td class="instruction">LD HL,47445</td>
+<td class="comment-1" rowspan="1">HL = Sinclair 2 fixed scancode table <a href="47445.html">sinclair_joystick_2_table</a> (type 3).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35842"></span>35842</td>
+<td class="instruction">CP 3</td>
+<td class="comment-1" rowspan="1">Is controller type = 3?</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35844"></span>35844</td>
+<td class="instruction">JR Z,<a href="35825.html#35861">human_input_reader_0</a></td>
+<td class="comment-1" rowspan="1">Yes: use Sinclair 2 table at <a href="47445.html">sinclair_joystick_2_table</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35846"></span>35846</td>
+<td class="instruction">LD HL,47450</td>
+<td class="comment-1" rowspan="1">HL = Sinclair 1 fixed scancode table <a href="47450.html">sinclair_joystick_1_table</a> (type 4).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35849"></span>35849</td>
+<td class="instruction">CP 4</td>
+<td class="comment-1" rowspan="1">Is controller type = 4?</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35851"></span>35851</td>
+<td class="instruction">JR Z,<a href="35825.html#35861">human_input_reader_0</a></td>
+<td class="comment-1" rowspan="1">Yes: use Sinclair 1 table at <a href="47450.html">sinclair_joystick_1_table</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35853"></span>35853</td>
+<td class="instruction">CP 5</td>
+<td class="comment-1" rowspan="1">Is controller type = 5 (Kempston)?</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35855"></span>35855</td>
+<td class="instruction">RET NZ</td>
+<td class="comment-1" rowspan="1">If controller type is not 1-5, return with A unchanged (no input).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35856"></span>35856</td>
+<td class="instruction">IN A,(31)</td>
+<td class="comment-1" rowspan="1">Read Kempston joystick state from port 31 into A.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35858"></span>35858</td>
+<td class="instruction">AND 31</td>
+<td class="comment-1" rowspan="1">Mask to lower 5 bits (Right, Left, Down, Up, Fire).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35860"></span>35860</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return with Kempston key state in A.</td>
+</tr>
+<tr>
+<td class="asm-label">human_input_reader_0</td>
+<td class="address-2"><span id="35861"></span>35861</td>
+<td class="instruction">LD E,0</td>
+<td class="comment-1" rowspan="1">E = 0 (result accumulator). D = 5 (remaining keys to scan).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35863"></span>35863</td>
+<td class="instruction">LD D,5</td>
+<td class="comment-1" rowspan="1">Start of keyboard scan loop (5 keys).</td>
+</tr>
+<tr>
+<td class="asm-label">human_input_reader_1</td>
+<td class="address-2"><span id="35865"></span>35865</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1">A = (HL) read next scancode from table.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35866"></span>35866</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">HL++ advance scancode table pointer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35867"></span>35867</td>
+<td class="instruction">CALL <a href="35910.html">key_state_test</a></td>
+<td class="comment-1" rowspan="1">Test key state via <a href="35910.html">key_state_test</a>: Carry=1 released, Carry=0 pressed.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35870"></span>35870</td>
+<td class="instruction">CCF</td>
+<td class="comment-1" rowspan="1">CCF invert carry so pressed -&gt; Carry=1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35871"></span>35871</td>
+<td class="instruction">RL E</td>
+<td class="comment-1" rowspan="1">RL E rotate carry into E; builds bitmask LSB-first (Right,Left,Down,Up,Fire).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35873"></span>35873</td>
+<td class="instruction">DEC D</td>
+<td class="comment-1" rowspan="1">D- decrement remaining-key counter.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35874"></span>35874</td>
+<td class="instruction">JR NZ,<a href="35825.html#35865">human_input_reader_1</a></td>
+<td class="comment-1" rowspan="1">Loop until all 5 keys have been processed.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35876"></span>35876</td>
+<td class="instruction">LD A,E</td>
+<td class="comment-1" rowspan="1">A = E: copy final key-state bitmask to A.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35877"></span>35877</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return with A = key-state bitmask.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="35765.html">35765</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#35825">Map</a></td>
+<td class="next">
+Next: <a href="35878.html">35878</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/8BF1.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Game status buffer entry at B972</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-g">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Game status buffer</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B962.html">B962</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b972">Map</a></td>
+<td class="next">
+Next: <a href="B973.html">B973</a>
+</td>
+</tr>
+</table>
+<div class="description">B972: ISR frame counter</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Incremented each interrupt (50 Hz PAL). When it reaches 9 it is reset to 0.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="b972"></span>
+<div class="comments">
+<div class="paragraph">
+Written and read exclusively by <a href="9664.html">int_serv_routine</a> (ISR).
+</div>
+<div class="paragraph">
+Acts as a frequency divider: the combat timer <a href="B6D8.html">timer_flag</a> is decremented once every 9 interrupts, giving an effective timer rate of 50/9 ~= 5.56 Hz.
+</div>
+<div class="paragraph">
+Initialised to 0 by <a href="89A8.html#89db">entry_point_1</a> at the start of each game round.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">isr_counter</td>
+<td class="address-1"><span id="b972"></span>B972</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">ISR frame counter. Range 0-8. Resets to 0 on tick 9.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B962.html">B962</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b972">Map</a></td>
+<td class="next">
+Next: <a href="B973.html">B973</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/47474.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

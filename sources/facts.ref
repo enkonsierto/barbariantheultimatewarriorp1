@@ -1,0 +1,84 @@
+[Fact:adamEasterEgg:Programmer's hidden signature]
+At #R34000, between the music engine routines, there are four bytes with ASCII
+values #N97, #N100, #N97, #N109 -- the word ADAM. This code is completely unreachable
+at runtime; no code path can ever reach it. No member of the development team is known as Adam, and at the time of disassembly, the reason for including it as a signature in the game was unknown. Perhaps a programmer's nickname? A family member's name? Perhaps a reference to Masters of the Universe?
+
+[Fact:deadJumpInMusicEngine:A jump that never jumps]
+At #R34004, inside the music engine, there is a JR Z,#N34004 instruction -- a
+conditional branch that would jump to itself. However, the Z flag is always
+clear when execution reaches that point, so the branch never fires. It is dead
+code that does nothing.
+
+[Fact:unusedWalkOutAnimation:The winner's exit animation that never plays]
+Both #R37714 (P1 wins) and #R37748 (P2 wins) contain unreachable blocks that
+would have applied the animation 35 (walk-out animation). However it is completely unreachable: they execute a JP or JR
+immediately beforehand and never return. In other systems this animation is executed, showing the winner walking out of the arena.
+
+[Fact:selfPatchingInvulnerability:The game patches itself to enable damage]
+A RET Z instruction inside #R39371 prevents P1 from losing energy, keeping them
+invulnerable during the demo/attract mode. When the player starts a real match,
+routines #R36212 and #R36508 overwrite that byte in memory with a NOP, removing
+the protection. The same pair of routines also rewrites the menu text from
+"0 DEMO" to "START GAME". Once this routines are executed we can't no longer launch the demo mode.
+
+[Fact:unusedMusicLoopPointers:Music loop pointers that are never written]
+The music engine state area at #R33864 reserves two 2-byte slots for loop-back
+addresses: Melody loop pointer at #R33869 and Bass loop pointer at #R33873. In the final
+version neither is ever written to. The restart mechanism instead reads the
+loop address inline from the music data stream at #R33903. The slots are a
+leftover from an earlier design.
+
+[Fact:unusedBossTilesInEnemyBank:Unused final boss]
+The enemy and head sprite bank at #R40192 contains the complete tiles of Drax and Mariana with no runtime
+caller. No sprite frame definition references these indices and
+no movement applies them during gameplay. At #R46871 there are 16 bytes of tile sequence data corresponding to the spell
+projectile animation for Drax, alternating tile IDs 18 and 22 from the
+head sprite bank. No runtime code references this data. They are remnants of the final boss cut in this part.
+
+[Fact:unusedStateBuffer:An unused buffer initialised to 6]
+At #R46825 there are 2 bytes. The first is always 0, written redundantly by
+#R37866. The second, at #N46826, retains its initialisation value of 6 and is
+neither read nor written at any point. It is likely a remnant from when the P2
+overlay state block had 9 fields and the IY+8 slot was later removed.
+
+[Fact:fontDataOverwrittenByFramebuffer:Font data overwritten by the framebuffer]
+From #R26480 onwards there are UDG font table entries that were loaded as part
+of the main code block but are never referenced at runtime. The framebuffer,
+which spans #R24066 to #N26751, overwrites them during normal gameplay.
+
+[Fact:ivtOverwritesTile0:The interrupt vector table overwrites the first byte of tile 0]
+The interrupt vector table generator at #R38494 writes 257 bytes of value 0xF0
+starting from address #N48896. The 257th byte lands exactly at #N49152, the first byte of the barbarian sprite tileset. After startup that byte
+holds #N$F0 rather than the original #N0. Because tile 0 is the fully
+transparent blank tile and its header byte is not read by any rendering path
+once the game is running, the change has no visible effect.
+
+[Fact:xDeltaOverwritesUnusedTiles:The X-delta table and the ISR overwrites two unused sprite tiles]
+At startup, #R48935 copies 100 bytes from #R49046 (the per-frame horizontal
+displacement table) to address #N61568. This area corresponds to tiles
+194 and 195 in the barbarian sprite bank.
+In the other hand, #R49031 writes the 46-byte ISR code -- relocated from #R38500 -- to
+address #N61680. This address falls inside tiles 195 and 196 of the
+barbarian sprite bank (#N$F0C0-#N$F0FF). Those tiles are unused: no sprite
+definition references either index.
+
+[Fact:p2SpriteCompositing:P2 is rendered by compositing one overlay tile on top of the shared P1 sprite]
+P1 and P2 share an identical base sprite bank at #R49152. Rather than
+maintaining a full duplicate tileset for P2, the game renders P2 using the
+same 4x3 tile grid as P1 and then composites a single extra tile on top each
+frame via #R38220. The overlay tile index is read from #R47223, and its
+framebuffer position from #R47329, both indexed by the current P2 frame
+counter at #R46442. The tile is sourced from the secondary sprite bank at
+#R40192, which holds the P2-specific head variants and overlay graphics.
+To avoid duplicating renderer logic, #R38220 populates the overlay state
+block at #R46817 using the same 9-byte layout as the flying head block at
+#R46809, allowing #R38103 and #R38158 to serve both paths without
+modification.
+
+[Fact:devBuildStamp:A hidden build stamp is accessible from the main menu]
+Pressing key 3 on the main menu does not launch a game mode. Instead,
+#R36130 loads the address #R48662 into DE and draws the string "FINAL V8
+5>11>87" over the SELECT OPTION line via #R36022, then loops straight back
+to the animation and key-wait cycle. The string remains on screen until
+the player presses another key.
+This is is consistent with a build tag left by the developer: version 8, dated 5 November 1987.

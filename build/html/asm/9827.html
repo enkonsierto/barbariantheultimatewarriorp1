@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 9827</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="9818.html">9818</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#9827">Map</a></td>
+<td class="next">
+Next: <a href="9830.html">9830</a>
+</td>
+</tr>
+</table>
+<div class="description">9827: Copy one 28-byte scanline from stage background to screen.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Copies exactly 28 bytes from the stage background source at DE to the screen at HL, advancing both pointers. Called 8 times per tile row by <a href="9818.html">copy_bg_row</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="9827"></span>
+<div class="comments">
+<div class="paragraph">
+INPUT: DE = stage background source address. HL = VRAM destination address.
+</div>
+<div class="paragraph">
+OUTPUT: DE and HL both advanced by 28 bytes. DESTROYS AF, B.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">copy_bg_scanline</td>
+<td class="address-2"><span id="9827"></span>9827</td>
+<td class="instruction">LD B,$1C</td>
+<td class="comment-1" rowspan="1">Sets the tile column counter to 28.</td>
+</tr>
+<tr>
+<td class="asm-label">copy_bg_scanline_0</td>
+<td class="address-2"><span id="9829"></span>9829</td>
+<td class="instruction">LD A,(DE)</td>
+<td class="comment-1" rowspan="2">Reads one background byte and writes it to VRAM.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="982a"></span>982A</td>
+<td class="instruction">LD (HL),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="982b"></span>982B</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="2">Advances both source and destination pointers.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="982c"></span>982C</td>
+<td class="instruction">INC DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="982d"></span>982D</td>
+<td class="instruction">DJNZ <a href="9827.html#9829">copy_bg_scanline_0</a></td>
+<td class="comment-1" rowspan="1">Repeats for all 28 tile columns.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="982f"></span>982F</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Returns to <a href="9818.html">copy_bg_row</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="9818.html">9818</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#9827">Map</a></td>
+<td class="next">
+Next: <a href="9830.html">9830</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/38951.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 37748</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="37714.html">37714</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#37748">Map</a></td>
+<td class="next">
+Next: <a href="37772.html">37772</a>
+</td>
+</tr>
+</table>
+<div class="description">37748: P2-wins end-of-fight sequence.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="37631.html">end_of_fight_dispatcher</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="37748"></span>
+<div class="comments">
+<div class="paragraph">
+Called by <a href="37631.html">end_of_fight_dispatcher</a> in timed 2P mode (<a href="46808.html">timer_flag</a> != 255) with IY pointing to the P2 state block <a href="46434.html">p2_controller_type</a>, signalling that P1 has been defeated.
+</div>
+<div class="paragraph">
+Symmetric counterpart to <a href="37714.html">p1_wins_seq</a>: same structure but operates on the P2 mirror flag (<a href="46434.html#46436">p2_mirror_flags</a> bit 0).
+</div>
+<div class="paragraph">
+Calls <a href="37819.html">p1_death_score_update</a> to update P2 score and decrement round timer.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">p2_wins_seq</td>
+<td class="address-2"><span id="37748"></span>37748</td>
+<td class="instruction">CALL <a href="37819.html">p1_death_score_update</a></td>
+<td class="comment-1" rowspan="1">Score update and timer decrement (P2 side).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="37751"></span>
+<div class="comments">
+<div class="paragraph">
+The rest of the routine contains UNREACHABLE CODE. In other versions of the game, after the end of fight, it applies movement 35 (walk-out animation) to exit arena on P2 state block via <a href="37772.html">post_fight_setup</a>. This seems to be a remaining of that.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37751"></span>37751</td>
+<td class="instruction">CALL <a href="37772.html">post_fight_setup</a></td>
+<td class="comment-1" rowspan="1">Walk out animation (movement 35) on P2; Z set if mirror flag clear.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37754"></span>37754</td>
+<td class="instruction">RET NZ</td>
+<td class="comment-1" rowspan="1">Mirror flag already set: nothing to do.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37755"></span>37755</td>
+<td class="instruction">XOR 1</td>
+<td class="comment-1" rowspan="1">Toggle bit 0 to activate mirror flag (one-shot).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37757"></span>37757</td>
+<td class="instruction">LD (46436),A</td>
+<td class="comment-1" rowspan="1">Write mirror flag to <a href="46434.html#46436">p2_mirror_flags</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37760"></span>37760</td>
+<td class="instruction">LD A,(46437)</td>
+<td class="comment-1" rowspan="1">Read P2 row position (<a href="46434.html#46437">p2_x_pos</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37763"></span>37763</td>
+<td class="instruction">SUB 4</td>
+<td class="comment-1" rowspan="1">Decrement row by 4.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37765"></span>37765</td>
+<td class="instruction">CP 24</td>
+<td class="comment-1" rowspan="1">Underflow check (row &lt; 0 after subtraction).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37767"></span>37767</td>
+<td class="instruction">RET NC</td>
+<td class="comment-1" rowspan="1">Row out of bounds: return without update.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37768"></span>37768</td>
+<td class="instruction">LD (46437),A</td>
+<td class="comment-1" rowspan="1">Write updated row position (<a href="46434.html#46437">p2_x_pos</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37771"></span>37771</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="37714.html">37714</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#37748">Map</a></td>
+<td class="next">
+Next: <a href="37772.html">37772</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/9374.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

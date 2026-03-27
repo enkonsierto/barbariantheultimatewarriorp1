@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at 47476</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="47475.html">47475</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#47476">Map</a></td>
+<td class="next">
+Next: <a href="47518.html">47518</a>
+</td>
+</tr>
+</table>
+<div class="description">47476: Keyboard glyph lookup table</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Maps keyboard scancodes (0-39) to UDG indices for drawing key symbols on the key assignment screen.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="47476"></span>
+<div class="comments">
+<div class="paragraph">
+Used by <a href="35937.html">catch_key</a>: HL=47476; CALL <a href="38318.html">get_byte_value</a> to read glyph index for scancode in A.
+</div>
+<div class="paragraph">
+Maps keyboard row/column scancodes to UDG glyphs for key config screen rendering via <a href="35937.html">catch_key</a>/<a href="38318.html">get_byte_value</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">key_glyph_table</td>
+<td class="address-1"><span id="47476"></span>47476</td>
+<td class="instruction">DEFB 66</td>
+<td class="comment-1" rowspan="1">'B' (scancode 0)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47477"></span>47477</td>
+<td class="instruction">DEFB 72</td>
+<td class="comment-1" rowspan="1">'H' (scancode 1)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47478"></span>47478</td>
+<td class="instruction">DEFB 89</td>
+<td class="comment-1" rowspan="1">'Y' (scancode 2)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47479"></span>47479</td>
+<td class="instruction">DEFB 54</td>
+<td class="comment-1" rowspan="1">'6' (scancode 3)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47480"></span>47480</td>
+<td class="instruction">DEFB 53</td>
+<td class="comment-1" rowspan="1">'5' (scancode 4)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47481"></span>47481</td>
+<td class="instruction">DEFB 84</td>
+<td class="comment-1" rowspan="1">'T' (scancode 5)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47482"></span>47482</td>
+<td class="instruction">DEFB 71</td>
+<td class="comment-1" rowspan="1">'G' (scancode 6)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47483"></span>47483</td>
+<td class="instruction">DEFB 86</td>
+<td class="comment-1" rowspan="1">'V' (scancode 7)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47484"></span>47484</td>
+<td class="instruction">DEFB 78</td>
+<td class="comment-1" rowspan="1">'N' (scancode 8)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47485"></span>47485</td>
+<td class="instruction">DEFB 74</td>
+<td class="comment-1" rowspan="1">'J' (scancode 9)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47486"></span>47486</td>
+<td class="instruction">DEFB 85</td>
+<td class="comment-1" rowspan="1">'U' (scancode 10)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47487"></span>47487</td>
+<td class="instruction">DEFB 55</td>
+<td class="comment-1" rowspan="1">'7' (scancode 11)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47488"></span>47488</td>
+<td class="instruction">DEFB 52</td>
+<td class="comment-1" rowspan="1">'4' (scancode 12)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47489"></span>47489</td>
+<td class="instruction">DEFB 82</td>
+<td class="comment-1" rowspan="1">'R' (scancode 13)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47490"></span>47490</td>
+<td class="instruction">DEFB 70</td>
+<td class="comment-1" rowspan="1">'F' (scancode 14)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47491"></span>47491</td>
+<td class="instruction">DEFB 67</td>
+<td class="comment-1" rowspan="1">'C' (scancode 15)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47492"></span>47492</td>
+<td class="instruction">DEFB 77</td>
+<td class="comment-1" rowspan="1">'M' (scancode 16)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47493"></span>47493</td>
+<td class="instruction">DEFB 75</td>
+<td class="comment-1" rowspan="1">'K' (scancode 17)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47494"></span>47494</td>
+<td class="instruction">DEFB 73</td>
+<td class="comment-1" rowspan="1">'I' (scancode 18)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47495"></span>47495</td>
+<td class="instruction">DEFB 56</td>
+<td class="comment-1" rowspan="1">'8' (scancode 19)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47496"></span>47496</td>
+<td class="instruction">DEFB 51</td>
+<td class="comment-1" rowspan="1">'3' (scancode 20)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47497"></span>47497</td>
+<td class="instruction">DEFB 69</td>
+<td class="comment-1" rowspan="1">'E' (scancode 21)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47498"></span>47498</td>
+<td class="instruction">DEFB 68</td>
+<td class="comment-1" rowspan="1">'D' (scancode 22)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47499"></span>47499</td>
+<td class="instruction">DEFB 88</td>
+<td class="comment-1" rowspan="1">'X' (scancode 23)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47500"></span>47500</td>
+<td class="instruction">DEFB 62</td>
+<td class="comment-1" rowspan="1">'&gt;' (scancode 24)'SYMBOL SHIFT'</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47501"></span>47501</td>
+<td class="instruction">DEFB 76</td>
+<td class="comment-1" rowspan="1">'L' (scancode 25)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47502"></span>47502</td>
+<td class="instruction">DEFB 79</td>
+<td class="comment-1" rowspan="1">'O' (scancode 26)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47503"></span>47503</td>
+<td class="instruction">DEFB 57</td>
+<td class="comment-1" rowspan="1">'9' (scancode 27)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47504"></span>47504</td>
+<td class="instruction">DEFB 50</td>
+<td class="comment-1" rowspan="1">'2' (scancode 28)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47505"></span>47505</td>
+<td class="instruction">DEFB 87</td>
+<td class="comment-1" rowspan="1">'W' (scancode 29)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47506"></span>47506</td>
+<td class="instruction">DEFB 83</td>
+<td class="comment-1" rowspan="1">'S' (scancode 30)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47507"></span>47507</td>
+<td class="instruction">DEFB 90</td>
+<td class="comment-1" rowspan="1">'Z' (scancode 31)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47508"></span>47508</td>
+<td class="instruction">DEFB 58</td>
+<td class="comment-1" rowspan="1">':' (scancode 32)'SPACE'</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47509"></span>47509</td>
+<td class="instruction">DEFB 61</td>
+<td class="comment-1" rowspan="1">'=' (scancode 33)'ENTER'</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47510"></span>47510</td>
+<td class="instruction">DEFB 80</td>
+<td class="comment-1" rowspan="1">'P' (scancode 34)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47511"></span>47511</td>
+<td class="instruction">DEFB 48</td>
+<td class="comment-1" rowspan="1">'0' (scancode 35)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47512"></span>47512</td>
+<td class="instruction">DEFB 49</td>
+<td class="comment-1" rowspan="1">'1' (scancode 36)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47513"></span>47513</td>
+<td class="instruction">DEFB 81</td>
+<td class="comment-1" rowspan="1">'Q' (scancode 37)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47514"></span>47514</td>
+<td class="instruction">DEFB 65</td>
+<td class="comment-1" rowspan="1">'A' (scancode 38)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47515"></span>47515</td>
+<td class="instruction">DEFB 63</td>
+<td class="comment-1" rowspan="1">'?' (scancode 39)'CAPS SHIFT'</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47516"></span>47516</td>
+<td class="instruction">DEFB 59,60</td>
+<td class="comment-1" rowspan="1">Unused padding bytes (';'=59,'&lt;'=60) - scancodes &gt;39 invalid</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="47475.html">47475</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#47476">Map</a></td>
+<td class="next">
+Next: <a href="47518.html">47518</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/B974.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

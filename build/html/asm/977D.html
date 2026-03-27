@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 977D</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="976C.html">976C</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#977d">Map</a></td>
+<td class="next">
+Next: <a href="9786.html">9786</a>
+</td>
+</tr>
+</table>
+<div class="description">977D: Derive attribute high byte from a VRAM pixel address.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Converts the high byte of a VRAM pixel address to the corresponding attribute high byte. Extracts the screen third (0-2) from H and combines it with the attribute area base (0x58) to produce 0x58, 0x59 or 0x5A. L is not touched, so the caller can form the full attribute address directly from A and L.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="977d"></span>
+<div class="comments">
+<div class="paragraph">
+INPUT: HL = VRAM pixel address. OUTPUT: A attribute high byte (0x58, 0x59 or 0x5A). DESTROYS: A.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">get_attr_address</td>
+<td class="address-2"><span id="977d"></span>977D</td>
+<td class="instruction">LD A,H</td>
+<td class="comment-1" rowspan="5">Shift H right by 3 and mask to bits 1-0 to isolate the screen third (0-2).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="977e"></span>977E</td>
+<td class="instruction">RRCA</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="977f"></span>977F</td>
+<td class="instruction">RRCA</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9780"></span>9780</td>
+<td class="instruction">RRCA</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9781"></span>9781</td>
+<td class="instruction">AND $03</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9783"></span>9783</td>
+<td class="instruction">OR $58</td>
+<td class="comment-1" rowspan="1">OR 0x58 to set the attribute area base, forming the attribute high byte.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9785"></span>9785</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return with the attribute high byte in A.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="976C.html">976C</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#977d">Map</a></td>
+<td class="next">
+Next: <a href="9786.html">9786</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/38781.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

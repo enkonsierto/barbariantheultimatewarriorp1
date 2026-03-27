@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 95C4</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="95B5.html">95B5</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#95c4">Map</a></td>
+<td class="next">
+Next: <a href="95DF.html">95DF</a>
+</td>
+</tr>
+</table>
+<div class="description">95C4: Mirrors a tile horizontally in-place.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+For each scanline: reverses bits of the 3 bytes via table at <a href="5B00.html">reversal_table</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="95c4"></span>
+<div class="comments">
+<div class="paragraph">
+Called from <a href="95DF.html">sprites_mirror_checker</a>, <a href="995A.html">draw_snakes_sprites</a> and <a href="950E.html">head_mirroring</a>.
+</div>
+<div class="paragraph">
+INPUT: B = scanline count. DE = tile address.
+</div>
+<div class="paragraph">
+OUTPUT: DE advanced past tile. Tile mirrored in-place. DESTROYS: AF, BC, HL.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">mirror_tile_inplace</td>
+<td class="address-2"><span id="95c4"></span>95C4</td>
+<td class="instruction">LD B,$15</td>
+<td class="comment-1" rowspan="1">B=21h: full tile height.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="95c6"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="995A.html">draw_snakes_sprites</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">mirror_tile_inplace_0</td>
+<td class="address-2"><span id="95c6"></span>95C6</td>
+<td class="instruction">LD H,$5B</td>
+<td class="comment-1" rowspan="1">HL base = bit-reversal table (<a href="5B00.html">reversal_table</a>).</td>
+</tr>
+<tr>
+<td class="asm-label">mirror_tile_inplace_1</td>
+<td class="address-2"><span id="95c8"></span>95C8</td>
+<td class="instruction">LD A,(DE)</td>
+<td class="comment-1" rowspan="1">A = byte 0 index from tile.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95c9"></span>95C9</td>
+<td class="instruction">LD L,A</td>
+<td class="comment-1" rowspan="1">HL points to reversed byte 0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95ca"></span>95CA</td>
+<td class="instruction">LD C,(HL)</td>
+<td class="comment-1" rowspan="1">C = reversed byte 0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95cb"></span>95CB</td>
+<td class="instruction">INC DE</td>
+<td class="comment-1" rowspan="2">Next: byte 1 index.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95cc"></span>95CC</td>
+<td class="instruction">LD A,(DE)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95cd"></span>95CD</td>
+<td class="instruction">LD L,A</td>
+<td class="comment-1" rowspan="1">HL points to reversed byte 1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95ce"></span>95CE</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1">A = reversed byte 1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95cf"></span>95CF</td>
+<td class="instruction">LD (DE),A</td>
+<td class="comment-1" rowspan="1">Write reversed byte 1 in place.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95d0"></span>95D0</td>
+<td class="instruction">INC DE</td>
+<td class="comment-1" rowspan="2">Next: byte 2 index.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95d1"></span>95D1</td>
+<td class="instruction">LD A,(DE)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95d2"></span>95D2</td>
+<td class="instruction">LD L,A</td>
+<td class="comment-1" rowspan="1">HL points to reversed byte 2.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95d3"></span>95D3</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1">A = reversed byte 2.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95d4"></span>95D4</td>
+<td class="instruction">DEC DE</td>
+<td class="comment-1" rowspan="2">Back to byte 0 position.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95d5"></span>95D5</td>
+<td class="instruction">DEC DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95d6"></span>95D6</td>
+<td class="instruction">LD (DE),A</td>
+<td class="comment-1" rowspan="2">Write reversed byte 2 to byte 0 position.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95d7"></span>95D7</td>
+<td class="instruction">INC DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95d8"></span>95D8</td>
+<td class="instruction">INC DE</td>
+<td class="comment-1" rowspan="1">Advance to byte 2 position.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95d9"></span>95D9</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="1">Recover reversed byte 0 (in C).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95da"></span>95DA</td>
+<td class="instruction">LD (DE),A</td>
+<td class="comment-1" rowspan="1">Write it to byte 2 position.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95db"></span>95DB</td>
+<td class="instruction">INC DE</td>
+<td class="comment-1" rowspan="1">Advance DE to next scanline.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95dc"></span>95DC</td>
+<td class="instruction">DJNZ <a href="95C4.html#95c8">mirror_tile_inplace_1</a></td>
+<td class="comment-1" rowspan="1">Repeat for B scanlines.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95de"></span>95DE</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="95B5.html">95B5</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#95c4">Map</a></td>
+<td class="next">
+Next: <a href="95DF.html">95DF</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/38340.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

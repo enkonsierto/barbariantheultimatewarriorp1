@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 39856</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="39846.html">39846</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#39856">Map</a></td>
+<td class="next">
+Next: <a href="39885.html">39885</a>
+</td>
+</tr>
+</table>
+<div class="description">39856: Calculate horizontal distance between fighters.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="39020.html">x_update_and_tackle_gate</a> and <a href="39617.html">combat_loop</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="39856"></span>
+<div class="comments">
+<div class="paragraph">
+Reads tile X position of both characters and computes the absolute difference. Result stored in <a href="46834.html">fighter_distance</a>, used by <a href="39518.html">collision_solver</a> to validate hit ranges.
+</div>
+<div class="paragraph">
+Direction is determined by the mirror flag of P1 (<a href="46425.html#46427">p1_mirror_flags</a> bit 0).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">calc_distance</td>
+<td class="address-2"><span id="39856"></span>39856</td>
+<td class="instruction">LD A,(46427)</td>
+<td class="comment-1" rowspan="3">Load <a href="46425.html#46427">p1_mirror_flags</a> (P1 flags); test bit 0 (mirror flag).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39859"></span>39859</td>
+<td class="instruction">BIT 0,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39861"></span>39861</td>
+<td class="instruction">JR NZ,<a href="39856.html#39873">calc_distance_0</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39863"></span>39863</td>
+<td class="instruction">LD A,(46428)</td>
+<td class="comment-1" rowspan="5">Not mirrored: load P1 X (<a href="46425.html#46428">p1_x_pos</a>) into B, load P2 X (<a href="46434.html#46437">p2_x_pos</a>), subtract B.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39866"></span>39866</td>
+<td class="instruction">LD B,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39867"></span>39867</td>
+<td class="instruction">LD A,(46437)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39870"></span>39870</td>
+<td class="instruction">SUB B</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39871"></span>39871</td>
+<td class="instruction">JR <a href="39856.html#39881">calc_distance_1</a></td>
+</tr>
+<tr>
+<td class="asm-label">calc_distance_0</td>
+<td class="address-2"><span id="39873"></span>39873</td>
+<td class="instruction">LD A,(46437)</td>
+<td class="comment-1" rowspan="4">Mirrored: load P2 X (<a href="46434.html#46437">p2_x_pos</a>) into B, load P1 X (<a href="46425.html#46428">p1_x_pos</a>), subtract B.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39876"></span>39876</td>
+<td class="instruction">LD B,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39877"></span>39877</td>
+<td class="instruction">LD A,(46428)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39880"></span>39880</td>
+<td class="instruction">SUB B</td>
+</tr>
+<tr>
+<td class="asm-label">calc_distance_1</td>
+<td class="address-2"><span id="39881"></span>39881</td>
+<td class="instruction">LD (46834),A</td>
+<td class="comment-1" rowspan="1">Store result (absolute X delta) in <a href="46834.html">fighter_distance</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39884"></span>39884</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="39846.html">39846</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#39856">Map</a></td>
+<td class="next">
+Next: <a href="39885.html">39885</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/9BB0.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,96 @@
+[Index:Game:Game]
+Instructions
+Controls
+Completion
+
+[Page:Instructions]
+PageContent=<div>#INCLUDE(Game:theGame) #INCLUDE1(Game:strenght) #INCLUDE1(Game:score) #INCLUDE(Game:source)</div>
+
+[Game:theGame]
+<h2>The Game</h2>
+<p>The story so far...</p>
+<p>The evil sorcerer Drax desires Princess Mariana and has sworn to wreak an unspeakable doom on the people of the Jewelled City unless she is delivered to him.</p>
+
+<p>However, he has agreed that if a champion can be found who is able to defeat his demonic guardians, the princess will be allowed to go free.  All seems lost as champion after champion is defeated.</p>
+
+<p>Then, from the forgotten wastelands of the North, comes an unknown barbarian, a mighty warrior, wielding his broadsword with deadly skill.</p>
+
+<p>Can he vanquish the forces of Darkness and free the Princess?...ONLY YOU CAN SAY...</p>
+	
+[Game:strenght]
+<h2>Strenght</h2>
+<p>Each character can survive six blows which are displayed at the top of the screen (player one on the left).</p>
+
+[Game:score]
+<h2>Score</h2>
+<p>Points will be awarded depending on the difficulty of the move used (player one on the left).</p>
+
+<p>When playing in two player mode there will be a time limit for each duel.  At this time if both are still in the game, their strength will be restored and a new game will commence.</p>
+
+<p>When playing in one player mode there is no time limit and the time display will be replaced with the skill level of the opponent you are facing.</p>
+
+[Game:source]
+</br>
+<p>(C) Palace Software 1987.  All rights reserved.</br>(Source: https://spectrumcomputing.co.uk/pub/sinclair/games-info/b/Barbarian-TheUltimateWarrior.txt)</p>
+
+[Page:Controls]
+PageContent=<div>#INCLUDE1(Game:joystickCom) #INCLUDE1(Game:keyboardCom)</div>
+
+[Game:joystickCom]
+<h2>Joystick Commands</h2>
+<p>The game is in two parts which can be loaded in any order.</p>
+<p>Side one: Combat practice (one player or two player).  Perfect your swordsmanship against the finest warriors in the land.</p>
+<p>Side two: Fight to the death.  Fight for the princess against the evil minions of DRAX and finally face the evil one himself.</p>
+<h3>Barbarian Fighting Moves:</h3>
+<p>The following instructions are for a right-facing character.  For a left-facing character the moves are reversed.</p>
+<h4>JOYSTICK DIRECTIONS WITHOUT FIRE BUTTON PRESSED</h4>
+<img src="assets/controls_no_fire.jpg" alt="controls without fire" \>
+<h4>JOYSTICK DIRECTIONS WITH FIRE BUTTON PRESSED</h4>
+<img src="assets/controls_fire.jpg" alt="controls with fire" \>
+[Game:keyboardCom]
+<h4>KEYBOARD COMMANDS</h4>
+<p>When the game has loaded press to choose from the following options:</p>
+<ul>
+<li>(1) START GAME/DEMO</li>
+<li>(2) ONE PLAYER</li>         
+<li>(3) TWO PLAYER</li>    
+</ul>
+<ul>
+<li><strong>One player options:</strong></li>
+<li>(1)   SINCLAIR JOYSTICK</li>
+<li>(2)   KEMPSTON JOYSTICK</li>
+<li>(3)   KEYBOARD</li>
+</ul>
+<ul>
+<li><strong>Player one define keys:</strong></li>        
+<li>(1)   FIRE </li>                      
+<li>(2)   UP   </li>                      
+<li>(3)   DOWN  </li>                     
+<li>(4)   LEFT   </li>               
+<li>(5)   RIGHT	</li>
+<li>(6)   PAUSE	</li>
+<li>(7)   QUIT	</li>
+</ul>
+<ul>
+<li><strong>Player two options:</strong></li>
+<li>(1)   SINCLAIR
+<li>(2)   SINCLAIR/KEYBOARD</li>
+<li>(3)   KEMPSTON/KEYBOARD</li>
+<li>(4)   KEYBOARD/KEYBOARD</li>
+</ul>
+[Page:Completion]
+PageContent=<div>#INCLUDE1(Completion:solution)</div>
+
+[Completion:solution]
+<h2>How to end the game</h2>
+
+<h3>2 PLAYERS MODE</h3>
+<h4>Have fun with a friend!</h4>
+<p>This part is basically made thinking in to combat with another human player, so there's no completition. The 2 players game was removed from part 2 (although the routines didn't were removed).</p>
+<h3>1 PLAYER MODE</h3>
+<h4>Defeat the opponents endlessly</h4>
+<p>If you play in 1 player mode, this part of the game is endless and you will fight one combat after another with opponents although the fight counter will stay in 7. Unfortunately you will never face Drax.</p>
+<p>As soon as you start the game, knock your opponent into the corner by rolling into hin and then constanly knock him over. After every two rolls, kick him down until dead.</p>
+<p> On the earlier fight levels of the game, the warriors are more susceptible to the (now legendary) 'spin around and chop his head off' move.</p>
+<p>So, use this as an opportunity to beat hell out of the guy with either stomach or head slashes (200pts each) until he's right down low on his energy, then chop his head off for maximum points value - a move that nets 500pts, if I'm not wrong. This is a great way to bolster the points up for a high score, but it won't work on the higher opponents.</p>
+<p>Source: A mix of mine and <a href="https://www.the-tipshop.co.uk/cgi-bin/info.pl?name=Barbarian%3a%20The%20Ultimate%20Warrior" target="_blank" >The Tip Shop.</a></p>

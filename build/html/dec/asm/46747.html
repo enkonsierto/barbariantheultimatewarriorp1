@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at 46747</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="46467.html">46467</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#46747">Map</a></td>
+<td class="next">
+Next: <a href="46775.html">46775</a>
+</td>
+</tr>
+</table>
+<div class="description">46747: Hit indicator frame table.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="46747"></span>
+<div class="comments">
+<div class="paragraph">
+3-byte entries: frame ID, X adjustment, row offset (scanlines/8 *32).
+</div>
+<div class="paragraph">
+Searched by <a href="38325.html">find_hit_section</a>: if attacker frame IY+8 matches ID, draws ASCII 61 (hit indicator glyph, UDG index 13). via <a href="35996.html">draw_character</a> near attacker column.
+</div>
+<div class="paragraph">
+Terminator 128 skips indicator. Called before score table <a href="46775.html">score_award_frame_table</a> by <a href="35531.html">hit_processor</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">hit_indicator_frame_table</td>
+<td class="address-1"><span id="46747"></span>46747</td>
+<td class="instruction">DEFB 5,5,7</td>
+<td class="comment-1" rowspan="1">Frame 5: X adjust +5, row offset 7</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46750"></span>46750</td>
+<td class="instruction">DEFB 7,6,7</td>
+<td class="comment-1" rowspan="1">Frame 7: X adjust +6, row offset 7</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46753"></span>46753</td>
+<td class="instruction">DEFB 12,6,9</td>
+<td class="comment-1" rowspan="1">Frame 12: X adjust +6, row offset 9</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46756"></span>46756</td>
+<td class="instruction">DEFB 23,6,7</td>
+<td class="comment-1" rowspan="1">Frame 23: X adjust +6, row offset 7</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46759"></span>46759</td>
+<td class="instruction">DEFB 26,7,5</td>
+<td class="comment-1" rowspan="1">Frame 26: X adjust +7, row offset 5</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46762"></span>46762</td>
+<td class="instruction">DEFB 28,5,7</td>
+<td class="comment-1" rowspan="1">Frame 28: X adjust +5, row offset 7</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46765"></span>46765</td>
+<td class="instruction">DEFB 32,7,4</td>
+<td class="comment-1" rowspan="1">Frame 32: X adjust +7, row offset 4</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46768"></span>46768</td>
+<td class="instruction">DEFB 34,5,4</td>
+<td class="comment-1" rowspan="1">Frame 34: X adjust +5, row offset 4</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46771"></span>46771</td>
+<td class="instruction">DEFB 67,7,5</td>
+<td class="comment-1" rowspan="1">Frame 67: X adjust +7, row offset 5</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46774"></span>46774</td>
+<td class="instruction">DEFB 128</td>
+<td class="comment-1" rowspan="1">Terminator skips drawing.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="46467.html">46467</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#46747">Map</a></td>
+<td class="next">
+Next: <a href="46775.html">46775</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/B69B.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

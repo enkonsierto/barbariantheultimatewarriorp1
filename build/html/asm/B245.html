@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at B245</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B1D0.html">B1D0</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b245">Map</a></td>
+<td class="next">
+Next: <a href="B2AC.html">B2AC</a>
+</td>
+</tr>
+</table>
+<div class="description">B245: Hit section: attacker frame 28.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Hitbox active when attacker animation frame index = 28. Pairs: (defender_frame, hit_type index into <a href="B4E4.html">hit_type_table</a>). Terminated by 0xFF.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="b245"></span>
+<div class="comments">
+<div class="paragraph">
+Low sweep contact frame. Almost exclusively fall+tackle+dmg at adjacent range (type 10).
+</div>
+<div class="paragraph">
+fr13, fr34, fr35, fr59 react at close range instead (fall+tackle+dmg/close, type 12).
+</div>
+<div class="paragraph">
+No guard entries: this attack cannot be blocked.
+</div>
+<div class="paragraph">
+Used by <a href="9A2C.html">hit_detection</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">hit_frame_28</td>
+<td class="address-1"><span id="b245"></span>B245</td>
+<td class="instruction">DEFB $00,$0A,$01,$0A,$02,$0A,$03,$0A</td>
+<td class="comment-1" rowspan="1">fr0:fall+tackle+dmg/adj fr1:fall+tackle+dmg/adj fr2:fall+tackle+dmg/adj fr3:fall+tackle+dmg/adj</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b24d"></span>B24D</td>
+<td class="instruction">DEFB $04,$0A,$05,$0A,$06,$0A,$07,$0A</td>
+<td class="comment-1" rowspan="1">fr4:fall+tackle+dmg/adj fr5:fall+tackle+dmg/adj fr6:fall+tackle+dmg/adj fr7:fall+tackle+dmg/adj</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b255"></span>B255</td>
+<td class="instruction">DEFB $0A,$0A,$0B,$0A,$0C,$0A,$0D,$0C</td>
+<td class="comment-1" rowspan="1">fr10:fall+tackle+dmg/adj fr11:fall+tackle+dmg/adj fr12:fall+tackle+dmg/adj fr13:fall+tackle+dmg/close</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b25d"></span>B25D</td>
+<td class="instruction">DEFB $0E,$0A,$0F,$0A,$10,$0A,$15,$0A</td>
+<td class="comment-1" rowspan="1">fr14:fall+tackle+dmg/adj fr15:fall+tackle+dmg/adj fr16:fall+tackle+dmg/adj fr21:fall+tackle+dmg/adj</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b265"></span>B265</td>
+<td class="instruction">DEFB $17,$0A,$19,$0A,$1A,$0A,$1F,$0A</td>
+<td class="comment-1" rowspan="1">fr23:fall+tackle+dmg/adj fr25:fall+tackle+dmg/adj fr26:fall+tackle+dmg/adj fr31:fall+tackle+dmg/adj</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b26d"></span>B26D</td>
+<td class="instruction">DEFB $22,$0C,$23,$0C,$32,$0A,$33,$0A</td>
+<td class="comment-1" rowspan="1">fr34:fall+tackle+dmg/close fr35:fall+tackle+dmg/close fr50:fall+tackle+dmg/adj fr51:fall+tackle+dmg/adj</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b275"></span>B275</td>
+<td class="instruction">DEFB $34,$0A,$35,$0A,$36,$0A,$37,$0A</td>
+<td class="comment-1" rowspan="1">fr52:fall+tackle+dmg/adj fr53:fall+tackle+dmg/adj fr54:fall+tackle+dmg/adj fr55:fall+tackle+dmg/adj</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b27d"></span>B27D</td>
+<td class="instruction">DEFB $39,$0A,$3A,$0A,$3B,$0C,$3C,$0A</td>
+<td class="comment-1" rowspan="1">fr57:fall+tackle+dmg/adj fr58:fall+tackle+dmg/adj fr59:fall+tackle+dmg/close fr60:fall+tackle+dmg/adj</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b285"></span>B285</td>
+<td class="instruction">DEFB $3D,$0A,$3E,$0A,$3F,$0A,$40,$0A</td>
+<td class="comment-1" rowspan="1">fr61:fall+tackle+dmg/adj fr62:fall+tackle+dmg/adj fr63:fall+tackle+dmg/adj fr64:fall+tackle+dmg/adj</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b28d"></span>B28D</td>
+<td class="instruction">DEFB $41,$0A,$42,$0A,$44,$0A,$47,$0A</td>
+<td class="comment-1" rowspan="1">fr65:fall+tackle+dmg/adj fr66:fall+tackle+dmg/adj fr68:fall+tackle+dmg/adj fr71:fall+tackle+dmg/adj</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b295"></span>B295</td>
+<td class="instruction">DEFB $48,$0A,$4A,$0A,$4B,$0A,$50,$0A</td>
+<td class="comment-1" rowspan="1">fr72:fall+tackle+dmg/adj fr74:fall+tackle+dmg/adj fr75:fall+tackle+dmg/adj fr80:fall+tackle+dmg/adj</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b29d"></span>B29D</td>
+<td class="instruction">DEFB $51,$0A,$52,$0A,$53,$0A,$54,$0A</td>
+<td class="comment-1" rowspan="1">fr81:fall+tackle+dmg/adj fr82:fall+tackle+dmg/adj fr83:fall+tackle+dmg/adj fr84:fall+tackle+dmg/adj</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b2a5"></span>B2A5</td>
+<td class="instruction">DEFB $55,$0A,$58,$0A,$60,$0A</td>
+<td class="comment-1" rowspan="1">fr85:fall+tackle+dmg/adj fr88:fall+tackle+dmg/adj fr96:fall+tackle+dmg/adj</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b2ab"></span>B2AB</td>
+<td class="instruction">DEFB $FF</td>
+<td class="comment-1" rowspan="1">End-of-section terminator (0xFF).</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B1D0.html">B1D0</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b245">Map</a></td>
+<td class="next">
+Next: <a href="B2AC.html">B2AC</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/45637.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

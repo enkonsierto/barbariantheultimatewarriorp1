@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 38494</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="38412.html">38412</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#38494">Map</a></td>
+<td class="next">
+Next: <a href="38500.html">38500</a>
+</td>
+</tr>
+</table>
+<div class="description">38494: Interrupt Vector Table Generator</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="48896.html">game_start</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="38494"></span>
+<div class="comments">
+<div class="paragraph">
+Will generate all the 257 bytes of the interrupt table where, in loading time, are the game start routines never used later.
+</div>
+<div class="paragraph">
+INPUT: C = 240, B = 0, HL = 48896 (<a href="48896.html">game_start</a>)
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">i_v_t_generator</td>
+<td class="address-2"><span id="38494"></span>38494</td>
+<td class="instruction">LD (HL),C</td>
+<td class="comment-1" rowspan="1">Copy 240($F0) to the future Vector Table (<a href="48896.html">game_start</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38495"></span>38495</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Increments in 1 HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38496"></span>38496</td>
+<td class="instruction">DJNZ <a href="38494.html#38494">i_v_t_generator</a></td>
+<td class="comment-1" rowspan="1">Decrements B and compare with 0 (this loop will execute 256 times).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38498"></span>38498</td>
+<td class="instruction">LD (HL),C</td>
+<td class="comment-1" rowspan="1">After copying the 256 bytes, we need to copy F0 once more (257 times).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38499"></span>38499</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Returns to <a href="35240.html#35244">35244</a></td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="38412.html">38412</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#38494">Map</a></td>
+<td class="next">
+Next: <a href="38500.html">38500</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/965E.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

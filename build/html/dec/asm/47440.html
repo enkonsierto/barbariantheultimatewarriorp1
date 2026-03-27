@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Game status buffer entry at 47440</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-g">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Game status buffer</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="47439.html">47439</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#47440">Map</a></td>
+<td class="next">
+Next: <a href="47445.html">47445</a>
+</td>
+</tr>
+</table>
+<div class="description">47440: P2 keyboard scancode table.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+5-byte table: Fire, Up, Down, Left, Right scancodes for P2 (controller type 2).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="47440"></span>
+<div class="comments">
+<div class="paragraph">
+Pre-loaded with this keys: 35,27,19,3,11.
+</div>
+<div class="paragraph">
+Written by <a href="36363.html">key_assign</a> key-assignment loop when P2 is assigned a custom keyboard
+</div>
+<div class="paragraph">
+(<a href="36347.html">control_setup</a> sets IX=<a href="47440.html">p2_keyboard_table</a>). Used in 2P options 2 and 3.
+</div>
+<div class="paragraph">
+Read by <a href="35825.html">human_input_reader</a> each frame when P2 controller type is 2.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">p2_keyboard_table</td>
+<td class="address-1"><span id="47440"></span>47440</td>
+<td class="instruction">DEFB 35</td>
+<td class="comment-1" rowspan="1">Fire  = key 0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47441"></span>47441</td>
+<td class="instruction">DEFB 27</td>
+<td class="comment-1" rowspan="1">Up    = key 9</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47442"></span>47442</td>
+<td class="instruction">DEFB 19</td>
+<td class="comment-1" rowspan="1">Down  = key 8</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47443"></span>47443</td>
+<td class="instruction">DEFB 3</td>
+<td class="comment-1" rowspan="1">Left  = key 6</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47444"></span>47444</td>
+<td class="instruction">DEFB 11</td>
+<td class="comment-1" rowspan="1">Right = key 7</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="47439.html">47439</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#47440">Map</a></td>
+<td class="next">
+Next: <a href="47445.html">47445</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/B950.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

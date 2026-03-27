@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at 47559</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="47558.html">47558</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#47559">Map</a></td>
+<td class="next">
+Next: <a href="47575.html">47575</a>
+</td>
+</tr>
+</table>
+<div class="description">47559: AI difficulty level pointers.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+16 bits pointers, one per fight level (fight_counter 0-7 from <a href="47558.html">fight_counter</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="47559"></span>
+<div class="comments">
+<div class="paragraph">
+Each pointer targets a 32-byte difficulty entry table. The entry is indexed by the pseudo-random value (R register AND 31, range 0-31) to yield a sub_index (0-7) used to pick within the 8-byte block at <a href="47974.html">ai_movement_table</a>. Higher fight numbers point to
+</div>
+<div class="paragraph">
+entries that return higher sub_indices, selecting more aggressive movement IDs within each block.
+</div>
+<div class="paragraph">
+Difficulty curve (avg sub_index, monotonically increasing): F0(5.75) &gt; F1(5.38) &gt; F2(4.38) &gt; F3(3.57) &gt; F4(3.12) &gt; F5(2.62) &gt; F6(1.59) &gt; F7(~1.09)
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">ai_difficulty_table</td>
+<td class="address-1"><span id="47559"></span>47559</td>
+<td class="instruction">DEFW <a href="46889.html">ai_level_0</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47561"></span>47561</td>
+<td class="instruction">DEFW <a href="46889.html#46921">ai_level_1</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47563"></span>47563</td>
+<td class="instruction">DEFW <a href="46889.html#46953">ai_level_2</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47565"></span>47565</td>
+<td class="instruction">DEFW <a href="46889.html#47191">ai_level_3</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47567"></span>47567</td>
+<td class="instruction">DEFW <a href="46889.html#46985">ai_level_4</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47569"></span>47569</td>
+<td class="instruction">DEFW <a href="46889.html#47053">ai_level_5</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47571"></span>47571</td>
+<td class="instruction">DEFW <a href="46889.html#47119">ai_level_6</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47573"></span>47573</td>
+<td class="instruction">DEFW <a href="46889.html#47159">ai_level_7</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="47558.html">47558</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#47559">Map</a></td>
+<td class="next">
+Next: <a href="47575.html">47575</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/B9C7.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

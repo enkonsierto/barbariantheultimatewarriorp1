@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 35487</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="35458.html">35458</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#35487">Map</a></td>
+<td class="next">
+Next: <a href="35514.html">35514</a>
+</td>
+</tr>
+</table>
+<div class="description">35487: Post-fight handler. Stage alternation and counter/time reset.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="35240.html">entry_point</a> and <a href="37791.html">p2_death_score_update</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="35487"></span>
+<div class="comments">
+<div class="paragraph">
+Called from <a href="35240.html#35376">35376</a> on 2P timeout (<a href="46808.html">timer_flag</a>=0) or from <a href="37791.html#37796">37796</a> on 1P win (<a href="46808.html">timer_flag</a> always 255 during combat). Alternates stage via <a href="35458.html">change_stage_ptr</a> unless fight counter has reached 7. Resets fight counter to 0 and restores time to 90 only on timeout (2P mode). On 1P win (time=255), counter advances normally with no reset.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">post_fight_handler</td>
+<td class="address-2"><span id="35487"></span>35487</td>
+<td class="instruction">LD A,(47558)</td>
+<td class="comment-1" rowspan="1">Read the fight counter buffer <a href="47558.html">fight_counter</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35490"></span>35490</td>
+<td class="instruction">INC A</td>
+<td class="comment-1" rowspan="1">Increment only for comparison - will not be stored.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35491"></span>35491</td>
+<td class="instruction">CP 8</td>
+<td class="comment-1" rowspan="1">Would counter+1 reach 8? (1P fight limit)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35493"></span>35493</td>
+<td class="instruction">CALL NZ,<a href="35458.html">change_stage_ptr</a></td>
+<td class="comment-1" rowspan="1">If not fight 8, alternate the stage via <a href="35458.html">change_stage_ptr</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35496"></span>35496</td>
+<td class="instruction">LD A,(46808)</td>
+<td class="comment-1" rowspan="1">Load time buffer <a href="46808.html">timer_flag</a>: 255=won by combat, 0=timeout.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35499"></span>35499</td>
+<td class="instruction">OR A</td>
+<td class="comment-1" rowspan="1">If 0: round ended by timeout (2P mode); if 255: P1 victory by combat.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35500"></span>35500</td>
+<td class="instruction">JR NZ,<a href="35487.html#35511">post_fight_handler_0</a></td>
+<td class="comment-1" rowspan="1">If non-zero (P1 victory), skip the time reset.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35502"></span>35502</td>
+<td class="instruction">XOR A</td>
+<td class="comment-1" rowspan="1">Timeout path: Reset the fight counter to 0 at <a href="47558.html">fight_counter</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35503"></span>35503</td>
+<td class="instruction">LD (47558),A</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35506"></span>35506</td>
+<td class="instruction">LD A,90</td>
+<td class="comment-1" rowspan="2">Restore the time to 90 at <a href="46808.html">timer_flag</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35508"></span>35508</td>
+<td class="instruction">LD (46808),A</td>
+</tr>
+<tr>
+<td class="asm-label">post_fight_handler_0</td>
+<td class="address-2"><span id="35511"></span>35511</td>
+<td class="instruction">JP <a href="35240.html#35291">entry_point_1</a></td>
+<td class="comment-1" rowspan="1">Return to the game loop.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="35458.html">35458</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#35487">Map</a></td>
+<td class="next">
+Next: <a href="35514.html">35514</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/8A9F.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

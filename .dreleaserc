@@ -1,0 +1,4 @@
+GAME=barbariantheultimatewarriorp1
+SRCFILES=$(echo barbariantheultimatewarriorp1.skool {barbariantheultimatewarriorp1,analytics,bases,changelog,pokes}.ref {dark,wide}.css)
+SKOOL2BINOPTS="-i 35240"
+WAVCONVERT=""

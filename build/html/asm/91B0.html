@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 91B0</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="9162.html">9162</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#91b0">Map</a></td>
+<td class="next">
+Next: <a href="91C5.html">91C5</a>
+</td>
+</tr>
+</table>
+<div class="description">91B0: Edge-mask sub-tile renderer.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="9162.html">comp_tile_dispatcher</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="91b0"></span>
+<div class="comments">
+<div class="paragraph">
+Renders edge-masked sub-tile (left/right via bit6); extracts scanlines to B (bits4-0).
+</div>
+<div class="paragraph">
+Bit6=0: left-edge AND-mask via <a href="902E.html">tile_render_engine</a> (entry 36943). Bit6=1: full AND-mask via <a href="9084.html#9086">right_edge_loop_0</a>.
+</div>
+<div class="paragraph">
+Advances BC past current byte; returns next definition byte in A (bit5=1 ends sequence).
+</div>
+<div class="paragraph">
+IN: A=definition byte (bits7-6=01/10, bit6=renderer, bits4-0=scanlines). BC=def pointer.
+</div>
+<div class="paragraph">
+OUT: A=next def byte. BC=advanced. DESTROYS: AF, B, BC.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">edge_mask_renderer</td>
+<td class="address-2"><span id="91b0"></span>91B0</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="2">Saves def pointer (BC); C=def byte (bit6 tested after B set).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="91b1"></span>91B1</td>
+<td class="instruction">LD C,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="91b2"></span>91B2</td>
+<td class="instruction">AND $1F</td>
+<td class="comment-1" rowspan="2">Extracts scanline count to B (bits4-0).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="91b4"></span>91B4</td>
+<td class="instruction">LD B,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="91b5"></span>91B5</td>
+<td class="instruction">BIT 6,C</td>
+<td class="comment-1" rowspan="1">Tests bit6 of C: 0=left-edge AND-mask, 1=AND-mask loop.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="91b7"></span>91B7</td>
+<td class="instruction">JR NZ,<a href="91B0.html#91be">edge_mask_renderer_0</a></td>
+<td class="comment-1" rowspan="1">Bit6=1: full AND-mask via <a href="9084.html#9086">right_edge_loop_0</a> (B scanlines).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="91b9"></span>91B9</td>
+<td class="instruction">CALL <a href="902E.html#904f">left_edge_loop</a></td>
+<td class="comment-1" rowspan="1">Bit6=0: left-edge AND-mask via <a href="902E.html">tile_render_engine</a> (entry <a href="902E.html#904f">left_edge_loop</a>, B scanlines).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="91bc"></span>91BC</td>
+<td class="instruction">JR <a href="91B0.html#91c1">edge_mask_renderer_1</a></td>
+<td class="comment-1" rowspan="1">Jump to common exit.</td>
+</tr>
+<tr>
+<td class="asm-label">edge_mask_renderer_0</td>
+<td class="address-2"><span id="91be"></span>91BE</td>
+<td class="instruction">CALL <a href="9084.html#9086">right_edge_loop_0</a></td>
+<td class="comment-1" rowspan="1">AND-mask via <a href="9084.html#9086">right_edge_loop_0</a></td>
+</tr>
+<tr>
+<td class="asm-label">edge_mask_renderer_1</td>
+<td class="address-2"><span id="91c1"></span>91C1</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="2">Restores def pointer; advances BC to next def byte.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="91c2"></span>91C2</td>
+<td class="instruction">INC BC</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="91c3"></span>91C3</td>
+<td class="instruction">LD A,(BC)</td>
+<td class="comment-1" rowspan="1">Loads next def byte to A; returns for end-test in caller.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="91c4"></span>91C4</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return: A = next byte for end-of-def test in <a href="9162.html">comp_tile_dispatcher</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="9162.html">9162</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#91b0">Map</a></td>
+<td class="next">
+Next: <a href="91C5.html">91C5</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/37296.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

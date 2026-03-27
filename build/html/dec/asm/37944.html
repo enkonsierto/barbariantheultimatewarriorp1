@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 37944</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="37866.html">37866</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#37944">Map</a></td>
+<td class="next">
+Next: <a href="37964.html">37964</a>
+</td>
+</tr>
+</table>
+<div class="description">37944: Initialise flying head state block.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Called by <a href="37866.html">decap_setup</a> when the decapitation hit frame 17 is detected and no head is already in flight.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="37944"></span>
+<div class="comments">
+<div class="paragraph">
+Writes the direction flag and framebuffer position directly into <a href="46809.html">head_state</a> and <a href="46809.html#46815">head_screen_addr</a>, then falls through to R37950 to set the active state, trajectory pointer and tile sequence pointer.
+</div>
+<div class="paragraph">
+INPUT: A = direction flag (0=right, 1=left). HL = initial framebuffer address. DE = trajectory data pointer (<a href="46889.html#47017">normal_traj_data</a>). BC = tile sequence pointer (<a href="46835.html">p1_head_tile_seq</a> or <a href="46853.html">p2_head_tile_seq</a>).
+</div>
+<div class="paragraph">
+OUTPUT: None. DESTROYS: A.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">head_init</td>
+<td class="address-2"><span id="37944"></span>37944</td>
+<td class="instruction">LD (46809),A</td>
+<td class="comment-1" rowspan="1">Write direction flag to <a href="46809.html">head_state</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37947"></span>37947</td>
+<td class="instruction">LD (46815),HL</td>
+<td class="comment-1" rowspan="1">Write framebuffer address to <a href="46809.html#46815">head_screen_addr</a> (16-bit store).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="37950"></span>
+<div class="comments">
+<div class="paragraph">
+Second entry point used by <a href="37964.html">goblin_kicks</a> when the goblin kicks the severed head. Re-activates the head with a new trajectory and tile source without touching direction <a href="46809.html">head_state</a> or current position <a href="46809.html#46815">head_screen_addr</a>; the head is already on screen and just needs a new bounce arc.
+</div>
+<div class="paragraph">
+INPUT: DE = <a href="46889.html#47085">kicked_traj_data</a> kicked-head bounce trajectory. BC = tile sequence pointer (<a href="46835.html">p1_head_tile_seq</a>or <a href="46853.html">p2_head_tile_seq</a>).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">head_reactivate</td>
+<td class="address-2"><span id="37950"></span>37950</td>
+<td class="instruction">LD A,1</td>
+<td class="comment-1" rowspan="1">A = 1, head active and bouncing.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37952"></span>37952</td>
+<td class="instruction">LD (46810),A</td>
+<td class="comment-1" rowspan="1"><a href="46809.html#46810">head_state_flag</a> = 1: mark head as active, re-enables R37997 movement logic.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37955"></span>37955</td>
+<td class="instruction">LD (46813),DE</td>
+<td class="comment-1" rowspan="1"><a href="46809.html#46813">head_traj_ptr</a> = DE: trajectory data pointer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37959"></span>37959</td>
+<td class="instruction">LD (46811),BC</td>
+<td class="comment-1" rowspan="1"><a href="46809.html#46811">head_frame_seq</a> = BC: tile frame sequence pointer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37963"></span>37963</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="37866.html">37866</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#37944">Map</a></td>
+<td class="next">
+Next: <a href="37964.html">37964</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/9438.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

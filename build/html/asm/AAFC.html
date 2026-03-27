@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at AAFC</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="AA00.html">AA00</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#aafc">Map</a></td>
+<td class="next">
+Next: <a href="AC9D.html">AC9D</a>
+</td>
+</tr>
+</table>
+<div class="description">AAFC: Barbarian Spritesheet</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="aafc"></span>
+<div class="comments">
+<div class="paragraph">
+Frame data structure: 1-byte shape ID + 12 tile indices (4 rows x 3 tiles wide).
+</div>
+<div class="paragraph">
+Shape table <a href="AA00.html">sprites_shape_table</a> defines sprite shapes; tile indices reference <a href="C000.html">barb_sprite_tileset</a> (barbarian tileset).
+</div>
+<div class="paragraph">
+Rendered by <a href="921C.html">draws_4_x_3_tiles</a> (4x3 grid blitter): loads column offset byte, then 12 tiles via <a href="9249.html">draw_single_tile</a>.
+</div>
+<div class="paragraph">
+P2 uses identical base sprites as P1 with per-frame overlay tiles composited via <a href="954C.html">p2_overlay_tile</a>.
+</div>
+<div class="paragraph">
+<a href="B877.html">p2_overlay_tile_table</a>: tile index per P2 frame (0-52, 255=no overlay). <a href="B8E1.html">p2_overlay_pos_table</a>: position bits 0-5 scanline offset from row 94, bits 6-7 column offset (0-3 right of P2 X tile, inverted if mirrored).
+</div>
+<div class="paragraph">
+Overlay state <a href="B6E1.html">p2_overlay_block_state</a> mirrors head block <a href="B6D9.html">head_state</a> layout, using shared renderer <a href="94D7.html">render_head_tile</a> + <a href="950E.html">head_mirroring</a> orientation check.
+</div>
+<div class="paragraph">
+<img src="../assets/sprites_v3.png" alt="sprites_v3.png" style="width:50%"/>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">barb_spritesheet</td>
+<td class="address-1"><span id="aafc"></span>AAFC</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Sprite ID0, ID51, ID52, ID93</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aafd"></span>AAFD</td>
+<td class="instruction">DEFB $01,$02,$03,$04,$05,$06</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/000.png" alt="sprites/000.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab03"></span>AB03</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Sprite ID1, ID53, ID97</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab04"></span>AB04</td>
+<td class="instruction">DEFB $01,$02,$07,$08,$09,$0A</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/001.png" alt="sprites/001.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab0a"></span>AB0A</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Sprite ID2, ID54, ID98</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab0b"></span>AB0B</td>
+<td class="instruction">DEFB $01,$02,$0B,$0C,$0D,$0E</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/002.png" alt="sprites/002.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab11"></span>AB11</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Sprite ID3, ID55, ID80, ID99</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab12"></span>AB12</td>
+<td class="instruction">DEFB $01,$02,$0F,$10,$11,$12</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/003.png" alt="sprites/003.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab18"></span>AB18</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Sprite ID4</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab19"></span>AB19</td>
+<td class="instruction">DEFB $13,$14,$15,$16,$17,$18</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/004.png" alt="sprites/004.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab1f"></span>AB1F</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Sprite ID5</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab20"></span>AB20</td>
+<td class="instruction">DEFB $19,$1A,$1B,$1C,$1D,$1E</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/005.png" alt="sprites/005.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab26"></span>AB26</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Sprite ID6</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab27"></span>AB27</td>
+<td class="instruction">DEFB $1F,$20,$21,$22,$23,$24</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/006.png" alt="sprites/006.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab2d"></span>AB2D</td>
+<td class="instruction">DEFB $CC</td>
+<td class="comment-1" rowspan="1">Sprite ID7</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab2e"></span>AB2E</td>
+<td class="instruction">DEFB $25,$26,$27,$28,$29,$2A,$B0</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/007.png" alt="sprites/007.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab35"></span>AB35</td>
+<td class="instruction">DEFB $0C</td>
+<td class="comment-1" rowspan="1">Sprite ID8, ID56</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab36"></span>AB36</td>
+<td class="instruction">DEFB $2B,$2C,$2D,$2E,$2F,$30,$F0,$F1</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/008.png" alt="sprites/008.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab3e"></span>AB3E</td>
+<td class="instruction">DEFB $0C</td>
+<td class="comment-1" rowspan="1">Sprite ID9</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab3f"></span>AB3F</td>
+<td class="instruction">DEFB $31,$32,$33,$34,$35,$36,$F2,$F3</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/009.png" alt="sprites/009.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab47"></span>AB47</td>
+<td class="instruction">DEFB $24</td>
+<td class="comment-1" rowspan="1">Sprite ID10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab48"></span>AB48</td>
+<td class="instruction">DEFB $37,$38,$39,$3A</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/010.png" alt="sprites/010.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab4c"></span>AB4C</td>
+<td class="instruction">DEFB $24</td>
+<td class="comment-1" rowspan="1">Sprite ID11, ID57, ID58</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab4d"></span>AB4D</td>
+<td class="instruction">DEFB $3B,$3C,$39,$3A</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/011.png" alt="sprites/011.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab51"></span>AB51</td>
+<td class="instruction">DEFB $D8</td>
+<td class="comment-1" rowspan="1">Sprite ID12, ID62, ID96</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab52"></span>AB52</td>
+<td class="instruction">DEFB $3D,$3E,$41,$3F,$40</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/012.png" alt="sprites/012.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab57"></span>AB57</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Sprite ID13, ID59</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab58"></span>AB58</td>
+<td class="instruction">DEFB $45,$46,$47,$48,$49,$4A</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/013.png" alt="sprites/013.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab5e"></span>AB5E</td>
+<td class="instruction">DEFB $0C</td>
+<td class="comment-1" rowspan="1">Sprite ID14, ID94</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab5f"></span>AB5F</td>
+<td class="instruction">DEFB $4B,$4C,$4D,$4E,$4F,$50,$F8,$F9</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/014.png" alt="sprites/014.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab67"></span>AB67</td>
+<td class="instruction">DEFB $0C</td>
+<td class="comment-1" rowspan="1">Sprite ID15</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab68"></span>AB68</td>
+<td class="instruction">DEFB $51,$52,$53,$54,$55,$56,$F6,$F7</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/015.png" alt="sprites/015.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab70"></span>AB70</td>
+<td class="instruction">DEFB $0C</td>
+<td class="comment-1" rowspan="1">Sprite ID16</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab71"></span>AB71</td>
+<td class="instruction">DEFB $57,$58,$59,$5A,$5B,$5C,$F4,$F5</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/016.png" alt="sprites/016.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab79"></span>AB79</td>
+<td class="instruction">DEFB $3C</td>
+<td class="comment-1" rowspan="1">Sprite ID17</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab7a"></span>AB7A</td>
+<td class="instruction">DEFB $5D,$5E,$5F</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/017.png" alt="sprites/017.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab7d"></span>AB7D</td>
+<td class="instruction">DEFB $48</td>
+<td class="comment-1" rowspan="1">Sprite ID18</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab7e"></span>AB7E</td>
+<td class="instruction">DEFB $60,$61,$62</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/018.png" alt="sprites/018.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab81"></span>AB81</td>
+<td class="instruction">DEFB $E4</td>
+<td class="comment-1" rowspan="1">Sprite ID19</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab82"></span>AB82</td>
+<td class="instruction">DEFB $63,$64,$65,$66</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/019.png" alt="sprites/019.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab86"></span>AB86</td>
+<td class="instruction">DEFB $60</td>
+<td class="comment-1" rowspan="1">Sprite ID20, ID100</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab87"></span>AB87</td>
+<td class="instruction">DEFB $68,$69,$6A</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/020.png" alt="sprites/020.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab8a"></span>AB8A</td>
+<td class="instruction">DEFB $84</td>
+<td class="comment-1" rowspan="1">Sprite ID21</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab8b"></span>AB8B</td>
+<td class="instruction">DEFB $2A,$20,$33,$2B,$1B,$2C,$32</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/021.png" alt="sprites/021.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab92"></span>AB92</td>
+<td class="instruction">DEFB $A8</td>
+<td class="comment-1" rowspan="1">Sprite ID22, ID68</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab93"></span>AB93</td>
+<td class="instruction">DEFB $74,$75,$76,$72,$73</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/022.png" alt="sprites/022.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab98"></span>AB98</td>
+<td class="instruction">DEFB $6C</td>
+<td class="comment-1" rowspan="1">Sprite ID23, ID61</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab99"></span>AB99</td>
+<td class="instruction">DEFB $77,$78,$79,$7C,$7A,$7B</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/023.png" alt="sprites/023.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ab9f"></span>AB9F</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Sprite ID24</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aba0"></span>ABA0</td>
+<td class="instruction">DEFB $7D,$7E,$7F,$80,$6F,$70</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/024.png" alt="sprites/024.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aba6"></span>ABA6</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Sprite ID25, ID60, ID66</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aba7"></span>ABA7</td>
+<td class="instruction">DEFB $81,$82,$83,$84,$85,$86</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/025.png" alt="sprites/025.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abad"></span>ABAD</td>
+<td class="instruction">DEFB $84</td>
+<td class="comment-1" rowspan="1">Sprite ID26, ID67, ID69</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abae"></span>ABAE</td>
+<td class="instruction">DEFB $87,$88,$8D,$89,$8A,$8B,$8C</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/026.png" alt="sprites/026.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abb5"></span>ABB5</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Sprite ID27, ID70</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abb6"></span>ABB6</td>
+<td class="instruction">DEFB $8E,$8F,$90,$91,$92,$93</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/027.png" alt="sprites/027.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abbc"></span>ABBC</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Sprite ID28</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abbd"></span>ABBD</td>
+<td class="instruction">DEFB $8E,$8F,$94,$95,$92,$96</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/028.png" alt="sprites/028.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abc3"></span>ABC3</td>
+<td class="instruction">DEFB $A8</td>
+<td class="comment-1" rowspan="1">Sprite ID29</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abc4"></span>ABC4</td>
+<td class="instruction">DEFB $97,$99,$9A,$9B,$9C</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/029.png" alt="sprites/029.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abc9"></span>ABC9</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Sprite ID30</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abca"></span>ABCA</td>
+<td class="instruction">DEFB $9D,$9E,$9F,$A0,$A1,$A2</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/030.png" alt="sprites/030.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abd0"></span>ABD0</td>
+<td class="instruction">DEFB $9C</td>
+<td class="comment-1" rowspan="1">Sprite ID31, ID72</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abd1"></span>ABD1</td>
+<td class="instruction">DEFB $A3,$A4,$A5,$A6,$A7,$A8,$FA</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/031.png" alt="sprites/031.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abd8"></span>ABD8</td>
+<td class="instruction">DEFB $84</td>
+<td class="comment-1" rowspan="1">Sprite ID32, ID73</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abd9"></span>ABD9</td>
+<td class="instruction">DEFB $A9,$AA,$AF,$A5,$AB,$A7,$A8</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/032.png" alt="sprites/032.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abe0"></span>ABE0</td>
+<td class="instruction">DEFB $60</td>
+<td class="comment-1" rowspan="1">Sprite ID33, ID89, ID105</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abe1"></span>ABE1</td>
+<td class="instruction">DEFB $E8,$E9,$EA</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/033.png" alt="sprites/033.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abe4"></span>ABE4</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Sprite ID34</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abe5"></span>ABE5</td>
+<td class="instruction">DEFB $B2,$B3,$B4,$B5,$B6,$B7</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/034.png" alt="sprites/034.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abeb"></span>ABEB</td>
+<td class="instruction">DEFB $24</td>
+<td class="comment-1" rowspan="1">Sprite ID35, ID46</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abec"></span>ABEC</td>
+<td class="instruction">DEFB $B8,$B9,$BA,$BB</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/035.png" alt="sprites/035.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abf0"></span>ABF0</td>
+<td class="instruction">DEFB $90</td>
+<td class="comment-1" rowspan="1">Sprite ID36, ID45</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abf1"></span>ABF1</td>
+<td class="instruction">DEFB $BC,$BD</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/036.png" alt="sprites/036.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abf3"></span>ABF3</td>
+<td class="instruction">DEFB $F0</td>
+<td class="comment-1" rowspan="1">Sprite ID37, ID44</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abf4"></span>ABF4</td>
+<td class="instruction">DEFB $BE,$BF</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/037.png" alt="sprites/037.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abf6"></span>ABF6</td>
+<td class="instruction">DEFB $90</td>
+<td class="comment-1" rowspan="1">Sprite ID38, ID43</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abf7"></span>ABF7</td>
+<td class="instruction">DEFB $C0,$C1</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/038.png" alt="sprites/038.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abf9"></span>ABF9</td>
+<td class="instruction">DEFB $F0</td>
+<td class="comment-1" rowspan="1">Sprite ID39, ID42</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abfa"></span>ABFA</td>
+<td class="instruction">DEFB $C2,$C3</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/039.png" alt="sprites/039.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abfc"></span>ABFC</td>
+<td class="instruction">DEFB $24</td>
+<td class="comment-1" rowspan="1">Sprite ID40, ID41</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="abfd"></span>ABFD</td>
+<td class="instruction">DEFB $C4,$C5,$C6,$C7</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/040.png" alt="sprites/040.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac01"></span>AC01</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Sprite ID47</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac02"></span>AC02</td>
+<td class="instruction">DEFB $C8,$C9,$CA,$CB,$CC,$CD</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/047.png" alt="sprites/047.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac08"></span>AC08</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Sprite ID48</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac09"></span>AC09</td>
+<td class="instruction">DEFB $C8,$CE,$CA,$CF,$CC,$D0</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/048.png" alt="sprites/048.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac0f"></span>AC0F</td>
+<td class="instruction">DEFB $0C</td>
+<td class="comment-1" rowspan="1">Sprite ID49</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac10"></span>AC10</td>
+<td class="instruction">DEFB $C8,$D1,$CA,$D2,$CC,$D0,$FB,$FC</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/049.png" alt="sprites/049.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac18"></span>AC18</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Sprite ID50, ID74</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac19"></span>AC19</td>
+<td class="instruction">DEFB $D3,$D4,$D5,$D6,$D7,$D8</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/050.png" alt="sprites/050.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac1f"></span>AC1F</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Sprite ID63, ID64, ID65, ID71, ID75, ID81</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac20"></span>AC20</td>
+<td class="instruction">DEFB $6B,$6C,$6D,$6E,$6F,$70</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/063.png" alt="sprites/063.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac26"></span>AC26</td>
+<td class="instruction">DEFB $A8</td>
+<td class="comment-1" rowspan="1">Sprite ID76</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac27"></span>AC27</td>
+<td class="instruction">DEFB $97,$99,$9A,$98,$B1</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/076.png" alt="sprites/076.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac2c"></span>AC2C</td>
+<td class="instruction">DEFB $60</td>
+<td class="comment-1" rowspan="1">Sprite ID77, ID78</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac2d"></span>AC2D</td>
+<td class="instruction">DEFB $D9,$DA,$DB</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/077.png" alt="sprites/077.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac30"></span>AC30</td>
+<td class="instruction">DEFB $B4</td>
+<td class="comment-1" rowspan="1">Sprite ID79</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac31"></span>AC31</td>
+<td class="instruction">DEFB $DC,$DD,$DE,$DF,$E0</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/079.png" alt="sprites/079.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac36"></span>AC36</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Sprite ID82</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac37"></span>AC37</td>
+<td class="instruction">DEFB $67,$71,$03,$04,$05,$06</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/082.png" alt="sprites/082.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac3d"></span>AC3D</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Sprite ID83</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac3e"></span>AC3E</td>
+<td class="instruction">DEFB $EB,$EC,$ED,$EE,$05,$06</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/083.png" alt="sprites/083.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac44"></span>AC44</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Sprite ID84</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac45"></span>AC45</td>
+<td class="instruction">DEFB $EF,$EC,$ED,$EE,$05,$06</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/084.png" alt="sprites/084.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac4b"></span>AC4B</td>
+<td class="instruction">DEFB $A8</td>
+<td class="comment-1" rowspan="1">Sprite ID85</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac4c"></span>AC4C</td>
+<td class="instruction">DEFB $43,$44,$AE,$72,$73</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/085.png" alt="sprites/085.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac51"></span>AC51</td>
+<td class="instruction">DEFB $48</td>
+<td class="comment-1" rowspan="1">Sprite ID86</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac52"></span>AC52</td>
+<td class="instruction">DEFB $E1,$E2,$E3</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/086.png" alt="sprites/086.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac55"></span>AC55</td>
+<td class="instruction">DEFB $24</td>
+<td class="comment-1" rowspan="1">Sprite ID87, ID90</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac56"></span>AC56</td>
+<td class="instruction">DEFB $E4,$E5,$E6,$E7</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/087.png" alt="sprites/087.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac5a"></span>AC5A</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Sprite ID88</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac5b"></span>AC5B</td>
+<td class="instruction">DEFB $AC,$AD,$6D,$6E,$6F,$70</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/088.png" alt="sprites/088.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac61"></span>AC61</td>
+<td class="instruction">DEFB $3C</td>
+<td class="comment-1" rowspan="1">Sprite ID91</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac62"></span>AC62</td>
+<td class="instruction">DEFB $02,$08,$0A</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/091.png" alt="sprites/091.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac65"></span>AC65</td>
+<td class="instruction">DEFB $3C</td>
+<td class="comment-1" rowspan="1">Sprite ID92</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac66"></span>AC66</td>
+<td class="instruction">DEFB $02,$0C,$0E</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/092.png" alt="sprites/092.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac69"></span>AC69</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">Sprite ID95</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac6a"></span>AC6A</td>
+<td class="instruction">DEFB $2A,$30,$2B,$31,$2C,$32</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/095.png" alt="sprites/095.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac70"></span>AC70</td>
+<td class="instruction">DEFB $30</td>
+<td class="comment-1" rowspan="1">Sprite ID101</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac71"></span>AC71</td>
+<td class="instruction">DEFB $69,$6A</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/101.png" alt="sprites/101.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac73"></span>AC73</td>
+<td class="instruction">DEFB $78</td>
+<td class="comment-1" rowspan="1">Sprite ID102</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac74"></span>AC74</td>
+<td class="instruction">DEFB $6A</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/102.png" alt="sprites/102.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac75"></span>AC75</td>
+<td class="instruction">DEFB $90</td>
+<td class="comment-1" rowspan="1">Sprite ID103</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac76"></span>AC76</td>
+<td class="instruction">DEFB $68,$69</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/103.png" alt="sprites/103.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac78"></span>AC78</td>
+<td class="instruction">DEFB $54</td>
+<td class="comment-1" rowspan="1">Sprite ID104</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac79"></span>AC79</td>
+<td class="instruction">DEFB $68</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/104.png" alt="sprites/104.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac7a"></span>AC7A</td>
+<td class="instruction">DEFB $30</td>
+<td class="comment-1" rowspan="1">Sprite ID106</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac7b"></span>AC7B</td>
+<td class="instruction">DEFB $E9,$EA</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/106.png" alt="sprites/106.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac7d"></span>AC7D</td>
+<td class="instruction">DEFB $78</td>
+<td class="comment-1" rowspan="1">Sprite ID107</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac7e"></span>AC7E</td>
+<td class="instruction">DEFB $EA</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/107.png" alt="sprites/107.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac7f"></span>AC7F</td>
+<td class="instruction">DEFB $90</td>
+<td class="comment-1" rowspan="1">Sprite ID108</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac80"></span>AC80</td>
+<td class="instruction">DEFB $E8,$E9</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/108.png" alt="sprites/108.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac82"></span>AC82</td>
+<td class="instruction">DEFB $54</td>
+<td class="comment-1" rowspan="1">Sprite ID109</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac83"></span>AC83</td>
+<td class="instruction">DEFB $E8</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/109.png" alt="sprites/109.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac84"></span>AC84</td>
+<td class="instruction">DEFB $18</td>
+<td class="comment-1" rowspan="1">Sprite ID110</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac85"></span>AC85</td>
+<td class="instruction">DEFB $26,$27</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/110.png" alt="sprites/110.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac87"></span>AC87</td>
+<td class="instruction">DEFB $18</td>
+<td class="comment-1" rowspan="1">Sprite ID111</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac88"></span>AC88</td>
+<td class="instruction">DEFB $26,$28</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/111.png" alt="sprites/111.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac8a"></span>AC8A</td>
+<td class="instruction">DEFB $A8</td>
+<td class="comment-1" rowspan="1">Sprite ID112</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac8b"></span>AC8B</td>
+<td class="instruction">DEFB $2A,$2B,$03,$2C,$32</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/112.png" alt="sprites/112.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac90"></span>AC90</td>
+<td class="instruction">DEFB $C0</td>
+<td class="comment-1" rowspan="1">Sprite ID113</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac91"></span>AC91</td>
+<td class="instruction">DEFB $2A,$2B,$2C,$00</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/113.png" alt="sprites/113.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac95"></span>AC95</td>
+<td class="instruction">DEFB $3C</td>
+<td class="comment-1" rowspan="1">Sprite ID114</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac96"></span>AC96</td>
+<td class="instruction">DEFB $2A,$2B,$2C</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/114.png" alt="sprites/114.png"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac99"></span>AC99</td>
+<td class="instruction">DEFB $48</td>
+<td class="comment-1" rowspan="1">Sprite ID115</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ac9a"></span>AC9A</td>
+<td class="instruction">DEFB $2D,$2F,$2E</td>
+<td class="comment-1" rowspan="1"><img src="../assets/sprites/115.png" alt="sprites/115.png"/></td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="AA00.html">AA00</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#aafc">Map</a></td>
+<td class="next">
+Next: <a href="AC9D.html">AC9D</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/43772.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

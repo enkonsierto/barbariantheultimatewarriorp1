@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 35240</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="35237.html">35237</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#35240">Map</a></td>
+<td class="next">
+Next: <a href="35381.html">35381</a>
+</td>
+</tr>
+</table>
+<div class="description">35240: Game Entry Point</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Sets up the system and runs the menu.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">entry_point</td>
+<td class="address-2"><span id="35240"></span>35240</td>
+<td class="instruction">DI</td>
+<td class="comment-1" rowspan="1">Game Loaded (Entry Point)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35241"></span>35241</td>
+<td class="instruction">LD SP,0</td>
+<td class="comment-1" rowspan="1">Initialises the stack pointer to 0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35244"></span>35244</td>
+<td class="instruction">CALL <a href="48896.html">game_start</a></td>
+<td class="comment-1" rowspan="1">Jumps to the game start routine.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="35247"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="35381.html">game_reset</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">entry_point_0</td>
+<td class="address-2"><span id="35247"></span>35247</td>
+<td class="instruction">DI</td>
+<td class="comment-1" rowspan="1">Disable interrupts.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35248"></span>35248</td>
+<td class="instruction">LD SP,0</td>
+<td class="comment-1" rowspan="1">Initialises the stack pointer to 0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35251"></span>35251</td>
+<td class="instruction">LD A,255</td>
+<td class="comment-1" rowspan="2">Write 255 to the fight counter buffer. (<a href="47558.html">fight_counter</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35253"></span>35253</td>
+<td class="instruction">LD (47558),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35256"></span>35256</td>
+<td class="instruction">CALL <a href="36130.html">main_menu</a></td>
+<td class="comment-1" rowspan="1">Runs the main menu via <a href="36130.html">main_menu</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35259"></span>35259</td>
+<td class="instruction">LD HL,0</td>
+<td class="comment-1" rowspan="4">Clears the stack and zeroes, <a href="47429.html">p1_score</a> and <a href="47431.html">p2_score</a>. (Scores Buffer).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35262"></span>35262</td>
+<td class="instruction">PUSH HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35263"></span>35263</td>
+<td class="instruction">LD (47429),HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35266"></span>35266</td>
+<td class="instruction">LD (47431),HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35269"></span>35269</td>
+<td class="instruction">CALL <a href="35426.html">paint_score</a></td>
+<td class="comment-1" rowspan="1">Resets and draws the Player 1 score HUD via <a href="35426.html">paint_score</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35272"></span>35272</td>
+<td class="instruction">CALL <a href="35426.html#35435">paint_score_0</a></td>
+<td class="comment-1" rowspan="1">Resets and draws the Player 2 score HUD via <a href="35426.html#35435">paint_score_0</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35275"></span>35275</td>
+<td class="instruction">LD HL,16559</td>
+<td class="comment-1" rowspan="1">Sets the time HUD screen address.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35278"></span>35278</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="1">Loads DE = 0 for the initial time value.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35279"></span>35279</td>
+<td class="instruction">LD B,2</td>
+<td class="comment-1" rowspan="1">B = 2 two digits to print.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35281"></span>35281</td>
+<td class="instruction">LD IX,47524</td>
+<td class="comment-1" rowspan="1">Points IX to the time value buffer <a href="47518.html#47524">47524</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35285"></span>35285</td>
+<td class="instruction">CALL <a href="36063.html#36067">print_dec_number_0</a></td>
+<td class="comment-1" rowspan="1">Converts the time value to ASCII and draws it via R36063.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35288"></span>35288</td>
+<td class="instruction">CALL <a href="35414.html">set_infinite_time</a></td>
+<td class="comment-1" rowspan="1">Sets the round timer mode via <a href="35414.html">set_infinite_time</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="35291"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="35487.html">post_fight_handler</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">entry_point_1</td>
+<td class="address-2"><span id="35291"></span>35291</td>
+<td class="instruction">XOR A</td>
+<td class="comment-1" rowspan="1">A = 0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35292"></span>35292</td>
+<td class="instruction">LD (47474),A</td>
+<td class="comment-1" rowspan="3">Clears <a href="47474.html">isr_counter</a>, <a href="46809.html#46810">head_state_flag</a> and <a href="46443.html">goblin_state_block</a> to 0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35295"></span>35295</td>
+<td class="instruction">LD (46810),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35298"></span>35298</td>
+<td class="instruction">LD (46443),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35301"></span>35301</td>
+<td class="instruction">CALL <a href="38547.html">copy_bg_to_frmbuff</a></td>
+<td class="comment-1" rowspan="1">Copies the stage 1 background to the screen buffer via <a href="38547.html">copy_bg_to_frmbuff</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35304"></span>35304</td>
+<td class="instruction">CALL <a href="38849.html">paints_stage_screen</a></td>
+<td class="comment-1" rowspan="1">Paints the stage to the screen row by row via R38849.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35307"></span>35307</td>
+<td class="instruction">CALL <a href="36776.html">reset_p1_state_block</a></td>
+<td class="comment-1" rowspan="1">Resets the P1 state block via <a href="36776.html">reset_p1_state_block</a> tile 0, full energy, facing right.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35310"></span>35310</td>
+<td class="instruction">CALL <a href="36793.html">reset_p2_state_block</a></td>
+<td class="comment-1" rowspan="1">Resets the P2 state block via <a href="36793.html">reset_p2_state_block</a> tile 23, full energy, facing left.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="35313"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="35514.html">pause_handler_routine</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">game_loop</td>
+<td class="address-2"><span id="35313"></span>35313</td>
+<td class="instruction">CALL <a href="38547.html">copy_bg_to_frmbuff</a></td>
+<td class="comment-1" rowspan="1">Copy active stage background to screen buffer via <a href="38547.html">copy_bg_to_frmbuff</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35316"></span>35316</td>
+<td class="instruction">CALL <a href="39617.html">combat_loop</a></td>
+<td class="comment-1" rowspan="1">Main character update and render dispatch (both fighters + goblin) via <a href="39617.html">combat_loop</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35319"></span>35319</td>
+<td class="instruction">CALL <a href="37997.html">head_animator</a></td>
+<td class="comment-1" rowspan="1">Severed head physics update and rendering via <a href="37997.html">head_animator</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35322"></span>35322</td>
+<td class="instruction">CALL <a href="39258.html">draw_snakes_sprites</a></td>
+<td class="comment-1" rowspan="1">Snake energy bar animation update via <a href="39258.html">draw_snakes_sprites</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35325"></span>35325</td>
+<td class="instruction">CALL <a href="39968.html">tackle_side_swap</a></td>
+<td class="comment-1" rowspan="1">Per-frame movement auto-update via <a href="39968.html">tackle_side_swap</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35328"></span>35328</td>
+<td class="instruction">EI</td>
+<td class="comment-1" rowspan="1">Enable interrupts.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35329"></span>35329</td>
+<td class="instruction">HALT</td>
+<td class="comment-1" rowspan="1">Wait for 50Hz frame interrupt (frame sync).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35330"></span>35330</td>
+<td class="instruction">DI</td>
+<td class="comment-1" rowspan="1">Disable interrupts.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35331"></span>35331</td>
+<td class="instruction">CALL <a href="38412.html">frmbuf_to_scr</a></td>
+<td class="comment-1" rowspan="1">Copy screen buffer to video RAM via <a href="38412.html">frmbuf_to_scr</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35334"></span>35334</td>
+<td class="instruction">CALL <a href="35450.html">align_hit_indicator</a></td>
+<td class="comment-1" rowspan="1">Align hit indicator tile address via <a href="35450.html">align_hit_indicator</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35337"></span>35337</td>
+<td class="instruction">CALL <a href="40092.html">frame_counter_hit_inc</a></td>
+<td class="comment-1" rowspan="1">Per-frame screen effect update via <a href="40092.html">frame_counter_hit_inc</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35340"></span>35340</td>
+<td class="instruction">CALL <a href="39468.html">hit_detection</a></td>
+<td class="comment-1" rowspan="1">Per-frame hit collision detection between fighters via <a href="39468.html">hit_detection</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35343"></span>35343</td>
+<td class="instruction">CALL <a href="35531.html">hit_processor</a></td>
+<td class="comment-1" rowspan="1">Hit processor: score award and sound dispatch via <a href="35531.html">hit_processor</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35346"></span>35346</td>
+<td class="instruction">CALL <a href="35426.html">paint_score</a></td>
+<td class="comment-1" rowspan="1">Refresh player 1 score display via <a href="35426.html">paint_score</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35349"></span>35349</td>
+<td class="instruction">CALL <a href="35426.html#35435">paint_score_0</a></td>
+<td class="comment-1" rowspan="1">Refresh player 2 score display via <a href="35426.html#35435">paint_score_0</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35352"></span>35352</td>
+<td class="instruction">CALL <a href="36105.html">update_time_display</a></td>
+<td class="comment-1" rowspan="1">Update time / fight counter HUD via <a href="36105.html">update_time_display</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35355"></span>35355</td>
+<td class="instruction">LD A,(47439)</td>
+<td class="comment-1" rowspan="1">Load quit key scancode from <a href="47439.html">quit_scancode</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35358"></span>35358</td>
+<td class="instruction">CALL <a href="35910.html">key_state_test</a></td>
+<td class="comment-1" rowspan="1">Test if quit key is pressed via <a href="35910.html">key_state_test</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35361"></span>35361</td>
+<td class="instruction">JR NC,<a href="35381.html">game_reset</a></td>
+<td class="comment-1" rowspan="1">Quit pressed (carry clear): jump to new round reset at <a href="35381.html">game_reset</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35363"></span>35363</td>
+<td class="instruction">LD A,(47438)</td>
+<td class="comment-1" rowspan="1">Load pause key scancode from <a href="47438.html">pause_scancode</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35366"></span>35366</td>
+<td class="instruction">CALL <a href="35910.html">key_state_test</a></td>
+<td class="comment-1" rowspan="1">Test if pause key is pressed via <a href="35910.html">key_state_test</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">pause_handler_entry</td>
+<td class="address-1"><span id="35369"></span>35369</td>
+<td class="instruction">JP NC,<a href="35514.html">pause_handler_routine</a></td>
+<td class="comment-1" rowspan="1">Pause pressed (carry clear): jump to pause handler at <a href="35514.html">pause_handler_routine</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35372"></span>35372</td>
+<td class="instruction">LD A,(46808)</td>
+<td class="comment-1" rowspan="1">Read round timer <a href="46808.html">timer_flag</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35375"></span>35375</td>
+<td class="instruction">OR A</td>
+<td class="comment-1" rowspan="1">Test if zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35376"></span>35376</td>
+<td class="instruction">JP Z,<a href="35487.html">post_fight_handler</a></td>
+<td class="comment-1" rowspan="1">Timer = 0 (2P timeout): jump to post-fight handler at <a href="35487.html">post_fight_handler</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35379"></span>35379</td>
+<td class="instruction">JR <a href="35240.html#35313">game_loop</a></td>
+<td class="comment-1" rowspan="1">Loop back to next frame at <a href="35240.html#35313">game_loop</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="35237.html">35237</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#35240">Map</a></td>
+<td class="next">
+Next: <a href="35381.html">35381</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/89A8.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

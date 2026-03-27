@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 38103</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="37997.html">37997</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#38103">Map</a></td>
+<td class="next">
+Next: <a href="38137.html">38137</a>
+</td>
+</tr>
+</table>
+<div class="description">38103: Render head or P2 overlay tile to framebuffer.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="37997.html">head_animator</a> and <a href="38220.html">p2_overlay_tile</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="38103"></span>
+<div class="comments">
+<div class="paragraph">
+Shared tile renderer for the flying head (<a href="46809.html">head_state</a>) and the P2 overlay (<a href="46817.html">p2_overlay_block_state</a>). Reads the tile index from the sequence pointer at IX+2,3, temporarily patches the sprite bank selector at <a href="37355.html#37368">resolve_tile_address_0</a> to use the head bank (<a href="40192.html">other_sprites</a>), resolves the tile address via <a href="37355.html">resolve_tile_address</a>, then restores the normal bank (<a href="49152.html">barb_sprite_tileset</a>).
+</div>
+<div class="paragraph">
+Checks tile orientation against the head direction via <a href="38158.html">head_mirroring</a>; on mismatch, flips bit 6 of the tile index and mirrors the tile in-place via <a href="38340.html">mirror_tile_inplace</a>. Renders the result to the framebuffer at IX+6,7 via <a href="36910.html">tile_render_engine</a>.
+</div>
+<div class="paragraph">
+INPUT: IX = state block (<a href="46809.html">head_state</a> flying head, <a href="46817.html">p2_overlay_block_state</a> P2 overlay); IX+2,3 = tile sequence pointer; IX+6,7 = framebuffer destination.
+</div>
+<div class="paragraph">
+OUTPUT: None. DESTROYS: AF, BC, DE, HL.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">render_head_tile</td>
+<td class="address-2"><span id="38103"></span>38103</td>
+<td class="instruction">LD L,(IX+2)</td>
+<td class="comment-1" rowspan="2">Load tile sequence pointer low byte from IX+2,3; HL now points to the current tile.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38106"></span>38106</td>
+<td class="instruction">LD H,(IX+3)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38109"></span>38109</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1">Read tile index at current sequence position.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38110"></span>38110</td>
+<td class="instruction">LD HL,40192</td>
+<td class="comment-1" rowspan="1">Load head sprite bank base address (<a href="40192.html">other_sprites</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38113"></span>38113</td>
+<td class="instruction">LD (37369),HL</td>
+<td class="comment-1" rowspan="1">Patch sprite bank operand at 37369 (<a href="37355.html#37368">resolve_tile_address_0</a>); overrides normal bank (<a href="49152.html">barb_sprite_tileset</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38116"></span>38116</td>
+<td class="instruction">CALL <a href="37355.html">resolve_tile_address</a></td>
+<td class="comment-1" rowspan="1">Resolve tile address into DE via <a href="37355.html">resolve_tile_address</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38119"></span>38119</td>
+<td class="instruction">LD HL,49152</td>
+<td class="comment-1" rowspan="1">Load normal sprite bank base address (<a href="49152.html">barb_sprite_tileset</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38122"></span>38122</td>
+<td class="instruction">LD (37369),HL</td>
+<td class="comment-1" rowspan="1">Restore sprite bank operand at 37369 (<a href="37355.html#37368">resolve_tile_address_0</a>) to normal bank.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38125"></span>38125</td>
+<td class="instruction">CALL <a href="38158.html">head_mirroring</a></td>
+<td class="comment-1" rowspan="1">Check tile orientation vs head direction via <a href="38158.html">head_mirroring</a>; draw mirrored variant if mismatched.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38128"></span>38128</td>
+<td class="instruction">LD L,(IX+6)</td>
+<td class="comment-1" rowspan="2">Load framebuffer destination IX+6,7 into HL.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38131"></span>38131</td>
+<td class="instruction">LD H,(IX+7)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38134"></span>38134</td>
+<td class="instruction">JP <a href="36910.html">tile_render_engine</a></td>
+<td class="comment-1" rowspan="1">Tail-call <a href="36910.html">tile_render_engine</a> to render the tile.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="37997.html">37997</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#38103">Map</a></td>
+<td class="next">
+Next: <a href="38137.html">38137</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/94D7.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

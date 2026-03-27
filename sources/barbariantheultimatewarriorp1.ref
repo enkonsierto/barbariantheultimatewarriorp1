@@ -1,0 +1,82 @@
+;
+; SkoolKit ref file for Barbarian the Ultimate Warrior P1
+;
+; To build the HTML disassembly, run these commands:
+;   tap2sna.py @barbariantheultimatewarriorp1.t2s
+;   sna2skool.py -H -c sources/barbariantheultimatewarriorp1.ctl BarbariantheUltimateWarriorP1.z80 > sources/barbariantheultimatewarriorp1.skool
+;   skool2html.py -H sources/barbariantheultimatewarriorp1.skool -T dark -T wide -toOa
+
+[Config]
+Expand=#INCLUDE(Expand)
+RefFiles=bases.ref;analytics.ref;resources.ref;changelog.ref;pokes.ref;game.ref;graphics.ref;facts.ref
+GameDir=barbariantheultimatewarriorp1
+
+[Config+]
+Expand=#DEF(#APATH #IF({vars[pub]}>2)(../../,../)assets) #DEF(#IMG()(fname) #HTML(<img src="#APATH/$fname" alt="$fname"/>)) #DEF(#IMGW(w)(fname) #HTML(<img src="#APATH/$fname" alt="$fname" style="width:$w%"/>))
+
+
+
+[Game]
+Game=Barbarian the Ultimate Warrior P1
+Logo=#SCR1,4,1,24,5,$4000,$5800(/images/logo)
+Copyright=&copy; 1987 Palace Software.
+Repository=https://github.com/enkonsierto/barbariantheultimatewarriorp1/
+LinkInternalOperands=1
+AddressAnchor={address#IF({base}==16)(:04x)}
+
+[PageHeaders]
+GameIndex=The complete<>(part 1) RAM disassembly.
+
+[Index]
+MemoryMaps
+Game
+GraphicSound
+DataTables
+Reference
+
+[Index:Game:Game]
+Instructions
+Controls
+Completion
+
+[Expand]
+#DEF(#COLOUR(id)
+  #LET(ink=$id&$07)#IF({ink}>=$00)(INK:
+    #MAP({ink})(
+      UNKNOWN,
+      0:BLACK,
+      1:BLUE,
+      2:RED,
+      3:MAGENTA,
+      4:GREEN,
+      5:CYAN,
+      6:YELLOW,
+      7:WHITE)),
+  #LET(paper=$id>>$03&$07)#IF({paper}>=$00)(PAPER:
+    #MAP({paper})(
+      UNKNOWN,
+      0:BLACK,
+      1:BLUE,
+      2:RED,
+      3:MAGENTA,
+      4:GREEN,
+      5:CYAN,
+      6:YELLOW,
+      7:WHITE))
+  #LET(bright=$id&$40)#IF({bright}>$00)((BRIGHT))
+  #LET(flash=$id&$80)#IF({flash}>$00)(FLASH: ON))
+
+#DEF(#INK(id)
+  #LET(bright=$id&$40)
+  #LET(flash=$id&$80)
+  #LET(ink=$id&$07)#IF({ink}>=$00)(
+    #MAP({ink})(
+      UNKNOWN,
+      0:BLACK,
+      1:BLUE,
+      2:RED,
+      3:MAGENTA,
+      4:GREEN,
+      5:CYAN,
+      6:YELLOW,
+      7:WHITE))#IF({bright}>$00)( (BRIGHT))#IF({flash}>$00)( (FLASH: ON)))

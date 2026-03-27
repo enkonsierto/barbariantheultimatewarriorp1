@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 38640</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="38624.html">38624</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#38640">Map</a></td>
+<td class="next">
+Next: <a href="38664.html">38664</a>
+</td>
+</tr>
+</table>
+<div class="description">38640: Fade ink colour to black.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="36673.html">menu_fade_out</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="38640"></span>
+<div class="comments">
+<div class="paragraph">
+For each of C rows, reads the ink bits of each attribute byte via AND 7 and decrements the ink value by 1 unless it is already 0. Processes B tiles per row, then advances HL 32 bytes to the next attribute row.
+</div>
+<div class="paragraph">
+Called from <a href="36673.html">menu_fade_out</a> to progressively darken the game window during the fade-out transition.
+</div>
+<div class="paragraph">
+INPUT: HL = first attribute address (top-left tile). B = tiles per row (26). C row count (3).
+</div>
+<div class="paragraph">
+OUTPUT: None. DESTROYS A, C, DE, HL.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">fade_ink</td>
+<td class="address-2"><span id="38640"></span>38640</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="2">Save row start address and counters.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38641"></span>38641</td>
+<td class="instruction">PUSH BC</td>
+</tr>
+<tr>
+<td class="asm-label">fade_ink_0</td>
+<td class="address-2"><span id="38642"></span>38642</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="2">Read ink bits from current attribute (AND 7).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38643"></span>38643</td>
+<td class="instruction">AND 7</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38645"></span>38645</td>
+<td class="instruction">OR A</td>
+<td class="comment-1" rowspan="2">Ink already 0 - skip decrement.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38646"></span>38646</td>
+<td class="instruction">JR Z,<a href="38640.html#38651">fade_ink_1</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38648"></span>38648</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="2">Reload attribute and decrement ink by 1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38649"></span>38649</td>
+<td class="instruction">DEC A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38650"></span>38650</td>
+<td class="instruction">LD (HL),A</td>
+<td class="comment-1" rowspan="1">Write decremented value back to attribute byte.</td>
+</tr>
+<tr>
+<td class="asm-label">fade_ink_1</td>
+<td class="address-2"><span id="38651"></span>38651</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Advance to next tile in row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38652"></span>38652</td>
+<td class="instruction">DJNZ <a href="38640.html#38642">fade_ink_0</a></td>
+<td class="comment-1" rowspan="1">Repeat for all B tiles in this row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38654"></span>38654</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="2">Restore counters and row start address.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38655"></span>38655</td>
+<td class="instruction">POP HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38656"></span>38656</td>
+<td class="instruction">LD DE,32</td>
+<td class="comment-1" rowspan="2">Advance HL one row (stride 32).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38659"></span>38659</td>
+<td class="instruction">ADD HL,DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38660"></span>38660</td>
+<td class="instruction">DEC C</td>
+<td class="comment-1" rowspan="2">Decrement row counter; loop if rows remain.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38661"></span>38661</td>
+<td class="instruction">JR NZ,<a href="38640.html#38640">fade_ink</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38663"></span>38663</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="38624.html">38624</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#38640">Map</a></td>
+<td class="next">
+Next: <a href="38664.html">38664</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/96F0.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

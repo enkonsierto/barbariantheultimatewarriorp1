@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 846F</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="8461.html">8461</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#846f">Map</a></td>
+<td class="next">
+Next: <a href="8477.html">8477</a>
+</td>
+</tr>
+</table>
+<div class="description">846F: Restarts sequence at loop point.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Processes the end of sequence marker (64).
+</div>
+<div class="paragraph">
+Reads the restart address and updates the pointer to loop.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">restart_music</td>
+<td class="address-2"><span id="846f"></span>846F</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Advances to low byte of loop address.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8470"></span>8470</td>
+<td class="instruction">LD E,(HL)</td>
+<td class="comment-1" rowspan="1">Reads low byte of restart address.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8471"></span>8471</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Advances to high byte.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8472"></span>8472</td>
+<td class="instruction">LD D,(HL)</td>
+<td class="comment-1" rowspan="1">Reads high byte of restart address.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8473"></span>8473</td>
+<td class="instruction">DEC HL</td>
+<td class="comment-1" rowspan="2">Goes back two bytes (returns to start of pointer).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8474"></span>8474</td>
+<td class="instruction">DEC HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8475"></span>8475</td>
+<td class="instruction">JR <a href="8454.html#8458">select_music_pointer_0</a></td>
+<td class="comment-1" rowspan="1">Jumps to <a href="8454.html#8458">select_music_pointer_0</a> to read note from new position.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="8461.html">8461</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#846f">Map</a></td>
+<td class="next">
+Next: <a href="8477.html">8477</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/33903.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

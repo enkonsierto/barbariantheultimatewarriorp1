@@ -1,0 +1,13 @@
+;
+
+[Poke:infiniteEnergy:Infinite Energy]
+
+Player 1 has infinite energy.
+
+POKE 36220 0 (#R36218): LD (#N39371),A > LD (#N00203),A (tries to write in the ROM zone = does nothing).
+
+POKE 36516 0 (#R36514): LD (#N39371),A > LD (#N00203),A (tries to write in the ROM zone = does nothing).
+
+POKE 39371 200 (#R39371): If the code was ever patched to NOP, this poke restores RET Z, so P1 never decrements its energy.
+
+Those pokes avoid the self-modify patch that enables the P1 depletion.

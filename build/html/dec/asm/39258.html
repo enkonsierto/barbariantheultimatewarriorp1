@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 39258</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="39245.html">39245</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#39258">Map</a></td>
+<td class="next">
+Next: <a href="39317.html">39317</a>
+</td>
+</tr>
+</table>
+<div class="description">39258: Snake energy bar renderer.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="35240.html">entry_point</a> and <a href="35381.html">game_reset</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="39258"></span>
+<div class="comments">
+<div class="paragraph">
+Blits the current snake animation frame to the HUD energy bar for each character whose draw phase is active (high nibble of IY+7 non-zero).
+</div>
+<div class="paragraph">
+P1 bar (VRAM 16416): the sprite is mirrored in-place before blitting and restored afterwards, since P1 faces right and needs the flipped orientation.
+</div>
+<div class="paragraph">
+P2 bar (VRAM 16445): blitted in its natural orientation.
+</div>
+<div class="paragraph">
+INPUT: None. OUTPUT: None. DESTROYS: IY, AF, BC, DE, HL.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">draw_snakes_sprites</td>
+<td class="address-2"><span id="39258"></span>39258</td>
+<td class="instruction">LD IY,46425</td>
+<td class="comment-1" rowspan="1">Select P1 state block. (<a href="46425.html">p1_controller_type</a>)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39262"></span>39262</td>
+<td class="instruction">LD A,(IY+7)</td>
+<td class="comment-1" rowspan="1">Load P1 packed energy/phase byte.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39265"></span>39265</td>
+<td class="instruction">AND 240</td>
+<td class="comment-1" rowspan="1">Isolate draw phase index.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39267"></span>39267</td>
+<td class="instruction">JR Z,<a href="39258.html#39295">draw_snakes_sprites_0</a></td>
+<td class="comment-1" rowspan="1">Phase idle - skip P1 bar update.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39269"></span>39269</td>
+<td class="instruction">CALL <a href="39317.html">update_snake_frame_id</a></td>
+<td class="comment-1" rowspan="1">Advance draw phase and fetch snake sprite pointer via <a href="39317.html">update_snake_frame_id</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39272"></span>39272</td>
+<td class="instruction">PUSH DE</td>
+<td class="comment-1" rowspan="1">Save sprite pointer for the restore pass.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39273"></span>39273</td>
+<td class="instruction">PUSH DE</td>
+<td class="comment-1" rowspan="1">Save sprite pointer for the blit pass.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39274"></span>39274</td>
+<td class="instruction">LD B,30</td>
+<td class="comment-1" rowspan="1">Set scanline count for the mirror operation.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39276"></span>39276</td>
+<td class="instruction">CALL <a href="38340.html#38342">mirror_tile_inplace_0</a></td>
+<td class="comment-1" rowspan="1">Mirror snake sprite in-place via <a href="38340.html#38342">mirror_tile_inplace_0</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39279"></span>39279</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="1">Restore pointer to the now-mirrored sprite data.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39280"></span>39280</td>
+<td class="instruction">LD HL,16416</td>
+<td class="comment-1" rowspan="1">Set P1 energy bar VRAM destination.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39283"></span>39283</td>
+<td class="instruction">LD BC,798</td>
+<td class="comment-1" rowspan="1">Set blit dimensions - 3 bytes wide, 30 scanlines.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39286"></span>39286</td>
+<td class="instruction">CALL <a href="37387.html">copy_rect</a></td>
+<td class="comment-1" rowspan="1">Blit mirrored sprite to P1 energy bar via <a href="37387.html">copy_rect</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39289"></span>39289</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="1">Restore pointer to the mirrored sprite data.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39290"></span>39290</td>
+<td class="instruction">LD B,30</td>
+<td class="comment-1" rowspan="1">Set scanline count for the restore pass.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39292"></span>39292</td>
+<td class="instruction">CALL <a href="38340.html#38342">mirror_tile_inplace_0</a></td>
+<td class="comment-1" rowspan="1">Un-mirror sprite in-place via <a href="38340.html#38342">mirror_tile_inplace_0</a>, restoring original data for reuse.</td>
+</tr>
+<tr>
+<td class="asm-label">draw_snakes_sprites_0</td>
+<td class="address-2"><span id="39295"></span>39295</td>
+<td class="instruction">LD IY,46434</td>
+<td class="comment-1" rowspan="1">Select P2 state block.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39299"></span>39299</td>
+<td class="instruction">LD A,(IY+7)</td>
+<td class="comment-1" rowspan="1">Load P2 packed energy/phase byte.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39302"></span>39302</td>
+<td class="instruction">AND 240</td>
+<td class="comment-1" rowspan="1">Isolate draw phase index.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39304"></span>39304</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Phase idle - return.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39305"></span>39305</td>
+<td class="instruction">CALL <a href="39317.html">update_snake_frame_id</a></td>
+<td class="comment-1" rowspan="1">Advance draw phase and fetch snake sprite pointer via <a href="39317.html">update_snake_frame_id</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39308"></span>39308</td>
+<td class="instruction">LD HL,16445</td>
+<td class="comment-1" rowspan="1">Set P2 energy bar VRAM destination.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39311"></span>39311</td>
+<td class="instruction">LD BC,798</td>
+<td class="comment-1" rowspan="1">Set blit dimensions - 3 bytes wide, 30 scanlines.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39314"></span>39314</td>
+<td class="instruction">JP <a href="37387.html">copy_rect</a></td>
+<td class="comment-1" rowspan="1">Tail-call to blit sprite to P2 energy bar via <a href="37387.html">copy_rect</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="39245.html">39245</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#39258">Map</a></td>
+<td class="next">
+Next: <a href="39317.html">39317</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/995A.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

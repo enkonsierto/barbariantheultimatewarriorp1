@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 35381</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="35240.html">35240</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#35381">Map</a></td>
+<td class="next">
+Next: <a href="35414.html">35414</a>
+</td>
+</tr>
+</table>
+<div class="description">35381: Game Over, Game Reset.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="35240.html">entry_point</a>, <a href="37631.html">end_of_fight_dispatcher</a> and <a href="37843.html">post_drain_wait</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="35381"></span>
+<div class="comments">
+<div class="paragraph">
+Resets game state and returns to the menu sequence at <a href="35240.html#35247">entry_point_0</a>.
+</div>
+<div class="paragraph">
+IY+7 is a packed byte: bits 7-4 hold the snake animation draw phase (0=idle, 1-13=active cycle), bits 3-0 hold the current energy value (0-13). Writing 0x10 arms the snake animation for one step before <a href="36776.html">reset_p1_state_block</a> and <a href="36793.html">reset_p2_state_block</a> restore energy to 13.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">game_reset</td>
+<td class="address-2"><span id="35381"></span>35381</td>
+<td class="instruction">LD A,16</td>
+<td class="comment-1" rowspan="3">Sets energy to 16 (0x10) in both player state blocks, priming the animation. Energy is restored to 13 by <a href="36776.html">reset_p1_state_block</a> at <a href="35240.html#35307">35307</a> and <a href="36793.html">reset_p2_state_block</a> at <a href="35240.html#35310">35310</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35383"></span>35383</td>
+<td class="instruction">LD (46432),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35386"></span>35386</td>
+<td class="instruction">LD (46441),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35389"></span>35389</td>
+<td class="instruction">CALL <a href="39258.html">draw_snakes_sprites</a></td>
+<td class="comment-1" rowspan="1">Runs one snake animation frame for both players via R39258; the HP bar UDG segments are not updated here.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35392"></span>35392</td>
+<td class="instruction">XOR A</td>
+<td class="comment-1" rowspan="1">A = 0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35393"></span>35393</td>
+<td class="instruction">LD (47576),A</td>
+<td class="comment-1" rowspan="1">Clear tackle collision flag <a href="47576.html">tackle_collision_flag</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35396"></span>35396</td>
+<td class="instruction">LD (46454),A</td>
+<td class="comment-1" rowspan="1">Reset active stage index to 0 (stage 1) at <a href="46454.html">active_bg</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35399"></span>35399</td>
+<td class="instruction">LD HL,26752</td>
+<td class="comment-1" rowspan="1">HL = stage 1 graphics base <a href="26752.html">stage_1_bg</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35402"></span>35402</td>
+<td class="instruction">LD (46459),HL</td>
+<td class="comment-1" rowspan="1">Set active stage graphics pointer <a href="46455.html#46459">active_bg_bitmap_ptr</a> to stage 1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35405"></span>35405</td>
+<td class="instruction">LD HL,46614</td>
+<td class="comment-1" rowspan="1">HL = stage 1 attribute data <a href="46467.html#46614">bg_1_attr_data</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35408"></span>35408</td>
+<td class="instruction">LD (46461),HL</td>
+<td class="comment-1" rowspan="1">Set active stage attributes pointer <a href="46455.html#46461">active_bg_attr_ptr</a> to stage 1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35411"></span>35411</td>
+<td class="instruction">JP <a href="35240.html#35247">entry_point_0</a></td>
+<td class="comment-1" rowspan="1">Jump to game menu sequence at <a href="35240.html#35247">entry_point_0</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="35240.html">35240</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#35381">Map</a></td>
+<td class="next">
+Next: <a href="35414.html">35414</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/8A35.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

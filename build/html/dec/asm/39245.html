@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 39245</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="39211.html">39211</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#39245">Map</a></td>
+<td class="next">
+Next: <a href="39258.html">39258</a>
+</td>
+</tr>
+</table>
+<div class="description">39245: Read movement properties byte.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="36838.html">set_char_moves</a> and <a href="39617.html">combat_loop</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="39245"></span>
+<div class="comments">
+<div class="paragraph">
+Reads the properties byte for the given movement ID from the table at <a href="44755.html">44755</a>.
+</div>
+<div class="paragraph">
+INPUT: A = movement ID. OUTPUT: A = properties byte. DESTROYS: None.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">get_moves_properties</td>
+<td class="address-2"><span id="39245"></span>39245</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="2">Preserve HL and DE.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39246"></span>39246</td>
+<td class="instruction">PUSH DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39247"></span>39247</td>
+<td class="instruction">LD HL,44755</td>
+<td class="comment-1" rowspan="1">Load movement properties table base <a href="44755.html">44755</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39250"></span>39250</td>
+<td class="instruction">LD E,A</td>
+<td class="comment-1" rowspan="2">Form a 16-bit offset from the movement ID.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39251"></span>39251</td>
+<td class="instruction">LD D,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39253"></span>39253</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1">Advance to the target entry.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39254"></span>39254</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1">Read the properties byte.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39255"></span>39255</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="2">Restore HL and DE.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39256"></span>39256</td>
+<td class="instruction">POP HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39257"></span>39257</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="39211.html">39211</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#39245">Map</a></td>
+<td class="next">
+Next: <a href="39258.html">39258</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/994D.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

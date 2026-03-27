@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at BE61</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="BDB1.html">BDB1</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#be61">Map</a></td>
+<td class="next">
+Next: <a href="BE9B.html">BE9B</a>
+</td>
+</tr>
+</table>
+<div class="description">BE61: String Pointers Table</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Table of 29 word-sized pointers to game strings.
+</div>
+<div class="paragraph">
+Used by <a href="8CD5.html">word_addr_solver</a> to resolve a string index into the target string address.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">string_pointers_table</td>
+<td class="address-1"><span id="be61"></span>BE61</td>
+<td class="instruction">DEFW <a href="BDB1.html">messages</a></td>
+<td class="comment-1" rowspan="1">[00] -&gt; "0 "</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be63"></span>BE63</td>
+<td class="instruction">DEFW <a href="BDB1.html#bdb4">$BDB4</a></td>
+<td class="comment-1" rowspan="1">[01] -&gt; "1 "</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be65"></span>BE65</td>
+<td class="instruction">DEFW <a href="BDB1.html#bdb7">$BDB7</a></td>
+<td class="comment-1" rowspan="1">[02] -&gt; "2 "</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be67"></span>BE67</td>
+<td class="instruction">DEFW <a href="BDB1.html#bdba">$BDBA</a></td>
+<td class="comment-1" rowspan="1">[03] -&gt; "3 "</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be69"></span>BE69</td>
+<td class="instruction">DEFW <a href="BDB1.html#bdbd">$BDBD</a></td>
+<td class="comment-1" rowspan="1">[04] -&gt; "4 "</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be6b"></span>BE6B</td>
+<td class="instruction">DEFW <a href="BDB1.html#bdc0">$BDC0</a></td>
+<td class="comment-1" rowspan="1">[05] -&gt; "SELECT"</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be6d"></span>BE6D</td>
+<td class="instruction">DEFW <a href="BDB1.html#bdc8">$BDC8</a></td>
+<td class="comment-1" rowspan="1">[06] -&gt; "OPTION"</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be6f"></span>BE6F</td>
+<td class="instruction">DEFW <a href="BDB1.html#bdcf">$BDCF</a></td>
+<td class="comment-1" rowspan="1">[07] -&gt; "PLAYER"</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be71"></span>BE71</td>
+<td class="instruction">DEFW <a href="BDB1.html#bdd6">$BDD6</a></td>
+<td class="comment-1" rowspan="1">[08] -&gt; "KEYBOARD"</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be73"></span>BE73</td>
+<td class="instruction">DEFW <a href="BDB1.html#bddf">$BDDF</a></td>
+<td class="comment-1" rowspan="1">[09] -&gt; " JOYSTICK"</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be75"></span>BE75</td>
+<td class="instruction">DEFW <a href="BDB1.html#bde9">$BDE9</a></td>
+<td class="comment-1" rowspan="1">[10] -&gt; "KEY"</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be77"></span>BE77</td>
+<td class="instruction">DEFW <a href="BDB1.html#bded">$BDED</a></td>
+<td class="comment-1" rowspan="1">[11] -&gt; " FOR"</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be79"></span>BE79</td>
+<td class="instruction">DEFW <a href="BDB1.html#bdf3">$BDF3</a></td>
+<td class="comment-1" rowspan="1">[12] -&gt; "FIRE"</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be7b"></span>BE7B</td>
+<td class="instruction">DEFW <a href="BDB1.html#bdf8">$BDF8</a></td>
+<td class="comment-1" rowspan="1">[13] -&gt; "UP"</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be7d"></span>BE7D</td>
+<td class="instruction">DEFW <a href="BDB1.html#bdfb">$BDFB</a></td>
+<td class="comment-1" rowspan="1">[14] -&gt; "DOWN"</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be7f"></span>BE7F</td>
+<td class="instruction">DEFW <a href="BDB1.html#be00">$BE00</a></td>
+<td class="comment-1" rowspan="1">[15] -&gt; "LEFT"</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be81"></span>BE81</td>
+<td class="instruction">DEFW <a href="BDB1.html#be05">$BE05</a></td>
+<td class="comment-1" rowspan="1">[16] -&gt; "RIGHT"</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be83"></span>BE83</td>
+<td class="instruction">DEFW <a href="BDB1.html#be0b">$BE0B</a></td>
+<td class="comment-1" rowspan="1">[17] -&gt; "PAUSE"</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be85"></span>BE85</td>
+<td class="instruction">DEFW <a href="BDB1.html#be11">$BE11</a></td>
+<td class="comment-1" rowspan="1">[18] -&gt; "QUIT"</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be87"></span>BE87</td>
+<td class="instruction">DEFW <a href="BDB1.html#be16">$BE16</a></td>
+<td class="comment-1" rowspan="1">[19] -&gt; "FINAL V8:5&gt;11&gt;87"</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be89"></span>BE89</td>
+<td class="instruction">DEFW <a href="BDB1.html#be27">$BE27</a></td>
+<td class="comment-1" rowspan="1">[20] -&gt; "ONE"</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be8b"></span>BE8B</td>
+<td class="instruction">DEFW <a href="BDB1.html#be2c">$BE2C</a></td>
+<td class="comment-1" rowspan="1">[21] -&gt; "TWO"</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be8d"></span>BE8D</td>
+<td class="instruction">DEFW <a href="BDB1.html#be31">$BE31</a></td>
+<td class="comment-1" rowspan="1">[22] -&gt; "SINCLAIR"</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be8f"></span>BE8F</td>
+<td class="instruction">DEFW <a href="BDB1.html#be3a">$BE3A</a></td>
+<td class="comment-1" rowspan="1">[23] -&gt; "KEMPSTON"</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be91"></span>BE91</td>
+<td class="instruction">DEFW <a href="BDB1.html#be43">$BE43</a></td>
+<td class="comment-1" rowspan="1">[24] -&gt; " "</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be93"></span>BE93</td>
+<td class="instruction">DEFW <a href="BDB1.html#be45">$BE45</a></td>
+<td class="comment-1" rowspan="1">[25] -&gt; "START GAME"</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be95"></span>BE95</td>
+<td class="instruction">DEFW <a href="BDB1.html#be50">$BE50</a></td>
+<td class="comment-1" rowspan="1">[26] -&gt; "GAME"</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be97"></span>BE97</td>
+<td class="instruction">DEFW <a href="BDB1.html#be56">$BE56</a></td>
+<td class="comment-1" rowspan="1">[27] -&gt; "KEYS"</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="be99"></span>BE99</td>
+<td class="instruction">DEFW <a href="BDB1.html#be5b">$BE5B</a></td>
+<td class="comment-1" rowspan="1">[28] -&gt; "DEMO"</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="BDB1.html">BDB1</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#be61">Map</a></td>
+<td class="next">
+Next: <a href="BE9B.html">BE9B</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/48737.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

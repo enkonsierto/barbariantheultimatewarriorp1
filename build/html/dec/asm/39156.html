@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 39156</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="39142.html">39142</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#39156">Map</a></td>
+<td class="next">
+Next: <a href="39194.html">39194</a>
+</td>
+</tr>
+</table>
+<div class="description">39156: Input-gated movement transition.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Called every frame from <a href="39827.html">char_frame_update</a>. Runs through three gates before attempting a movement change; returns early if any fails:
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="39156"></span>
+<div class="comments">
+<div class="paragraph">
+1. Current movement is non-interruptible (bit 6 of its properties byte in <a href="44755.html">44755</a>).
+</div>
+<div class="paragraph">
+2. A special event is active (<a href="47575.html">tackle_overlap_flag</a> != 0, e.g. tackle or collision).
+</div>
+<div class="paragraph">
+3. Current frame is non-controllable (IY+2 bit 7 set).
+</div>
+<div class="paragraph">
+If all gates pass, mirror-corrects the input via <a href="39142.html">input_mirror_correcter</a>, resolves a candidate movement via <a href="39211.html">moves_solver</a>, and returns unchanged if the result is 255 or matches the current movement. On a valid new movement, applies it via <a href="36838.html">set_char_moves</a> and rewinds the frame pointer by 1 so the animation starts at its first real frame.
+</div>
+<div class="paragraph">
+INPUT: IY = character state block (<a href="46425.html">p1_controller_type</a> or <a href="46434.html">p2_controller_type</a>).
+</div>
+<div class="paragraph">
+OUTPUT: None. Updates IY+6 (movement ID), IY+4/IY+5 (frame pointer) and IY+2 (mirror flag) via <a href="36838.html">set_char_moves</a>. DESTROYS: AF, HL.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">input_gated_moves</td>
+<td class="address-2"><span id="39156"></span>39156</td>
+<td class="instruction">LD A,(IY+6)</td>
+<td class="comment-1" rowspan="4">Read movement properties byte from <a href="44755.html">44755</a> using the current movement ID; test the non-interruptible flag (bit 6).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39159"></span>39159</td>
+<td class="instruction">LD HL,44755</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39162"></span>39162</td>
+<td class="instruction">CALL <a href="38318.html">get_byte_value</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39165"></span>39165</td>
+<td class="instruction">BIT 6,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39167"></span>39167</td>
+<td class="instruction">RET NZ</td>
+<td class="comment-1" rowspan="1">Non-interruptible movement active (death, victory); return.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39168"></span>39168</td>
+<td class="instruction">LD A,(47575)</td>
+<td class="comment-1" rowspan="3">Special event in progress (<a href="47575.html">tackle_overlap_flag</a> != 0); return.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39171"></span>39171</td>
+<td class="instruction">OR A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39172"></span>39172</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39173"></span>39173</td>
+<td class="instruction">LD A,(IY+1)</td>
+<td class="comment-1" rowspan="2">Read key state and apply mirror correction for direction via <a href="39142.html">input_mirror_correcter</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39176"></span>39176</td>
+<td class="instruction">CALL <a href="39142.html">input_mirror_correcter</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39179"></span>39179</td>
+<td class="instruction">BIT 7,(IY+2)</td>
+<td class="comment-1" rowspan="2">Current frame is non-controllable (IY+2 bit 7); return.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39183"></span>39183</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39184"></span>39184</td>
+<td class="instruction">CALL <a href="39211.html">moves_solver</a></td>
+<td class="comment-1" rowspan="1">Resolve candidate movement ID from current input via <a href="39211.html">moves_solver</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39187"></span>39187</td>
+<td class="instruction">CP 255</td>
+<td class="comment-1" rowspan="1">No transition defined for this input/movement combination; return.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39189"></span>39189</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39190"></span>39190</td>
+<td class="instruction">CP (IY+6)</td>
+<td class="comment-1" rowspan="2">Candidate matches current movement; return without change.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39193"></span>39193</td>
+<td class="instruction">RET Z</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="39142.html">39142</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#39156">Map</a></td>
+<td class="next">
+Next: <a href="39194.html">39194</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/98F4.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

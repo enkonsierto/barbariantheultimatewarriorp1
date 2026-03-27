@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at BD31</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="BC8D.html">BC8D</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#bd31">Map</a></td>
+<td class="next">
+Next: <a href="BDB1.html">BDB1</a>
+</td>
+</tr>
+</table>
+<div class="description">BD31: Composite tile index pointers table.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="bd31"></span>
+<div class="comments">
+<div class="paragraph">
+64 x 2-byte LE pointers (indices 0-63) into <a href="BC8D.html">BC8D</a> definition data.
+</div>
+<div class="paragraph">
+Index = control_byte AND 0x3F. All pointers in range <a href="BC8D.html">BC8D</a>-<a href="BC8D.html#bd2d">BD2D</a>.
+</div>
+<div class="paragraph">
+Resolved by <a href="91C5.html">comptile_ptr_resolver</a>: A=index * 2, HL=<a href="BD31.html">composite_tile_pointers</a>, HL+=A, BC=word at HL.
+</div>
+<div class="paragraph">
+Called from <a href="9162.html">comp_tile_dispatcher</a> after stripping mirror bit and isolating composite index.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">composite_tile_pointers</td>
+<td class="address-1"><span id="bd31"></span>BD31</td>
+<td class="instruction">DEFW <a href="BC8D.html">$BC8D</a></td>
+<td class="comment-1" rowspan="1">Index  0 -&gt; <a href="BC8D.html">BC8D</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd33"></span>BD33</td>
+<td class="instruction">DEFW <a href="BC8D.html#bc8f">$BC8F</a></td>
+<td class="comment-1" rowspan="1">Index  1 -&gt; <a href="BC8D.html#bc8f">BC8F</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd35"></span>BD35</td>
+<td class="instruction">DEFW <a href="BC8D.html#bc91">$BC91</a></td>
+<td class="comment-1" rowspan="1">Index  2 -&gt; <a href="BC8D.html#bc91">BC91</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd37"></span>BD37</td>
+<td class="instruction">DEFW <a href="BC8D.html#bc93">$BC93</a></td>
+<td class="comment-1" rowspan="1">Index  3 -&gt; <a href="BC8D.html#bc93">BC93</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd39"></span>BD39</td>
+<td class="instruction">DEFW <a href="BC8D.html#bc95">$BC95</a></td>
+<td class="comment-1" rowspan="1">Index  4 -&gt; <a href="BC8D.html#bc95">BC95</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd3b"></span>BD3B</td>
+<td class="instruction">DEFW <a href="BC8D.html#bc97">$BC97</a></td>
+<td class="comment-1" rowspan="1">Index  5 -&gt; <a href="BC8D.html#bc97">BC97</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd3d"></span>BD3D</td>
+<td class="instruction">DEFW <a href="BC8D.html#bc99">$BC99</a></td>
+<td class="comment-1" rowspan="1">Index  6 -&gt; <a href="BC8D.html#bc99">BC99</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd3f"></span>BD3F</td>
+<td class="instruction">DEFW <a href="BC8D.html#bc9e">$BC9E</a></td>
+<td class="comment-1" rowspan="1">Index  7 -&gt; <a href="BC8D.html#bc9e">BC9E</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd41"></span>BD41</td>
+<td class="instruction">DEFW <a href="BC8D.html#bca1">$BCA1</a></td>
+<td class="comment-1" rowspan="1">Index  8 -&gt; <a href="BC8D.html#bca1">BCA1</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd43"></span>BD43</td>
+<td class="instruction">DEFW <a href="BC8D.html#bca4">$BCA4</a></td>
+<td class="comment-1" rowspan="1">Index  9 -&gt; <a href="BC8D.html#bca4">BCA4</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd45"></span>BD45</td>
+<td class="instruction">DEFW <a href="BC8D.html#bca6">$BCA6</a></td>
+<td class="comment-1" rowspan="1">Index 10 -&gt; <a href="BC8D.html#bca6">BCA6</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd47"></span>BD47</td>
+<td class="instruction">DEFW <a href="BC8D.html#bca9">$BCA9</a></td>
+<td class="comment-1" rowspan="1">Index 11 -&gt; <a href="BC8D.html#bca9">BCA9</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd49"></span>BD49</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcad">$BCAD</a></td>
+<td class="comment-1" rowspan="1">Index 12 -&gt; <a href="BC8D.html#bcad">BCAD</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd4b"></span>BD4B</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcb0">$BCB0</a></td>
+<td class="comment-1" rowspan="1">Index 13 -&gt; <a href="BC8D.html#bcb0">BCB0</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd4d"></span>BD4D</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcb2">$BCB2</a></td>
+<td class="comment-1" rowspan="1">Index 14 -&gt; <a href="BC8D.html#bcb2">BCB2</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd4f"></span>BD4F</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcb4">$BCB4</a></td>
+<td class="comment-1" rowspan="1">Index 15 -&gt; <a href="BC8D.html#bcb4">BCB4</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd51"></span>BD51</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcb8">$BCB8</a></td>
+<td class="comment-1" rowspan="1">Index 16 -&gt; <a href="BC8D.html#bcb8">BCB8</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd53"></span>BD53</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcba">$BCBA</a></td>
+<td class="comment-1" rowspan="1">Index 17 -&gt; <a href="BC8D.html#bcba">BCBA</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd55"></span>BD55</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcbd">$BCBD</a></td>
+<td class="comment-1" rowspan="1">Index 18 -&gt; <a href="BC8D.html#bcbd">BCBD</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd57"></span>BD57</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcc0">$BCC0</a></td>
+<td class="comment-1" rowspan="1">Index 19 -&gt; <a href="BC8D.html#bcc0">BCC0</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd59"></span>BD59</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcc3">$BCC3</a></td>
+<td class="comment-1" rowspan="1">Index 20 -&gt; <a href="BC8D.html#bcc3">BCC3</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd5b"></span>BD5B</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcc6">$BCC6</a></td>
+<td class="comment-1" rowspan="1">Index 21 -&gt; <a href="BC8D.html#bcc6">BCC6</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd5d"></span>BD5D</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcc8">$BCC8</a></td>
+<td class="comment-1" rowspan="1">Index 22 -&gt; <a href="BC8D.html#bcc8">BCC8</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd5f"></span>BD5F</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcca">$BCCA</a></td>
+<td class="comment-1" rowspan="1">Index 23 -&gt; <a href="BC8D.html#bcca">BCCA</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd61"></span>BD61</td>
+<td class="instruction">DEFW <a href="BC8D.html#bccc">$BCCC</a></td>
+<td class="comment-1" rowspan="1">Index 24 -&gt; <a href="BC8D.html#bccc">BCCC</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd63"></span>BD63</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcce">$BCCE</a></td>
+<td class="comment-1" rowspan="1">Index 25 -&gt; <a href="BC8D.html#bcce">BCCE</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd65"></span>BD65</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcd1">$BCD1</a></td>
+<td class="comment-1" rowspan="1">Index 26 -&gt; <a href="BC8D.html#bcd1">BCD1</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd67"></span>BD67</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcd3">$BCD3</a></td>
+<td class="comment-1" rowspan="1">Index 27 -&gt; <a href="BC8D.html#bcd3">BCD3</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd69"></span>BD69</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcd5">$BCD5</a></td>
+<td class="comment-1" rowspan="1">Index 28 -&gt; <a href="BC8D.html#bcd5">BCD5</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd6b"></span>BD6B</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcd7">$BCD7</a></td>
+<td class="comment-1" rowspan="1">Index 29 -&gt; <a href="BC8D.html#bcd7">BCD7</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd6d"></span>BD6D</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcdb">$BCDB</a></td>
+<td class="comment-1" rowspan="1">Index 30 -&gt; <a href="BC8D.html#bcdb">BCDB</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd6f"></span>BD6F</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcdd">$BCDD</a></td>
+<td class="comment-1" rowspan="1">Index 31 -&gt; <a href="BC8D.html#bcdd">BCDD</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd71"></span>BD71</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcdf">$BCDF</a></td>
+<td class="comment-1" rowspan="1">Index 32 -&gt; <a href="BC8D.html#bcdf">BCDF</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd73"></span>BD73</td>
+<td class="instruction">DEFW <a href="BC8D.html#bce2">$BCE2</a></td>
+<td class="comment-1" rowspan="1">Index 33 -&gt; <a href="BC8D.html#bce2">BCE2</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd75"></span>BD75</td>
+<td class="instruction">DEFW <a href="BC8D.html#bce4">$BCE4</a></td>
+<td class="comment-1" rowspan="1">Index 34 -&gt; <a href="BC8D.html#bce4">BCE4</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd77"></span>BD77</td>
+<td class="instruction">DEFW <a href="BC8D.html#bce7">$BCE7</a></td>
+<td class="comment-1" rowspan="1">Index 35 -&gt; <a href="BC8D.html#bce7">BCE7</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd79"></span>BD79</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcea">$BCEA</a></td>
+<td class="comment-1" rowspan="1">Index 36 -&gt; <a href="BC8D.html#bcea">BCEA</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd7b"></span>BD7B</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcec">$BCEC</a></td>
+<td class="comment-1" rowspan="1">Index 37 -&gt; <a href="BC8D.html#bcec">BCEC</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd7d"></span>BD7D</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcef">$BCEF</a></td>
+<td class="comment-1" rowspan="1">Index 38 -&gt; <a href="BC8D.html#bcef">BCEF</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd7f"></span>BD7F</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcf1">$BCF1</a></td>
+<td class="comment-1" rowspan="1">Index 39 -&gt; <a href="BC8D.html#bcf1">BCF1</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd81"></span>BD81</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcf3">$BCF3</a></td>
+<td class="comment-1" rowspan="1">Index 40 -&gt; <a href="BC8D.html#bcf3">BCF3</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd83"></span>BD83</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcf5">$BCF5</a></td>
+<td class="comment-1" rowspan="1">Index 41 -&gt; <a href="BC8D.html#bcf5">BCF5</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd85"></span>BD85</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcf8">$BCF8</a></td>
+<td class="comment-1" rowspan="1">Index 42 -&gt; <a href="BC8D.html#bcf8">BCF8</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd87"></span>BD87</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcfa">$BCFA</a></td>
+<td class="comment-1" rowspan="1">Index 43 -&gt; <a href="BC8D.html#bcfa">BCFA</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd89"></span>BD89</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcfc">$BCFC</a></td>
+<td class="comment-1" rowspan="1">Index 44 -&gt; <a href="BC8D.html#bcfc">BCFC</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd8b"></span>BD8B</td>
+<td class="instruction">DEFW <a href="BC8D.html#bcff">$BCFF</a></td>
+<td class="comment-1" rowspan="1">Index 45 -&gt; <a href="BC8D.html#bcff">BCFF</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd8d"></span>BD8D</td>
+<td class="instruction">DEFW <a href="BC8D.html#bd03">$BD03</a></td>
+<td class="comment-1" rowspan="1">Index 46 -&gt; <a href="BC8D.html#bd03">BD03</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd8f"></span>BD8F</td>
+<td class="instruction">DEFW <a href="BC8D.html#bd05">$BD05</a></td>
+<td class="comment-1" rowspan="1">Index 47 -&gt; <a href="BC8D.html#bd05">BD05</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd91"></span>BD91</td>
+<td class="instruction">DEFW <a href="BC8D.html#bd07">$BD07</a></td>
+<td class="comment-1" rowspan="1">Index 48 -&gt; <a href="BC8D.html#bd07">BD07</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd93"></span>BD93</td>
+<td class="instruction">DEFW <a href="BC8D.html#bd09">$BD09</a></td>
+<td class="comment-1" rowspan="1">Index 49 -&gt; <a href="BC8D.html#bd09">BD09</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd95"></span>BD95</td>
+<td class="instruction">DEFW <a href="BC8D.html#bd0c">$BD0C</a></td>
+<td class="comment-1" rowspan="1">Index 50 -&gt; <a href="BC8D.html#bd0c">BD0C</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd97"></span>BD97</td>
+<td class="instruction">DEFW <a href="BC8D.html#bd0e">$BD0E</a></td>
+<td class="comment-1" rowspan="1">Index 51 -&gt; <a href="BC8D.html#bd0e">BD0E</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd99"></span>BD99</td>
+<td class="instruction">DEFW <a href="BC8D.html#bd11">$BD11</a></td>
+<td class="comment-1" rowspan="1">Index 52 -&gt; <a href="BC8D.html#bd11">BD11</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd9b"></span>BD9B</td>
+<td class="instruction">DEFW <a href="BC8D.html#bd14">$BD14</a></td>
+<td class="comment-1" rowspan="1">Index 53 -&gt; <a href="BC8D.html#bd14">BD14</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd9d"></span>BD9D</td>
+<td class="instruction">DEFW <a href="BC8D.html#bd16">$BD16</a></td>
+<td class="comment-1" rowspan="1">Index 54 -&gt; <a href="BC8D.html#bd16">BD16</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bd9f"></span>BD9F</td>
+<td class="instruction">DEFW <a href="BC8D.html#bd18">$BD18</a></td>
+<td class="comment-1" rowspan="1">Index 55 -&gt; <a href="BC8D.html#bd18">BD18</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bda1"></span>BDA1</td>
+<td class="instruction">DEFW <a href="BC8D.html#bd1a">$BD1A</a></td>
+<td class="comment-1" rowspan="1">Index 56 -&gt; <a href="BC8D.html#bd1a">BD1A</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bda3"></span>BDA3</td>
+<td class="instruction">DEFW <a href="BC8D.html#bd1c">$BD1C</a></td>
+<td class="comment-1" rowspan="1">Index 57 -&gt; <a href="BC8D.html#bd1c">BD1C</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bda5"></span>BDA5</td>
+<td class="instruction">DEFW <a href="BC8D.html#bd1e">$BD1E</a></td>
+<td class="comment-1" rowspan="1">Index 58 -&gt; <a href="BC8D.html#bd1e">BD1E</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bda7"></span>BDA7</td>
+<td class="instruction">DEFW <a href="BC8D.html#bd21">$BD21</a></td>
+<td class="comment-1" rowspan="1">Index 59 -&gt; <a href="BC8D.html#bd21">BD21</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bda9"></span>BDA9</td>
+<td class="instruction">DEFW <a href="BC8D.html#bd24">$BD24</a></td>
+<td class="comment-1" rowspan="1">Index 60 -&gt; <a href="BC8D.html#bd24">BD24</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bdab"></span>BDAB</td>
+<td class="instruction">DEFW <a href="BC8D.html#bd27">$BD27</a></td>
+<td class="comment-1" rowspan="1">Index 61 -&gt; <a href="BC8D.html#bd27">BD27</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bdad"></span>BDAD</td>
+<td class="instruction">DEFW <a href="BC8D.html#bd29">$BD29</a></td>
+<td class="comment-1" rowspan="1">Index 62 -&gt; <a href="BC8D.html#bd29">BD29</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bdaf"></span>BDAF</td>
+<td class="instruction">DEFW <a href="BC8D.html#bd2d">$BD2D</a></td>
+<td class="comment-1" rowspan="1">Index 63 -&gt; <a href="BC8D.html#bd2d">BD2D</a></td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="BC8D.html">BC8D</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#bd31">Map</a></td>
+<td class="next">
+Next: <a href="BDB1.html">BDB1</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/48433.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>
