@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 9539</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="952F.html">952F</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#9539">Map</a></td>
+<td class="next">
+Next: <a href="9544.html">9544</a>
+</td>
+</tr>
+</table>
+<div class="description">9539: Move screen pointer up by B scanlines.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="946D.html">head_animator</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="9539"></span>
+<div class="comments">
+<div class="paragraph">
+Counterpart to <a href="952F.html">move_scanl_down</a>. Subtracts 32 from HL up to B times, stepping the framebuffer address back one scanline per iteration.
+</div>
+<div class="paragraph">
+SBC HL,DE requires carry = 0 on entry; not guaranteed by all callers.
+</div>
+<div class="paragraph">
+INPUT: B number of scanlines. HL = current framebuffer address. OUTPUT: HL = updated address. DESTROYS: A, DE.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">move_scanl_up</td>
+<td class="address-2"><span id="9539"></span>9539</td>
+<td class="instruction">LD A,B</td>
+<td class="comment-1" rowspan="3">Return immediately if B is 0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="953a"></span>953A</td>
+<td class="instruction">OR A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="953b"></span>953B</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="asm-label">move_scanl_up_0</td>
+<td class="address-2"><span id="953c"></span>953C</td>
+<td class="instruction">LD DE,$0020</td>
+<td class="comment-1" rowspan="1">DE = 32 - one scanline.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="953f"></span>953F</td>
+<td class="instruction">SBC HL,DE</td>
+<td class="comment-1" rowspan="2">Step HL back one scanline, loop B times.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9541"></span>9541</td>
+<td class="instruction">DJNZ <a href="9539.html#953c">move_scanl_up_0</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9543"></span>9543</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="952F.html">952F</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#9539">Map</a></td>
+<td class="next">
+Next: <a href="9544.html">9544</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/38201.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

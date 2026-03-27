@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at 46853</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="46835.html">46835</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#46853">Map</a></td>
+<td class="next">
+Next: <a href="46871.html">46871</a>
+</td>
+</tr>
+</table>
+<div class="description">46853: P2 head tile sequence.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+17-entry tile index sequence for the severed P2 head animation.
+</div>
+<div class="paragraph">
+Structure identical to <a href="46835.html">p1_head_tile_seq</a>. Tile ID 18 is absent (sequence jumps directly 17-&gt;19). Each byte resolved against sprite bank base 40192 by <a href="38103.html">render_head_tile</a>.
+</div>
+<div class="paragraph">
+Terminated by sentinel 255 at <a href="46853.html#46870">46870</a>, triggering <a href="38180.html">mark_head_landed</a> (<a href="46809.html#46810">head_state_flag</a> = 255).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="46853"></span>
+<div class="comments">
+<div class="paragraph">
+Tile base: <a href="40192.html">other_sprites</a>. 17 active tile IDs + 1 sentinel = 18 bytes total.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">p2_head_tile_seq</td>
+<td class="address-1"><span id="46853"></span>46853</td>
+<td class="instruction">DEFB 16,17,19,20</td>
+<td class="comment-1" rowspan="1">Tile IDs: 16,17,19,20 (cycle 1, tile ID 18 absent).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46857"></span>46857</td>
+<td class="instruction">DEFB 16,17,19,20</td>
+<td class="comment-1" rowspan="1">Tile IDs: 16,17,19,20 (cycle 2).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46861"></span>46861</td>
+<td class="instruction">DEFB 16,17,19,20</td>
+<td class="comment-1" rowspan="1">Tile IDs: 16,17,19,20 (cycle 3).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46865"></span>46865</td>
+<td class="instruction">DEFB 16,16,17,17,17</td>
+<td class="comment-1" rowspan="1">Tile IDs: 16,16,17,17,17 (final phase).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46870"></span>46870</td>
+<td class="instruction">DEFB 255</td>
+<td class="comment-1" rowspan="1">Sentinel 255: end of sequence, triggers <a href="38180.html">mark_head_landed</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="46835.html">46835</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#46853">Map</a></td>
+<td class="next">
+Next: <a href="46871.html">46871</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/B705.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

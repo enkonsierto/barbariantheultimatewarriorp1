@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 36706</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="36673.html">36673</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#36706">Map</a></td>
+<td class="next">
+Next: <a href="36776.html">36776</a>
+</td>
+</tr>
+</table>
+<div class="description">36706: Menu rainbow colour animation.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Cycles 7 times (112 ms each), incrementing ink tint across 7 menu rows: white -&gt; yellow -&gt; cyan -&gt; green -&gt; magenta -&gt; green -&gt; cyan (pause/quit conditional).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">rainbow_animation</td>
+<td class="address-2"><span id="36706"></span>36706</td>
+<td class="instruction">LD B,7</td>
+<td class="comment-1" rowspan="1">Set a counter of 7 loops.</td>
+</tr>
+<tr>
+<td class="asm-label">rainbow_animation_0</td>
+<td class="address-2"><span id="36708"></span>36708</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Preserves the counter.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36709"></span>36709</td>
+<td class="instruction">CALL <a href="39846.html">waits_112ms</a></td>
+<td class="comment-1" rowspan="1">Waits 112 ms.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36712"></span>36712</td>
+<td class="instruction">LD A,7</td>
+<td class="comment-1" rowspan="1">Target ink colour: white (7).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36714"></span>36714</td>
+<td class="instruction">LD HL,22853</td>
+<td class="comment-1" rowspan="1">First attribute row base address for this colour step.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36717"></span>36717</td>
+<td class="instruction">LD BC,5377</td>
+<td class="comment-1" rowspan="1">B=21 tiles per row, C=1 row to step.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36720"></span>36720</td>
+<td class="instruction">CALL <a href="38664.html">step_ink_up</a></td>
+<td class="comment-1" rowspan="1">Advance ink colour toward the target value via R38664.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36723"></span>36723</td>
+<td class="instruction">DEC A</td>
+<td class="comment-1" rowspan="1">Target ink colour: yellow (6).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36724"></span>36724</td>
+<td class="instruction">LD HL,22918</td>
+<td class="comment-1" rowspan="1">Set the initial screen address to colour.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36727"></span>36727</td>
+<td class="instruction">CALL <a href="38664.html">step_ink_up</a></td>
+<td class="comment-1" rowspan="1">Increments in 1 the attribute ink.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36730"></span>36730</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1">Selects the next line below.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36731"></span>36731</td>
+<td class="instruction">DEC A</td>
+<td class="comment-1" rowspan="1">Target ink colour: cyan (5).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36732"></span>36732</td>
+<td class="instruction">CALL <a href="38664.html">step_ink_up</a></td>
+<td class="comment-1" rowspan="1">Increments in 1 the attribute ink.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36735"></span>36735</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1">Selects the next line below.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36736"></span>36736</td>
+<td class="instruction">DEC A</td>
+<td class="comment-1" rowspan="1">Target ink colour: green (4).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36737"></span>36737</td>
+<td class="instruction">CALL <a href="38664.html">step_ink_up</a></td>
+<td class="comment-1" rowspan="1">Increments in 1 the attribute ink.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36740"></span>36740</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1">Selects the next line below.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36741"></span>36741</td>
+<td class="instruction">DEC A</td>
+<td class="comment-1" rowspan="1">Target ink colour: magenta (3).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36742"></span>36742</td>
+<td class="instruction">CALL <a href="38664.html">step_ink_up</a></td>
+<td class="comment-1" rowspan="1">Increments in 1 the attribute ink.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36745"></span>36745</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1">Selects the next line below.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36746"></span>36746</td>
+<td class="instruction">INC A</td>
+<td class="comment-1" rowspan="1">Target ink colour: green (4).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36747"></span>36747</td>
+<td class="instruction">CALL <a href="38664.html">step_ink_up</a></td>
+<td class="comment-1" rowspan="1">Increments in 1 the attribute ink.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="36750"></span>
+<div class="comments">
+<div class="paragraph">
+These two attribute writes only fire if <a href="47439.html">quit_scancode</a> quit and <a href="47438.html">pause_scancode</a> pause scancodes are still 0 not yet assigned. In practice both are non-zero during normal gameplay, so these rows are never coloured at runtime. They would only activate before any key assignment has occurred.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36750"></span>36750</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1">Selects the next line below.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36751"></span>36751</td>
+<td class="instruction">INC A</td>
+<td class="comment-1" rowspan="1">Target ink colour: cyan (5) - conditional on pause/quit unassigned.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36752"></span>36752</td>
+<td class="instruction">LD E,A</td>
+<td class="comment-1" rowspan="4">Compares if <a href="47439.html">quit_scancode</a> is 0 (now is 032).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36753"></span>36753</td>
+<td class="instruction">LD A,(47439)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36756"></span>36756</td>
+<td class="instruction">OR A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36757"></span>36757</td>
+<td class="instruction">LD A,E</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36758"></span>36758</td>
+<td class="instruction">CALL Z,<a href="38664.html">step_ink_up</a></td>
+<td class="comment-1" rowspan="1">If is 0 increments in 1 the attribute ink.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36761"></span>36761</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1">Selects the next line below.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36762"></span>36762</td>
+<td class="instruction">INC A</td>
+<td class="comment-1" rowspan="1">Target ink colour: cyan (5) - conditional on pause/quit unassigned.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36763"></span>36763</td>
+<td class="instruction">LD E,A</td>
+<td class="comment-1" rowspan="4">Compares if <a href="47438.html">pause_scancode</a> is 0 (now is 024).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36764"></span>36764</td>
+<td class="instruction">LD A,(47438)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36767"></span>36767</td>
+<td class="instruction">OR A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36768"></span>36768</td>
+<td class="instruction">LD A,E</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36769"></span>36769</td>
+<td class="instruction">CALL Z,<a href="38664.html">step_ink_up</a></td>
+<td class="comment-1" rowspan="1">If is 0 increments in 1 the attribute ink.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="36772"></span>
+<div class="comments">
+<div class="paragraph">
+End of the routine.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36772"></span>36772</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Recovers BC</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36773"></span>36773</td>
+<td class="instruction">DJNZ <a href="36706.html#36708">rainbow_animation_0</a></td>
+<td class="comment-1" rowspan="1">Repeats the routine 7 times.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36775"></span>36775</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Returns.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="36673.html">36673</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#36706">Map</a></td>
+<td class="next">
+Next: <a href="36776.html">36776</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/8F62.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

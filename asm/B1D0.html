@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at B1D0</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B15F.html">B15F</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b1d0">Map</a></td>
+<td class="next">
+Next: <a href="B245.html">B245</a>
+</td>
+</tr>
+</table>
+<div class="description">B1D0: Hit section: attacker frame 26.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Hitbox active when attacker animation frame index = 26. Pairs: (defender_frame, hit_type index into <a href="B4E4.html">hit_type_table</a>). Terminated by 0xFF.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="b1d0"></span>
+<div class="comments">
+<div class="paragraph">
+Decapitation sword strike frame. Triggers mv8 (decap/death) on most standing and neutral defender stances (types 4-5).
+</div>
+<div class="paragraph">
+fr0-fr3 react with decap at near range (type 4). fr4-fr6 at close range (type 5).
+</div>
+<div class="paragraph">
+fr26 fully blocked (guard2/any, type 6). fr27 and fr28 have dual entries: stagger+slash at close range OR guard1 at far range.
+</div>
+<div class="paragraph">
+Upper-body frames (fr63-fr71,fr75) have dual entries: decap at close range (type 5) AND slash+dmg at far range (type 11).
+</div>
+<div class="paragraph">
+Crouching/idle frames fr0-fr9 and victory/post-combat fr96 react with stagger+slash (types 36-38).
+</div>
+<div class="paragraph">
+Used by <a href="9A2C.html">hit_detection</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">hit_frame_26</td>
+<td class="address-1"><span id="b1d0"></span>B1D0</td>
+<td class="instruction">DEFB $00,$04,$01,$04,$02,$04,$03,$04</td>
+<td class="comment-1" rowspan="1">fr0:decap/near  fr1:decap/near fr2:decap/near  fr3:decap/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b1d8"></span>B1D8</td>
+<td class="instruction">DEFB $04,$05,$05,$05,$06,$05,$08,$00</td>
+<td class="comment-1" rowspan="1">fr4:decap/close  fr5:decap/close fr6:decap/close fr8:stagger+slash+dmg/any</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b1e0"></span>B1E0</td>
+<td class="instruction">DEFB $09,$25,$0D,$24,$0E,$25,$0F,$24</td>
+<td class="comment-1" rowspan="1">fr9:stagger+slash+dmg/near fr13:stagger+slash+dmg/any fr14:stagger+slash+dmg/near fr15:stagger+slash+dmg/any</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b1e8"></span>B1E8</td>
+<td class="instruction">DEFB $10,$24,$15,$24,$16,$25,$17,$25</td>
+<td class="comment-1" rowspan="1">fr16:stagger+slash+dmg/any fr21:stagger+slash+dmg/any fr22:stagger+slash+dmg/near fr23:stagger+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b1f0"></span>B1F0</td>
+<td class="instruction">DEFB $18,$24,$19,$24,$1A,$06,$1B,$26</td>
+<td class="comment-1" rowspan="1">fr24:stagger+slash+dmg/any fr25:stagger+slash+dmg/any fr26:guard2(full block) fr27:stagger+slash+dmg/close</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b1f8"></span>B1F8</td>
+<td class="instruction">DEFB $1B,$0D,$1C,$26,$1C,$0D,$1F,$24</td>
+<td class="comment-1" rowspan="1">fr27:guard1/far fr28:stagger+slash+dmg/close fr28:guard1/far fr31:stagger+slash+dmg/any</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b200"></span>B200</td>
+<td class="instruction">DEFB $31,$25,$32,$04,$33,$04,$34,$04</td>
+<td class="comment-1" rowspan="1">fr49:stagger+slash+dmg/near fr50:decap/near  fr51:decap/near fr52:decap/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b208"></span>B208</td>
+<td class="instruction">DEFB $35,$04,$36,$04,$37,$04,$3B,$24</td>
+<td class="comment-1" rowspan="1">fr53:decap/near  fr54:decap/near fr55:decap/near fr59:stagger+slash+dmg/any</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b210"></span>B210</td>
+<td class="instruction">DEFB $3C,$25,$3D,$25,$3F,$05,$3F,$0B</td>
+<td class="comment-1" rowspan="1">fr60:stagger+slash+dmg/near fr61:stagger+slash+dmg/near fr63:decap/close  fr63:slash+dmg/far</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b218"></span>B218</td>
+<td class="instruction">DEFB $40,$05,$40,$0B,$41,$05,$41,$0B</td>
+<td class="comment-1" rowspan="1">fr64:decap/close  fr64:slash+dmg/far fr65:decap/close  fr65:slash+dmg/far</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b220"></span>B220</td>
+<td class="instruction">DEFB $42,$05,$42,$0B,$43,$06,$44,$05</td>
+<td class="comment-1" rowspan="1">fr66:decap/close  fr66:slash+dmg/far fr67:guard2(full block)  fr68:decap/close</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b228"></span>B228</td>
+<td class="instruction">DEFB $44,$0B,$46,$05,$47,$05,$47,$0B</td>
+<td class="comment-1" rowspan="1">fr68:slash+dmg/far  fr70:decap/close fr71:decap/close  fr71:slash+dmg/far</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b230"></span>B230</td>
+<td class="instruction">DEFB $48,$04,$4B,$05,$4B,$0B,$50,$05</td>
+<td class="comment-1" rowspan="1">fr72:decap/near  fr75:decap/close fr75:slash+dmg/far  fr80:decap/close</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b238"></span>B238</td>
+<td class="instruction">DEFB $51,$04,$52,$04,$53,$04,$54,$04</td>
+<td class="comment-1" rowspan="1">fr81:decap/near  fr82:decap/near fr83:decap/near  fr84:decap/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b240"></span>B240</td>
+<td class="instruction">DEFB $55,$05,$58,$05</td>
+<td class="comment-1" rowspan="1">fr85:decap/close  fr88:decap/close</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b244"></span>B244</td>
+<td class="instruction">DEFB $FF</td>
+<td class="comment-1" rowspan="1">End-of-section terminator (0xFF).</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B15F.html">B15F</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b1d0">Map</a></td>
+<td class="next">
+Next: <a href="B245.html">B245</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/45520.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

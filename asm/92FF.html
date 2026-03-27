@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 92FF</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="92A0.html">92A0</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#92ff">Map</a></td>
+<td class="next">
+Next: <a href="9322.html">9322</a>
+</td>
+</tr>
+</table>
+<div class="description">92FF: End-of-fight dispatcher.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="9830.html">x_pos_controller</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="92ff"></span>
+<div class="comments">
+<div class="paragraph">
+Called when the loser's X tile reaches 30 (off-screen, "pulled" by the goblin).
+</div>
+<div class="paragraph">
+Checks which player has won through checking who has frame 19 (victory) in IY+6, then dispatches to the appropriate end-of-fight sequence.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">end_of_fight_dispatcher</td>
+<td class="address-2"><span id="92ff"></span>92FF</td>
+<td class="instruction">LD IY,$B559</td>
+<td class="comment-1" rowspan="1">IY = player 1 state block <a href="B559.html">p1_controller_type</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9303"></span>9303</td>
+<td class="instruction">LD A,(IY+$06)</td>
+<td class="comment-1" rowspan="1">Load movement ID (IY+6).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9306"></span>9306</td>
+<td class="instruction">CP $13</td>
+<td class="comment-1" rowspan="1">Is movement 19 (victory)?</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9308"></span>9308</td>
+<td class="instruction">JR NZ,<a href="92FF.html#9310">end_of_fight_dispatcher_0</a></td>
+<td class="comment-1" rowspan="1">No - jump to <a href="92FF.html#9310">end_of_fight_dispatcher_0</a> to check time/P2 (P1 has died).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="930a"></span>930A</td>
+<td class="instruction">CALL <a href="9352.html">p1_wins_seq</a></td>
+<td class="comment-1" rowspan="1">Yes - P1 wins: call <a href="9352.html">p1_wins_seq</a> (score update, victory sequence (P2 has died).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="930d"></span>930D</td>
+<td class="instruction">JP <a href="8FB9.html">reset_p2_state_block</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="8FB9.html">reset_p2_state_block</a> to reinitialise P2 block for next round.</td>
+</tr>
+<tr>
+<td class="asm-label">end_of_fight_dispatcher_0</td>
+<td class="address-2"><span id="9310"></span>9310</td>
+<td class="instruction">LD A,($B6D8)</td>
+<td class="comment-1" rowspan="1">Load round timer value from <a href="B6D8.html">timer_flag</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9313"></span>9313</td>
+<td class="instruction">CP $FF</td>
+<td class="comment-1" rowspan="1">Is time = 255 (non-timed game = 1P game)?</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9315"></span>9315</td>
+<td class="instruction">JP Z,<a href="8A35.html">game_reset</a></td>
+<td class="comment-1" rowspan="1">Yes - Game over. jump to <a href="8A35.html">game_reset</a> back to menu without scoring.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9318"></span>9318</td>
+<td class="instruction">LD IY,$B562</td>
+<td class="comment-1" rowspan="1">No (It's a 2 players game); IY = P2 state block <a href="B562.html">p2_controller_type</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="931c"></span>931C</td>
+<td class="instruction">CALL <a href="9374.html">p2_wins_seq</a></td>
+<td class="comment-1" rowspan="1">Call <a href="9374.html">p2_wins_seq</a> to run P2-wins sequence (P1 has died, timed 2P mode).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="931f"></span>931F</td>
+<td class="instruction">JP <a href="8FA8.html">reset_p1_state_block</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="8FA8.html">reset_p1_state_block</a> to reinitialise P1 block for next round.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="92A0.html">92A0</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#92ff">Map</a></td>
+<td class="next">
+Next: <a href="9322.html">9322</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/37631.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

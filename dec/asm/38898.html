@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 38898</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="38849.html">38849</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#38898">Map</a></td>
+<td class="next">
+Next: <a href="38936.html">38936</a>
+</td>
+</tr>
+</table>
+<div class="description">38898: Apply RLE colour attributes to a screen row.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="38849.html">paints_stage_screen</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="38898"></span>
+<div class="comments">
+<div class="paragraph">
+Reads the RLE attribute stream from <a href="46455.html#46461">active_bg_attr_ptr</a> and writes colour attributes. The stream is a sequence of count+value byte pairs. Each pair applies one attribute byte to the next &lt;count&gt; consecutive tiles. A count of 255 signals the end of the row.
+</div>
+<div class="paragraph">
+After the row is processed, <a href="46455.html#46461">active_bg_attr_ptr</a> is advanced past the end-of-row marker, ready for the next row.
+</div>
+<div class="paragraph">
+INPUT: HL = VRAM address of any scanline within the target screen row. <a href="46455.html#46461">active_bg_attr_ptr</a> active stage attribute stream pointer. OUTPUT: None. DESTROYS: AF, BC, DE, HL, alternate registers.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">apply_bg_attr_row</td>
+<td class="address-2"><span id="38898"></span>38898</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Pushes the VRAM row address to carry it across the EXX boundary.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38899"></span>38899</td>
+<td class="instruction">EXX</td>
+<td class="comment-1" rowspan="1">Switches to the alternate register set.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38900"></span>38900</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">Recovers the VRAM row address in the now-active alternate HL.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38901"></span>38901</td>
+<td class="instruction">CALL <a href="36879.html">calc_prev_scanline_addr</a></td>
+<td class="comment-1" rowspan="1">Steps back to the top scanline of this tile row via <a href="36879.html">calc_prev_scanline_addr</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38904"></span>38904</td>
+<td class="instruction">CALL <a href="38781.html">get_attr_address</a></td>
+<td class="comment-1" rowspan="1">Derives the attribute RAM high byte for this row via <a href="38781.html">get_attr_address</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38907"></span>38907</td>
+<td class="instruction">LD H,A</td>
+<td class="comment-1" rowspan="2">Forms DE as the attribute RAM address for the first tile of this row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38908"></span>38908</td>
+<td class="instruction">EX DE,HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38909"></span>38909</td>
+<td class="instruction">LD HL,(46461)</td>
+<td class="comment-1" rowspan="2">Loads the stream pointer from <a href="46455.html#46461">active_bg_attr_ptr</a> and reads the next stream byte into A.</td>
+</tr>
+<tr>
+<td class="asm-label">apply_bg_attr_row_0</td>
+<td class="address-2"><span id="38912"></span>38912</td>
+<td class="instruction">LD A,(HL)</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="38913"></span>
+<div class="comments">
+<div class="paragraph">
+Stream format: count+value byte pairs. The first byte of each pair is the number of consecutive tiles to colour; the second is the attribute value to apply. A count of 255 ends the row.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38913"></span>38913</td>
+<td class="instruction">CP 255</td>
+<td class="comment-1" rowspan="2">End-of-row check; jumps to the pointer update step if the stream byte is 255.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38915"></span>38915</td>
+<td class="instruction">JR Z,<a href="38898.html#38930">apply_bg_attr_row_2</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38917"></span>38917</td>
+<td class="instruction">LD B,A</td>
+<td class="comment-1" rowspan="1">Stores the tile run length in B.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38918"></span>38918</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Advances to the attribute value byte of this pair.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38919"></span>38919</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="2">Reads the attribute value and writes it to the current tile in attribute RAM.</td>
+</tr>
+<tr>
+<td class="asm-label">apply_bg_attr_row_1</td>
+<td class="address-2"><span id="38920"></span>38920</td>
+<td class="instruction">LD (DE),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38921"></span>38921</td>
+<td class="instruction">INC DE</td>
+<td class="comment-1" rowspan="1">Advances to the next tile in attribute RAM.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38922"></span>38922</td>
+<td class="instruction">DJNZ <a href="38898.html#38920">apply_bg_attr_row_1</a></td>
+<td class="comment-1" rowspan="1">Repeats for all tiles in this run.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38924"></span>38924</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Advances to the next count+value pair in the stream.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38925"></span>38925</td>
+<td class="instruction">LD (46461),HL</td>
+<td class="comment-1" rowspan="1">Saves the updated stream pointer to <a href="46455.html#46461">active_bg_attr_ptr</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38928"></span>38928</td>
+<td class="instruction">JR <a href="38898.html#38912">apply_bg_attr_row_0</a></td>
+<td class="comment-1" rowspan="1">Loops back to process the next pair.</td>
+</tr>
+<tr>
+<td class="asm-label">apply_bg_attr_row_2</td>
+<td class="address-2"><span id="38930"></span>38930</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Advances past the end-of-row marker.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38931"></span>38931</td>
+<td class="instruction">LD (46461),HL</td>
+<td class="comment-1" rowspan="1">Saves the updated stream pointer to <a href="46455.html#46461">active_bg_attr_ptr</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38934"></span>38934</td>
+<td class="instruction">EXX</td>
+<td class="comment-1" rowspan="1">Restores the caller's alternate registers.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38935"></span>38935</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Returns.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="38849.html">38849</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#38898">Map</a></td>
+<td class="next">
+Next: <a href="38936.html">38936</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/97F2.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

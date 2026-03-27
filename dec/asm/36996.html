@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 36996</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="36949.html">36949</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#36996">Map</a></td>
+<td class="next">
+Next: <a href="37004.html">37004</a>
+</td>
+</tr>
+</table>
+<div class="description">36996: Right-edge AND-mask renderer loop (21 scanlines)</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="36910.html">tile_render_engine</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="36996"></span>
+<div class="comments">
+<div class="paragraph">
+Outer loop for the right-edge AND-mask tile renderer. Calls <a href="37004.html">right_edge_renderer</a> 21 times (B=21), once per scanline of the tile.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">right_edge_loop</td>
+<td class="address-2"><span id="36996"></span>36996</td>
+<td class="instruction">LD B,21</td>
+<td class="comment-1" rowspan="1">B=21 (scanline counter).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="36998"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="37296.html">edge_mask_renderer</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">right_edge_loop_0</td>
+<td class="address-2"><span id="36998"></span>36998</td>
+<td class="instruction">CALL <a href="37004.html">right_edge_renderer</a></td>
+<td class="comment-1" rowspan="1">Render one scanline via <a href="37004.html">right_edge_renderer</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37001"></span>37001</td>
+<td class="instruction">DJNZ <a href="36996.html#36998">right_edge_loop_0</a></td>
+<td class="comment-1" rowspan="1">Loop 21 times.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37003"></span>37003</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="36949.html">36949</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#36996">Map</a></td>
+<td class="next">
+Next: <a href="37004.html">37004</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/9084.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

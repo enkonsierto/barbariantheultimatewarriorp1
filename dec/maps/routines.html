@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routines</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="RoutinesMap">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<div class="map-intro"></div>
+<table class="map">
+<tr>
+<th>Address</th>
+<th>Description</th>
+</tr>
+<tr>
+<td class="map-c"><span id="33840"></span><a href="../asm/33840.html">33840</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/33840.html">Music player.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="33876"></span><a href="../asm/33876.html">33876</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/33876.html">Selects the next pointer and the note.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="33889"></span><a href="../asm/33889.html">33889</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/33889.html">Converts note value to period.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="33903"></span><a href="../asm/33903.html">33903</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/33903.html">Restarts sequence at loop point.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="33911"></span><a href="../asm/33911.html">33911</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/33911.html">Plays music (Beeper 2-channel engine).</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="34004"></span><a href="../asm/34004.html">34004</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/34004.html">Melody counter still running; check bass counter independently.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="34022"></span><a href="../asm/34022.html">34022</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/34022.html">Silence routine.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="35240"></span><a href="../asm/35240.html">35240</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/35240.html">Game Entry Point</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="35381"></span><a href="../asm/35381.html">35381</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/35381.html">Game Over, Game Reset.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="35414"></span><a href="../asm/35414.html">35414</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/35414.html">Sets infinite time or not.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="35426"></span><a href="../asm/35426.html">35426</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/35426.html">Score display updater.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="35450"></span><a href="../asm/35450.html">35450</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/35450.html">Aligns the hit indicator screen address to a tile boundary.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="35458"></span><a href="../asm/35458.html">35458</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/35458.html">Switches the active stage graphics and attribute pointers.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="35487"></span><a href="../asm/35487.html">35487</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/35487.html">Post-fight handler. Stage alternation and counter/time reset.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="35514"></span><a href="../asm/35514.html">35514</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/35514.html">Pause handler.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="35531"></span><a href="../asm/35531.html">35531</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/35531.html">Hit processor, score award and sound dispatcher.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="35713"></span><a href="../asm/35713.html">35713</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/35713.html">Input and AI dispatcher.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="35765"></span><a href="../asm/35765.html">35765</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/35765.html">Character AI engine.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="35825"></span><a href="../asm/35825.html">35825</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/35825.html">Human controller input reader.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="35878"></span><a href="../asm/35878.html">35878</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/35878.html">Keyboard scanner: detects single pressed key for input config (redefine keys).</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="35910"></span><a href="../asm/35910.html">35910</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/35910.html">Key state tester</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="35937"></span><a href="../asm/35937.html">35937</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/35937.html">Single-key capture prompt.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="35976"></span><a href="../asm/35976.html">35976</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/35976.html">Binary multiplier. Computes HL = A * DE.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="35996"></span><a href="../asm/35996.html">35996</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/35996.html">Single UDG character renderer</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="36022"></span><a href="../asm/36022.html">36022</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/36022.html">Null-terminated word renderer.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="36037"></span><a href="../asm/36037.html">36037</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/36037.html">String line renderer.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="36053"></span><a href="../asm/36053.html">36053</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/36053.html">Word index to address resolver.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="36063"></span><a href="../asm/36063.html">36063</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/36063.html">Decimal number renderer.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="36105"></span><a href="../asm/36105.html">36105</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/36105.html">Time or fight counter display updater.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="36130"></span><a href="../asm/36130.html">36130</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/36130.html">Main Menu loop</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="36212"></span><a href="../asm/36212.html">36212</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/36212.html">One-player mode selector.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="36347"></span><a href="../asm/36347.html">36347</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/36347.html">P2 controller setup for key-assignment.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="36363"></span><a href="../asm/36363.html">36363</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/36363.html">Key assignment loop.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="36508"></span><a href="../asm/36508.html">36508</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/36508.html">Two-player mode selector.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="36673"></span><a href="../asm/36673.html">36673</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/36673.html">Menu fade-out transition.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="36706"></span><a href="../asm/36706.html">36706</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/36706.html">Menu rainbow colour animation.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="36776"></span><a href="../asm/36776.html">36776</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/36776.html">Reset P1 state block for new round.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="36793"></span><a href="../asm/36793.html">36793</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/36793.html">Reset P2 state block for new round.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="36822"></span><a href="../asm/36822.html">36822</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/36822.html">Character position and energy reset.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="36838"></span><a href="../asm/36838.html">36838</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/36838.html">Set character movement.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="36879"></span><a href="../asm/36879.html">36879</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/36879.html">Calculates the VRAM address of the scanline above.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="36895"></span><a href="../asm/36895.html">36895</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/36895.html">Calculates the VRAM address of the scanline below.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="36910"></span><a href="../asm/36910.html">36910</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/36910.html">Tile render engine.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="36949"></span><a href="../asm/36949.html">36949</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/36949.html">Left-edge AND-mask tile renderer.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="36996"></span><a href="../asm/36996.html">36996</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/36996.html">Right-edge AND-mask renderer loop (21 scanlines)</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37004"></span><a href="../asm/37004.html">37004</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37004.html">Right-edge tile scanline renderer.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37057"></span><a href="../asm/37057.html">37057</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37057.html">Generate left-edge column mask for partial tile blending.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37100"></span><a href="../asm/37100.html">37100</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37100.html">Apply edge mask and blend tile byte to framebuffer.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37111"></span><a href="../asm/37111.html">37111</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37111.html">Write transparent tile byte to framebuffer.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37114"></span><a href="../asm/37114.html">37114</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37114.html">Generate right-edge column mask for partial tile blending.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37159"></span><a href="../asm/37159.html">37159</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37159.html">Renders a 3-byte-wide sprite tile over 21 scanlines using AND masking.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37218"></span><a href="../asm/37218.html">37218</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37218.html">Composite tile renderer dispatcher.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37296"></span><a href="../asm/37296.html">37296</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37296.html">Edge-mask sub-tile renderer.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37317"></span><a href="../asm/37317.html">37317</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37317.html">Composite tile pointer resolver.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37331"></span><a href="../asm/37331.html">37331</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37331.html">Direct copy tile renderer.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37355"></span><a href="../asm/37355.html">37355</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37355.html">Resolve tile address.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37387"></span><a href="../asm/37387.html">37387</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37387.html">Rectangular screen copy.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37404"></span><a href="../asm/37404.html">37404</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37404.html">Draws 4 rows of 3 tiles each from the sprite frame data.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37449"></span><a href="../asm/37449.html">37449</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37449.html">Draws one sprite tile to the framebuffer.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37486"></span><a href="../asm/37486.html">37486</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37486.html">Main sprite dispatcher.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37536"></span><a href="../asm/37536.html">37536</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37536.html">Animation frame stepper.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37631"></span><a href="../asm/37631.html">37631</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37631.html">End-of-fight dispatcher.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37666"></span><a href="../asm/37666.html">37666</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37666.html">Goblin entry trigger.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37701"></span><a href="../asm/37701.html">37701</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37701.html">Activate goblin and initialise its state block.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37714"></span><a href="../asm/37714.html">37714</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37714.html">P1-wins end-of-fight sequence.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37748"></span><a href="../asm/37748.html">37748</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37748.html">P2-wins end-of-fight sequence.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37772"></span><a href="../asm/37772.html">37772</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37772.html">Post-fight winner setup. (UNUSED)</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37791"></span><a href="../asm/37791.html">37791</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37791.html">P2-death score update and time drain loop.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37819"></span><a href="../asm/37819.html">37819</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37819.html">P1-death score update and time drain loop.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37843"></span><a href="../asm/37843.html">37843</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37843.html">Post-drain wait and end-of-round jump.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37852"></span><a href="../asm/37852.html">37852</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37852.html">Round timer tick: decrement, refresh HUD and play sound.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37866"></span><a href="../asm/37866.html">37866</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37866.html">Decapitation setup.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37944"></span><a href="../asm/37944.html">37944</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37944.html">Initialise flying head state block.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37964"></span><a href="../asm/37964.html">37964</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37964.html">Goblin kicks the severed head off-screen.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="37997"></span><a href="../asm/37997.html">37997</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/37997.html">Flying head animator.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38103"></span><a href="../asm/38103.html">38103</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38103.html">Render head or P2 overlay tile to framebuffer.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38137"></span><a href="../asm/38137.html">38137</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38137.html">Flying head ground shadow renderer.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38158"></span><a href="../asm/38158.html">38158</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38158.html">Head tile orientation selector.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38180"></span><a href="../asm/38180.html">38180</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38180.html">Mark head landed.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38186"></span><a href="../asm/38186.html">38186</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38186.html">Deactivate flying head: exited screen.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38191"></span><a href="../asm/38191.html">38191</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38191.html">Move screen pointer down by B scanlines.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38201"></span><a href="../asm/38201.html">38201</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38201.html">Move screen pointer up by B scanlines.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38212"></span><a href="../asm/38212.html">38212</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38212.html">Move framebuffer pointer one column left (decrements L by 1).</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38216"></span><a href="../asm/38216.html">38216</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38216.html">Move framebuffer pointer one column right.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38220"></span><a href="../asm/38220.html">38220</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38220.html">Player 2 overlay tile renderer.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38304"></span><a href="../asm/38304.html">38304</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38304.html">Generic 16-bit pointer lookup.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38318"></span><a href="../asm/38318.html">38318</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38318.html">Read byte from address.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38325"></span><a href="../asm/38325.html">38325</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38325.html">Hit section table search.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38340"></span><a href="../asm/38340.html">38340</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38340.html">Mirrors a tile horizontally in-place.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38367"></span><a href="../asm/38367.html">38367</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38367.html">Sprites mirror checker and correcter.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38412"></span><a href="../asm/38412.html">38412</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38412.html">Flush framebuffer to screen.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38494"></span><a href="../asm/38494.html">38494</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38494.html">Interrupt Vector Table Generator</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38500"></span><a href="../asm/38500.html">38500</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38500.html">Interrupt Service Routine</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38547"></span><a href="../asm/38547.html">38547</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38547.html">Copy stage background to framebuffer.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38624"></span><a href="../asm/38624.html">38624</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38624.html">Clear attributes for a row.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38640"></span><a href="../asm/38640.html">38640</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38640.html">Fade ink colour to black.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38664"></span><a href="../asm/38664.html">38664</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38664.html">Step each attribute ink colour one level toward a target.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38699"></span><a href="../asm/38699.html">38699</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38699.html">Game window row-by-row wipe to black.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38764"></span><a href="../asm/38764.html">38764</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38764.html">Single scanline clear with attribute wipe.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38781"></span><a href="../asm/38781.html">38781</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38781.html">Derive attribute high byte from a VRAM pixel address.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38790"></span><a href="../asm/38790.html">38790</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38790.html">Single scanline clear for snake-edge rows (26 central tiles).</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38796"></span><a href="../asm/38796.html">38796</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38796.html">Clear all 28 tiles of one game-window row to black.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38811"></span><a href="../asm/38811.html">38811</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38811.html">Clear one game-window row preserving snake edge columns.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38849"></span><a href="../asm/38849.html">38849</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38849.html">Blit stage background to screen row by row.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38898"></span><a href="../asm/38898.html">38898</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38898.html">Apply RLE colour attributes to a screen row.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38936"></span><a href="../asm/38936.html">38936</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38936.html">Copy one tile row from stage background directly to screen.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38951"></span><a href="../asm/38951.html">38951</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38951.html">Copy one 28-byte scanline from stage background to screen.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="38960"></span><a href="../asm/38960.html">38960</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/38960.html">Loser X tile position controller</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="39020"></span><a href="../asm/39020.html">39020</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/39020.html">X position update and tackle proximity gate.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="39142"></span><a href="../asm/39142.html">39142</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/39142.html">Mirror-corrected directional input.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="39156"></span><a href="../asm/39156.html">39156</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/39156.html">Input-gated movement transition.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="39194"></span><a href="../asm/39194.html">39194</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/39194.html">Force-apply new movement.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="39211"></span><a href="../asm/39211.html">39211</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/39211.html">Movement transition resolver.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="39245"></span><a href="../asm/39245.html">39245</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/39245.html">Read movement properties byte.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="39258"></span><a href="../asm/39258.html">39258</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/39258.html">Snake energy bar renderer.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="39317"></span><a href="../asm/39317.html">39317</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/39317.html">Snake animation phase stepper.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="39367"></span><a href="../asm/39367.html">39367</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/39367.html">Energy decrement, bar display and KO detection.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="39468"></span><a href="../asm/39468.html">39468</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/39468.html">Per-frame hit detection.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="39518"></span><a href="../asm/39518.html">39518</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/39518.html">Hit range validation and combat event dispatch.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="39617"></span><a href="../asm/39617.html">39617</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/39617.html">Main combat loop.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="39827"></span><a href="../asm/39827.html">39827</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/39827.html">Per-frame character update.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="39846"></span><a href="../asm/39846.html">39846</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/39846.html">112 ms delay loop.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="39856"></span><a href="../asm/39856.html">39856</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/39856.html">Calculate horizontal distance between fighters.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="39885"></span><a href="../asm/39885.html">39885</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/39885.html">Beeper sound engine.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="39897"></span><a href="../asm/39897.html">39897</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/39897.html">Emits one square-wave pulse.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="39906"></span><a href="../asm/39906.html">39906</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/39906.html">Beeper HIGH phase.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="39916"></span><a href="../asm/39916.html">39916</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/39916.html">Beeper LOW phase.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="39926"></span><a href="../asm/39926.html">39926</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/39926.html">Combat Sound Effects List.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="39968"></span><a href="../asm/39968.html">39968</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/39968.html">Tackle cross-side animation controller.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="40077"></span><a href="../asm/40077.html">40077</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/40077.html">Apply idle movement and toggle facing direction.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="40092"></span><a href="../asm/40092.html">40092</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/40092.html">3-frame cycle counter advance.</a></div>
+</td>
+</tr>
+<tr>
+<td class="map-c"><span id="48896"></span><a href="../asm/48896.html">48896</a></td>
+<td class="map-c-desc">
+<div class="map-entry-title-10"><a class="map-entry-title" href="../asm/48896.html">Game Start Routine</a></div>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../maps/routines.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

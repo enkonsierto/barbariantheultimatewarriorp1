@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 9A2C</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="99C7.html">99C7</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#9a2c">Map</a></td>
+<td class="next">
+Next: <a href="9A5E.html">9A5E</a>
+</td>
+</tr>
+</table>
+<div class="description">9A2C: Per-frame hit detection.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="89A8.html">entry_point</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="9a2c"></span>
+<div class="comments">
+<div class="paragraph">
+Called once per frame from the main game loop.
+</div>
+<div class="paragraph">
+Skips entirely if <a href="B973.html">frame_counter_hit</a> is non-zero (throttled by <a href="9C9C.html">frame_counter_hit_inc</a>).
+</div>
+<div class="paragraph">
+Runs the attacker/defender check twice: first with P1 as attacker and P2 as defender, then reversed. For each pass, reads the attacker frame index and searches the hit section table <a href="AFD7.html">hit_detection_table</a> via <a href="95B5.html">find_hit_section</a>. On a match, walks
+</div>
+<div class="paragraph">
+the section pairs comparing defender frame index against IY+8. On a match, calls <a href="9A5E.html">collision_solver</a> to validate range and resolve the hit.
+</div>
+<div class="paragraph">
+Hit section table <a href="AFD7.html">hit_detection_table</a> format: each section starts with the attacker frame ID, followed by (defender frameID, hitTypeIndex) pairs, terminated by 0xFF.
+</div>
+<div class="paragraph">
+INPUT: None. OUTPUT: None. DESTROYS: AF, BC, DE, HL, IX, IY.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">hit_detection</td>
+<td class="address-2"><span id="9a2c"></span>9A2C</td>
+<td class="instruction">LD A,($B973)</td>
+<td class="comment-1" rowspan="3">Read frame skip counter <a href="B973.html">frame_counter_hit</a> - return if non-zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a2f"></span>9A2F</td>
+<td class="instruction">OR A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a30"></span>9A30</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a31"></span>9A31</td>
+<td class="instruction">LD IX,$B559</td>
+<td class="comment-1" rowspan="2">Set up P1 as attacker (IX) and P2 as defender (IY).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a35"></span>9A35</td>
+<td class="instruction">LD IY,$B562</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a39"></span>9A39</td>
+<td class="instruction">CALL <a href="9A2C.html#9a44">hit_check</a></td>
+<td class="comment-1" rowspan="1">Call <a href="9A2C.html#9a44">hit_check</a> to run hit detection for this attacker/defender pair.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a3c"></span>9A3C</td>
+<td class="instruction">LD IY,$B559</td>
+<td class="comment-1" rowspan="1">Set up P2 as attacker (IX) and P1 as defender (IY).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a40"></span>9A40</td>
+<td class="instruction">LD IX,$B562</td>
+<td class="comment-1" rowspan="1">Fall through to <a href="9A2C.html#9a44">hit_check</a> for the reversed pass.</td>
+</tr>
+<tr>
+<td class="asm-label">hit_check</td>
+<td class="address-2"><span id="9a44"></span>9A44</td>
+<td class="instruction">LD A,(IX+$08)</td>
+<td class="comment-1" rowspan="1">Load attacker frame index from IX+8.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a47"></span>9A47</td>
+<td class="instruction">LD HL,$AFD7</td>
+<td class="comment-1" rowspan="2">Search hit section table <a href="AFD7.html">hit_detection_table</a> for the attacker frame via <a href="95B5.html">find_hit_section</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a4a"></span>9A4A</td>
+<td class="instruction">CALL <a href="95B5.html">find_hit_section</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a4d"></span>9A4D</td>
+<td class="instruction">RET NZ</td>
+<td class="comment-1" rowspan="1">Return if attacker frame not found - no active hit this frame.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a4e"></span>9A4E</td>
+<td class="instruction">PUSH DE</td>
+<td class="comment-1" rowspan="3">Read candidate defender frame ID from the current table pair.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a4f"></span>9A4F</td>
+<td class="instruction">POP HL</td>
+</tr>
+<tr>
+<td class="asm-label">hit_pair_scan</td>
+<td class="address-2"><span id="9a50"></span>9A50</td>
+<td class="instruction">LD A,(HL)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a51"></span>9A51</td>
+<td class="instruction">CP $FF</td>
+<td class="comment-1" rowspan="2">Compare against defender frame index IY+8.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a53"></span>9A53</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a54"></span>9A54</td>
+<td class="instruction">CP (IY+$08)</td>
+<td class="comment-1" rowspan="1">Match - call <a href="9A5E.html">collision_solver</a> to validate range and apply the hit.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a57"></span>9A57</td>
+<td class="instruction">CALL Z,<a href="9A5E.html">collision_solver</a></td>
+<td class="comment-1" rowspan="1">Advance to the next pair.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a5a"></span>9A5A</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="3">Loop until 0xFF sentinel - no more pairs for this attacker frame.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a5b"></span>9A5B</td>
+<td class="instruction">INC HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a5c"></span>9A5C</td>
+<td class="instruction">JR <a href="9A2C.html#9a50">hit_pair_scan</a></td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="99C7.html">99C7</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#9a2c">Map</a></td>
+<td class="next">
+Next: <a href="9A5E.html">9A5E</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/39468.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

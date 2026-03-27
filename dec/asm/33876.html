@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 33876</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="33864.html">33864</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#33876">Map</a></td>
+<td class="next">
+Next: <a href="33889.html">33889</a>
+</td>
+</tr>
+</table>
+<div class="description">33876: Selects the next pointer and the note.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Reads the next note from a music sequence and updates the pointer.
+</div>
+<div class="paragraph">
+If it finds the end marker (64), it restarts the sequence in a loop.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="33876"></span>
+<div class="comments">
+<div class="paragraph">
+INPUT: HL = address of sequence pointer (<a href="33864.html#33867">melody_ptr</a> or <a href="33864.html#33871">bass_ptr</a>).
+</div>
+<div class="paragraph">
+OUTPUT: HL = next pointer, A = note value.
+</div>
+<div class="paragraph">
+DESTROYS: DE.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">select_music_pointer</td>
+<td class="address-2"><span id="33876"></span>33876</td>
+<td class="instruction">LD E,(HL)</td>
+<td class="comment-1" rowspan="3">Loads the current note address into DE (low and high byte).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33877"></span>33877</td>
+<td class="instruction">INC HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33878"></span>33878</td>
+<td class="instruction">LD D,(HL)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33879"></span>33879</td>
+<td class="instruction">INC DE</td>
+<td class="comment-1" rowspan="1">DE now points to the next note.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="33880"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="33903.html">restart_music</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">select_music_pointer_0</td>
+<td class="address-2"><span id="33880"></span>33880</td>
+<td class="instruction">LD A,(DE)</td>
+<td class="comment-1" rowspan="1">Reads the note value into A.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33881"></span>33881</td>
+<td class="instruction">CP 64</td>
+<td class="comment-1" rowspan="1">Compares with 64 (end of sequence marker).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33883"></span>33883</td>
+<td class="instruction">JR Z,<a href="33903.html">restart_music</a></td>
+<td class="comment-1" rowspan="1">If 64, jumps to <a href="33903.html">restart_music</a> to restart.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33885"></span>33885</td>
+<td class="instruction">LD (HL),D</td>
+<td class="comment-1" rowspan="3">Saves the new pointer (updates position in sequence).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33886"></span>33886</td>
+<td class="instruction">DEC HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33887"></span>33887</td>
+<td class="instruction">LD (HL),E</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33888"></span>33888</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Returns with note in A.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="33864.html">33864</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#33876">Map</a></td>
+<td class="next">
+Next: <a href="33889.html">33889</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/8454.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

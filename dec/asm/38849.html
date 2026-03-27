@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 38849</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="38811.html">38811</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#38849">Map</a></td>
+<td class="next">
+Next: <a href="38898.html">38898</a>
+</td>
+</tr>
+</table>
+<div class="description">38849: Blit stage background to screen row by row.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="35240.html">entry_point</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="38849"></span>
+<div class="comments">
+<div class="paragraph">
+Copies backfround tile graphics and RLE colour attributes from the active background source to VRAM one row at a time, inserting a 112 ms pause after each of the first 15 rows to produce a visible top-to-bottom reveal. The final 2 rows are blitted without a pause. Resets the attribute stream pointer <a href="46455.html#46461">active_bg_attr_ptr</a> to its initial value on exit so the next call starts from the beginning of the attribute table.
+</div>
+<div class="paragraph">
+INPUT: None. OUTPUT: None. DESTROYS: AF, BC, DE, HL.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">paints_stage_screen</td>
+<td class="address-2"><span id="38849"></span>38849</td>
+<td class="instruction">LD HL,(46461)</td>
+<td class="comment-1" rowspan="2">Load the initial attribute stream address from <a href="46467.html#46614">bg_1_attr_data</a> and preserve it on the stack for the reset at the end.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38852"></span>38852</td>
+<td class="instruction">PUSH HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38853"></span>38853</td>
+<td class="instruction">LD DE,(46459)</td>
+<td class="comment-1" rowspan="1">Load the active stage graphics source address from <a href="46455.html#46459">active_bg_bitmap_ptr</a> into DE (<a href="26752.html">stage_1_bg</a> stage 1, <a href="30112.html">stage_2_bg</a> stage 2).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38857"></span>38857</td>
+<td class="instruction">LD HL,16610</td>
+<td class="comment-1" rowspan="1">Set HL to the VRAM address of the first tile of the game window.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38860"></span>38860</td>
+<td class="instruction">LD B,15</td>
+<td class="comment-1" rowspan="1">B=15, one iteration per row for the top section; the last 2 rows are handled separately without a pause.</td>
+</tr>
+<tr>
+<td class="asm-label">paints_stage_screen_0</td>
+<td class="address-2"><span id="38862"></span>38862</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Preserve the loop counter.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38863"></span>38863</td>
+<td class="instruction">CALL <a href="38936.html">copy_bg_row</a></td>
+<td class="comment-1" rowspan="1">Copy one full tile row (28 tiles, 8 scanlines) from source to VRAM via <a href="38936.html">copy_bg_row</a>; DE and HL advance to the next row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38866"></span>38866</td>
+<td class="instruction">CALL <a href="38898.html">apply_bg_attr_row</a></td>
+<td class="comment-1" rowspan="1">Apply RLE colour attributes to the current VRAM row via <a href="38898.html">apply_bg_attr_row</a>; <a href="46455.html#46461">active_bg_attr_ptr</a> advances to the next attribute entry.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38869"></span>38869</td>
+<td class="instruction">CALL <a href="39846.html">waits_112ms</a></td>
+<td class="comment-1" rowspan="1">Wait 112 ms via <a href="39846.html">waits_112ms</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38872"></span>38872</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore the loop counter.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38873"></span>38873</td>
+<td class="instruction">DJNZ <a href="38849.html#38862">paints_stage_screen_0</a></td>
+<td class="comment-1" rowspan="1">Repeat for all 15 rows.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38875"></span>38875</td>
+<td class="instruction">LD HL,22466</td>
+<td class="comment-1" rowspan="1">Advance DE and HL to the penultimate row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38878"></span>38878</td>
+<td class="instruction">CALL <a href="38898.html">apply_bg_attr_row</a></td>
+<td class="comment-1" rowspan="1">Copy the penultimate row via <a href="38936.html">copy_bg_row</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38881"></span>38881</td>
+<td class="instruction">CALL <a href="39846.html">waits_112ms</a></td>
+<td class="comment-1" rowspan="1">Apply attributes to the penultimate row via <a href="38898.html">apply_bg_attr_row</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38884"></span>38884</td>
+<td class="instruction">LD HL,22501</td>
+<td class="comment-1" rowspan="1">Advance DE and HL to the last row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38887"></span>38887</td>
+<td class="instruction">CALL <a href="38898.html">apply_bg_attr_row</a></td>
+<td class="comment-1" rowspan="1">Copy the last row via <a href="38936.html">copy_bg_row</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38890"></span>38890</td>
+<td class="instruction">CALL <a href="39846.html">waits_112ms</a></td>
+<td class="comment-1" rowspan="1">Apply attributes to the last row via <a href="38898.html">apply_bg_attr_row</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38893"></span>38893</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">Restore initial attribute stream address from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38894"></span>38894</td>
+<td class="instruction">LD (46461),HL</td>
+<td class="comment-1" rowspan="1">Write restored address to <a href="46455.html#46461">active_bg_attr_ptr</a>, resetting the attribute stream pointer for the next call.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38897"></span>38897</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="38811.html">38811</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#38849">Map</a></td>
+<td class="next">
+Next: <a href="38898.html">38898</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/97C1.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

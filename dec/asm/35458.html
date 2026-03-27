@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 35458</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="35450.html">35450</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#35458">Map</a></td>
+<td class="next">
+Next: <a href="35487.html">35487</a>
+</td>
+</tr>
+</table>
+<div class="description">35458: Switches the active stage graphics and attribute pointers.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Toggles <a href="46454.html">active_bg</a> between 0 and 1, then resolves the corresponding graphics and attribute pointers from <a href="46455.html">bg_bitmap_ptr</a> and <a href="46455.html#46463">bg_attr_ptr</a>, storing them as the active stage for the next background paint.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">change_stage_ptr</td>
+<td class="address-2"><span id="35458"></span>35458</td>
+<td class="instruction">LD A,(46454)</td>
+<td class="comment-1" rowspan="3">Load active stage index <a href="46454.html">active_bg</a>, toggle it (XOR 1) and write back.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35461"></span>35461</td>
+<td class="instruction">XOR 1</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35463"></span>35463</td>
+<td class="instruction">LD (46454),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35466"></span>35466</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Preserve toggled index for the second lookup.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35467"></span>35467</td>
+<td class="instruction">LD HL,46455</td>
+<td class="comment-1" rowspan="2">HL = graphics pointer table <a href="46455.html">bg_bitmap_ptr</a>; resolve new graphics pointer via <a href="38304.html">solve_pointer</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35470"></span>35470</td>
+<td class="instruction">CALL <a href="38304.html">solve_pointer</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35473"></span>35473</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore index for the second lookup.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35474"></span>35474</td>
+<td class="instruction">LD (46459),HL</td>
+<td class="comment-1" rowspan="1">Store new graphics pointer in <a href="46455.html#46459">active_bg_bitmap_ptr</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35477"></span>35477</td>
+<td class="instruction">LD HL,46463</td>
+<td class="comment-1" rowspan="2">HL = attributes pointer table <a href="46455.html#46463">bg_attr_ptr</a>; resolve new attributes pointer via <a href="38304.html">solve_pointer</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35480"></span>35480</td>
+<td class="instruction">CALL <a href="38304.html">solve_pointer</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35483"></span>35483</td>
+<td class="instruction">LD (46461),HL</td>
+<td class="comment-1" rowspan="1">Store new attributes pointer in <a href="46455.html#46461">active_bg_attr_ptr</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35486"></span>35486</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="35450.html">35450</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#35458">Map</a></td>
+<td class="next">
+Next: <a href="35487.html">35487</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/8A82.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 38960</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="38951.html">38951</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#38960">Map</a></td>
+<td class="next">
+Next: <a href="39020.html">39020</a>
+</td>
+</tr>
+</table>
+<div class="description">38960: Loser X tile position controller</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="39020.html">x_update_and_tackle_gate</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="38960"></span>
+<div class="comments">
+<div class="paragraph">
+Advances the active character X tile by the per-frame animation delta.
+</div>
+<div class="paragraph">
+If the character is in an exit animation (mv29, 31, 32 or 33), increments X by 1 per frame until X reaches 30, then tail-calls <a href="37631.html">end_of_fight_dispatcher</a> to end the fight.
+</div>
+<div class="paragraph">
+For all other animations, applies the signed delta from the frame displacement table, clamping to the play-area boundary (column 23).
+</div>
+<div class="paragraph">
+INPUT: IY = active character state block.
+</div>
+<div class="paragraph">
+OUTPUT: IY+3 = updated X tile, or tail-call to <a href="37631.html">end_of_fight_dispatcher</a> when exit animation clears the screen. DESTROYS: AF, B, HL.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">x_pos_controller</td>
+<td class="address-2"><span id="38960"></span>38960</td>
+<td class="instruction">LD A,(IY+6)</td>
+<td class="comment-1" rowspan="1">Load active movement ID from IY+6.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38963"></span>38963</td>
+<td class="instruction">CP 31</td>
+<td class="comment-1" rowspan="8">Test for exit animations (mv29, 31, 32, 33); if matched, jump to exit path (<a href="38960.html#39007">x_pos_controller_1</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38965"></span>38965</td>
+<td class="instruction">JR Z,<a href="38960.html#39007">x_pos_controller_1</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38967"></span>38967</td>
+<td class="instruction">CP 29</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38969"></span>38969</td>
+<td class="instruction">JR Z,<a href="38960.html#39007">x_pos_controller_1</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38971"></span>38971</td>
+<td class="instruction">CP 32</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38973"></span>38973</td>
+<td class="instruction">JR Z,<a href="38960.html#39007">x_pos_controller_1</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38975"></span>38975</td>
+<td class="instruction">CP 33</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38977"></span>38977</td>
+<td class="instruction">JR Z,<a href="38960.html#39007">x_pos_controller_1</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38979"></span>38979</td>
+<td class="instruction">LD A,(IY+8)</td>
+<td class="comment-1" rowspan="3">Read per-frame X displacement for the current animation frame from the table at <a href="49152.html#61568">61568</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38982"></span>38982</td>
+<td class="instruction">LD HL,61568</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38985"></span>38985</td>
+<td class="instruction">CALL <a href="38318.html">get_byte_value</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38988"></span>38988</td>
+<td class="instruction">BIT 0,(IY+2)</td>
+<td class="comment-1" rowspan="3">Check mirror flag in IY+2; if set, negate (mirrors) the displacement for a left-facing character.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38992"></span>38992</td>
+<td class="instruction">JR Z,<a href="38960.html#38996">x_pos_controller_0</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38994"></span>38994</td>
+<td class="instruction">NEG</td>
+</tr>
+<tr>
+<td class="asm-label">x_pos_controller_0</td>
+<td class="address-2"><span id="38996"></span>38996</td>
+<td class="instruction">LD B,(IY+3)</td>
+<td class="comment-1" rowspan="1">Load current X tile from IY+3.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38999"></span>38999</td>
+<td class="instruction">ADD A,B</td>
+<td class="comment-1" rowspan="1">Apply displacement to get new X tile.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39000"></span>39000</td>
+<td class="instruction">CP 24</td>
+<td class="comment-1" rowspan="1">Discard if result reaches or exceeds play-area boundary (column 24).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39002"></span>39002</td>
+<td class="instruction">RET NC</td>
+<td class="comment-1" rowspan="1">Return without updating IY+3.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39003"></span>39003</td>
+<td class="instruction">LD (IY+3),A</td>
+<td class="comment-1" rowspan="1">Store updated X tile in IY+3.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39006"></span>39006</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="39007"></span>
+<div class="comments">
+<div class="paragraph">
+Exit animation path.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">x_pos_controller_1</td>
+<td class="address-2"><span id="39007"></span>39007</td>
+<td class="instruction">LD A,(IY+3)</td>
+<td class="comment-1" rowspan="3">Increment X by 1 toward the right screen edge and store in IY+3.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39010"></span>39010</td>
+<td class="instruction">INC A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39011"></span>39011</td>
+<td class="instruction">LD (IY+3),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39014"></span>39014</td>
+<td class="instruction">CP 30</td>
+<td class="comment-1" rowspan="1">Check whether X has reached column 30 (character fully off-screen).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39016"></span>39016</td>
+<td class="instruction">RET NZ</td>
+<td class="comment-1" rowspan="1">Not yet: return and continue exit animation.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39017"></span>39017</td>
+<td class="instruction">JP <a href="37631.html">end_of_fight_dispatcher</a></td>
+<td class="comment-1" rowspan="1">Tail-call <a href="37631.html">end_of_fight_dispatcher</a> to end the fight.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="38951.html">38951</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#38960">Map</a></td>
+<td class="next">
+Next: <a href="39020.html">39020</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/9830.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at 48269</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="48158.html">48158</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#48269">Map</a></td>
+<td class="next">
+Next: <a href="48433.html">48433</a>
+</td>
+</tr>
+</table>
+<div class="description">48269: Composite tile definition data</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Composite tile definitions: edge-mask sequences for sprites.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="48269"></span>
+<div class="comments">
+<div class="paragraph">
+164-byte packed stream (used by <a href="37218.html">comp_tile_dispatcher</a> via <a href="37317.html">comptile_ptr_resolver</a> and <a href="48433.html">composite_tile_pointers</a>).
+</div>
+<div class="paragraph">
+Byte format:
+</div>
+<div class="paragraph">
+bits 7-6  render mode: 11=AND-mask <a href="37159.html#37161">tile_renderer_0</a>, 00=DirectCopy <a href="37331.html#37333">direct_copy_tile_renderer_0</a>, 01=EdgeMask-L <a href="37296.html">edge_mask_renderer</a> bit6=1, 10=EdgeMask-R <a href="37296.html">edge_mask_renderer</a> bit6=0.
+</div>
+<div class="paragraph">
+bit  5    end-of-definition signal when this byte is read as the NEXT byte after rendering a sub-tile. Has NO effect on rendering itself. bit5=1 terminates the current sequence AND serves as the first definition byte of the following entry (packed shared layout).
+</div>
+<div class="paragraph">
+bits 4-0  scanline count (0-31) for this sub-tile.
+</div>
+<div class="paragraph">
+Invariant: scanline counts per entry sum to 21 (one full tile column height).
+</div>
+<div class="paragraph">
+The only pure terminator is the final byte at 48432 which has no next entry.
+</div>
+<div class="paragraph">
+The terminator byte for entry N is ALSO the first definition byte of entry N+1.
+</div>
+<div class="paragraph">
+No wasted bytes except 48432 (final terminator only).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48269"></span>48269</td>
+<td class="instruction">DEFB 240,133</td>
+<td class="comment-1" rowspan="1">Entry  0: AND,16sc | EMR,5sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48271"></span>48271</td>
+<td class="instruction">DEFB 240,69</td>
+<td class="comment-1" rowspan="1">Entry  1: AND,16sc | EML,5sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48273"></span>48273</td>
+<td class="instruction">DEFB 229,144</td>
+<td class="comment-1" rowspan="1">Entry  2: AND,5sc | EMR,16sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48275"></span>48275</td>
+<td class="instruction">DEFB 228,81</td>
+<td class="comment-1" rowspan="1">Entry  3: AND,4sc | EML,17sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48277"></span>48277</td>
+<td class="instruction">DEFB 240,69</td>
+<td class="comment-1" rowspan="1">Entry  4: AND,16sc | EML,5sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48279"></span>48279</td>
+<td class="instruction">DEFB 241,68</td>
+<td class="comment-1" rowspan="1">Entry  5: AND,17sc | EML,4sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48281"></span>48281</td>
+<td class="instruction">DEFB 164,194,130,199,134</td>
+<td class="comment-1" rowspan="1">Entry  6: EMR,4sc | AND,2sc | EMR,2sc | AND,7sc | EMR,6sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48286"></span>48286</td>
+<td class="instruction">DEFB 104,200,69</td>
+<td class="comment-1" rowspan="1">Entry  7: EML,8sc | AND,8sc | EML,5sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48289"></span>48289</td>
+<td class="instruction">DEFB 103,201,69</td>
+<td class="comment-1" rowspan="1">Entry  8: EML,7sc | AND,9sc | EML,5sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48292"></span>48292</td>
+<td class="instruction">DEFB 242,131</td>
+<td class="comment-1" rowspan="1">Entry  9: AND,18sc | EMR,3sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48294"></span>48294</td>
+<td class="instruction">DEFB 99,200,74</td>
+<td class="comment-1" rowspan="1">Entry 10: EML,3sc | AND,8sc | EML,10sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48297"></span>48297</td>
+<td class="instruction">DEFB 228,134,198,133</td>
+<td class="comment-1" rowspan="1">Entry 11: AND,4sc | EMR,6sc | AND,6sc | EMR,5sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48301"></span>48301</td>
+<td class="instruction">DEFB 107,196,70</td>
+<td class="comment-1" rowspan="1">Entry 12: EML,11sc | AND,4sc | EML,6sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48304"></span>48304</td>
+<td class="instruction">DEFB 226,83</td>
+<td class="comment-1" rowspan="1">Entry 13: AND,2sc | EML,19sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48306"></span>48306</td>
+<td class="instruction">DEFB 236,73</td>
+<td class="comment-1" rowspan="1">Entry 14: AND,12sc | EML,9sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48308"></span>48308</td>
+<td class="instruction">DEFB 170,194,72,129</td>
+<td class="comment-1" rowspan="1">Entry 15: EMR,10sc | AND,2sc | EML,8sc | EMR,1sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48312"></span>48312</td>
+<td class="instruction">DEFB 166,79</td>
+<td class="comment-1" rowspan="1">Entry 16: EMR,6sc | EML,15sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48314"></span>48314</td>
+<td class="instruction">DEFB 164,204,133</td>
+<td class="comment-1" rowspan="1">Entry 17: EMR,4sc | AND,12sc | EMR,5sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48317"></span>48317</td>
+<td class="instruction">DEFB 104,200,69</td>
+<td class="comment-1" rowspan="1">Entry 18: EML,8sc | AND,8sc | EML,5sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48320"></span>48320</td>
+<td class="instruction">DEFB 171,197,133</td>
+<td class="comment-1" rowspan="1">Entry 19: EMR,11sc | AND,5sc | EMR,5sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48323"></span>48323</td>
+<td class="instruction">DEFB 169,5,135</td>
+<td class="comment-1" rowspan="1">Entry 20: EMR,9sc | DC,5sc | EMR,7sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48326"></span>48326</td>
+<td class="instruction">DEFB 116,1</td>
+<td class="comment-1" rowspan="1">Entry 21: EML,20sc | DC,1sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48328"></span>48328</td>
+<td class="instruction">DEFB 242,131</td>
+<td class="comment-1" rowspan="1">Entry 22: AND,18sc | EMR,3sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48330"></span>48330</td>
+<td class="instruction">DEFB 230,143</td>
+<td class="comment-1" rowspan="1">Entry 23: AND,6sc | EMR,15sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48332"></span>48332</td>
+<td class="instruction">DEFB 242,67</td>
+<td class="comment-1" rowspan="1">Entry 24: AND,18sc | EML,3sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48334"></span>48334</td>
+<td class="instruction">DEFB 103,6,72</td>
+<td class="comment-1" rowspan="1">Entry 25: EML,7sc | DC,6sc | EML,8sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48337"></span>48337</td>
+<td class="instruction">DEFB 231,78</td>
+<td class="comment-1" rowspan="1">Entry 26: AND,7sc | EML,14sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48339"></span>48339</td>
+<td class="instruction">DEFB 113,4</td>
+<td class="comment-1" rowspan="1">Entry 27: EML,17sc | DC,4sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48341"></span>48341</td>
+<td class="instruction">DEFB 239,134</td>
+<td class="comment-1" rowspan="1">Entry 28: AND,15sc | EMR,6sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48343"></span>48343</td>
+<td class="instruction">DEFB 164,197,68,7</td>
+<td class="comment-1" rowspan="1">Entry 29: EMR,4sc | AND,5sc | EML,4sc | DC,7sc [20sc] ANOMALY sum!=21</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48347"></span>48347</td>
+<td class="instruction">DEFB 107,10</td>
+<td class="comment-1" rowspan="1">Entry 30: EML,11sc | DC,10sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48349"></span>48349</td>
+<td class="instruction">DEFB 236,137</td>
+<td class="comment-1" rowspan="1">Entry 31: AND,12sc | EMR,9sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48351"></span>48351</td>
+<td class="instruction">DEFB 168,4,137</td>
+<td class="comment-1" rowspan="1">Entry 32: EMR,8sc | DC,4sc | EMR,9sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48354"></span>48354</td>
+<td class="instruction">DEFB 228,145</td>
+<td class="comment-1" rowspan="1">Entry 33: AND,4sc | EMR,17sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48356"></span>48356</td>
+<td class="instruction">DEFB 103,3,75</td>
+<td class="comment-1" rowspan="1">Entry 34: EML,7sc | DC,3sc | EML,11sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48359"></span>48359</td>
+<td class="instruction">DEFB 106,197,70</td>
+<td class="comment-1" rowspan="1">Entry 35: EML,10sc | AND,5sc | EML,6sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48362"></span>48362</td>
+<td class="instruction">DEFB 232,77</td>
+<td class="comment-1" rowspan="1">Entry 36: AND,8sc | EML,13sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48364"></span>48364</td>
+<td class="instruction">DEFB 107,3,71</td>
+<td class="comment-1" rowspan="1">Entry 37: EML,11sc | DC,3sc | EML,7sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48367"></span>48367</td>
+<td class="instruction">DEFB 231,142</td>
+<td class="comment-1" rowspan="1">Entry 38: AND,7sc | EMR,14sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48369"></span>48369</td>
+<td class="instruction">DEFB 170,203</td>
+<td class="comment-1" rowspan="1">Entry 39: EMR,10sc | AND,11sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48371"></span>48371</td>
+<td class="instruction">DEFB 172,201</td>
+<td class="comment-1" rowspan="1">Entry 40: EMR,12sc | AND,9sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48373"></span>48373</td>
+<td class="instruction">DEFB 163,8,202</td>
+<td class="comment-1" rowspan="1">Entry 41: EMR,3sc | DC,8sc | AND,10sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48376"></span>48376</td>
+<td class="instruction">DEFB 38,143</td>
+<td class="comment-1" rowspan="1">Entry 42: DC,6sc | EMR,15sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48378"></span>48378</td>
+<td class="instruction">DEFB 230,79</td>
+<td class="comment-1" rowspan="1">Entry 43: AND,6sc | EML,15sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48380"></span>48380</td>
+<td class="instruction">DEFB 108,2,199</td>
+<td class="comment-1" rowspan="1">Entry 44: EML,12sc | DC,2sc | AND,7sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48383"></span>48383</td>
+<td class="instruction">DEFB 228,74,195,68</td>
+<td class="comment-1" rowspan="1">Entry 45: AND,4sc | EML,10sc | AND,3sc | EML,4sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48387"></span>48387</td>
+<td class="instruction">DEFB 109,8</td>
+<td class="comment-1" rowspan="1">Entry 46: EML,13sc | DC,8sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48389"></span>48389</td>
+<td class="instruction">DEFB 235,74</td>
+<td class="comment-1" rowspan="1">Entry 47: AND,11sc | EML,10sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48391"></span>48391</td>
+<td class="instruction">DEFB 102,207</td>
+<td class="comment-1" rowspan="1">Entry 48: EML,6sc | AND,15sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48393"></span>48393</td>
+<td class="instruction">DEFB 104,201,68</td>
+<td class="comment-1" rowspan="1">Entry 49: EML,8sc | AND,9sc | EML,4sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48396"></span>48396</td>
+<td class="instruction">DEFB 234,75</td>
+<td class="comment-1" rowspan="1">Entry 50: AND,10sc | EML,11sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48398"></span>48398</td>
+<td class="instruction">DEFB 165,204,132</td>
+<td class="comment-1" rowspan="1">Entry 51: EMR,5sc | AND,12sc | EMR,4sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48401"></span>48401</td>
+<td class="instruction">DEFB 100,204,69</td>
+<td class="comment-1" rowspan="1">Entry 52: EML,4sc | AND,12sc | EML,5sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48404"></span>48404</td>
+<td class="instruction">DEFB 229,16</td>
+<td class="comment-1" rowspan="1">Entry 53: AND,5sc | DC,16sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48406"></span>48406</td>
+<td class="instruction">DEFB 242,3</td>
+<td class="comment-1" rowspan="1">Entry 54: AND,18sc | DC,3sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48408"></span>48408</td>
+<td class="instruction">DEFB 228,145</td>
+<td class="comment-1" rowspan="1">Entry 55: AND,4sc | EMR,17sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48410"></span>48410</td>
+<td class="instruction">DEFB 230,15</td>
+<td class="comment-1" rowspan="1">Entry 56: AND,6sc | DC,15sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48412"></span>48412</td>
+<td class="instruction">DEFB 241,132</td>
+<td class="comment-1" rowspan="1">Entry 57: AND,17sc | EMR,4sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48414"></span>48414</td>
+<td class="instruction">DEFB 39,73,5</td>
+<td class="comment-1" rowspan="1">Entry 58: DC,7sc | EML,9sc | DC,5sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48417"></span>48417</td>
+<td class="instruction">DEFB 42,133,6</td>
+<td class="comment-1" rowspan="1">Entry 59: DC,10sc | EMR,5sc | DC,6sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48420"></span>48420</td>
+<td class="instruction">DEFB 226,135,12</td>
+<td class="comment-1" rowspan="1">Entry 60: AND,2sc | EMR,7sc | DC,12sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48423"></span>48423</td>
+<td class="instruction">DEFB 235,138</td>
+<td class="comment-1" rowspan="1">Entry 61: AND,11sc | EMR,10sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48425"></span>48425</td>
+<td class="instruction">DEFB 227,132,195,75</td>
+<td class="comment-1" rowspan="1">Entry 62: AND,3sc | EMR,4sc | AND,3sc | EML,11sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48429"></span>48429</td>
+<td class="instruction">DEFB 235,69,197</td>
+<td class="comment-1" rowspan="1">Entry 63: AND,11sc | EML,5sc | AND,5sc [21sc]</td>
+</tr>
+<tr>
+<td class="address-1"><span id="48432"></span>48432</td>
+<td class="instruction">DEFB 32</td>
+<td class="comment-1" rowspan="1">Terminator.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="48158.html">48158</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#48269">Map</a></td>
+<td class="next">
+Next: <a href="48433.html">48433</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/BC8D.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

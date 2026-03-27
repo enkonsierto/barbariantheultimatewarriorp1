@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 9708</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="96F0.html">96F0</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#9708">Map</a></td>
+<td class="next">
+Next: <a href="972B.html">972B</a>
+</td>
+</tr>
+</table>
+<div class="description">9708: Step each attribute ink colour one level toward a target.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Called from <a href="8F62.html">rainbow_animation</a> each frame to drive the menu rainbow colour animation.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="9708"></span>
+<div class="comments">
+<div class="paragraph">
+For each of B tiles in the row, reads the ink bits via AND 7. If already at the target value A, leaves the tile unchanged. Otherwise increments the ink by 1, sets BRIGHT, and writes the result back. After all B tiles, advances HL by 32 bytes to the next attribute row and decrements C. If C&gt;1, the outer PUSHes accumulate on the stack but are only popped once on exit, corrupting the caller's stack.
+</div>
+<div class="paragraph">
+The caller relies on DE=32 on return to step between rows via ADD HL,DE.
+</div>
+<div class="paragraph">
+INPUT: HL = first attribute address in the row. A = target ink value (0-7). B = tiles per row. C = row count (always 1 in game).
+</div>
+<div class="paragraph">
+OUTPUT: DE = 32 (row stride; used by caller via ADD HL,DE to advance between rows).
+</div>
+<div class="paragraph">
+DESTROYS: None (HL, BC, AF all restored via PUSH/POP).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">step_ink_up</td>
+<td class="address-2"><span id="9708"></span>9708</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="3">Save row-start address, tile count and target ink for final restoration.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9709"></span>9709</td>
+<td class="instruction">PUSH BC</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="970a"></span>970A</td>
+<td class="instruction">PUSH AF</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="970b"></span>970B</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="3">Save the same values again to preserve B (tile counter) and C (row count) across the inner tile loop.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="970c"></span>970C</td>
+<td class="instruction">PUSH BC</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="970d"></span>970D</td>
+<td class="instruction">PUSH AF</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="970e"></span>970E</td>
+<td class="instruction">LD C,A</td>
+<td class="comment-1" rowspan="1">Copy target ink value to C for per-tile comparison.</td>
+</tr>
+<tr>
+<td class="asm-label">step_ink_up_0</td>
+<td class="address-2"><span id="970f"></span>970F</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="2">Read the ink bits of the current attribute (AND 7).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9710"></span>9710</td>
+<td class="instruction">AND $07</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9712"></span>9712</td>
+<td class="instruction">CP C</td>
+<td class="comment-1" rowspan="2">Already at target - skip this tile without writing.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9713"></span>9713</td>
+<td class="instruction">JR Z,<a href="9708.html#971b">step_ink_up_1</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9715"></span>9715</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="4">Increment ink by 1, set BRIGHT, and write back to the attribute.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9716"></span>9716</td>
+<td class="instruction">INC A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9717"></span>9717</td>
+<td class="instruction">SET 6,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9719"></span>9719</td>
+<td class="instruction">LD (HL),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="971a"></span>971A</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Advance to the next tile.</td>
+</tr>
+<tr>
+<td class="asm-label">step_ink_up_1</td>
+<td class="address-2"><span id="971b"></span>971B</td>
+<td class="instruction">DJNZ <a href="9708.html#970f">step_ink_up_0</a></td>
+<td class="comment-1" rowspan="1">Repeat for all B tiles in this row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="971d"></span>971D</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="3">Restore tile count, row count and row-start address.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="971e"></span>971E</td>
+<td class="instruction">POP BC</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="971f"></span>971F</td>
+<td class="instruction">POP HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9720"></span>9720</td>
+<td class="instruction">LD DE,$0020</td>
+<td class="comment-1" rowspan="2">Set DE to 32 (row stride) and advance HL to the next attribute row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9723"></span>9723</td>
+<td class="instruction">ADD HL,DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9724"></span>9724</td>
+<td class="instruction">DEC C</td>
+<td class="comment-1" rowspan="2">Decrement row counter; loop back if rows remain.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9725"></span>9725</td>
+<td class="instruction">JR NZ,<a href="9708.html#9708">step_ink_up</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9727"></span>9727</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="3">Restore caller's HL, BC and AF.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9728"></span>9728</td>
+<td class="instruction">POP BC</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9729"></span>9729</td>
+<td class="instruction">POP HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="972a"></span>972A</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="96F0.html">96F0</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#9708">Map</a></td>
+<td class="next">
+Next: <a href="972B.html">972B</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/38664.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

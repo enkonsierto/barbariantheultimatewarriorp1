@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at 23552</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="23296.html">23296</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#23552">Map</a></td>
+<td class="next">
+Next: <a href="23720.html">23720</a>
+</td>
+</tr>
+</table>
+<div class="description">23552: Game window left-column scanline address table.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="23552"></span>
+<div class="comments">
+<div class="paragraph">
+The updatable game window is 4 tile rows tall (4 x 21 = 84 scanlines, the height of the characters) from 23552 to 23718. Each entry is the VRAM byte address the leftmost pixel column for that scanline, ordered top to bottom.
+</div>
+<div class="paragraph">
+Built once at startup by <a href="48896.html#48984">game_start_2</a>: SP is set to <a href="23720.html">udg_font_addr</a> then decremented 84 times via PUSH HL, filling entries from the top downward. Precomputed to avoid the costly non-linear scanline calculation (<a href="36879.html">calc_prev_scanline_addr</a> / <a href="36895.html">calc_next_scanline_addr</a>) on every rendered row at runtime.
+</div>
+<div class="paragraph">
+At load time contains BASIC system variables that are never used again after the game starts.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">left_col_addr_table</td>
+<td class="address-1"><span id="23552"></span>23552</td>
+<td class="instruction">DEFB 255,0</td>
+<td class="comment-1" rowspan="84">84 scanline VRAM addresses, entries 0 top to 83 bottom.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23554"></span>23554</td>
+<td class="instruction">DEFB 31,48</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23556"></span>23556</td>
+<td class="instruction">DEFB 13,5</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23558"></span>23558</td>
+<td class="instruction">DEFB 35,13</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23560"></span>23560</td>
+<td class="instruction">DEFB 13,35</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23562"></span>23562</td>
+<td class="instruction">DEFB 5,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23564"></span>23564</td>
+<td class="instruction">DEFB 0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23566"></span>23566</td>
+<td class="instruction">DEFB 22,5</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23568"></span>23568</td>
+<td class="instruction">DEFB 1,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23570"></span>23570</td>
+<td class="instruction">DEFB 6,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23572"></span>23572</td>
+<td class="instruction">DEFB 11,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23574"></span>23574</td>
+<td class="instruction">DEFB 1,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23576"></span>23576</td>
+<td class="instruction">DEFB 1,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23578"></span>23578</td>
+<td class="instruction">DEFB 6,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23580"></span>23580</td>
+<td class="instruction">DEFB 16,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23582"></span>23582</td>
+<td class="instruction">DEFB 0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23584"></span>23584</td>
+<td class="instruction">DEFB 0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23586"></span>23586</td>
+<td class="instruction">DEFB 0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23588"></span>23588</td>
+<td class="instruction">DEFB 0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23590"></span>23590</td>
+<td class="instruction">DEFB 0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23592"></span>23592</td>
+<td class="instruction">DEFB 0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23594"></span>23594</td>
+<td class="instruction">DEFB 0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23596"></span>23596</td>
+<td class="instruction">DEFB 0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23598"></span>23598</td>
+<td class="instruction">DEFB 0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23600"></span>23600</td>
+<td class="instruction">DEFB 0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23602"></span>23602</td>
+<td class="instruction">DEFB 0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23604"></span>23604</td>
+<td class="instruction">DEFB 0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23606"></span>23606</td>
+<td class="instruction">DEFB 0,60</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23608"></span>23608</td>
+<td class="instruction">DEFB 64,30</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23610"></span>23610</td>
+<td class="instruction">DEFB 255,236</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23612"></span>23612</td>
+<td class="instruction">DEFB 1,208</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23614"></span>23614</td>
+<td class="instruction">DEFB 98,82</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23616"></span>23616</td>
+<td class="instruction">DEFB 255,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23618"></span>23618</td>
+<td class="instruction">DEFB 135,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23620"></span>23620</td>
+<td class="instruction">DEFB 255,140</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23622"></span>23622</td>
+<td class="instruction">DEFB 0,1</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23624"></span>23624</td>
+<td class="instruction">DEFB 7,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23626"></span>23626</td>
+<td class="instruction">DEFB 0,247</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23628"></span>23628</td>
+<td class="instruction">DEFB 95,11</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23630"></span>23630</td>
+<td class="instruction">DEFB 96,38</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23632"></span>23632</td>
+<td class="instruction">DEFB 93,38</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23634"></span>23634</td>
+<td class="instruction">DEFB 93,59</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23636"></span>23636</td>
+<td class="instruction">DEFB 93,97</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23638"></span>23638</td>
+<td class="instruction">DEFB 95,58</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23640"></span>23640</td>
+<td class="instruction">DEFB 93,18</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23642"></span>23642</td>
+<td class="instruction">DEFB 96,21</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23644"></span>23644</td>
+<td class="instruction">DEFB 96,96</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23646"></span>23646</td>
+<td class="instruction">DEFB 95,88</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23648"></span>23648</td>
+<td class="instruction">DEFB 0,29</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23650"></span>23650</td>
+<td class="instruction">DEFB 96,29</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23652"></span>23652</td>
+<td class="instruction">DEFB 96,29</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23654"></span>23654</td>
+<td class="instruction">DEFB 96,45</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23656"></span>23656</td>
+<td class="instruction">DEFB 146,92</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23658"></span>23658</td>
+<td class="instruction">DEFB 16,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23660"></span>23660</td>
+<td class="instruction">DEFB 0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23662"></span>23662</td>
+<td class="instruction">DEFB 254,255</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23664"></span>23664</td>
+<td class="instruction">DEFB 1,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23666"></span>23666</td>
+<td class="instruction">DEFB 105,210</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23668"></span>23668</td>
+<td class="instruction">DEFB 182,26</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23670"></span>23670</td>
+<td class="instruction">DEFB 0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23672"></span>23672</td>
+<td class="instruction">DEFB 42,66</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23674"></span>23674</td>
+<td class="instruction">DEFB 0,88</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23676"></span>23676</td>
+<td class="instruction">DEFB 255,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23678"></span>23678</td>
+<td class="instruction">DEFB 0,33</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23680"></span>23680</td>
+<td class="instruction">DEFB 0,91</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23682"></span>23682</td>
+<td class="instruction">DEFB 33,23</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23684"></span>23684</td>
+<td class="instruction">DEFB 0,64</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23686"></span>23686</td>
+<td class="instruction">DEFB 224,80</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23688"></span>23688</td>
+<td class="instruction">DEFB 33,24</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23690"></span>23690</td>
+<td class="instruction">DEFB 33,23</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23692"></span>23692</td>
+<td class="instruction">DEFB 1,56</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23694"></span>23694</td>
+<td class="instruction">DEFB 0,56</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23696"></span>23696</td>
+<td class="instruction">DEFB 0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23698"></span>23698</td>
+<td class="instruction">DEFB 0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23700"></span>23700</td>
+<td class="instruction">DEFB 0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23702"></span>23702</td>
+<td class="instruction">DEFB 0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23704"></span>23704</td>
+<td class="instruction">DEFB 0,20</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23706"></span>23706</td>
+<td class="instruction">DEFB 0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23708"></span>23708</td>
+<td class="instruction">DEFB 0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23710"></span>23710</td>
+<td class="instruction">DEFB 10,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23712"></span>23712</td>
+<td class="instruction">DEFB 0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23714"></span>23714</td>
+<td class="instruction">DEFB 0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23716"></span>23716</td>
+<td class="instruction">DEFB 0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23718"></span>23718</td>
+<td class="instruction">DEFB 0,0</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="23296.html">23296</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#23552">Map</a></td>
+<td class="next">
+Next: <a href="23720.html">23720</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/5C00.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

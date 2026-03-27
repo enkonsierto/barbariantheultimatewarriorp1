@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 9055</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="902E.html">902E</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#9055">Map</a></td>
+<td class="next">
+Next: <a href="9084.html">9084</a>
+</td>
+</tr>
+</table>
+<div class="description">9055: Left-edge AND-mask tile renderer.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="902E.html">tile_render_engine</a> and <a href="9127.html">tile_renderer</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="9055"></span>
+<div class="comments">
+<div class="paragraph">
+Renders one scanline of a 3-byte-wide tile. Scans each byte for transparency (0xFF); the first visible byte receives a left-edge column mask via <a href="90C1.html">left_mask_gen</a>, and any remaining visible bytes are written directly to the framebuffer.
+</div>
+<div class="paragraph">
+Called 21 times per tile by the outer loop at <a href="902E.html#904f">left_edge_loop</a>. On return, DE and HL point to the start of the next scanline.
+</div>
+<div class="paragraph">
+INPUT: DE = tile source address (within a single 256-byte page). HL = framebuffer destination. OUTPUT: None. DESTROYS: AF, C.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">left_edge_renderer</td>
+<td class="address-2"><span id="9055"></span>9055</td>
+<td class="instruction">LD C,$FF</td>
+<td class="comment-1" rowspan="1">Sets 0xFF as the transparent sentinel.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9057"></span>9057</td>
+<td class="instruction">LD A,(DE)</td>
+<td class="comment-1" rowspan="4">Reads byte 0; if not transparent, applies the left-edge column mask via <a href="90C1.html">left_mask_gen</a>; otherwise skips to the byte-1 check.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9058"></span>9058</td>
+<td class="instruction">CP C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9059"></span>9059</td>
+<td class="instruction">JR Z,<a href="9055.html#9060">left_edge_renderer_0</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="905b"></span>905B</td>
+<td class="instruction">CALL <a href="90C1.html">left_mask_gen</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="905e"></span>905E</td>
+<td class="instruction">JR <a href="9055.html#9074">left_edge_renderer_2</a></td>
+<td class="comment-1" rowspan="1">Byte 0 masked: jumps to write bytes 1 and 2 directly.</td>
+</tr>
+<tr>
+<td class="asm-label">left_edge_renderer_0</td>
+<td class="address-2"><span id="9060"></span>9060</td>
+<td class="instruction">INC E</td>
+<td class="comment-1" rowspan="6">Byte 0 transparent: reads byte 1; if not transparent, applies the left-edge mask via <a href="90C1.html">left_mask_gen</a>; otherwise skips to the byte-2 check.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9061"></span>9061</td>
+<td class="instruction">INC L</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9062"></span>9062</td>
+<td class="instruction">LD A,(DE)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9063"></span>9063</td>
+<td class="instruction">CP C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9064"></span>9064</td>
+<td class="instruction">JR Z,<a href="9055.html#906b">left_edge_renderer_1</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9066"></span>9066</td>
+<td class="instruction">CALL <a href="90C1.html">left_mask_gen</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9069"></span>9069</td>
+<td class="instruction">JR <a href="9055.html#9078">left_edge_renderer_3</a></td>
+<td class="comment-1" rowspan="1">Byte 1 masked: jumps to write byte 2 directly.</td>
+</tr>
+<tr>
+<td class="asm-label">left_edge_renderer_1</td>
+<td class="address-2"><span id="906b"></span>906B</td>
+<td class="instruction">INC E</td>
+<td class="comment-1" rowspan="6">Bytes 0 and 1 transparent: reads byte 2 and applies the mask if visible; falls through to the scanline advance.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="906c"></span>906C</td>
+<td class="instruction">INC L</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="906d"></span>906D</td>
+<td class="instruction">LD A,(DE)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="906e"></span>906E</td>
+<td class="instruction">CP C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="906f"></span>906F</td>
+<td class="instruction">CALL NZ,<a href="90C1.html">left_mask_gen</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9072"></span>9072</td>
+<td class="instruction">JR <a href="9055.html#907c">left_edge_renderer_4</a></td>
+</tr>
+<tr>
+<td class="asm-label">left_edge_renderer_2</td>
+<td class="address-2"><span id="9074"></span>9074</td>
+<td class="instruction">INC E</td>
+<td class="comment-1" rowspan="8">Writes the remaining visible bytes directly to the framebuffer without masking.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9075"></span>9075</td>
+<td class="instruction">INC L</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9076"></span>9076</td>
+<td class="instruction">LD A,(DE)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9077"></span>9077</td>
+<td class="instruction">LD (HL),A</td>
+</tr>
+<tr>
+<td class="asm-label">left_edge_renderer_3</td>
+<td class="address-2"><span id="9078"></span>9078</td>
+<td class="instruction">INC E</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9079"></span>9079</td>
+<td class="instruction">INC L</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="907a"></span>907A</td>
+<td class="instruction">LD A,(DE)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="907b"></span>907B</td>
+<td class="instruction">LD (HL),A</td>
+</tr>
+<tr>
+<td class="asm-label">left_edge_renderer_4</td>
+<td class="address-2"><span id="907c"></span>907C</td>
+<td class="instruction">PUSH DE</td>
+<td class="comment-1" rowspan="6">Advances the framebuffer destination 30 bytes to the next scanline and steps the source pointer past this scanline.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="907d"></span>907D</td>
+<td class="instruction">LD DE,$001E</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9080"></span>9080</td>
+<td class="instruction">ADD HL,DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9081"></span>9081</td>
+<td class="instruction">POP DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9082"></span>9082</td>
+<td class="instruction">INC E</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9083"></span>9083</td>
+<td class="instruction">RET</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="902E.html">902E</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#9055">Map</a></td>
+<td class="next">
+Next: <a href="9084.html">9084</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/36949.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

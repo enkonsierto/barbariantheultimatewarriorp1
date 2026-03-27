@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 9352</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="9345.html">9345</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#9352">Map</a></td>
+<td class="next">
+Next: <a href="9374.html">9374</a>
+</td>
+</tr>
+</table>
+<div class="description">9352: P1-wins end-of-fight sequence.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="92FF.html">end_of_fight_dispatcher</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="9352"></span>
+<div class="comments">
+<div class="paragraph">
+Called by <a href="92FF.html">end_of_fight_dispatcher</a> when P1 movement ID equals 19 (Victory), meaning P2 has been defeated.
+</div>
+<div class="paragraph">
+Updates P1 score and drains the round timer (<a href="939F.html">p2_death_score_update</a>).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">p1_wins_seq</td>
+<td class="address-2"><span id="9352"></span>9352</td>
+<td class="instruction">CALL <a href="939F.html">p2_death_score_update</a></td>
+<td class="comment-1" rowspan="1">Score update and timer drain via <a href="939F.html">p2_death_score_update</a>; never returns to caller.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="9355"></span>
+<div class="comments">
+<div class="paragraph">
+The rest of the routine contains UNREACHABLE CODE. In other versions of the game, after the end of fight, it applies movement 35 (walk-out animation) to exit arena on P1 state block via <a href="938C.html">post_fight_setup</a>. This seems to be a remaining of that.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9355"></span>9355</td>
+<td class="instruction">CALL <a href="938C.html">post_fight_setup</a></td>
+<td class="comment-1" rowspan="1">Walk-out animation (movement 35) on P1; Z set if mirror flag clear.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9358"></span>9358</td>
+<td class="instruction">RET NZ</td>
+<td class="comment-1" rowspan="1">Mirror flag active: nothing to do.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9359"></span>9359</td>
+<td class="instruction">XOR $01</td>
+<td class="comment-1" rowspan="1">Activate mirror flag (one-shot).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="935b"></span>935B</td>
+<td class="instruction">LD ($B55B),A</td>
+<td class="comment-1" rowspan="1">Write mirror flag to <a href="B559.html#b55b">p1_mirror_flags</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="935e"></span>935E</td>
+<td class="instruction">LD A,($B55C)</td>
+<td class="comment-1" rowspan="1">Read P1 row position.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9361"></span>9361</td>
+<td class="instruction">ADD A,$04</td>
+<td class="comment-1" rowspan="1">Advance row by 4.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9363"></span>9363</td>
+<td class="instruction">CP $18</td>
+<td class="comment-1" rowspan="1">Out of bounds check (row &gt;= 24).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9365"></span>9365</td>
+<td class="instruction">RET NC</td>
+<td class="comment-1" rowspan="1">Row out of bounds: return without update.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9366"></span>9366</td>
+<td class="instruction">CP $18</td>
+<td class="comment-1" rowspan="1">[Dead code] Unreachable compare.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9368"></span>9368</td>
+<td class="instruction">JR Z,<a href="9352.html#936e">p1_wins_seq_0</a></td>
+<td class="comment-1" rowspan="1">[Dead code] Unreachable branch.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="936a"></span>936A</td>
+<td class="instruction">LD ($B55C),A</td>
+<td class="comment-1" rowspan="1">Write updated row position.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="936d"></span>936D</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="asm-label">p1_wins_seq_0</td>
+<td class="address-2"><span id="936e"></span>936E</td>
+<td class="instruction">LD A,$17</td>
+<td class="comment-1" rowspan="1">[Dead code] Clamp row to 23.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9370"></span>9370</td>
+<td class="instruction">LD ($B55C),A</td>
+<td class="comment-1" rowspan="1">[Dead code] Would write clamped value.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9373"></span>9373</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="9345.html">9345</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#9352">Map</a></td>
+<td class="next">
+Next: <a href="9374.html">9374</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/37714.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

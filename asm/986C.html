@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 986C</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="9830.html">9830</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#986c">Map</a></td>
+<td class="next">
+Next: <a href="98E6.html">98E6</a>
+</td>
+</tr>
+</table>
+<div class="description">986C: X position update and tackle proximity gate.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="9B93.html">char_frame_update</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="986c"></span>
+<div class="comments">
+<div class="paragraph">
+Advances the active character X position tile via <a href="9830.html">x_pos_controller</a>, then recomputes the fighter distance. If the new distance is negative (bit 7 set), the fighters have overlapped after the step. In that case, if neither fighter is in an exit or death movement, tackle detection is armed (<a href="B9D7.html">tackle_overlap_flag</a>=1). If one fighter is rolling (mv17) and the other has reached the jump-over frames (8 or 9), the flag stays set and <a href="9C20.html">tackle_side_swap</a> handles the cross-side sequence. If no roll/jump-over match is found, the step is reversed.
+</div>
+<div class="paragraph">
+INPUT: IY = active character state block. B = X tile before the step (saved by <a href="9B93.html">char_frame_update</a>).
+</div>
+<div class="paragraph">
+OUTOUT: <a href="B9D7.html">tackle_overlap_flag</a> set to 1 if tackle condition is met; 0 if the step was rolled back. DESTROYS: AF, BC.
+</div>
+<div class="paragraph">
+Advances the active character X tile and recomputes fighter distance.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">x_update_and_tackle_gate</td>
+<td class="address-2"><span id="986c"></span>986C</td>
+<td class="instruction">CALL <a href="9830.html">x_pos_controller</a></td>
+<td class="comment-1" rowspan="1">Advance the X tile for the current frame via <a href="9830.html">x_pos_controller</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="986f"></span>986F</td>
+<td class="instruction">LD C,B</td>
+<td class="comment-1" rowspan="1">Save pre-step X tile for possible rollback.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9870"></span>9870</td>
+<td class="instruction">LD A,($B6F2)</td>
+<td class="comment-1" rowspan="1">Load pre-step distance from <a href="B6F2.html">fighter_distance</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9873"></span>9873</td>
+<td class="instruction">LD B,A</td>
+<td class="comment-1" rowspan="1">Save pre-step distance for possible rollback.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9874"></span>9874</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Save pre-step X tile and distance on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9875"></span>9875</td>
+<td class="instruction">CALL <a href="9BB0.html">calc_distance</a></td>
+<td class="comment-1" rowspan="1">Recompute fighter distance after the step via <a href="9BB0.html">calc_distance</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9878"></span>9878</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore pre-step values.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="9879"></span>
+<div class="comments">
+<div class="paragraph">
+Returns immediately if a tackle sequence is already active.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9879"></span>9879</td>
+<td class="instruction">LD A,($B9D7)</td>
+<td class="comment-1" rowspan="1">Load tackle state from <a href="B9D7.html">tackle_overlap_flag</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="987c"></span>987C</td>
+<td class="instruction">OR A</td>
+<td class="comment-1" rowspan="1">Test if a tackle sequence is already active.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="987d"></span>987D</td>
+<td class="instruction">RET NZ</td>
+<td class="comment-1" rowspan="1">Return - tackle already in progress.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="987e"></span>
+<div class="comments">
+<div class="paragraph">
+Checks whether the step produced an overlap (negative distance, bit 7 set).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="987e"></span>987E</td>
+<td class="instruction">LD A,($B6F2)</td>
+<td class="comment-1" rowspan="1">Load updated distance to test for overlap.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9881"></span>9881</td>
+<td class="instruction">BIT 7,A</td>
+<td class="comment-1" rowspan="1">Bit 7 set means the step produced a negative distance - fighters have overlapped.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9883"></span>9883</td>
+<td class="instruction">JR NZ,<a href="986C.html#9886">x_update_and_tackle_gate_0</a></td>
+<td class="comment-1" rowspan="1">Overlap detected - proceed to exit-movement guards.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9885"></span>9885</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">No overlap - fighters are still apart, return.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="9886"></span>
+<div class="comments">
+<div class="paragraph">
+Guards: returns if either fighter is in an exit or death movement.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">x_update_and_tackle_gate_0</td>
+<td class="address-2"><span id="9886"></span>9886</td>
+<td class="instruction">LD A,($B55F)</td>
+<td class="comment-1" rowspan="1">Load P1 movement ID to screen for exit or death animations.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9889"></span>9889</td>
+<td class="instruction">CP $08</td>
+<td class="comment-1" rowspan="1">P1 is decapitated (mv8 <a href="ADD5.html#ae0e">AE0E</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="988b"></span>988B</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Return - no tackle during this movement.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="988c"></span>988C</td>
+<td class="instruction">CP $1B</td>
+<td class="comment-1" rowspan="1">P1 is in a death animation (mv27 <a href="ADD5.html#ae67">AE67</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="988e"></span>988E</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="988f"></span>988F</td>
+<td class="instruction">CP $1F</td>
+<td class="comment-1" rowspan="1">P1 is in a body-drag exit (mv31 <a href="ADD5.html#ae8e">AE8E</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9891"></span>9891</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9892"></span>9892</td>
+<td class="instruction">CP $1D</td>
+<td class="comment-1" rowspan="1">P1 is in a body-drag exit (mv29 <a href="ADD5.html#ae83">AE83</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9894"></span>9894</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9895"></span>9895</td>
+<td class="instruction">CP $21</td>
+<td class="comment-1" rowspan="1">P1 is in a body-drag exit (mv33 <a href="ADD5.html#ae9e">AE9E</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9897"></span>9897</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9898"></span>9898</td>
+<td class="instruction">CP $20</td>
+<td class="comment-1" rowspan="1">P1 is in a body-drag exit (mv32 <a href="ADD5.html#ae96">AE96</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="989a"></span>989A</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="989b"></span>989B</td>
+<td class="instruction">LD A,($B568)</td>
+<td class="comment-1" rowspan="1">Load P2 movement ID to screen for exit or death animations.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="989e"></span>989E</td>
+<td class="instruction">CP $08</td>
+<td class="comment-1" rowspan="1">P2 is decapitated (mv8 <a href="ADD5.html#ae0e">AE0E</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98a0"></span>98A0</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98a1"></span>98A1</td>
+<td class="instruction">CP $1B</td>
+<td class="comment-1" rowspan="1">P2 is in a death animation (mv27 <a href="ADD5.html#ae67">AE67</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98a3"></span>98A3</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98a4"></span>98A4</td>
+<td class="instruction">CP $1F</td>
+<td class="comment-1" rowspan="1">P2 is in a body-drag exit (mv31 <a href="ADD5.html#ae8e">AE8E</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98a6"></span>98A6</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98a7"></span>98A7</td>
+<td class="instruction">CP $1D</td>
+<td class="comment-1" rowspan="1">P2 is in a body-drag exit (mv29 <a href="ADD5.html#ae83">AE83</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98a9"></span>98A9</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98aa"></span>98AA</td>
+<td class="instruction">CP $21</td>
+<td class="comment-1" rowspan="1">P2 is in a body-drag exit (mv33 <a href="ADD5.html#ae9e">AE9E</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98ac"></span>98AC</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98ad"></span>98AD</td>
+<td class="instruction">CP $20</td>
+<td class="comment-1" rowspan="1">P2 is in a body-drag exit (mv32 <a href="ADD5.html#ae96">AE96</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98af"></span>98AF</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="98b0"></span>
+<div class="comments">
+<div class="paragraph">
+Arms tackle detection and checks whether either fighter is rolling.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98b0"></span>98B0</td>
+<td class="instruction">LD A,$01</td>
+<td class="comment-1" rowspan="1">Both fighters are eligible for tackle detection.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98b2"></span>98B2</td>
+<td class="instruction">LD ($B9D7),A</td>
+<td class="comment-1" rowspan="1">Arm tackle detection in <a href="B9D7.html">tackle_overlap_flag</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98b5"></span>98B5</td>
+<td class="instruction">LD A,($B55F)</td>
+<td class="comment-1" rowspan="1">Load P1 movement ID to check for an active roll.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98b8"></span>98B8</td>
+<td class="instruction">CP $11</td>
+<td class="comment-1" rowspan="1">P1 is rolling (mv17 <a href="ADD5.html#ae3d">AE3D</a>) - check whether P2 is in the jump-over phase.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98ba"></span>98BA</td>
+<td class="instruction">JR Z,<a href="986C.html#98d0">x_update_and_tackle_gate_2</a></td>
+<td class="comment-1" rowspan="1">P1 rolling confirmed - jump to jump-over check.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98bc"></span>98BC</td>
+<td class="instruction">LD A,($B568)</td>
+<td class="comment-1" rowspan="1">Load P2 movement ID to check for an active roll.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98bf"></span>98BF</td>
+<td class="instruction">CP $11</td>
+<td class="comment-1" rowspan="1">P2 is rolling (mv17 <a href="ADD5.html#ae3d">AE3D</a>) - check whether P1 is in the jump-over phase.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98c1"></span>98C1</td>
+<td class="instruction">JR Z,<a href="986C.html#98db">x_update_and_tackle_gate_3</a></td>
+<td class="comment-1" rowspan="1">P2 rolling confirmed - jump to jump-over check.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="98c3"></span>
+<div class="comments">
+<div class="paragraph">
+Rollback: reverses the overlap step and clears the tackle flag.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">x_update_and_tackle_gate_1</td>
+<td class="address-2"><span id="98c3"></span>98C3</td>
+<td class="instruction">XOR A</td>
+<td class="comment-1" rowspan="1">Neither fighter is rolling - reverse the overlap step.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98c4"></span>98C4</td>
+<td class="instruction">LD ($B9D7),A</td>
+<td class="comment-1" rowspan="1">Clear tackle flag.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98c7"></span>98C7</td>
+<td class="instruction">LD A,B</td>
+<td class="comment-1" rowspan="1">Recover pre-step distance.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98c8"></span>98C8</td>
+<td class="instruction">LD ($B6F2),A</td>
+<td class="comment-1" rowspan="1">Restore pre-step distance to <a href="B6F2.html">fighter_distance</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98cb"></span>98CB</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="1">Recover pre-step X tile.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98cc"></span>98CC</td>
+<td class="instruction">LD (IY+$03),A</td>
+<td class="comment-1" rowspan="1">Undo the overlap step by restoring the pre-step X tile.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98cf"></span>98CF</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="98d0"></span>
+<div class="comments">
+<div class="paragraph">
+P1 rolling: checks whether P2 has reached the jump-over phase (frame 8 or 9).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">x_update_and_tackle_gate_2</td>
+<td class="address-2"><span id="98d0"></span>98D0</td>
+<td class="instruction">LD A,($B56A)</td>
+<td class="comment-1" rowspan="1">P1 rolling - load P2 frame index to check jump-over state.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98d3"></span>98D3</td>
+<td class="instruction">CP $08</td>
+<td class="comment-1" rowspan="1">P2 is at jump-over frame 8. <a href="AAFC.html#ab35">AB35</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98d5"></span>98D5</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Return with tackle flag set - <a href="9C20.html">tackle_side_swap</a> drives the cross-side phase.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98d6"></span>98D6</td>
+<td class="instruction">CP $09</td>
+<td class="comment-1" rowspan="1">P2 is at jump-over frame 9. <a href="AAFC.html#ab3e">AB3E</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98d8"></span>98D8</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98d9"></span>98D9</td>
+<td class="instruction">JR <a href="986C.html#98c3">x_update_and_tackle_gate_1</a></td>
+<td class="comment-1" rowspan="1">P2 not yet in jump-over phase - reverse the overlap step.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="98db"></span>
+<div class="comments">
+<div class="paragraph">
+P2 rolling: checks whether P1 has reached the jump-over phase (frame 8 or 9).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">x_update_and_tackle_gate_3</td>
+<td class="address-2"><span id="98db"></span>98DB</td>
+<td class="instruction">LD A,($B561)</td>
+<td class="comment-1" rowspan="1">P2 rolling - load P1 frame index to check jump-over state.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98de"></span>98DE</td>
+<td class="instruction">CP $08</td>
+<td class="comment-1" rowspan="1">P1 is at jump-over frame 8. <a href="AAFC.html#ab35">AB35</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98e0"></span>98E0</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Return with tackle flag set - <a href="9C20.html">tackle_side_swap</a> drives the cross-side phase.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98e1"></span>98E1</td>
+<td class="instruction">CP $09</td>
+<td class="comment-1" rowspan="1">P1 is at jump-over frame 9. <a href="AAFC.html#ab3e">AB3E</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98e3"></span>98E3</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="98e4"></span>98E4</td>
+<td class="instruction">JR <a href="986C.html#98c3">x_update_and_tackle_gate_1</a></td>
+<td class="comment-1" rowspan="1">P1 not yet in jump-over phase - reverse the overlap step.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="9830.html">9830</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#986c">Map</a></td>
+<td class="next">
+Next: <a href="98E6.html">98E6</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/39020.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

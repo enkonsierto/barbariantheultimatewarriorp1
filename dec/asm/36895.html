@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 36895</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="36879.html">36879</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#36895">Map</a></td>
+<td class="next">
+Next: <a href="36910.html">36910</a>
+</td>
+</tr>
+</table>
+<div class="description">36895: Calculates the VRAM address of the scanline below.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Given a VRAM scanline address in HL, steps forward one scanline, handling tile-row and screen-third boundaries in the non-linear ZX Spectrum screen layout.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="36895"></span>
+<div class="comments">
+<div class="paragraph">
+INPUT: HL = current VRAM scanline address. OUTPUT: HL = address of the scanline below. DESTROYS: A, F.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">calc_next_scanline_addr</td>
+<td class="address-2"><span id="36895"></span>36895</td>
+<td class="instruction">INC H</td>
+<td class="comment-1" rowspan="1">Steps forward one scanline (H encodes the scanline index within the tile).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36896"></span>36896</td>
+<td class="instruction">LD A,H</td>
+<td class="comment-1" rowspan="2">Checks whether the increment crossed a tile boundary (lower 3 bits of H become 0 when wrapping forward).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36897"></span>36897</td>
+<td class="instruction">AND 7</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36899"></span>36899</td>
+<td class="instruction">RET NZ</td>
+<td class="comment-1" rowspan="1">Within the same tile; address is ready.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36900"></span>36900</td>
+<td class="instruction">LD A,L</td>
+<td class="comment-1" rowspan="3">Moves down one tile row (L encodes the tile row; add 32 to reach the row below).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36901"></span>36901</td>
+<td class="instruction">ADD A,32</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36903"></span>36903</td>
+<td class="instruction">LD L,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36904"></span>36904</td>
+<td class="instruction">RET C</td>
+<td class="comment-1" rowspan="1">Tile-row overflow carried into the screen-third; address is ready.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36905"></span>36905</td>
+<td class="instruction">LD A,H</td>
+<td class="comment-1" rowspan="3">No carry; the screen-third was over-incremented - subtracts 8 from H to correct it.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36906"></span>36906</td>
+<td class="instruction">SUB 8</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36908"></span>36908</td>
+<td class="instruction">LD H,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36909"></span>36909</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="36879.html">36879</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#36895">Map</a></td>
+<td class="next">
+Next: <a href="36910.html">36910</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/901F.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

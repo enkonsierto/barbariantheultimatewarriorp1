@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 8ACB</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="8ABA.html">8ABA</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#8acb">Map</a></td>
+<td class="next">
+Next: <a href="8B81.html">8B81</a>
+</td>
+</tr>
+</table>
+<div class="description">8ACB: Hit processor, score award and sound dispatcher.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Called once per frame from the game loop. Reads the pending combat event from <a href="B6D3.html">pending_sound_index</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="8acb"></span>
+<div class="comments">
+<div class="paragraph">
+If 0, returns immediately. Events 5-6 (guard) skip the visual/score logic and jump directly to sound dispatch.
+</div>
+<div class="paragraph">
+Events 1-4 (hit): draws a hit indicator glyph (<a href="6600.html#6668">6668</a>) near the attacker column if the frame is in <a href="B69B.html">hit_indicator_frame_table</a>, awards score if the frame is in <a href="B6B7.html">score_award_frame_table</a>, then clears <a href="B6D3.html">pending_sound_index</a> and plays the sound for the event.
+</div>
+<div class="paragraph">
+Sound index: 1=<a href="9BF6.html#9bfc">sound_kick</a>, 2=<a href="9BF6.html">sound_tackle</a>, 3=<a href="9BF6.html#9c02">sound_slash</a>, 4=<a href="9BF6.html#9c08">sound_head_cut</a>, 5=<a href="9BF6.html#9c0e">sound_guard_1</a>, 6=<a href="9BF6.html#9c14">sound_guard_2</a>.
+</div>
+<div class="paragraph">
+IN None. OUT None. DESTROYS AF, BC, DE, HL, IY.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">hit_processor</td>
+<td class="address-2"><span id="8acb"></span>8ACB</td>
+<td class="instruction">LD A,($B6D3)</td>
+<td class="comment-1" rowspan="1">Load pending event code from <a href="B6D3.html">pending_sound_index</a>. Return if none.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8ace"></span>8ACE</td>
+<td class="instruction">OR A</td>
+<td class="comment-1" rowspan="2">Return if no event pending.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8acf"></span>8ACF</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8ad0"></span>8AD0</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Save event/sound index.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8ad1"></span>8AD1</td>
+<td class="instruction">CP $05</td>
+<td class="comment-1" rowspan="4">Guard events 5-6: skip visual and score, jump directly to sound dispatch.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8ad3"></span>8AD3</td>
+<td class="instruction">JP Z,<a href="8ACB.html#8b5d">hit_processor_6</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8ad6"></span>8AD6</td>
+<td class="instruction">CP $06</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8ad8"></span>8AD8</td>
+<td class="instruction">JP Z,<a href="8ACB.html#8b5d">hit_processor_6</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8adb"></span>8ADB</td>
+<td class="instruction">LD IY,($B6D4)</td>
+<td class="comment-1" rowspan="1">IY = attacker state block pointer from <a href="B6D4.html">attacker_block_ptr</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8adf"></span>8ADF</td>
+<td class="instruction">LD A,(IY+$08)</td>
+<td class="comment-1" rowspan="1">A = current animation frame index (IY+8).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8ae2"></span>8AE2</td>
+<td class="instruction">LD HL,$B69B</td>
+<td class="comment-1" rowspan="1">Search hit-indicator table <a href="B69B.html">hit_indicator_frame_table</a> for this frame. Z=1 if found, DE=row/column data.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8ae5"></span>8AE5</td>
+<td class="instruction">CALL <a href="95B5.html">find_hit_section</a></td>
+<td class="comment-1" rowspan="1">Call <a href="95B5.html">find_hit_section</a> to search the table.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8ae8"></span>8AE8</td>
+<td class="instruction">JR NZ,<a href="8ACB.html#8b3c">hit_processor_4</a></td>
+<td class="comment-1" rowspan="1">Frame not in table - skip drawing hit indicator.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8aea"></span>8AEA</td>
+<td class="instruction">PUSH DE</td>
+<td class="comment-1" rowspan="1">Save DE (row/column data) while computing screen address.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8aeb"></span>8AEB</td>
+<td class="instruction">LD E,(IY+$03)</td>
+<td class="comment-1" rowspan="1">E = attacker X tile column (IY+3).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8aee"></span>8AEE</td>
+<td class="instruction">LD D,$00</td>
+<td class="comment-1" rowspan="1">D = 0, DE = 16-bit column index.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8af0"></span>8AF0</td>
+<td class="instruction">LD HL,$5940</td>
+<td class="comment-1" rowspan="1">HL = start of attribute row 22848 (screen row for hit indicator).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8af3"></span>8AF3</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1">HL += attacker column offset.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8af4"></span>8AF4</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="1">Restore DE (row offset in D, original X column in E).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8af5"></span>8AF5</td>
+<td class="instruction">LD A,D</td>
+<td class="comment-1" rowspan="2">A = D (row offset). If 0, already on the right row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8af6"></span>8AF6</td>
+<td class="instruction">OR A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8af7"></span>8AF7</td>
+<td class="instruction">JR Z,<a href="8ACB.html#8b00">hit_processor_1</a></td>
+<td class="comment-1" rowspan="1">Skip row advance if row offset is 0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8af9"></span>8AF9</td>
+<td class="instruction">LD BC,$0020</td>
+<td class="comment-1" rowspan="1">Advance HL one attribute row (32 bytes) D times.</td>
+</tr>
+<tr>
+<td class="asm-label">hit_processor_0</td>
+<td class="address-2"><span id="8afc"></span>8AFC</td>
+<td class="instruction">ADD HL,BC</td>
+<td class="comment-1" rowspan="1">Advance one row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8afd"></span>8AFD</td>
+<td class="instruction">DEC A</td>
+<td class="comment-1" rowspan="1">Decrement row counter.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8afe"></span>8AFE</td>
+<td class="instruction">JR NZ,<a href="8ACB.html#8afc">hit_processor_0</a></td>
+<td class="comment-1" rowspan="1">Loop until row offset consumed.</td>
+</tr>
+<tr>
+<td class="asm-label">hit_processor_1</td>
+<td class="address-2"><span id="8b00"></span>8B00</td>
+<td class="instruction">BIT 0,(IY+$02)</td>
+<td class="comment-1" rowspan="1">Test mirror flag (IY+2 bit 0): determines column direction for hit indicator.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b04"></span>8B04</td>
+<td class="instruction">JR Z,<a href="8ACB.html#8b0f">hit_processor_2</a></td>
+<td class="comment-1" rowspan="1">Not mirrored - column = base + X tile.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b06"></span>8B06</td>
+<td class="instruction">LD C,$08</td>
+<td class="comment-1" rowspan="1">Mirrored: shift right 8 columns, then subtract X tile (column = base + 8 - X).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b08"></span>8B08</td>
+<td class="instruction">ADD HL,BC</td>
+<td class="comment-1" rowspan="1">HL += 8.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b09"></span>8B09</td>
+<td class="instruction">LD C,E</td>
+<td class="comment-1" rowspan="1">C = X tile column.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b0a"></span>8B0A</td>
+<td class="instruction">AND A</td>
+<td class="comment-1" rowspan="1">Clear carry before SBC.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b0b"></span>8B0B</td>
+<td class="instruction">SBC HL,BC</td>
+<td class="comment-1" rowspan="1">HL -= X tile (mirrored column placement).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b0d"></span>8B0D</td>
+<td class="instruction">JR <a href="8ACB.html#8b11">hit_processor_3</a></td>
+<td class="comment-1" rowspan="1">Jump to boundary check.</td>
+</tr>
+<tr>
+<td class="asm-label">hit_processor_2</td>
+<td class="address-2"><span id="8b0f"></span>8B0F</td>
+<td class="instruction">LD C,E</td>
+<td class="comment-1" rowspan="1">Not mirrored: C = X tile column.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b10"></span>8B10</td>
+<td class="instruction">ADD HL,BC</td>
+<td class="comment-1" rowspan="1">HL += X tile (normal column placement).</td>
+</tr>
+<tr>
+<td class="asm-label">hit_processor_3</td>
+<td class="address-2"><span id="8b11"></span>8B11</td>
+<td class="instruction">LD B,L</td>
+<td class="comment-1" rowspan="2">Save column byte for boundary check (B = L).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b12"></span>8B12</td>
+<td class="instruction">LD A,L</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b13"></span>8B13</td>
+<td class="instruction">AND $1F</td>
+<td class="comment-1" rowspan="1">Mask column to 0-31.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b15"></span>8B15</td>
+<td class="instruction">OR A</td>
+<td class="comment-1" rowspan="1">Skip if column is on a boundary tile (0, 1, 30 or 31).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b16"></span>8B16</td>
+<td class="instruction">JR Z,<a href="8ACB.html#8b3c">hit_processor_4</a></td>
+<td class="comment-1" rowspan="1">Column 0 - skip.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b18"></span>8B18</td>
+<td class="instruction">CP $01</td>
+<td class="comment-1" rowspan="2">Column 1 - skip.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b1a"></span>8B1A</td>
+<td class="instruction">JR Z,<a href="8ACB.html#8b3c">hit_processor_4</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b1c"></span>8B1C</td>
+<td class="instruction">CP $1F</td>
+<td class="comment-1" rowspan="2">Column 31 - skip.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b1e"></span>8B1E</td>
+<td class="instruction">JR Z,<a href="8ACB.html#8b3c">hit_processor_4</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b20"></span>8B20</td>
+<td class="instruction">CP $1E</td>
+<td class="comment-1" rowspan="2">Column 30 - skip.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b22"></span>8B22</td>
+<td class="instruction">JR Z,<a href="8ACB.html#8b3c">hit_processor_4</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b24"></span>8B24</td>
+<td class="instruction">LD L,B</td>
+<td class="comment-1" rowspan="1">Restore L from saved column byte B.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b25"></span>8B25</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="2">Align column to tile boundary (AND 248) and add 2-column offset.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b26"></span>8B26</td>
+<td class="instruction">AND $F8</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b28"></span>8B28</td>
+<td class="instruction">OR $02</td>
+<td class="comment-1" rowspan="1">OR 2: place indicator 2 columns into the tile.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b2a"></span>8B2A</td>
+<td class="instruction">LD (HL),A</td>
+<td class="comment-1" rowspan="1">Store final VRAM pixel address in HL.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b2b"></span>8B2B</td>
+<td class="instruction">LD ($B6D6),HL</td>
+<td class="comment-1" rowspan="1">Save hit indicator VRAM address to <a href="B6D6.html">hit_indicator_screen_addr</a> for <a href="8A7A.html">align_hit_indicator</a> to align each frame.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b2e"></span>8B2E</td>
+<td class="instruction">LD A,H</td>
+<td class="comment-1" rowspan="2">Convert pixel address H to attribute area: isolate sector bits (AND 3).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b2f"></span>8B2F</td>
+<td class="instruction">AND $03</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b31"></span>8B31</td>
+<td class="instruction">RLCA</td>
+<td class="comment-1" rowspan="3">Shift sector bits left 3 to form attribute page high byte.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b32"></span>8B32</td>
+<td class="instruction">RLCA</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b33"></span>8B33</td>
+<td class="instruction">RLCA</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b34"></span>8B34</td>
+<td class="instruction">OR $40</td>
+<td class="comment-1" rowspan="1">OR 64: set attribute page base (0x40xx).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b36"></span>8B36</td>
+<td class="instruction">LD H,A</td>
+<td class="comment-1" rowspan="1">H = attribute address high byte.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b37"></span>8B37</td>
+<td class="instruction">LD A,$3D</td>
+<td class="comment-1" rowspan="1">A = ASCII 61 (hit indicator glyph, UDG index 13).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b39"></span>8B39</td>
+<td class="instruction">CALL <a href="8C9C.html">draw_character</a></td>
+<td class="comment-1" rowspan="1">Draw hit indicator glyph at computed screen address via <a href="8C9C.html">draw_character</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">hit_processor_4</td>
+<td class="address-2"><span id="8b3c"></span>8B3C</td>
+<td class="instruction">LD A,(IY+$08)</td>
+<td class="comment-1" rowspan="1">Reload frame index (IY+8) for score table lookup.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b3f"></span>8B3F</td>
+<td class="instruction">LD HL,$B6B7</td>
+<td class="comment-1" rowspan="1">Search score-award table <a href="B6B7.html">score_award_frame_table</a> for this frame. Z=1 if found, DE=score delta.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b42"></span>8B42</td>
+<td class="instruction">CALL <a href="95B5.html">find_hit_section</a></td>
+<td class="comment-1" rowspan="1">Call <a href="95B5.html">find_hit_section</a> to search the table.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b45"></span>8B45</td>
+<td class="instruction">JR NZ,<a href="8ACB.html#8b5d">hit_processor_6</a></td>
+<td class="comment-1" rowspan="1">Frame not in score table - jump to sound dispatch.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b47"></span>8B47</td>
+<td class="instruction">LD A,IYl</td>
+<td class="comment-1" rowspan="1">A = attacker character type (IYl).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b49"></span>8B49</td>
+<td class="instruction">CP $59</td>
+<td class="comment-1" rowspan="1">Is attacker P1 (type 89)?</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b4b"></span>8B4B</td>
+<td class="instruction">JR Z,<a href="8ACB.html#8b56">hit_processor_5</a></td>
+<td class="comment-1" rowspan="1">Yes (P1) - jump to P1 score update at 35670.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b4d"></span>8B4D</td>
+<td class="instruction">LD HL,($B947)</td>
+<td class="comment-1" rowspan="1">P2 path: HL = P2 score buffer <a href="B947.html">p2_score</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b50"></span>8B50</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1">Add score delta DE to P2 score.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b51"></span>8B51</td>
+<td class="instruction">LD ($B947),HL</td>
+<td class="comment-1" rowspan="1">Write updated P2 score to <a href="B947.html">p2_score</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b54"></span>8B54</td>
+<td class="instruction">JR <a href="8ACB.html#8b5d">hit_processor_6</a></td>
+<td class="comment-1" rowspan="1">Jump to sound dispatch.</td>
+</tr>
+<tr>
+<td class="asm-label">hit_processor_5</td>
+<td class="address-2"><span id="8b56"></span>8B56</td>
+<td class="instruction">LD HL,($B945)</td>
+<td class="comment-1" rowspan="1">P1 path: HL = P1 score buffer <a href="B945.html">p1_score</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b59"></span>8B59</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1">Add score delta DE to P1 score.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b5a"></span>8B5A</td>
+<td class="instruction">LD ($B945),HL</td>
+<td class="comment-1" rowspan="1">Write updated P1 score to <a href="B945.html">p1_score</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">hit_processor_6</td>
+<td class="address-2"><span id="8b5d"></span>8B5D</td>
+<td class="instruction">XOR A</td>
+<td class="comment-1" rowspan="1">Clear pending event code in <a href="B6D3.html">pending_sound_index</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b5e"></span>8B5E</td>
+<td class="instruction">LD ($B6D3),A</td>
+<td class="comment-1" rowspan="1">Write 0 to <a href="B6D3.html">pending_sound_index</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b61"></span>8B61</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore event/sound index from stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b62"></span>8B62</td>
+<td class="instruction">CP $01</td>
+<td class="comment-1" rowspan="2">Sound 1 - kick <a href="9BF6.html#9bfc">sound_kick</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b64"></span>8B64</td>
+<td class="instruction">JP Z,<a href="9BF6.html#9bfc">sound_kick</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b67"></span>8B67</td>
+<td class="instruction">CP $02</td>
+<td class="comment-1" rowspan="2">Sound 2 - tackle <a href="9BF6.html">sound_tackle</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b69"></span>8B69</td>
+<td class="instruction">JP Z,<a href="9BF6.html">sound_tackle</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b6c"></span>8B6C</td>
+<td class="instruction">CP $03</td>
+<td class="comment-1" rowspan="2">Sound 3 - slash <a href="9BF6.html#9c02">sound_slash</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b6e"></span>8B6E</td>
+<td class="instruction">JP Z,<a href="9BF6.html#9c02">sound_slash</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b71"></span>8B71</td>
+<td class="instruction">CP $04</td>
+<td class="comment-1" rowspan="2">Sound 4 - head cut <a href="9BF6.html#9c08">sound_head_cut</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b73"></span>8B73</td>
+<td class="instruction">JP Z,<a href="9BF6.html#9c08">sound_head_cut</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b76"></span>8B76</td>
+<td class="instruction">CP $05</td>
+<td class="comment-1" rowspan="2">Sound 5 - guard 1 <a href="9BF6.html#9c0e">sound_guard_1</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b78"></span>8B78</td>
+<td class="instruction">JP Z,<a href="9BF6.html#9c0e">sound_guard_1</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b7b"></span>8B7B</td>
+<td class="instruction">CP $06</td>
+<td class="comment-1" rowspan="2">Sound 6 - guard 2 <a href="9BF6.html#9c14">sound_guard_2</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b7d"></span>8B7D</td>
+<td class="instruction">JP Z,<a href="9BF6.html#9c14">sound_guard_2</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8b80"></span>8B80</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="8ABA.html">8ABA</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#8acb">Map</a></td>
+<td class="next">
+Next: <a href="8B81.html">8B81</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/35531.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

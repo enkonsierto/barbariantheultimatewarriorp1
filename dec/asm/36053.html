@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 36053</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="36037.html">36037</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#36053">Map</a></td>
+<td class="next">
+Next: <a href="36063.html">36063</a>
+</td>
+</tr>
+</table>
+<div class="description">36053: Word index to address resolver.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Resolves a word index to its character data address from the string pointer table at <a href="48737.html">string_pointers_table</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="36053"></span>
+<div class="comments">
+<div class="paragraph">
+INPUT: A = word index. HL = VRAM address.
+</div>
+<div class="paragraph">
+OUTPUT: HL = VRAM address (preserved). DE = word data address. DESTROYS: None.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">word_addr_solver</td>
+<td class="address-2"><span id="36053"></span>36053</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Preserves the VRAM address.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36054"></span>36054</td>
+<td class="instruction">LD HL,48737</td>
+<td class="comment-1" rowspan="1">Loads the string pointer table base <a href="48737.html">string_pointers_table</a> into HL.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36057"></span>36057</td>
+<td class="instruction">CALL <a href="38304.html">solve_pointer</a></td>
+<td class="comment-1" rowspan="1">Resolves the pointer for index A via <a href="38304.html">solve_pointer</a>; result in HL.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36060"></span>36060</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="1">Recovers the VRAM address into DE.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36061"></span>36061</td>
+<td class="instruction">EX DE,HL</td>
+<td class="comment-1" rowspan="1">Swaps registers: HL=VRAM address, DE=word address.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36062"></span>36062</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="36037.html">36037</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#36053">Map</a></td>
+<td class="next">
+Next: <a href="36063.html">36063</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/8CD5.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 938C</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="9374.html">9374</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#938c">Map</a></td>
+<td class="next">
+Next: <a href="939F.html">939F</a>
+</td>
+</tr>
+</table>
+<div class="description">938C: Post-fight winner setup. (UNUSED)</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Sets the winner's energy bar to full, applies movement 35 (walk-out animation) via <a href="8FE6.html">set_char_moves</a>, and returns the mirror flag state in Z.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="938c"></span>
+<div class="comments">
+<div class="paragraph">
+Never executed in this version: the only callers are <a href="9352.html">p1_wins_seq</a> and <a href="9374.html">p2_wins_seq</a>, which invoke <a href="939F.html">p2_death_score_update</a> and <a href="93BB.html">p1_death_score_update</a> immediately before the CALL to this routine. Those routines always exit via JP or JR without returning, making this entire routine unreachable. Other versions of the game do execute it and display the walk-out animation.
+</div>
+<div class="paragraph">
+INPUT: IY = winning character state block.
+</div>
+<div class="paragraph">
+OUTPUT: Z set if IY+2 bit 0 is clear (not mirrored).
+</div>
+<div class="paragraph">
+DESTROYS AF.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">post_fight_setup</td>
+<td class="address-2"><span id="938c"></span>938C</td>
+<td class="instruction">LD A,$0D</td>
+<td class="comment-1" rowspan="1">Load the full energy value (13).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="938e"></span>938E</td>
+<td class="instruction">LD (IY+$07),A</td>
+<td class="comment-1" rowspan="1">Write it to the winner's energy display field.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9391"></span>9391</td>
+<td class="instruction">CALL <a href="99C7.html">energy_dec</a></td>
+<td class="comment-1" rowspan="1">Refresh the energy bar on screen immediately via <a href="99C7.html">energy_dec</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9394"></span>9394</td>
+<td class="instruction">LD A,$23</td>
+<td class="comment-1" rowspan="1">Select movement 35 - walk-out animation.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9396"></span>9396</td>
+<td class="instruction">CALL <a href="8FE6.html">set_char_moves</a></td>
+<td class="comment-1" rowspan="1">Apply movement 35 to the winner's state block via <a href="8FE6.html">set_char_moves</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9399"></span>9399</td>
+<td class="instruction">LD A,(IY+$02)</td>
+<td class="comment-1" rowspan="1">Fetch the winner's current orientation state.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="939c"></span>939C</td>
+<td class="instruction">BIT 0,A</td>
+<td class="comment-1" rowspan="1">Test mirror bit; Z set if not mirrored, Z clear if mirrored.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="939e"></span>939E</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return with Z reflecting the winner's orientation.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="9374.html">9374</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#938c">Map</a></td>
+<td class="next">
+Next: <a href="939F.html">939F</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/37772.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

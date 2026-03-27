@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Pokes</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Pokes">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Pokes</td>
+</tr>
+</table>
+<ul class="contents">
+<li><a href="#infiniteEnergy">Infinite Energy</a></li>
+</ul>
+<div><span id="infiniteEnergy"></span></div>
+<div class="box box-1">
+<div class="box-title">Infinite Energy</div>
+<div class="paragraph">
+Player 1 has infinite energy.
+</div>
+<div class="paragraph">
+POKE 36220 0 (<a href="../asm/8D74.html#8d7a">8D7A</a>): LD (99CB),A > LD (CB),A (tries to write in the ROM zone = does nothing).
+</div>
+<div class="paragraph">
+POKE 36516 0 (<a href="../asm/8E9C.html#8ea2">8EA2</a>): LD (99CB),A > LD (CB),A (tries to write in the ROM zone = does nothing).
+</div>
+<div class="paragraph">
+POKE 39371 200 (<a href="../asm/99C7.html#99cb">p1_energy_gate</a>): If the code was ever patched to NOP, this poke restores RET Z, so P1 never decrements its energy.
+</div>
+<div class="paragraph">
+Those pokes avoid the self-modify patch that enables the P1 depletion.
+</div>
+</div>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/reference/pokes.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

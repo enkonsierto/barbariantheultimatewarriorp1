@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at 44501</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="44421.html">44421</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#44501">Map</a></td>
+<td class="next">
+Next: <a href="44755.html">44755</a>
+</td>
+</tr>
+</table>
+<div class="description">44501: Frame sequences (animation data)</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+One entry per movement ID. Each sequence is a list of frame indices into <a href="44189.html">barb_ptr_table</a> Barbarian sprite pointer table, terminated by a sentinel byte.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="44501"></span>
+<div class="comments">
+<div class="paragraph">
+Note: Drax sprites and animations are present in the data but are never triggered in the 2 Players version of the game.
+</div>
+<div class="paragraph">
+Terminators:
+</div>
+<div class="paragraph">
+253 - LOOP: on the last frame, jump back to the first frame of the sequence.
+</div>
+<div class="paragraph">
+254 - HOLD: freeze animation advance; the game logic determines when to proceed to the next frame.
+</div>
+<div class="paragraph">
+255 - CHAIN: end this sequence and chain into another; the following byte specifies the target movement ID.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">frame_seq</td>
+<td class="address-1"><span id="44501"></span>44501</td>
+<td class="instruction">DEFB 0,0,0,0,0,0,0,0</td>
+<td class="comment-1" rowspan="3"><span>0 Idle</br><img src="../../assets/sprites/000.png" alt="sprites/000.png" style="width:10%"/><img src="../../assets/sprites/082.png" alt="sprites/082.png" style="width:10%"/><img src="../../assets/sprites/083.png" alt="sprites/083.png" style="width:10%"/><img src="../../assets/sprites/084.png" alt="sprites/084.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44509"></span>44509</td>
+<td class="instruction">DEFB 0,0,0,0,0,82,83,84</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44517"></span>44517</td>
+<td class="instruction">DEFB 83,84,83,84,253</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44522"></span>44522</td>
+<td class="instruction">DEFB 1,2,3,51,253</td>
+<td class="comment-1" rowspan="1"><span>1 Walk forward</br><img src="../../assets/sprites/001.png" alt="sprites/001.png" style="width:10%"/><img src="../../assets/sprites/002.png" alt="sprites/002.png" style="width:10%"/><img src="../../assets/sprites/003.png" alt="sprites/003.png" style="width:10%"/><img src="../../assets/sprites/051.png" alt="sprites/051.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44527"></span>44527</td>
+<td class="instruction">DEFB 55,54,53,52,253</td>
+<td class="comment-1" rowspan="1"><span>2 Walk backward</br><img src="../../assets/sprites/055.png" alt="sprites/055.png" style="width:10%"/><img src="../../assets/sprites/054.png" alt="sprites/054.png" style="width:10%"/><img src="../../assets/sprites/053.png" alt="sprites/053.png" style="width:10%"/><img src="../../assets/sprites/052.png" alt="sprites/052.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44532"></span>44532</td>
+<td class="instruction">DEFB 4,5,6,7,253</td>
+<td class="comment-1" rowspan="1"><span>3 Sword Spin</br><img src="../../assets/sprites/004.png" alt="sprites/004.png" style="width:10%"/><img src="../../assets/sprites/005.png" alt="sprites/005.png" style="width:10%"/><img src="../../assets/sprites/006.png" alt="sprites/006.png" style="width:10%"/><img src="../../assets/sprites/007.png" alt="sprites/007.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44537"></span>44537</td>
+<td class="instruction">DEFB 8,9,56,0,253</td>
+<td class="comment-1" rowspan="1"><span>4 Jump</br><img src="../../assets/sprites/008.png" alt="sprites/008.png" style="width:10%"/><img src="../../assets/sprites/009.png" alt="sprites/009.png" style="width:10%"/><img src="../../assets/sprites/056.png" alt="sprites/056.png" style="width:10%"/><img src="../../assets/sprites/000.png" alt="sprites/000.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44542"></span>44542</td>
+<td class="instruction">DEFB 10,11,12,96,57,253</td>
+<td class="comment-1" rowspan="1"><span>5 Crouch Slash</br><img src="../../assets/sprites/010.png" alt="sprites/010.png" style="width:10%"/><img src="../../assets/sprites/011.png" alt="sprites/011.png" style="width:10%"/><img src="../../assets/sprites/012.png" alt="sprites/012.png" style="width:10%"/><img src="../../assets/sprites/096.png" alt="sprites/096.png" style="width:10%"/><img src="../../assets/sprites/057.png" alt="sprites/057.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44548"></span>44548</td>
+<td class="instruction">DEFB 58,254</td>
+<td class="comment-1" rowspan="1"><span>6 Crouch</br><img src="../../assets/sprites/058.png" alt="sprites/058.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44550"></span>44550</td>
+<td class="instruction">DEFB 14,15,16,25,26,69,25,253</td>
+<td class="comment-1" rowspan="1"><span>7 Headcut movement</br><img src="../../assets/sprites/014.png" alt="sprites/014.png" style="width:10%"/><img src="../../assets/sprites/015.png" alt="sprites/015.png" style="width:10%"/><img src="../../assets/sprites/016.png" alt="sprites/016.png" style="width:10%"/><img src="../../assets/sprites/025.png" alt="sprites/025.png" style="width:10%"/><img src="../../assets/sprites/026.png" alt="sprites/026.png" style="width:10%"/><img src="../../assets/sprites/069.png" alt="sprites/069.png" style="width:10%"/><img src="../../assets/sprites/025.png" alt="sprites/025.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44558"></span>44558</td>
+<td class="instruction">DEFB 17,17,17,18,18,18,19,20</td>
+<td class="comment-1" rowspan="2"><span>8 Death animation (head cutted)</br><img src="../../assets/sprites/017.png" alt="sprites/017.png" style="width:10%"/><img src="../../assets/sprites/017.png" alt="sprites/017.png" style="width:10%"/><img src="../../assets/sprites/017.png" alt="sprites/017.png" style="width:10%"/><img src="../../assets/sprites/018.png" alt="sprites/018.png" style="width:10%"/><img src="../../assets/sprites/018.png" alt="sprites/018.png" style="width:10%"/><img src="../../assets/sprites/018.png" alt="sprites/018.png" style="width:10%"/><img src="../../assets/sprites/019.png" alt="sprites/019.png" style="width:10%"/><img src="../../assets/sprites/020.png" alt="sprites/020.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44566"></span>44566</td>
+<td class="instruction">DEFB 254</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44567"></span>44567</td>
+<td class="instruction">DEFB 85,22,23,61,68,253</td>
+<td class="comment-1" rowspan="1"><span>9 Forward Slash</br><img src="../../assets/sprites/085.png" alt="sprites/085.png" style="width:10%"/><img src="../../assets/sprites/022.png" alt="sprites/022.png" style="width:10%"/><img src="../../assets/sprites/023.png" alt="sprites/023.png" style="width:10%"/><img src="../../assets/sprites/061.png" alt="sprites/061.png" style="width:10%"/><img src="../../assets/sprites/068.png" alt="sprites/068.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44573"></span>44573</td>
+<td class="instruction">DEFB 63,24,254</td>
+<td class="comment-1" rowspan="1"><span>10 Guard 1</br><img src="../../assets/sprites/063.png" alt="sprites/063.png" style="width:10%"/><img src="../../assets/sprites/024.png" alt="sprites/024.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44576"></span>44576</td>
+<td class="instruction">DEFB 65,66,67,69,60,253</td>
+<td class="comment-1" rowspan="1"><span>11 Top front Slash</br><img src="../../assets/sprites/065.png" alt="sprites/065.png" style="width:10%"/><img src="../../assets/sprites/066.png" alt="sprites/066.png" style="width:10%"/><img src="../../assets/sprites/067.png" alt="sprites/067.png" style="width:10%"/><img src="../../assets/sprites/069.png" alt="sprites/069.png" style="width:10%"/><img src="../../assets/sprites/060.png" alt="sprites/060.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44582"></span>44582</td>
+<td class="instruction">DEFB 27,28,70,0,253</td>
+<td class="comment-1" rowspan="1"><span>12 Kick</br><img src="../../assets/sprites/027.png" alt="sprites/027.png" style="width:10%"/><img src="../../assets/sprites/028.png" alt="sprites/028.png" style="width:10%"/><img src="../../assets/sprites/070.png" alt="sprites/070.png" style="width:10%"/><img src="../../assets/sprites/000.png" alt="sprites/000.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44587"></span>44587</td>
+<td class="instruction">DEFB 29,30,0,254</td>
+<td class="comment-1" rowspan="1"><span>13 Damage received</br><img src="../../assets/sprites/029.png" alt="sprites/029.png" style="width:10%"/><img src="../../assets/sprites/030.png" alt="sprites/030.png" style="width:10%"/><img src="../../assets/sprites/000.png" alt="sprites/000.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44591"></span>44591</td>
+<td class="instruction">DEFB 88,31,32,73,72,253</td>
+<td class="comment-1" rowspan="1"><span>14 Overhead slash</br><img src="../../assets/sprites/088.png" alt="sprites/088.png" style="width:10%"/><img src="../../assets/sprites/031.png" alt="sprites/031.png" style="width:10%"/><img src="../../assets/sprites/032.png" alt="sprites/032.png" style="width:10%"/><img src="../../assets/sprites/073.png" alt="sprites/073.png" style="width:10%"/><img src="../../assets/sprites/072.png" alt="sprites/072.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44597"></span>44597</td>
+<td class="instruction">DEFB 50,34,74,253</td>
+<td class="comment-1" rowspan="1"><span>15 Headbutt</br><img src="../../assets/sprites/050.png" alt="sprites/050.png" style="width:10%"/><img src="../../assets/sprites/034.png" alt="sprites/034.png" style="width:10%"/><img src="../../assets/sprites/074.png" alt="sprites/074.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44601"></span>44601</td>
+<td class="instruction">DEFB 80,75,81,254</td>
+<td class="comment-1" rowspan="1"><span>16 Guard 2</br><img src="../../assets/sprites/080.png" alt="sprites/080.png" style="width:10%"/><img src="../../assets/sprites/075.png" alt="sprites/075.png" style="width:10%"/><img src="../../assets/sprites/081.png" alt="sprites/081.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44605"></span>44605</td>
+<td class="instruction">DEFB 35,36,37,38,253</td>
+<td class="comment-1" rowspan="1"><span>17 Roll Forward</br><img src="../../assets/sprites/035.png" alt="sprites/035.png" style="width:10%"/><img src="../../assets/sprites/036.png" alt="sprites/036.png" style="width:10%"/><img src="../../assets/sprites/037.png" alt="sprites/037.png" style="width:10%"/><img src="../../assets/sprites/038.png" alt="sprites/038.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44610"></span>44610</td>
+<td class="instruction">DEFB 41,43,44,45,253</td>
+<td class="comment-1" rowspan="1"><span>18 Roll Backward</br><img src="../../assets/sprites/041.png" alt="sprites/041.png" style="width:10%"/><img src="../../assets/sprites/043.png" alt="sprites/043.png" style="width:10%"/><img src="../../assets/sprites/044.png" alt="sprites/044.png" style="width:10%"/><img src="../../assets/sprites/045.png" alt="sprites/045.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44615"></span>44615</td>
+<td class="instruction">DEFB 0,47,47,48,49,49,49,49</td>
+<td class="comment-1" rowspan="2"><span>19 Victory</br><img src="../../assets/sprites/000.png" alt="sprites/000.png" style="width:10%"/><img src="../../assets/sprites/047.png" alt="sprites/047.png" style="width:10%"/><img src="../../assets/sprites/047.png" alt="sprites/047.png" style="width:10%"/><img src="../../assets/sprites/048.png" alt="sprites/048.png" style="width:10%"/><img src="../../assets/sprites/049.png" alt="sprites/049.png" style="width:10%"/><img src="../../assets/sprites/049.png" alt="sprites/049.png" style="width:10%"/><img src="../../assets/sprites/049.png" alt="sprites/049.png" style="width:10%"/><img src="../../assets/sprites/049.png" alt="sprites/049.png" style="width:10%"/><img src="../../assets/sprites/049.png" alt="sprites/049.png" style="width:10%"/><img src="../../assets/sprites/048.png" alt="sprites/048.png" style="width:10%"/><img src="../../assets/sprites/047.png" alt="sprites/047.png" style="width:10%"/><img src="../../assets/sprites/047.png" alt="sprites/047.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44623"></span>44623</td>
+<td class="instruction">DEFB 49,48,47,47,254</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44628"></span>44628</td>
+<td class="instruction">DEFB 59,253</td>
+<td class="comment-1" rowspan="1"><span>20 Crouching</br><img src="../../assets/sprites/059.png" alt="sprites/059.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44630"></span>44630</td>
+<td class="instruction">DEFB 62,253</td>
+<td class="comment-1" rowspan="1"><span>21 Crouch Strike</br><img src="../../assets/sprites/062.png" alt="sprites/062.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44632"></span>44632</td>
+<td class="instruction">DEFB 64,253</td>
+<td class="comment-1" rowspan="1"><span>22 Guard 2</br><img src="../../assets/sprites/064.png" alt="sprites/064.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44634"></span>44634</td>
+<td class="instruction">DEFB 13,253</td>
+<td class="comment-1" rowspan="1"><span>23 Crouching</br><img src="../../assets/sprites/013.png" alt="sprites/013.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44636"></span>44636</td>
+<td class="instruction">DEFB 40,253</td>
+<td class="comment-1" rowspan="1"><span>24 Roll Backward</br><img src="../../assets/sprites/040.png" alt="sprites/040.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44638"></span>44638</td>
+<td class="instruction">DEFB 76,77,78,79,254</td>
+<td class="comment-1" rowspan="1"><span>25 Fall</br><img src="../../assets/sprites/076.png" alt="sprites/076.png" style="width:10%"/><img src="../../assets/sprites/077.png" alt="sprites/077.png" style="width:10%"/><img src="../../assets/sprites/078.png" alt="sprites/078.png" style="width:10%"/><img src="../../assets/sprites/079.png" alt="sprites/079.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44643"></span>44643</td>
+<td class="instruction">DEFB 21,21,95,254</td>
+<td class="comment-1" rowspan="1"><span>26 Drax (Spells)</br><img src="../../assets/sprites/021.png" alt="sprites/021.png" style="width:10%"/><img src="../../assets/sprites/021.png" alt="sprites/021.png" style="width:10%"/><img src="../../assets/sprites/095.png" alt="sprites/095.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44647"></span>44647</td>
+<td class="instruction">DEFB 80,13,86,86,86,86,86,87</td>
+<td class="comment-1" rowspan="2"><span>27 Death</br><img src="../../assets/sprites/080.png" alt="sprites/080.png" style="width:10%"/><img src="../../assets/sprites/013.png" alt="sprites/013.png" style="width:10%"/><img src="../../assets/sprites/086.png" alt="sprites/086.png" style="width:10%"/><img src="../../assets/sprites/086.png" alt="sprites/086.png" style="width:10%"/><img src="../../assets/sprites/086.png" alt="sprites/086.png" style="width:10%"/><img src="../../assets/sprites/086.png" alt="sprites/086.png" style="width:10%"/><img src="../../assets/sprites/086.png" alt="sprites/086.png" style="width:10%"/><img src="../../assets/sprites/087.png" alt="sprites/087.png" style="width:10%"/><img src="../../assets/sprites/090.png" alt="sprites/090.png" style="width:10%"/><img src="../../assets/sprites/090.png" alt="sprites/090.png" style="width:10%"/><img src="../../assets/sprites/033.png" alt="sprites/033.png" style="width:10%"/><img src="../../assets/sprites/089.png" alt="sprites/089.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44655"></span>44655</td>
+<td class="instruction">DEFB 90,90,33,89,254</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44660"></span>44660</td>
+<td class="instruction">DEFB 91,91,91,91,92,93,1,2</td>
+<td class="comment-1" rowspan="2"><span>28 Enter the arena</br><img src="../../assets/sprites/091.png" alt="sprites/091.png" style="width:10%"/><img src="../../assets/sprites/091.png" alt="sprites/091.png" style="width:10%"/><img src="../../assets/sprites/091.png" alt="sprites/091.png" style="width:10%"/><img src="../../assets/sprites/091.png" alt="sprites/091.png" style="width:10%"/><img src="../../assets/sprites/092.png" alt="sprites/092.png" style="width:10%"/><img src="../../assets/sprites/093.png" alt="sprites/093.png" style="width:10%"/><img src="../../assets/sprites/001.png" alt="sprites/001.png" style="width:10%"/><img src="../../assets/sprites/002.png" alt="sprites/002.png" style="width:10%"/><img src="../../assets/sprites/003.png" alt="sprites/003.png" style="width:10%"/><img src="../../assets/sprites/051.png" alt="sprites/051.png" style="width:10%"/><img src="../../assets/sprites/001.png" alt="sprites/001.png" style="width:10%"/><img src="../../assets/sprites/002.png" alt="sprites/002.png" style="width:10%"/><img src="../../assets/sprites/003.png" alt="sprites/003.png" style="width:10%"/><img src="../../assets/sprites/000.png" alt="sprites/000.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44668"></span>44668</td>
+<td class="instruction">DEFB 3,51,1,2,3,255,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44675"></span>44675</td>
+<td class="instruction">DEFB 100,100,101,101,102,102,102,254</td>
+<td class="comment-1" rowspan="1"><span>29 Body dragged to the left (head off)</br><img src="../../assets/sprites/100.png" alt="sprites/100.png" style="width:10%"/><img src="../../assets/sprites/100.png" alt="sprites/100.png" style="width:10%"/><img src="../../assets/sprites/101.png" alt="sprites/101.png" style="width:10%"/><img src="../../assets/sprites/101.png" alt="sprites/101.png" style="width:10%"/><img src="../../assets/sprites/102.png" alt="sprites/102.png" style="width:10%"/><img src="../../assets/sprites/102.png" alt="sprites/102.png" style="width:10%"/><img src="../../assets/sprites/102.png" alt="sprites/102.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44683"></span>44683</td>
+<td class="instruction">DEFB 110,111,253</td>
+<td class="comment-1" rowspan="1"><span>30 Goblin</br><img src="../../assets/sprites/110.png" alt="sprites/110.png" style="width:10%"/><img src="../../assets/sprites/111.png" alt="sprites/111.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44686"></span>44686</td>
+<td class="instruction">DEFB 100,100,103,103,104,104,104,254</td>
+<td class="comment-1" rowspan="1"><span>31 Body dragged to the right (head off)</br><img src="../../assets/sprites/100.png" alt="sprites/100.png" style="width:10%"/><img src="../../assets/sprites/100.png" alt="sprites/100.png" style="width:10%"/><img src="../../assets/sprites/103.png" alt="sprites/103.png" style="width:10%"/><img src="../../assets/sprites/103.png" alt="sprites/103.png" style="width:10%"/><img src="../../assets/sprites/104.png" alt="sprites/104.png" style="width:10%"/><img src="../../assets/sprites/104.png" alt="sprites/104.png" style="width:10%"/><img src="../../assets/sprites/104.png" alt="sprites/104.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44694"></span>44694</td>
+<td class="instruction">DEFB 105,105,106,106,107,107,107,254</td>
+<td class="comment-1" rowspan="1"><span>32 Body dragged to the left</br><img src="../../assets/sprites/105.png" alt="sprites/105.png" style="width:10%"/><img src="../../assets/sprites/105.png" alt="sprites/105.png" style="width:10%"/><img src="../../assets/sprites/106.png" alt="sprites/106.png" style="width:10%"/><img src="../../assets/sprites/106.png" alt="sprites/106.png" style="width:10%"/><img src="../../assets/sprites/107.png" alt="sprites/107.png" style="width:10%"/><img src="../../assets/sprites/107.png" alt="sprites/107.png" style="width:10%"/><img src="../../assets/sprites/107.png" alt="sprites/107.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44702"></span>44702</td>
+<td class="instruction">DEFB 105,105,108,108,109,109,109,254</td>
+<td class="comment-1" rowspan="1"><span>33 Body dragged to the right</br><img src="../../assets/sprites/105.png" alt="sprites/105.png" style="width:10%"/><img src="../../assets/sprites/105.png" alt="sprites/105.png" style="width:10%"/><img src="../../assets/sprites/108.png" alt="sprites/108.png" style="width:10%"/><img src="../../assets/sprites/108.png" alt="sprites/108.png" style="width:10%"/><img src="../../assets/sprites/109.png" alt="sprites/109.png" style="width:10%"/><img src="../../assets/sprites/109.png" alt="sprites/109.png" style="width:10%"/><img src="../../assets/sprites/109.png" alt="sprites/109.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44710"></span>44710</td>
+<td class="instruction">DEFB 0,94,15,16,254</td>
+<td class="comment-1" rowspan="1"><span>34 Change side</br><img src="../../assets/sprites/000.png" alt="sprites/000.png" style="width:10%"/><img src="../../assets/sprites/094.png" alt="sprites/094.png" style="width:10%"/><img src="../../assets/sprites/015.png" alt="sprites/015.png" style="width:10%"/><img src="../../assets/sprites/016.png" alt="sprites/016.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44715"></span>44715</td>
+<td class="instruction">DEFB 52,97,98,99,52,97,98,99</td>
+<td class="comment-1" rowspan="2"><span>35 Walk Backwards/Exit the arena (Unused)</br><img src="../../assets/sprites/052.png" alt="sprites/052.png" style="width:10%"/><img src="../../assets/sprites/097.png" alt="sprites/097.png" style="width:10%"/><img src="../../assets/sprites/098.png" alt="sprites/098.png" style="width:10%"/><img src="../../assets/sprites/099.png" alt="sprites/099.png" style="width:10%"/><img src="../../assets/sprites/052.png" alt="sprites/052.png" style="width:10%"/><img src="../../assets/sprites/097.png" alt="sprites/097.png" style="width:10%"/><img src="../../assets/sprites/098.png" alt="sprites/098.png" style="width:10%"/><img src="../../assets/sprites/099.png" alt="sprites/099.png" style="width:10%"/><img src="../../assets/sprites/052.png" alt="sprites/052.png" style="width:10%"/><img src="../../assets/sprites/097.png" alt="sprites/097.png" style="width:10%"/><img src="../../assets/sprites/000.png" alt="sprites/000.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44723"></span>44723</td>
+<td class="instruction">DEFB 52,97,255,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44727"></span>44727</td>
+<td class="instruction">DEFB 14,15,16,0,52,97,27,28</td>
+<td class="comment-1" rowspan="2"><span>36 Win sequence</br><img src="../../assets/sprites/014.png" alt="sprites/014.png" style="width:10%"/><img src="../../assets/sprites/015.png" alt="sprites/015.png" style="width:10%"/><img src="../../assets/sprites/016.png" alt="sprites/016.png" style="width:10%"/><img src="../../assets/sprites/000.png" alt="sprites/000.png" style="width:10%"/><img src="../../assets/sprites/052.png" alt="sprites/052.png" style="width:10%"/><img src="../../assets/sprites/097.png" alt="sprites/097.png" style="width:10%"/><img src="../../assets/sprites/027.png" alt="sprites/027.png" style="width:10%"/><img src="../../assets/sprites/028.png" alt="sprites/028.png" style="width:10%"/><img src="../../assets/sprites/070.png" alt="sprites/070.png" style="width:10%"/><img src="../../assets/sprites/000.png" alt="sprites/000.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44735"></span>44735</td>
+<td class="instruction">DEFB 70,0,254</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44738"></span>44738</td>
+<td class="instruction">DEFB 0,254</td>
+<td class="comment-1" rowspan="1"><span>37 Stand</br><img src="../../assets/sprites/000.png" alt="sprites/000.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44740"></span>44740</td>
+<td class="instruction">DEFB 95,95,112,112,112,112,113,113</td>
+<td class="comment-1" rowspan="2"><span>38 Drax (Death)</br><img src="../../assets/sprites/095.png" alt="sprites/095.png" style="width:10%"/><img src="../../assets/sprites/095.png" alt="sprites/095.png" style="width:10%"/><img src="../../assets/sprites/112.png" alt="sprites/112.png" style="width:10%"/><img src="../../assets/sprites/112.png" alt="sprites/112.png" style="width:10%"/><img src="../../assets/sprites/112.png" alt="sprites/112.png" style="width:10%"/><img src="../../assets/sprites/112.png" alt="sprites/112.png" style="width:10%"/><img src="../../assets/sprites/113.png" alt="sprites/113.png" style="width:10%"/><img src="../../assets/sprites/113.png" alt="sprites/113.png" style="width:10%"/><img src="../../assets/sprites/113.png" alt="sprites/113.png" style="width:10%"/><img src="../../assets/sprites/113.png" alt="sprites/113.png" style="width:10%"/><img src="../../assets/sprites/114.png" alt="sprites/114.png" style="width:10%"/><img src="../../assets/sprites/115.png" alt="sprites/115.png" style="width:10%"/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44748"></span>44748</td>
+<td class="instruction">DEFB 113,113,114,115,254</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="44753"></span>44753</td>
+<td class="instruction">DEFB 47,254</td>
+<td class="comment-1" rowspan="1"><span>39 End game</br><img src="../../assets/sprites/047.png" alt="sprites/047.png" style="width:10%"/></td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="44421.html">44421</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#44501">Map</a></td>
+<td class="next">
+Next: <a href="44755.html">44755</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/ADD5.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

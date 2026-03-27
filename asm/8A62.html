@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 8A62</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="8A56.html">8A56</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#8a62">Map</a></td>
+<td class="next">
+Next: <a href="8A7A.html">8A7A</a>
+</td>
+</tr>
+</table>
+<div class="description">8A62: Score display updater.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Redraws the 5-digit score for one player to the HUD.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="8a62"></span>
+<div class="comments">
+<div class="paragraph">
+Called every frame from the game loop and once at initialisation via <a href="89A8.html">entry_point</a>.
+</div>
+<div class="paragraph">
+Entry at <a href="8A62.html">paint_score</a> targets Player 1; entry at <a href="8A62.html#8a6b">paint_score_0</a> targets Player 2.
+</div>
+<div class="paragraph">
+INPUT: None. OUTPUT: None. DESTROYS: AF, BC, DE, HL, IX and shadow registers.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">paint_score</td>
+<td class="address-2"><span id="8a62"></span>8A62</td>
+<td class="instruction">LD HL,$40A9</td>
+<td class="comment-1" rowspan="1">Sets HL to the Player 1 score HUD tile address.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8a65"></span>8A65</td>
+<td class="instruction">LD DE,($B945)</td>
+<td class="comment-1" rowspan="1">Loads the Player 1 score value address into DE.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8a69"></span>8A69</td>
+<td class="instruction">JR <a href="8A62.html#8a72">paint_score_1</a></td>
+<td class="comment-1" rowspan="1">Jumps to the shared print path.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="8a6b"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point updates the Player 2 score.
+</div>
+<div class="paragraph">
+Used by the routines at <a href="89A8.html">entry_point</a> and <a href="93BB.html">p1_death_score_update</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">paint_score_0</td>
+<td class="address-2"><span id="8a6b"></span>8A6B</td>
+<td class="instruction">LD HL,$40B2</td>
+<td class="comment-1" rowspan="1">First tile address of the Player 2 score HUD.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8a6e"></span>8A6E</td>
+<td class="instruction">LD DE,($B947)</td>
+<td class="comment-1" rowspan="1">VRAM destination for Player 2 score R47431.</td>
+</tr>
+<tr>
+<td class="asm-label">paint_score_1</td>
+<td class="address-2"><span id="8a72"></span>8A72</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Preserves A.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8a73"></span>8A73</td>
+<td class="instruction">LD B,$05</td>
+<td class="comment-1" rowspan="1">Sets digit count to 5.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8a75"></span>8A75</td>
+<td class="instruction">CALL <a href="8CDF.html">print_dec_number</a></td>
+<td class="comment-1" rowspan="1">Converts and draws the score via <a href="8CDF.html">print_dec_number</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8a78"></span>8A78</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restores A.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8a79"></span>8A79</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="8A56.html">8A56</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#8a62">Map</a></td>
+<td class="next">
+Next: <a href="8A7A.html">8A7A</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/35426.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

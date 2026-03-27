@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 9C20</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="9BF6.html">9BF6</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#9c20">Map</a></td>
+<td class="next">
+Next: <a href="9C8D.html">9C8D</a>
+</td>
+</tr>
+</table>
+<div class="description">9C20: Tackle cross-side animation controller.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="89A8.html">entry_point</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="9c20"></span>
+<div class="comments">
+<div class="paragraph">
+Two-phase sequencer for roll/jump-over side-swap. Triggered by <a href="986C.html">x_update_and_tackle_gate</a> when one fighter rolls (mv17 frame 38) while the other jumps over (frames 8-9).
+</div>
+<div class="paragraph">
+Gated by <a href="B973.html">frame_counter_hit</a> (3-frame cycle via <a href="9C9C.html">frame_counter_hit_inc</a>) and <a href="B9D7.html">tackle_overlap_flag</a> (phase selector).
+</div>
+<div class="paragraph">
+Phase 1 (<a href="B9D7.html">tackle_overlap_flag</a>=1): apply mv34 (changeside) to both, advance to phase 2.
+</div>
+<div class="paragraph">
+Phase 2 (<a href="B9D7.html">tackle_overlap_flag</a>=2): wait for mid-swap frame (P1 IY+8=16), apply mv0 + mirror flip + X correction (+-2 tiles).
+</div>
+<div class="paragraph">
+Called pre-HALT at <a href="89A8.html#89fd">89FD</a>; reads <a href="B973.html">frame_counter_hit</a> set by previous frame's <a href="9C9C.html">frame_counter_hit_inc</a> (post-HALT).
+</div>
+<div class="paragraph">
+INPUT: None. OUTPUT: None. DESTROYS: AF, BC, DE, HL, IY.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">tackle_side_swap</td>
+<td class="address-2"><span id="9c20"></span>9C20</td>
+<td class="instruction">LD A,($B973)</td>
+<td class="comment-1" rowspan="6">Guard: return if <a href="B973.html">frame_counter_hit</a> != 0 (skip frames 1-2) or <a href="B9D7.html">tackle_overlap_flag</a> == 0 (not active).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c23"></span>9C23</td>
+<td class="instruction">OR A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c24"></span>9C24</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c25"></span>9C25</td>
+<td class="instruction">LD A,($B9D7)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c28"></span>9C28</td>
+<td class="instruction">OR A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c29"></span>9C29</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c2a"></span>9C2A</td>
+<td class="instruction">CP $02</td>
+<td class="comment-1" rowspan="2">Test phase selector <a href="B9D7.html">tackle_overlap_flag</a>: phase 2 jumps to <a href="9C20.html#9c55">tackle_side_swap_1</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c2c"></span>9C2C</td>
+<td class="instruction">JR Z,<a href="9C20.html#9c55">tackle_side_swap_1</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="9c2e"></span>
+<div class="comments">
+<div class="paragraph">
+Phase 1: scan for roll-complete frame (mv17 frame 38).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c2e"></span>9C2E</td>
+<td class="instruction">LD A,($B561)</td>
+<td class="comment-1" rowspan="3">Check P1 frame index <a href="B559.html#b561">p1_frame_index</a> == 38; jump if match.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c31"></span>9C31</td>
+<td class="instruction">CP $26</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c33"></span>9C33</td>
+<td class="instruction">JR Z,<a href="9C20.html#9c3d">tackle_side_swap_0</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c35"></span>9C35</td>
+<td class="instruction">LD A,($B56A)</td>
+<td class="comment-1" rowspan="2">Check P2 frame index <a href="B562.html#b56a">p2_frame_index</a> == 38; jump if match.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c38"></span>9C38</td>
+<td class="instruction">CP $26</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c3a"></span>9C3A</td>
+<td class="instruction">JR Z,<a href="9C20.html#9c3d">tackle_side_swap_0</a></td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c3c"></span>9C3C</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label">tackle_side_swap_0</td>
+<td class="address-2"><span id="9c3d"></span>9C3D</td>
+<td class="instruction">LD A,$22</td>
+<td class="comment-1" rowspan="9">Apply mv34 (changeside) to P1 then P2 via <a href="8FE6.html">set_char_moves</a>; set <a href="B9D7.html">tackle_overlap_flag</a>=2 (phase 2).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c3f"></span>9C3F</td>
+<td class="instruction">LD IY,$B559</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c43"></span>9C43</td>
+<td class="instruction">CALL <a href="8FE6.html">set_char_moves</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c46"></span>9C46</td>
+<td class="instruction">LD A,$22</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c48"></span>9C48</td>
+<td class="instruction">LD IY,$B562</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c4c"></span>9C4C</td>
+<td class="instruction">CALL <a href="8FE6.html">set_char_moves</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c4f"></span>9C4F</td>
+<td class="instruction">LD A,$02</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c51"></span>9C51</td>
+<td class="instruction">LD ($B9D7),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c54"></span>9C54</td>
+<td class="instruction">RET</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="9c55"></span>
+<div class="comments">
+<div class="paragraph">
+Phase 2: wait for mid-swap sync.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">tackle_side_swap_1</td>
+<td class="address-2"><span id="9c55"></span>9C55</td>
+<td class="instruction">LD A,($B561)</td>
+<td class="comment-1" rowspan="3">Guard: return unless P1 frame index <a href="B559.html#b561">p1_frame_index</a> == 16 (mid-changeside).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c58"></span>9C58</td>
+<td class="instruction">CP $10</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c5a"></span>9C5A</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c5b"></span>9C5B</td>
+<td class="instruction">XOR A</td>
+<td class="comment-1" rowspan="4">Clear <a href="B9D7.html">tackle_overlap_flag</a>; IY = P1 block <a href="B559.html">p1_controller_type</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c5c"></span>9C5C</td>
+<td class="instruction">LD ($B9D7),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c5f"></span>9C5F</td>
+<td class="instruction">LD IY,$B559</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c63"></span>9C63</td>
+<td class="instruction">BIT 0,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c65"></span>9C65</td>
+<td class="instruction">CALL <a href="9C8D.html">stop_mov_and_mirror</a></td>
+<td class="comment-1" rowspan="1">Call <a href="9C8D.html">stop_mov_and_mirror</a> (mv0 + mirror flip); Z/NZ selects X correction.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c68"></span>9C68</td>
+<td class="instruction">CALL Z,<a href="9C20.html#9c82">tackle_side_swap_3</a></td>
+<td class="comment-1" rowspan="1">Z set (now facing right): IY+3 += 2.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c6b"></span>9C6B</td>
+<td class="instruction">CALL NZ,<a href="9C20.html#9c77">tackle_side_swap_2</a></td>
+<td class="comment-1" rowspan="1">NZ clear (now facing left): IY+3 -= 2.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c6e"></span>9C6E</td>
+<td class="instruction">LD IY,$B562</td>
+<td class="comment-1" rowspan="1">IY = P2 block <a href="B562.html">p2_controller_type</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c72"></span>9C72</td>
+<td class="instruction">CALL <a href="9C8D.html">stop_mov_and_mirror</a></td>
+<td class="comment-1" rowspan="1">Call <a href="9C8D.html">stop_mov_and_mirror</a> for P2.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c75"></span>9C75</td>
+<td class="instruction">JR Z,<a href="9C20.html#9c82">tackle_side_swap_3</a></td>
+<td class="comment-1" rowspan="1">Z set (P2 now right): IY+3 += 2.</td>
+</tr>
+<tr>
+<td class="asm-label">tackle_side_swap_2</td>
+<td class="address-2"><span id="9c77"></span>9C77</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="6">NZ clear (P2 now left): IY+3 -= 2 (move character 2 tiles left after swap).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c78"></span>9C78</td>
+<td class="instruction">LD A,(IY+$03)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c7b"></span>9C7B</td>
+<td class="instruction">SUB $02</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c7d"></span>9C7D</td>
+<td class="instruction">LD (IY+$03),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c80"></span>9C80</td>
+<td class="instruction">POP AF</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c81"></span>9C81</td>
+<td class="instruction">RET</td>
+</tr>
+<tr>
+<td class="asm-label">tackle_side_swap_3</td>
+<td class="address-2"><span id="9c82"></span>9C82</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="6">Z set (P2 now right): IY+3 += 2 (move character 2 tiles right after swap).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c83"></span>9C83</td>
+<td class="instruction">LD A,(IY+$03)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c86"></span>9C86</td>
+<td class="instruction">ADD A,$02</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c88"></span>9C88</td>
+<td class="instruction">LD (IY+$03),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c8b"></span>9C8B</td>
+<td class="instruction">POP AF</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c8c"></span>9C8C</td>
+<td class="instruction">RET</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="9BF6.html">9BF6</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#9c20">Map</a></td>
+<td class="next">
+Next: <a href="9C8D.html">9C8D</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/39968.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

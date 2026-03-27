@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 978C</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="9786.html">9786</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#978c">Map</a></td>
+<td class="next">
+Next: <a href="979B.html">979B</a>
+</td>
+</tr>
+</table>
+<div class="description">978C: Clear all 28 tiles of one game-window row to black.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="972B.html">sweep_transition</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="978c"></span>
+<div class="comments">
+<div class="paragraph">
+Calls <a href="976C.html">clear_scanline_ink_attr</a> once per scanline (8 times, one per pixel row within the tile) to zero the pixel data and set attributes to black. After the loop, HL naturally points to the first scanline of the tile row below. Tail-calls <a href="9BA6.html">waits_112ms</a> to insert a 112 ms pause, producing the visible row-by-row wipe delay in <a href="972B.html">sweep_transition</a>.
+</div>
+<div class="paragraph">
+INPUT: HL = VRAM address of the first scanline of the tile row to clear.
+</div>
+<div class="paragraph">
+OUTPUT: HL = VRAM address of the first scanline of the next tile row.
+</div>
+<div class="paragraph">
+DESTROYS: A, B, DE.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">clear_row</td>
+<td class="address-2"><span id="978c"></span>978C</td>
+<td class="instruction">LD B,$08</td>
+<td class="comment-1" rowspan="1">B=8, one iteration per scanline within the tile row.</td>
+</tr>
+<tr>
+<td class="asm-label">clear_row_0</td>
+<td class="address-2"><span id="978e"></span>978E</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Preserve the loop counter.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="978f"></span>978F</td>
+<td class="instruction">CALL <a href="976C.html">clear_scanline_ink_attr</a></td>
+<td class="comment-1" rowspan="1">Clear pixel data and attributes for this scanline via <a href="976C.html">clear_scanline_ink_attr</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9792"></span>9792</td>
+<td class="instruction">CALL <a href="901F.html">calc_next_scanline_addr</a></td>
+<td class="comment-1" rowspan="1">Advance HL to the next scanline via <a href="901F.html">calc_next_scanline_addr</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9795"></span>9795</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore the loop counter.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9796"></span>9796</td>
+<td class="instruction">DJNZ <a href="978C.html#978e">clear_row_0</a></td>
+<td class="comment-1" rowspan="1">Repeat for all 8 scanlines of the tile row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9798"></span>9798</td>
+<td class="instruction">JP <a href="9BA6.html">waits_112ms</a></td>
+<td class="comment-1" rowspan="1">Tail-call <a href="9BA6.html">waits_112ms</a> to wait 112 ms before returning.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="9786.html">9786</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#978c">Map</a></td>
+<td class="next">
+Next: <a href="979B.html">979B</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/38796.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

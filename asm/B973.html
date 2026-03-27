@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Game status buffer entry at B973</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-g">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Game status buffer</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B972.html">B972</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b973">Map</a></td>
+<td class="next">
+Next: <a href="B974.html">B974</a>
+</td>
+</tr>
+</table>
+<div class="description">B973: 2-frame animation and hit-detection gate counter.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Incremented each frame by <a href="9C9C.html">frame_counter_hit_inc</a>. Cycles 0-1-0-1.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="b973"></span>
+<div class="comments">
+<div class="paragraph">
+Checked at the start of the frame by <a href="9B93.html">char_frame_update</a> (animation update) and R39968 (tackle): both skip when non-zero.
+</div>
+<div class="paragraph">
+Checked after R40092 by <a href="9A2C.html">hit_detection</a> (hit detection): runs when zero after the increment, i.e., the opposite frame from animations.
+</div>
+<div class="paragraph">
+Net effect: animations and hit detection alternate each frame and never execute simultaneously.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">frame_counter_hit</td>
+<td class="address-1"><span id="b973"></span>B973</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">2-frame gate counter. 0 animations run, hit detection skips. 1 animations skip, hit detection runs.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B972.html">B972</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b973">Map</a></td>
+<td class="next">
+Next: <a href="B974.html">B974</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/47475.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

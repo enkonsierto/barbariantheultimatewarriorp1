@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 8C61</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="8C46.html">8C46</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#8c61">Map</a></td>
+<td class="next">
+Next: <a href="8C88.html">8C88</a>
+</td>
+</tr>
+</table>
+<div class="description">8C61: Single-key capture prompt.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="8E0B.html">key_assign</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="8c61"></span>
+<div class="comments">
+<div class="paragraph">
+Redefining keys, waits for the player to press a key, draws its glyph on screen and plays a confirmation sound. Returns the scancode of the chosen key in A. Loops indefinitely until a valid key press is detected (D != 255).
+</div>
+<div class="paragraph">
+Called from <a href="8DFB.html">control_setup</a> in a loop to assign each of the 5 action keys (Fire, Up, Down, Left, Right, and optionally Pause and Quit).
+</div>
+<div class="paragraph">
+INPUT  HL = VRAM address where the key glyph will be drawn.
+</div>
+<div class="paragraph">
+OUTPUT A  = scancode of the selected key.
+</div>
+<div class="paragraph">
+DESTROYS AF, BC, DE.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">catch_key</td>
+<td class="address-2"><span id="8c61"></span>8C61</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Preserve VRAM address.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c62"></span>8C62</td>
+<td class="instruction">LD A,$3F</td>
+<td class="comment-1" rowspan="1">Load ASCII 63 ('?') as the prompt glyph.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c64"></span>8C64</td>
+<td class="instruction">CALL <a href="8C9C.html">draw_character</a></td>
+<td class="comment-1" rowspan="1">Draw '?' at HL via <a href="8C9C.html">draw_character</a> to signal awaiting input.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c67"></span>8C67</td>
+<td class="instruction">CALL <a href="9BA6.html">waits_112ms</a></td>
+<td class="comment-1" rowspan="1">Short delay via <a href="9BA6.html">waits_112ms</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c6a"></span>8C6A</td>
+<td class="instruction">CALL <a href="8C26.html">keyb_scan</a></td>
+<td class="comment-1" rowspan="1">Scan keyboard via <a href="8C26.html">keyb_scan</a>; D = scancode, or 255 if no key pressed.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c6d"></span>8C6D</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">Restore VRAM address.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c6e"></span>8C6E</td>
+<td class="instruction">LD A,D</td>
+<td class="comment-1" rowspan="3">If D = 255 (no key), loop back to <a href="8C61.html">catch_key</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c6f"></span>8C6F</td>
+<td class="instruction">CP $FF</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c71"></span>8C71</td>
+<td class="instruction">JR Z,<a href="8C61.html#8c61">catch_key</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c73"></span>8C73</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Save scancode.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c74"></span>8C74</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Preserve VRAM address.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c75"></span>8C75</td>
+<td class="instruction">LD HL,$B974</td>
+<td class="comment-1" rowspan="1">HL = key-glyph lookup table base (<a href="B974.html">key_glyph_table</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c78"></span>8C78</td>
+<td class="instruction">CALL <a href="95AE.html">get_byte_value</a></td>
+<td class="comment-1" rowspan="1">Read display glyph index for this scancode via <a href="95AE.html">get_byte_value</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c7b"></span>8C7B</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">Restore VRAM address.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c7c"></span>8C7C</td>
+<td class="instruction">CALL <a href="8C9C.html">draw_character</a></td>
+<td class="comment-1" rowspan="1">Draw the key glyph at HL via <a href="8C9C.html">draw_character</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c7f"></span>8C7F</td>
+<td class="instruction">PUSH IX</td>
+<td class="comment-1" rowspan="1">Preserve IX.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c81"></span>8C81</td>
+<td class="instruction">CALL <a href="9BF6.html#9c08">sound_head_cut</a></td>
+<td class="comment-1" rowspan="1">Play confirmation sound via <a href="9BF6.html#9c08">sound_head_cut</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c84"></span>8C84</td>
+<td class="instruction">POP IX</td>
+<td class="comment-1" rowspan="1">Restore IX.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c86"></span>8C86</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Recover scancode into A.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c87"></span>8C87</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return with A = scancode of the selected key.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="8C46.html">8C46</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#8c61">Map</a></td>
+<td class="next">
+Next: <a href="8C88.html">8C88</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/35937.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

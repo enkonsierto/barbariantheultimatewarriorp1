@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 35514</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="35487.html">35487</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#35514">Map</a></td>
+<td class="next">
+Next: <a href="35531.html">35531</a>
+</td>
+</tr>
+</table>
+<div class="description">35514: Pause handler.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Called from <a href="35240.html#35369">pause_handler_entry</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="35514"></span>
+<div class="comments">
+<div class="paragraph">
+Entered from the main game loop when the pause key <a href="47438.html">pause_scancode</a> is pressed.
+</div>
+<div class="paragraph">
+Plays a sound via <a href="39926.html#39944">sound_head_cut</a>, waits 112ms to debounce the initial press, then polls <a href="47438.html">pause_scancode</a> via <a href="35910.html">key_state_test</a> until the pause key is pressed again to resume.
+</div>
+<div class="paragraph">
+IN None. OUT None. DESTROYS AF, BC.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">pause_handler_routine</td>
+<td class="address-2"><span id="35514"></span>35514</td>
+<td class="instruction">CALL <a href="39926.html#39944">sound_head_cut</a></td>
+<td class="comment-1" rowspan="1">Play pause sound via <a href="39926.html#39944">sound_head_cut</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35517"></span>35517</td>
+<td class="instruction">CALL <a href="39846.html">waits_112ms</a></td>
+<td class="comment-1" rowspan="1">Wait 112ms to absorb the initial key press.</td>
+</tr>
+<tr>
+<td class="asm-label">pause_handler_routine_0</td>
+<td class="address-2"><span id="35520"></span>35520</td>
+<td class="instruction">LD A,(47438)</td>
+<td class="comment-1" rowspan="1">Load pause key scancode from <a href="47438.html">pause_scancode</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35523"></span>35523</td>
+<td class="instruction">CALL <a href="35910.html">key_state_test</a></td>
+<td class="comment-1" rowspan="1">Test pause key state via <a href="35910.html">key_state_test</a>. Carry=1 released, carry=0 pressed.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35526"></span>35526</td>
+<td class="instruction">JR C,<a href="35514.html#35520">pause_handler_routine_0</a></td>
+<td class="comment-1" rowspan="1">Key released - loop back, waiting for the second press.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35528"></span>35528</td>
+<td class="instruction">JP <a href="35240.html#35313">game_loop</a></td>
+<td class="comment-1" rowspan="1">Key pressed again - resume, jump to game loop at <a href="35240.html#35313">game_loop</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="35487.html">35487</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#35514">Map</a></td>
+<td class="next">
+Next: <a href="35531.html">35531</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/8ABA.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

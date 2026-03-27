@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 9249</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="921C.html">921C</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#9249">Map</a></td>
+<td class="next">
+Next: <a href="926E.html">926E</a>
+</td>
+</tr>
+</table>
+<div class="description">9249: Draws one sprite tile to the framebuffer.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="921C.html">draws_4_x_3_tiles</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="9249"></span>
+<div class="comments">
+<div class="paragraph">
+Used by the 4x3 tile renderer to draw individual tiles in a character sprite.
+</div>
+<div class="paragraph">
+Skips the draw if the tile index is 255 (empty slot).
+</div>
+<div class="paragraph">
+Applies mirror correction to the tile index if needed based on direction.
+</div>
+<div class="paragraph">
+INPUT: IX = column offset and sentinel; IY = character state block.
+</div>
+<div class="paragraph">
+OUTPUT: C adjusted for next tile position (INC/DEC based on mirror flag). DESTROYS: AF, B, DE, HL.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">draw_single_tile</td>
+<td class="address-2"><span id="9249"></span>9249</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Preserves caller's BC value.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="924a"></span>924A</td>
+<td class="instruction">LD B,$AA</td>
+<td class="comment-1" rowspan="1">Sets sentinel comparison value.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="924c"></span>924C</td>
+<td class="instruction">LD A,(BC)</td>
+<td class="comment-1" rowspan="1">Reads tile index from current slot.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="924d"></span>924D</td>
+<td class="instruction">INC A</td>
+<td class="comment-1" rowspan="1">Tests for empty slot sentinel.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="924e"></span>924E</td>
+<td class="instruction">JR Z,<a href="9249.html#925f">draw_single_tile_0</a></td>
+<td class="comment-1" rowspan="1">Skips rendering if empty slot detected.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9250"></span>9250</td>
+<td class="instruction">DEC A</td>
+<td class="comment-1" rowspan="1">Restores tile index.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9251"></span>9251</td>
+<td class="instruction">LD ($9256),A</td>
+<td class="comment-1" rowspan="1">Self-modified: loads displacement offset from table.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9254"></span>9254</td>
+<td class="instruction">LD A,(IX+$00)</td>
+<td class="comment-1" rowspan="1">Reloads tile index.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9257"></span>9257</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Preserves framebuffer address.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9258"></span>9258</td>
+<td class="instruction">CALL <a href="91EB.html">resolve_tile_address</a></td>
+<td class="comment-1" rowspan="1">Resolves sprite RAM address for the tile.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="925b"></span>925B</td>
+<td class="instruction">CALL <a href="902E.html">tile_render_engine</a></td>
+<td class="comment-1" rowspan="1">Renders the tile to framebuffer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="925e"></span>925E</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">Restores framebuffer address.</td>
+</tr>
+<tr>
+<td class="asm-label">draw_single_tile_0</td>
+<td class="address-2"><span id="925f"></span>925F</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restores caller's BC value.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9260"></span>9260</td>
+<td class="instruction">INC L</td>
+<td class="comment-1" rowspan="3">Advances framebuffer pointer 3 bytes right (one tile).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9261"></span>9261</td>
+<td class="instruction">INC L</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9262"></span>9262</td>
+<td class="instruction">INC L</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9263"></span>9263</td>
+<td class="instruction">LD A,(IY+$02)</td>
+<td class="comment-1" rowspan="1">Tests mirror flag in character state.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9266"></span>9266</td>
+<td class="instruction">BIT 0,A</td>
+<td class="comment-1" rowspan="1">Checks mirror bit.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9268"></span>9268</td>
+<td class="instruction">JR Z,<a href="9249.html#926c">draw_single_tile_1</a></td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="926a"></span>926A</td>
+<td class="instruction">DEC C</td>
+<td class="comment-1" rowspan="2">Adjusts offset left if mirrored.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="926b"></span>926B</td>
+<td class="instruction">RET</td>
+</tr>
+<tr>
+<td class="asm-label">draw_single_tile_1</td>
+<td class="address-2"><span id="926c"></span>926C</td>
+<td class="instruction">INC C</td>
+<td class="comment-1" rowspan="1">Adjusts offset right if not mirrored.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="926d"></span>926D</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Returns with updated offset.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="921C.html">921C</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#9249">Map</a></td>
+<td class="next">
+Next: <a href="926E.html">926E</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/37449.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

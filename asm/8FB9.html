@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 8FB9</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="8FA8.html">8FA8</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#8fb9">Map</a></td>
+<td class="next">
+Next: <a href="8FD6.html">8FD6</a>
+</td>
+</tr>
+</table>
+<div class="description">8FB9: Reset P2 state block for new round.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Called from <a href="89A8.html">entry_point</a> at game start and from <a href="92FF.html">end_of_fight_dispatcher</a>/<a href="92FF.html#930d">930D</a> at the end of each fight, after the winning sequence completes.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="8fb9"></span>
+<div class="comments">
+<div class="paragraph">
+Increments the fight counter then place the P2 at right sid) with full energy and movement 28 (enter the arena), and sets bit 0 of IY+2 so the P2 starts mirrored (facing left, towards player 1).
+</div>
+<div class="paragraph">
+Symmetric counterpart to <a href="8FA8.html">reset_p1_state_block</a> which resets player 1 at tile 0, mirror flag cleared (facing right).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">reset_p2_state_block</td>
+<td class="address-2"><span id="8fb9"></span>8FB9</td>
+<td class="instruction">LD A,($B9C6)</td>
+<td class="comment-1" rowspan="5">Increment fight counter <a href="B9C6.html">fight_counter</a>; if 7 skip write.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8fbc"></span>8FBC</td>
+<td class="instruction">INC A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8fbd"></span>8FBD</td>
+<td class="instruction">CP $08</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8fbf"></span>8FBF</td>
+<td class="instruction">JR Z,<a href="8FB9.html#8fc4">reset_p2_state_block_0</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8fc1"></span>8FC1</td>
+<td class="instruction">LD ($B9C6),A</td>
+</tr>
+<tr>
+<td class="asm-label">reset_p2_state_block_0</td>
+<td class="address-2"><span id="8fc4"></span>8FC4</td>
+<td class="instruction">LD IY,$B562</td>
+<td class="comment-1" rowspan="3">Points P2 state block (<a href="B562.html">p2_controller_type</a>); Sets A=23 (rightmost tile); call <a href="8FD6.html">pos_energy_reset</a> to reset position and energy.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8fc8"></span>8FC8</td>
+<td class="instruction">LD A,$17</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8fca"></span>8FCA</td>
+<td class="instruction">CALL <a href="8FD6.html">pos_energy_reset</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8fcd"></span>8FCD</td>
+<td class="instruction">LD A,($B564)</td>
+<td class="comment-1" rowspan="3">Set P2 mirror flag: SET 0 on IY+2 (<a href="B562.html#b564">p2_mirror_flags</a>) so P2 faces left towards P1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8fd0"></span>8FD0</td>
+<td class="instruction">SET 0,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8fd2"></span>8FD2</td>
+<td class="instruction">LD ($B564),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8fd5"></span>8FD5</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="8FA8.html">8FA8</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#8fb9">Map</a></td>
+<td class="next">
+Next: <a href="8FD6.html">8FD6</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/36793.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

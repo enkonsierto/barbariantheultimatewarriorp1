@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at B410</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B3A7.html">B3A7</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b410">Map</a></td>
+<td class="next">
+Next: <a href="B479.html">B479</a>
+</td>
+</tr>
+</table>
+<div class="description">B410: Hit section: attacker frame 38.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Hitbox active when attacker animation frame index = 38. Pairs: (defender_frame, hit_type index into <a href="B4E4.html">hit_type_table</a>). Terminated by 0xFF.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="b410"></span>
+<div class="comments">
+<div class="paragraph">
+Upward headcut sword frame. Exclusively type 20 (fall+slash+dmg/near) on all matched defender frames.
+</div>
+<div class="paragraph">
+Near range (dist0-2) uniform across all entries. No guard frames and no range exceptions.
+</div>
+<div class="paragraph">
+Used by <a href="9A2C.html">hit_detection</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">hit_frame_38</td>
+<td class="address-1"><span id="b410"></span>B410</td>
+<td class="instruction">DEFB $00,$11,$01,$11,$02,$11,$03,$11</td>
+<td class="comment-1" rowspan="1">fr0:fall+slash+dmg/near fr1:fall+slash+dmg/near fr2:fall+slash+dmg/near fr3:fall+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b418"></span>B418</td>
+<td class="instruction">DEFB $04,$11,$05,$11,$06,$11,$07,$11</td>
+<td class="comment-1" rowspan="1">fr4:fall+slash+dmg/near fr5:fall+slash+dmg/near fr6:fall+slash+dmg/near fr7:fall+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b420"></span>B420</td>
+<td class="instruction">DEFB $0A,$11,$0B,$11,$0C,$11,$0D,$11</td>
+<td class="comment-1" rowspan="1">fr8:fall+slash+dmg/near fr10:fall+slash+dmg/near fr11:fall+slash+dmg/near fr13:fall+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b428"></span>B428</td>
+<td class="instruction">DEFB $0E,$11,$0F,$11,$10,$11,$15,$11</td>
+<td class="comment-1" rowspan="1">fr14:fall+slash+dmg/near fr15:fall+slash+dmg/near fr16:fall+slash+dmg/near fr21:fall+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b430"></span>B430</td>
+<td class="instruction">DEFB $16,$11,$17,$11,$18,$11,$19,$11</td>
+<td class="comment-1" rowspan="1">fr22:fall+slash+dmg/near fr23:fall+slash+dmg/near fr24:fall+slash+dmg/near fr25:fall+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b438"></span>B438</td>
+<td class="instruction">DEFB $1A,$11,$1C,$12,$1F,$11,$20,$11</td>
+<td class="comment-1" rowspan="1">fr26:fall+slash+dmg/near fr28:fall+slash+dmg/near fr31:fall+slash+dmg/near fr32:fall+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b440"></span>B440</td>
+<td class="instruction">DEFB $32,$11,$33,$11,$34,$11,$35,$11</td>
+<td class="comment-1" rowspan="1">fr50:fall+slash+dmg/near fr51:fall+slash+dmg/near fr52:fall+slash+dmg/near fr53:fall+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b448"></span>B448</td>
+<td class="instruction">DEFB $36,$11,$37,$11,$39,$11,$3A,$11</td>
+<td class="comment-1" rowspan="1">fr54:fall+slash+dmg/near fr55:fall+slash+dmg/near fr57:fall+slash+dmg/near fr58:fall+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b450"></span>B450</td>
+<td class="instruction">DEFB $3B,$11,$3C,$11,$3D,$11,$41,$11</td>
+<td class="comment-1" rowspan="1">fr59:fall+slash+dmg/near fr60:fall+slash+dmg/near fr61:fall+slash+dmg/near fr65:fall+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b458"></span>B458</td>
+<td class="instruction">DEFB $42,$11,$43,$11,$44,$11,$45,$11</td>
+<td class="comment-1" rowspan="1">fr66:fall+slash+dmg/near fr67:fall+slash+dmg/near fr68:fall+slash+dmg/near fr69:fall+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b460"></span>B460</td>
+<td class="instruction">DEFB $48,$11,$49,$11,$4A,$11,$4B,$11</td>
+<td class="comment-1" rowspan="1">fr72:fall+slash+dmg/near fr73:fall+slash+dmg/near fr74:fall+slash+dmg/near fr75:fall+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b468"></span>B468</td>
+<td class="instruction">DEFB $50,$11,$51,$11,$52,$11,$53,$11</td>
+<td class="comment-1" rowspan="1">fr80:fall+slash+dmg/near fr81:fall+slash+dmg/near fr82:fall+slash+dmg/near fr83:fall+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b470"></span>B470</td>
+<td class="instruction">DEFB $54,$11,$55,$11,$58,$11,$60,$11</td>
+<td class="comment-1" rowspan="1">fr84:fall+slash+dmg/near fr85:fall+slash+dmg/near fr88:fall+slash+dmg/near fr96:fall+slash+dmg/near</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b478"></span>B478</td>
+<td class="instruction">DEFB $FF</td>
+<td class="comment-1" rowspan="1">End-of-section terminator (0xFF).</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B3A7.html">B3A7</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b410">Map</a></td>
+<td class="next">
+Next: <a href="B479.html">B479</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/46096.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

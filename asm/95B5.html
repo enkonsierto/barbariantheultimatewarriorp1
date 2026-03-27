@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 95B5</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="95AE.html">95AE</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#95b5">Map</a></td>
+<td class="next">
+Next: <a href="95C4.html">95C4</a>
+</td>
+</tr>
+</table>
+<div class="description">95B5: Hit section table search.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Scans the hit section table at HL for an entry whose first byte matches the attacker frame ID in A.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="95b5"></span>
+<div class="comments">
+<div class="paragraph">
+Scans a table of 3-byte entries (frame ID with hit + 2 bytes) until matching A or sentinel = 128. On a match, DE is loaded with the 2-byte data pair from that entry and Z is set.
+</div>
+<div class="paragraph">
+INPUT: A = attacker frame ID. HL = base address of the hit section table (<a href="AFD7.html">hit_detection_table</a> or <a href="B69B.html">hit_indicator_frame_table</a>).
+</div>
+<div class="paragraph">
+OUTPUT: Z set on match; DE = 2-byte data pair from the matched entry. DESTROYS: HL, DE, AF, BC.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">find_hit_section</td>
+<td class="address-2"><span id="95b5"></span>95B5</td>
+<td class="instruction">LD D,(HL)</td>
+<td class="comment-1" rowspan="4">Read entry key into D; advance HL to the end of the 3-byte entry.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95b6"></span>95B6</td>
+<td class="instruction">INC HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95b7"></span>95B7</td>
+<td class="instruction">INC HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95b8"></span>95B8</td>
+<td class="instruction">INC HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95b9"></span>95B9</td>
+<td class="instruction">BIT 7,D</td>
+<td class="comment-1" rowspan="1">Sentinel reached (128): return NZ (no match).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95bb"></span>95BB</td>
+<td class="instruction">RET NZ</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95bc"></span>95BC</td>
+<td class="instruction">CP D</td>
+<td class="comment-1" rowspan="2">Frame ID does not match: loop back to next entry.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95bd"></span>95BD</td>
+<td class="instruction">JR NZ,<a href="95B5.html#95b5">find_hit_section</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95bf"></span>95BF</td>
+<td class="instruction">DEC HL</td>
+<td class="comment-1" rowspan="4">Match found: backtrack HL and load the 2-byte data pair into DE.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95c0"></span>95C0</td>
+<td class="instruction">LD D,(HL)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95c1"></span>95C1</td>
+<td class="instruction">DEC HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95c2"></span>95C2</td>
+<td class="instruction">LD E,(HL)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95c3"></span>95C3</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return with Z set.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="95AE.html">95AE</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#95b5">Map</a></td>
+<td class="next">
+Next: <a href="95C4.html">95C4</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/38325.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

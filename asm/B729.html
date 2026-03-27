@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at B729</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B727.html">B727</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b729">Map</a></td>
+<td class="next">
+Next: <a href="B877.html">B877</a>
+</td>
+</tr>
+</table>
+<div class="description">B729: AI difficulty entry table / Head trajectory data</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+32-byte tables indexed by R AND 31 (0-31). AI decision weights for levels 0-5 (passive to aggressive). Used by <a href="8BB5.html">character_ai_engine</a> to bias movement choices..
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">ai_level_0</td>
+<td class="address-1"><span id="b729"></span>B729</td>
+<td class="instruction">DEFB $02,$02,$03,$03,$04,$04,$05,$05</td>
+<td class="comment-1" rowspan="4">fight 0 (most passive, avg sub_index 5.75). Range: 2-7. No sub_index 0 or 1 possible at any random value; the AI always picks at least sub_index 2, guaranteeing a moderate-to-heavy movement block.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b731"></span>B731</td>
+<td class="instruction">DEFB $05,$05,$06,$06,$06,$06,$06,$06</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b739"></span>B739</td>
+<td class="instruction">DEFB $06,$06,$07,$07,$07,$07,$07,$07</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b741"></span>B741</td>
+<td class="instruction">DEFB $07,$07,$07,$07,$07,$07,$07,$07</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="b749"></span>
+<div class="comments">
+<div class="paragraph">
+AI Level 1
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">ai_level_1</td>
+<td class="address-1"><span id="b749"></span>B749</td>
+<td class="instruction">DEFB $01,$01,$02,$03,$03,$04,$04,$04</td>
+<td class="comment-1" rowspan="4">fight 1 (avg sub_index 5.38). Range: 1-7.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b751"></span>B751</td>
+<td class="instruction">DEFB $05,$05,$05,$05,$05,$06,$06,$06</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b759"></span>B759</td>
+<td class="instruction">DEFB $06,$06,$06,$06,$06,$07,$07,$07</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b761"></span>B761</td>
+<td class="instruction">DEFB $07,$07,$07,$07,$07,$07,$07,$07</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="b769"></span>
+<div class="comments">
+<div class="paragraph">
+AI Level 2
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">ai_level_2</td>
+<td class="address-1"><span id="b769"></span>B769</td>
+<td class="instruction">DEFB $00,$00,$01,$01,$02,$02,$02,$03</td>
+<td class="comment-1" rowspan="4">fight 2 (avg sub_index 4.38). Range: 0-7.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b771"></span>B771</td>
+<td class="instruction">DEFB $03,$03,$03,$04,$04,$04,$04,$05</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b779"></span>B779</td>
+<td class="instruction">DEFB $05,$05,$05,$05,$06,$06,$06,$06</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b781"></span>B781</td>
+<td class="instruction">DEFB $06,$07,$07,$07,$07,$07,$07,$07</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="b789"></span>
+<div class="comments">
+<div class="paragraph">
+AI Level 4
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">ai_level_4</td>
+<td class="address-1"><span id="b789"></span>B789</td>
+<td class="instruction">DEFB $00,$00,$00,$00,$00,$01,$01,$01</td>
+<td class="comment-1" rowspan="4">fight 4 (avg sub_index 3.12). Range: 0-7.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b791"></span>B791</td>
+<td class="instruction">DEFB $01,$01,$02,$02,$02,$02,$03,$03</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b799"></span>B799</td>
+<td class="instruction">DEFB $03,$03,$04,$04,$04,$04,$05,$05</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b7a1"></span>B7A1</td>
+<td class="instruction">DEFB $05,$05,$06,$06,$06,$07,$07,$07</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="b7a9"></span>
+<div class="comments">
+<div class="paragraph">
+Normal trajectory data.
+</div>
+<div class="paragraph">
+Table of 2-byte step pairs (control, magnitude) for the severed head after a normal decapitation. One pair is consumed per frame by <a href="946D.html">head_animator</a> via the trajectory pointer at IX4,5 (<a href="B6D9.html#b6dd">head_traj_ptr</a>).
+</div>
+<div class="paragraph">
+Control byte: bit 0 set (value 1) moves the head up by magnitude scanlines; bit 1 set (value 2) moves it down; value 0 holds position. Magnitude is the vertical delta in scanlines applied that frame.
+</div>
+<div class="paragraph">
+The head rises 9 scanlines over 2 frames (6+3), holds one frame at the peak, then falls with increasing speed (2, 4, 6, 8, 10, 12, 14 scanlines per frame), bounces slightly upward (4+2), and settles to the ground.
+</div>
+<div class="paragraph">
+Loaded into IX4,5 (<a href="B6D9.html#b6dd">head_traj_ptr</a>) by <a href="9438.html">head_init</a> at the moment of decapitation. 18 step pairs, 36 bytes total.
+</div>
+<div class="paragraph">
+Spell trajectory data.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">normal_traj_data</td>
+<td class="address-1"><span id="b7a9"></span>B7A9</td>
+<td class="instruction">DEFB $01,$06,$01,$03</td>
+<td class="comment-1" rowspan="1">Rise: up 6, up 3 scanlines.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b7ad"></span>B7AD</td>
+<td class="instruction">DEFB $00,$00</td>
+<td class="comment-1" rowspan="1">Hold: peak position.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b7af"></span>B7AF</td>
+<td class="instruction">DEFB $02,$02,$02,$04,$02,$06,$02,$08</td>
+<td class="comment-1" rowspan="1">Fall: down 2, 4, 6, 8 scanlines (accelerating).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b7b7"></span>B7B7</td>
+<td class="instruction">DEFB $02,$0A,$02,$0C</td>
+<td class="comment-1" rowspan="1">Fall: down 10, 12 scanlines.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b7bb"></span>B7BB</td>
+<td class="instruction">DEFB $02,$0E,$01,$04</td>
+<td class="comment-1" rowspan="1">Fall: down 14; bounce: up 4 scanlines.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b7bf"></span>B7BF</td>
+<td class="instruction">DEFB $01,$02,$00,$00</td>
+<td class="comment-1" rowspan="1">Bounce: up 2; hold.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b7c3"></span>B7C3</td>
+<td class="instruction">DEFB $02,$02,$02,$04</td>
+<td class="comment-1" rowspan="1">Settle: down 2, 4 scanlines.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b7c7"></span>B7C7</td>
+<td class="instruction">DEFB $00,$00,$00,$00,$00,$00</td>
+<td class="comment-1" rowspan="1">Landed: hold.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="b7cd"></span>
+<div class="comments">
+<div class="paragraph">
+AI Level 5
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">ai_level_5</td>
+<td class="address-1"><span id="b7cd"></span>B7CD</td>
+<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$01</td>
+<td class="comment-1" rowspan="4">fight 5 (avg sub_index 2.62). Range: 0-7.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b7d5"></span>B7D5</td>
+<td class="instruction">DEFB $01,$01,$01,$01,$02,$02,$02,$02</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b7dd"></span>B7DD</td>
+<td class="instruction">DEFB $02,$03,$03,$03,$03,$04,$04,$04</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b7e5"></span>B7E5</td>
+<td class="instruction">DEFB $04,$05,$05,$05,$06,$06,$07,$07</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="b7ed"></span>
+<div class="comments">
+<div class="paragraph">
+Goblin-kick head trajectory.
+</div>
+<div class="paragraph">
+Table of 2-byte step pairs (control, magnitude) for the severed head after the goblin kick (<a href="944C.html">goblin_kicks</a>). Replaces the active trajectory pointer at IX4,5 (<a href="B6D9.html#b6dd">head_traj_ptr</a>) via <a href="9438.html#943e">head_reactivate</a>.
+</div>
+<div class="paragraph">
+Same format as <a href="B729.html#b7a9">normal_traj_data</a>: control byte 1 moves up, 2 moves down, 0 holds. Magnitude is the vertical delta in scanlines applied that frame.
+</div>
+<div class="paragraph">
+The head rises 9 scanlines over 2 frames (6+3), holds one frame, falls 9 scanlines (6+3), holds, bounces up 3 scanlines, holds, settles down 3 scanlines, then rests.
+</div>
+<div class="paragraph">
+Loaded into IX4,5 (<a href="B6D9.html#b6dd">head_traj_ptr</a>) by <a href="944C.html">goblin_kicks</a> via <a href="9438.html#943e">head_reactivate</a> after the goblin kick. 17 step pairs, 34 bytes total.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">kicked_traj_data</td>
+<td class="address-1"><span id="b7ed"></span>B7ED</td>
+<td class="instruction">DEFB $01,$06,$01,$03</td>
+<td class="comment-1" rowspan="1">Rise: up 6, up 3 scanlines.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b7f1"></span>B7F1</td>
+<td class="instruction">DEFB $00,$00</td>
+<td class="comment-1" rowspan="1">Hold.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b7f3"></span>B7F3</td>
+<td class="instruction">DEFB $02,$06,$02,$03</td>
+<td class="comment-1" rowspan="1">Fall: down 6, down 3 scanlines.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b7f7"></span>B7F7</td>
+<td class="instruction">DEFB $00,$00</td>
+<td class="comment-1" rowspan="1">Hold.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b7f9"></span>B7F9</td>
+<td class="instruction">DEFB $01,$03,$00,$00</td>
+<td class="comment-1" rowspan="1">Bounce: up 3; hold.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b7fd"></span>B7FD</td>
+<td class="instruction">DEFB $02,$03,$00,$00</td>
+<td class="comment-1" rowspan="1">Settle: down 3; hold.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b801"></span>B801</td>
+<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
+<td class="comment-1" rowspan="2">Landed: hold.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b809"></span>B809</td>
+<td class="instruction">DEFB $00,$00,$00,$00,$00,$00</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="b80f"></span>
+<div class="comments">
+<div class="paragraph">
+AI Level 6
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">ai_level_6</td>
+<td class="address-1"><span id="b80f"></span>B80F</td>
+<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
+<td class="comment-1" rowspan="4">fight 6 (avg sub_index 1.59). Range: 0-6. Only entry where max sub_index never reaches 7; the AI cannot select the most aggressive movement block even at maximum random variance.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b817"></span>B817</td>
+<td class="instruction">DEFB $00,$00,$00,$01,$01,$01,$01,$01</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b81f"></span>B81F</td>
+<td class="instruction">DEFB $01,$01,$01,$02,$02,$02,$02,$02</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b827"></span>B827</td>
+<td class="instruction">DEFB $03,$03,$03,$04,$04,$05,$05,$06</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="b82f"></span>
+<div class="comments">
+<div class="paragraph">
+Trajectory-format data fragment. Four 2-byte pairs (control=2, magnitude): (2,8),(2,8),(2,10),(2,10). Control byte 2 with moderate-to-high constant magnitudes matches a stabilised falling arc phase. No confirmed code reference loads this address as a trajectory pointer. Likely dead data, possibly a remnant of the drax spell movement.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b82f"></span>B82F</td>
+<td class="instruction">DEFB $02,$08,$02,$08,$02,$0A,$02,$0A</td>
+<td class="comment-1" rowspan="1">Trajectory-format data fragment.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="b837"></span>
+<div class="comments">
+<div class="paragraph">
+AI Level 7
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">ai_level_7</td>
+<td class="address-1"><span id="b837"></span>B837</td>
+<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
+<td class="comment-1" rowspan="4">fight 7 (most aggressive, avg sub_index ~1.09). Range: 0-5. Even at maximum difficulty the AI cannot lock to sub_index 0; some passive outcomes (sub_index 4-5) remain possible at the high end. Occupies 47159-47190. Bytes 47181-47190 are positions 22-31 of this table, NOT the start of fight 3.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b83f"></span>B83F</td>
+<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$01,$01</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b847"></span>B847</td>
+<td class="instruction">DEFB $01,$01,$01,$01,$01,$01,$02,$02</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b84f"></span>B84F</td>
+<td class="instruction">DEFB $02,$02,$03,$03,$04,$04,$05,$05</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="b857"></span>
+<div class="comments">
+<div class="paragraph">
+AI Level 3
+</div>
+<div class="paragraph">
+Located at 47191, after fights 4, 5, 6, 7 in memory despite being fight 3 in the logical sequence (pointer table at <a href="B9C7.html">ai_difficulty_table</a> resolves order).
+</div>
+<div class="paragraph">
+Fits correctly between F2 (avg 4.38) and F4 (avg 3.12),
+</div>
+<div class="paragraph">
+confirming the monotonically increasing difficulty curve.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">ai_level_3</td>
+<td class="address-1"><span id="b857"></span>B857</td>
+<td class="instruction">DEFB $00,$00,$00,$01,$01,$01,$02,$02</td>
+<td class="comment-1" rowspan="4">fight 3 (avg sub_index 3.57). Range: 0-7.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b85f"></span>B85F</td>
+<td class="instruction">DEFB $02,$03,$03,$03,$03,$04,$04,$04</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b867"></span>B867</td>
+<td class="instruction">DEFB $04,$05,$05,$05,$05,$06,$06,$06</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b86f"></span>B86F</td>
+<td class="instruction">DEFB $06,$06,$06,$07,$07,$07,$07,$07</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B727.html">B727</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b729">Map</a></td>
+<td class="next">
+Next: <a href="B877.html">B877</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/46889.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

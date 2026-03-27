@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Game status buffer entry at 47433</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-g">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Game status buffer</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="47431.html">47431</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#47433">Map</a></td>
+<td class="next">
+Next: <a href="47438.html">47438</a>
+</td>
+</tr>
+</table>
+<div class="description">47433: P1 keyboard scancode table.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+5-byte table: Fire, Up, Down, Left, Right scancodes for P1 (controller type 1).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="47433"></span>
+<div class="comments">
+<div class="paragraph">
+Written by <a href="36363.html">key_assign</a> key-assignment loop when P1 selects custom keyboard (<a href="36212.html#36316">one_player_mode_3</a> sets IX=<a href="47433.html">p1_keyboard_table</a>).
+</div>
+<div class="paragraph">
+Read by <a href="35825.html">human_input_reader</a> each frame when P1 controller type is 1.
+</div>
+<div class="paragraph">
+The contents of the table are assignments in loading time.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">p1_keyboard_table</td>
+<td class="address-1"><span id="47433"></span>47433</td>
+<td class="instruction">DEFB 34</td>
+<td class="comment-1" rowspan="1">Right = P  (34)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47434"></span>47434</td>
+<td class="instruction">DEFB 37</td>
+<td class="comment-1" rowspan="1">Up  = Q  (37)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47435"></span>47435</td>
+<td class="instruction">DEFB 38</td>
+<td class="comment-1" rowspan="1">Down  = A  (38)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47436"></span>47436</td>
+<td class="instruction">DEFB 18</td>
+<td class="comment-1" rowspan="1">Left    = I  (18)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="47437"></span>47437</td>
+<td class="instruction">DEFB 26</td>
+<td class="comment-1" rowspan="1">Fire  = O  (26)</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="47431.html">47431</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#47433">Map</a></td>
+<td class="next">
+Next: <a href="47438.html">47438</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/B949.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

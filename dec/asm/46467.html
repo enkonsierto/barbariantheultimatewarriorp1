@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at 46467</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="46455.html">46455</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#46467">Map</a></td>
+<td class="next">
+Next: <a href="46747.html">46747</a>
+</td>
+</tr>
+</table>
+<div class="description">46467: Background Attributes.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="46467"></span>
+<div class="comments">
+<div class="paragraph">
+RLE compressed attributes using pairs of [count, attribute] values. (28x11 chars).
+</div>
+<div class="paragraph">
+Example: [1,82] means "1 tile with attribute 82".
+</div>
+<div class="paragraph">
+Each row ends with 255 marker.
+</div>
+<div class="paragraph">
+Format per row: [count, attr, count, attr, ..., 255]
+</div>
+<div class="paragraph">
+Graphics bytes are in <a href="26752.html">stage_1_bg</a> for Stage 1 and <a href="30112.html">stage_2_bg</a> for Stage 2.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">bg_2_attr_data</td>
+<td class="address-1"><span id="46467"></span>46467</td>
+<td class="instruction">DEFB 1,98,3,96,1,124,2,125</td>
+<td class="comment-1" rowspan="19"><span>Background 2 Attributes.</span></br><img src="../images/bg/bg2_attrs.png"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46475"></span>46475</td>
+<td class="instruction">DEFB 1,104,14,111,4,108,1,68</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46483"></span>46483</td>
+<td class="instruction">DEFB 1,100,255,1,98,3,96,1</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46491"></span>46491</td>
+<td class="instruction">DEFB 100,2,124,14,111,3,108,1</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46499"></span>46499</td>
+<td class="instruction">DEFB 100,1,108,1,68,1,100,255</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46507"></span>46507</td>
+<td class="instruction">DEFB 4,96,1,108,15,124,5,108</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46515"></span>46515</td>
+<td class="instruction">DEFB 2,96,1,68,255,1,96,16</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46523"></span>46523</td>
+<td class="instruction">DEFB 96,1,108,5,96,1,108,2</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46531"></span>46531</td>
+<td class="instruction">DEFB 96,2,68,255,1,66,25,96</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46539"></span>46539</td>
+<td class="instruction">DEFB 2,68,255,1,66,1,96,1</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46547"></span>46547</td>
+<td class="instruction">DEFB 112,1,96,3,112,19,96,2</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46555"></span>46555</td>
+<td class="instruction">DEFB 68,255,1,66,5,112,2,96</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46563"></span>46563</td>
+<td class="instruction">DEFB 2,112,1,96,2,112,3,96</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46571"></span>46571</td>
+<td class="instruction">DEFB 1,112,1,96,2,112,2,96</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46579"></span>46579</td>
+<td class="instruction">DEFB 4,112,2,68,255,28,112,255</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46587"></span>46587</td>
+<td class="instruction">DEFB 28,112,255,28,112,255,28,112</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46595"></span>46595</td>
+<td class="instruction">DEFB 255,28,112,255,28,112,255,28</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46603"></span>46603</td>
+<td class="instruction">DEFB 112,255,28,112,255,28,112,255</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46611"></span>46611</td>
+<td class="instruction">DEFB 22,112,255</td>
+</tr>
+<tr>
+<td class="asm-label">bg_1_attr_data</td>
+<td class="address-1"><span id="46614"></span>46614</td>
+<td class="instruction">DEFB 1,82,26,86,1,84,255,1</td>
+<td class="comment-1" rowspan="17"><span>Background 1 Attributes.</span></br><img src="../images/bg/bg1_attrs.png"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46622"></span>46622</td>
+<td class="instruction">DEFB 82,26,86,1,84,255,3,81</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46630"></span>46630</td>
+<td class="instruction">DEFB 4,86,1,113,2,89,1,113</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46638"></span>46638</td>
+<td class="instruction">DEFB 14,86,3,81,255,1,89,3</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46646"></span>46646</td>
+<td class="instruction">DEFB 81,3,86,1,113,2,89,1</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46654"></span>46654</td>
+<td class="instruction">DEFB 113,13,86,3,81,1,89,255</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46662"></span>46662</td>
+<td class="instruction">DEFB 1,90,2,89,2,81,2,86</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46670"></span>46670</td>
+<td class="instruction">DEFB 1,113,3,89,1,113,11,114</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46678"></span>46678</td>
+<td class="instruction">DEFB 2,81,2,89,1,92,255,1</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46686"></span>46686</td>
+<td class="instruction">DEFB 90,4,89,2,81,4,89,3</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46694"></span>46694</td>
+<td class="instruction">DEFB 113,2,126,5,113,1,89,1</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46702"></span>46702</td>
+<td class="instruction">DEFB 81,4,89,1,92,255,1,90</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46710"></span>46710</td>
+<td class="instruction">DEFB 3,88,23,89,1,92,255,28</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46718"></span>46718</td>
+<td class="instruction">DEFB 88,255,28,88,255,28,88,255</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46726"></span>46726</td>
+<td class="instruction">DEFB 28,88,255,28,88,255,28,88</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46734"></span>46734</td>
+<td class="instruction">DEFB 255,28,88,255,28,88,255,28</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46742"></span>46742</td>
+<td class="instruction">DEFB 88,255,22,88,255</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="46455.html">46455</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#46467">Map</a></td>
+<td class="next">
+Next: <a href="46747.html">46747</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/B583.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

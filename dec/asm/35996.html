@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 35996</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="35976.html">35976</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#35996">Map</a></td>
+<td class="next">
+Next: <a href="36022.html">36022</a>
+</td>
+</tr>
+</table>
+<div class="description">35996: Single UDG character renderer</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="35531.html">hit_processor</a>, <a href="35937.html">catch_key</a>, <a href="36022.html">draw_word</a>, <a href="36063.html">print_dec_number</a>, <a href="39367.html">energy_dec</a> and <a href="48896.html">game_start</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="35996"></span>
+<div class="comments">
+<div class="paragraph">
+Draws one 8x8 UDG tile from the font table at <a href="23720.html">udg_font_addr</a> to a VRAM address. Used to render scores, keys glyphs, menu labels and the hit indicator.
+</div>
+<div class="paragraph">
+Converts the ASCII code to a font index (SUB 48), multiplies by 8 to get the byte offset, and adds the UDG font base to locate the 8-byte tile data. Copies one byte per scanline row, calling <a href="36895.html">calc_next_scanline_addr</a> after each row to advance to the next VRAM scanline.
+</div>
+<div class="paragraph">
+INPUT: A = ASCII code (48+). HL = VRAM destination address. OUTPUT: None.
+</div>
+<div class="paragraph">
+DESTROYS: AF, BC, DE, HL.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">draw_character</td>
+<td class="address-2"><span id="35996"></span>35996</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Preserves the VRAM destination address.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35997"></span>35997</td>
+<td class="instruction">SUB 48</td>
+<td class="comment-1" rowspan="1">Converts ASCII code to font index (index = A - 48).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35999"></span>35999</td>
+<td class="instruction">LD L,A</td>
+<td class="comment-1" rowspan="2">Places font index in HL (L = index, H = 0).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36000"></span>36000</td>
+<td class="instruction">LD H,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36002"></span>36002</td>
+<td class="instruction">ADD HL,HL</td>
+<td class="comment-1" rowspan="3">Multiplies font index by 8 to obtain the byte offset into the font table.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36003"></span>36003</td>
+<td class="instruction">ADD HL,HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36004"></span>36004</td>
+<td class="instruction">ADD HL,HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36005"></span>36005</td>
+<td class="instruction">LD DE,23720</td>
+<td class="comment-1" rowspan="1">Loads the UDG font base address <a href="23720.html">udg_font_addr</a> into DE.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36008"></span>36008</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1">HL now points to the first byte of the font data for this character.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36009"></span>36009</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="1">Restores the VRAM destination address into DE.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36010"></span>36010</td>
+<td class="instruction">EX DE,HL</td>
+<td class="comment-1" rowspan="1">Swaps registers so HL = VRAM destination, DE = font source.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36011"></span>36011</td>
+<td class="instruction">LD B,8</td>
+<td class="comment-1" rowspan="1">Sets row counter to 8, one iteration per scanline.</td>
+</tr>
+<tr>
+<td class="asm-label">draw_character_0</td>
+<td class="address-2"><span id="36013"></span>36013</td>
+<td class="instruction">LD A,(DE)</td>
+<td class="comment-1" rowspan="2">Copies one font scanline byte to the screen.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36014"></span>36014</td>
+<td class="instruction">LD (HL),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36015"></span>36015</td>
+<td class="instruction">CALL <a href="36895.html">calc_next_scanline_addr</a></td>
+<td class="comment-1" rowspan="1">Advances HL to the next VRAM scanline via <a href="36895.html">calc_next_scanline_addr</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36018"></span>36018</td>
+<td class="instruction">INC DE</td>
+<td class="comment-1" rowspan="1">Advances to the next font row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36019"></span>36019</td>
+<td class="instruction">DJNZ <a href="35996.html#36013">draw_character_0</a></td>
+<td class="comment-1" rowspan="1">Repeats for all 8 scanlines.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36021"></span>36021</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="35976.html">35976</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#35996">Map</a></td>
+<td class="next">
+Next: <a href="36022.html">36022</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/8C9C.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

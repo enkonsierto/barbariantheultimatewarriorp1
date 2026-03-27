@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 35713</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="35531.html">35531</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#35713">Map</a></td>
+<td class="next">
+Next: <a href="35765.html">35765</a>
+</td>
+</tr>
+</table>
+<div class="description">35713: Input and AI dispatcher.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Called once per character from <a href="39617.html">combat_loop</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="35713"></span>
+<div class="comments">
+<div class="paragraph">
+IY points to the active character state block. Selects between human input and AI, or returns immediately if the character is inactive. Human-controlled characters read the keyboard/joystick and store the key bitmask in IY+1. CPU-controlled characters call <a href="35765.html">character_ai_engine</a> to generate an AI key bitmask in their state block.
+</div>
+<div class="paragraph">
+IN IY character state block.
+</div>
+<div class="paragraph">
+OUT (IY+1) key state bitmask (human or AI).
+</div>
+<div class="paragraph">
+DESTROYS AF, A. IY is preserved on return.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">input_ai_dispatcher</td>
+<td class="address-2"><span id="35713"></span>35713</td>
+<td class="instruction">LD A,(IY+0)</td>
+<td class="comment-1" rowspan="1">A = (IY+0) controller type / active flag.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35716"></span>35716</td>
+<td class="instruction">BIT 7,A</td>
+<td class="comment-1" rowspan="1">Test bit 7: 0 = human-controlled, 1 = CPU-controlled.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35718"></span>35718</td>
+<td class="instruction">JR NZ,<a href="35713.html#35729">input_ai_dispatcher_0</a></td>
+<td class="comment-1" rowspan="1">If bit 7 set (CPU), branch to AI path at 35729.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35720"></span>35720</td>
+<td class="instruction">OR A</td>
+<td class="comment-1" rowspan="1">Human path: A = 0 means inactive character.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35721"></span>35721</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">If inactive (IY+0 = 0), return immediately.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35722"></span>35722</td>
+<td class="instruction">CALL <a href="35825.html">human_input_reader</a></td>
+<td class="comment-1" rowspan="1">Call <a href="35825.html">human_input_reader</a> to read human input for this controller type.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35725"></span>35725</td>
+<td class="instruction">LD (IY+1),A</td>
+<td class="comment-1" rowspan="1">Store key bitmask returned in A into (IY+1).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35728"></span>35728</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return (human-controlled case done).</td>
+</tr>
+<tr>
+<td class="asm-label">input_ai_dispatcher_0</td>
+<td class="address-2"><span id="35729"></span>35729</td>
+<td class="instruction">LD A,IYl</td>
+<td class="comment-1" rowspan="1">CPU path: A = (IY+1) character type (89=P1, 98=P2).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35731"></span>35731</td>
+<td class="instruction">CP 89</td>
+<td class="comment-1" rowspan="1">Is this P1 type (89)?</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35733"></span>35733</td>
+<td class="instruction">JR NZ,<a href="35713.html#35750">input_ai_dispatcher_1</a></td>
+<td class="comment-1" rowspan="1">If not P1, branch to P2 AI path at 35750.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35735"></span>35735</td>
+<td class="instruction">LD A,(46442)</td>
+<td class="comment-1" rowspan="1">Load P1 extra state byte from <a href="46434.html#46442">p2_frame_index</a> (AI profile / difficulty).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35738"></span>35738</td>
+<td class="instruction">PUSH IY</td>
+<td class="comment-1" rowspan="1">Preserve caller IY.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35740"></span>35740</td>
+<td class="instruction">LD IY,46425</td>
+<td class="comment-1" rowspan="1">Set IY to P1 state block base <a href="46425.html">p1_controller_type</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35744"></span>35744</td>
+<td class="instruction">CALL <a href="35765.html">character_ai_engine</a></td>
+<td class="comment-1" rowspan="1">Call <a href="35765.html">character_ai_engine</a> to run P1 AI and write synthetic key state into IY+1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35747"></span>35747</td>
+<td class="instruction">POP IY</td>
+<td class="comment-1" rowspan="1">Restore original IY.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35749"></span>35749</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return (CPU-controlled P1 done).</td>
+</tr>
+<tr>
+<td class="asm-label">input_ai_dispatcher_1</td>
+<td class="address-2"><span id="35750"></span>35750</td>
+<td class="instruction">LD A,(46433)</td>
+<td class="comment-1" rowspan="1">P2 AI path: load P2 extra state byte from <a href="46425.html#46433">p1_frame_index</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35753"></span>35753</td>
+<td class="instruction">PUSH IY</td>
+<td class="comment-1" rowspan="1">Preserve caller IY.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35755"></span>35755</td>
+<td class="instruction">LD IY,46434</td>
+<td class="comment-1" rowspan="1">Set IY to P2 state block base <a href="46434.html">p2_controller_type</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35759"></span>35759</td>
+<td class="instruction">CALL <a href="35765.html">character_ai_engine</a></td>
+<td class="comment-1" rowspan="1">Call <a href="35765.html">character_ai_engine</a> to run P2 AI and write synthetic key state into IY+1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35762"></span>35762</td>
+<td class="instruction">POP IY</td>
+<td class="comment-1" rowspan="1">Restore original IY.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35764"></span>35764</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return (CPU-controlled P2 done).</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="35531.html">35531</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#35713">Map</a></td>
+<td class="next">
+Next: <a href="35765.html">35765</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/8B81.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

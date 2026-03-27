@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 37666</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="37631.html">37631</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#37666">Map</a></td>
+<td class="next">
+Next: <a href="37701.html">37701</a>
+</td>
+</tr>
+</table>
+<div class="description">37666: Goblin entry trigger.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Called from <a href="37536.html">anim_frame_stepper</a> when the dying character's animation reaches frame index 20 or 33, signalling the body has settled and the goblin can enter.
+</div>
+<div class="paragraph">
+Two guard conditions are checked before spawning: the goblin is already active (R46443=255), or the severed head is still in flight (<a href="46809.html#46810">head_state_flag</a> neither 0 nor 255). If no decapitation occurred (R46810=0) or the head has already landed (<a href="46809.html#46810">head_state_flag</a>=255), both guards pass and the goblin is spawned via <a href="37701.html">init_goblin</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="37666"></span>
+<div class="comments">
+<div class="paragraph">
+INPUT: IY = active character state block, preserved across the call.
+</div>
+<div class="paragraph">
+OUTPUT: None. Side effect: goblin state block initialised and <a href="46443.html">goblin_state_block</a> set to 255 if spawn conditions are met.
+</div>
+<div class="paragraph">
+DESTROYS: AF.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">goblin_entry</td>
+<td class="address-2"><span id="37666"></span>37666</td>
+<td class="instruction">LD A,(46443)</td>
+<td class="comment-1" rowspan="3">Skip if the goblin is already active (<a href="46443.html">goblin_state_block</a>=255).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37669"></span>37669</td>
+<td class="instruction">CP 255</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37671"></span>37671</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37672"></span>37672</td>
+<td class="instruction">LD A,(46810)</td>
+<td class="comment-1" rowspan="3">Head landed or no decapitation(<a href="46809.html#46810">head_state_flag</a>=255): proceed to spawn.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37675"></span>37675</td>
+<td class="instruction">CP 255</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37677"></span>37677</td>
+<td class="instruction">JR Z,<a href="37666.html#37681">goblin_entry_0</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37679"></span>37679</td>
+<td class="instruction">OR A</td>
+<td class="comment-1" rowspan="2">Head still in flight (<a href="46809.html#46810">head_state_flag</a>!=255): return and wait.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37680"></span>37680</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="asm-label">goblin_entry_0</td>
+<td class="address-2"><span id="37681"></span>37681</td>
+<td class="instruction">PUSH IY</td>
+<td class="comment-1" rowspan="1">Save the caller's IY before goblin initialisation overwrites it.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37683"></span>37683</td>
+<td class="instruction">LD A,30</td>
+<td class="comment-1" rowspan="1">Select movement 30 (goblin entrance animation).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37685"></span>37685</td>
+<td class="instruction">CALL <a href="37701.html">init_goblin</a></td>
+<td class="comment-1" rowspan="1">Spawn and initialise the goblin via <a href="37701.html">init_goblin</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37688"></span>37688</td>
+<td class="instruction">XOR A</td>
+<td class="comment-1" rowspan="4">Reset goblin frame counter (<a href="46443.html#46446">goblin_x_pos</a>), mirror flags(<a href="46443.html#46445">goblin_mirror_flags</a>), and tackle collision flag (<a href="47576.html">tackle_collision_flag</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37689"></span>37689</td>
+<td class="instruction">LD (46446),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37692"></span>37692</td>
+<td class="instruction">LD (46445),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37695"></span>37695</td>
+<td class="instruction">LD (47576),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37698"></span>37698</td>
+<td class="instruction">POP IY</td>
+<td class="comment-1" rowspan="1">Restore the caller's IY.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37700"></span>37700</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="37631.html">37631</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#37666">Map</a></td>
+<td class="next">
+Next: <a href="37701.html">37701</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/9322.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

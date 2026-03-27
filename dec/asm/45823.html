@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at 45823</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="45740.html">45740</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#45823">Map</a></td>
+<td class="next">
+Next: <a href="45884.html">45884</a>
+</td>
+</tr>
+</table>
+<div class="description">45823: Hit section: attacker frame 34.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Hitbox active when attacker animation frame index = 34. Pairs: (defender_frame, hit_type index into <a href="46308.html">hit_type_table</a>). Terminated by 0xFF.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="45823"></span>
+<div class="comments">
+<div class="paragraph">
+Spinning kick contact frame. Exclusively type 3 (fall+kick+dmg/adj) on all matched defender frames.
+</div>
+<div class="paragraph">
+Adjacent range only (dist0): shortest-range attack in the game.
+</div>
+<div class="paragraph">
+No guard entries: cannot be blocked. Only frames present in the table are vulnerable.
+</div>
+<div class="paragraph">
+Used by <a href="39468.html">hit_detection</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">hit_frame_34</td>
+<td class="address-1"><span id="45823"></span>45823</td>
+<td class="instruction">DEFB 0,3,1,3,2,3,3,3</td>
+<td class="comment-1" rowspan="1">fr0:fall+kick+dmg/adj  fr1:fall+kick+dmg/adj fr2:fall+kick+dmg/adj  fr3:fall+kick+dmg/adj</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="45831"></span>45831</td>
+<td class="instruction">DEFB 14,3,15,3,16,3,21,3</td>
+<td class="comment-1" rowspan="1">fr14:fall+kick+dmg/adj fr15:fall+kick+dmg/adj fr16:fall+kick+dmg/adj fr21:fall+kick+dmg/adj</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="45839"></span>45839</td>
+<td class="instruction">DEFB 24,3,25,3,26,3,31,3</td>
+<td class="comment-1" rowspan="1">fr24:fall+kick+dmg/adj fr25:fall+kick+dmg/adj fr26:fall+kick+dmg/adj fr31:fall+kick+dmg/adj</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="45847"></span>45847</td>
+<td class="instruction">DEFB 32,3,50,3,51,3,52,3</td>
+<td class="comment-1" rowspan="1">fr32:fall+kick+dmg/adj fr50:fall+kick+dmg/adj fr51:fall+kick+dmg/adj fr52:fall+kick+dmg/adj</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="45855"></span>45855</td>
+<td class="instruction">DEFB 53,3,54,3,55,3,66,3</td>
+<td class="comment-1" rowspan="1">fr53:fall+kick+dmg/adj fr54:fall+kick+dmg/adj fr55:fall+kick+dmg/adj fr66:fall+kick+dmg/adj</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="45863"></span>45863</td>
+<td class="instruction">DEFB 67,3,68,3,72,3,73,3</td>
+<td class="comment-1" rowspan="1">fr67:fall+kick+dmg/adj fr68:fall+kick+dmg/adj fr72:fall+kick+dmg/adj fr73:fall+kick+dmg/adj</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="45871"></span>45871</td>
+<td class="instruction">DEFB 74,3,80,3,82,3,83,3</td>
+<td class="comment-1" rowspan="1">fr74:fall+kick+dmg/adj fr80:fall+kick+dmg/adj fr82:fall+kick+dmg/adj fr83:fall+kick+dmg/adj</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="45879"></span>45879</td>
+<td class="instruction">DEFB 84,3,88,3</td>
+<td class="comment-1" rowspan="1">fr84:fall+kick+dmg/adj fr88:fall+kick+dmg/adj</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="45883"></span>45883</td>
+<td class="instruction">DEFB 255</td>
+<td class="comment-1" rowspan="1">End-of-section terminator (0xFF).</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="45740.html">45740</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#45823">Map</a></td>
+<td class="next">
+Next: <a href="45884.html">45884</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/B2FF.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

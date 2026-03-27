@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 91EB</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="91D3.html">91D3</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#91eb">Map</a></td>
+<td class="next">
+Next: <a href="920B.html">920B</a>
+</td>
+</tr>
+</table>
+<div class="description">91EB: Resolve tile address.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="9249.html">draw_single_tile</a>, <a href="94D7.html">render_head_tile</a> and <a href="95DF.html">sprites_mirror_checker</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="91eb"></span>
+<div class="comments">
+<div class="paragraph">
+Resolves tile index A to sprite RAM address DE.
+</div>
+<div class="paragraph">
+Selects by character type IYl (107=other <a href="9D00.html">other_sprites</a>; else barbarian <a href="C000.html">barb_sprite_tileset</a>). Computes DE=state block+(A*64); each tile=64 bytes (8x8).
+</div>
+<div class="paragraph">
+INPUT: A = tile index 0-255. IY = character state block. OUTPUT: DE = sprite RAM address.
+</div>
+<div class="paragraph">
+DESTROYS: AF,DE,HL.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">resolve_tile_address</td>
+<td class="address-2"><span id="91eb"></span>91EB</td>
+<td class="instruction">LD D,A</td>
+<td class="comment-1" rowspan="1">Stores tile index in D to form index*256 in DE, ready for the *64 computation via two right-shifts.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="91ec"></span>91EC</td>
+<td class="instruction">LD A,IYl</td>
+<td class="comment-1" rowspan="1">Loads character type IYl to select tile bank. (89)P1, (98)P2 use <a href="C000.html">barb_sprite_tileset</a>. (107)goblin uses <a href="9D00.html">other_sprites</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="91ee"></span>91EE</td>
+<td class="instruction">CP $6B</td>
+<td class="comment-1" rowspan="1">If IYl is 107, dispatch to the secondary state block <a href="9D00.html">other_sprites</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="91f0"></span>91F0</td>
+<td class="instruction">LD A,D</td>
+<td class="comment-1" rowspan="1">Restores tile index to A.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="91f1"></span>91F1</td>
+<td class="instruction">JR NZ,<a href="91EB.html#91f8">resolve_tile_address_0</a></td>
+<td class="comment-1" rowspan="1">Not goblin - branch to barbarian state block <a href="C000.html">barb_sprite_tileset</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="91f3"></span>91F3</td>
+<td class="instruction">LD DE,$9D00</td>
+<td class="comment-1" rowspan="1">Goblin path - load secondary state block base <a href="9D00.html">other_sprites</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="91f6"></span>91F6</td>
+<td class="instruction">JR <a href="91EB.html#91fb">resolve_tile_address_1</a></td>
+<td class="comment-1" rowspan="1">Jump to common offset calculation.</td>
+</tr>
+<tr>
+<td class="asm-label">resolve_tile_address_0</td>
+<td class="address-2"><span id="91f8"></span>91F8</td>
+<td class="instruction">LD DE,$C000</td>
+<td class="comment-1" rowspan="1">Barbarian path - load barbarian state block base <a href="C000.html">barb_sprite_tileset</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">resolve_tile_address_1</td>
+<td class="address-2"><span id="91fb"></span>91FB</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Preserve callers HL.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="91fc"></span>91FC</td>
+<td class="instruction">LD H,A</td>
+<td class="comment-1" rowspan="2">Load tile index into H to start index*256 in HL.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="91fd"></span>91FD</td>
+<td class="instruction">LD L,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="91ff"></span>91FF</td>
+<td class="instruction">SRL H</td>
+<td class="comment-1" rowspan="2">Two right-shifts on HL to obtain index*64 tile byte offset.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9201"></span>9201</td>
+<td class="instruction">RR L</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9203"></span>9203</td>
+<td class="instruction">SRL H</td>
+<td class="comment-1" rowspan="1">Add tile byte offset to block base low byte.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9205"></span>9205</td>
+<td class="instruction">RR L</td>
+<td class="comment-1" rowspan="1">Complete 16-bit addition to form final address.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9207"></span>9207</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1">DE: final sprite RAM address.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9208"></span>9208</td>
+<td class="instruction">EX DE,HL</td>
+<td class="comment-1" rowspan="1">Restore callers HL.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9209"></span>9209</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="920a"></span>920A</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return with DE pointing to tile data.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="91D3.html">91D3</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#91eb">Map</a></td>
+<td class="next">
+Next: <a href="920B.html">920B</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/37355.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

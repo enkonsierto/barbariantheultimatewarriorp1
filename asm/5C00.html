@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at 5C00</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="5B00.html">5B00</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#5c00">Map</a></td>
+<td class="next">
+Next: <a href="5CA8.html">5CA8</a>
+</td>
+</tr>
+</table>
+<div class="description">5C00: Game window left-column scanline address table.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="5c00"></span>
+<div class="comments">
+<div class="paragraph">
+The updatable game window is 4 tile rows tall (4 x 21 = 84 scanlines, the height of the characters) from 23552 to 23718. Each entry is the VRAM byte address the leftmost pixel column for that scanline, ordered top to bottom.
+</div>
+<div class="paragraph">
+Built once at startup by <a href="BF00.html#bf58">game_start_2</a>: SP is set to <a href="5CA8.html">udg_font_addr</a> then decremented 84 times via PUSH HL, filling entries from the top downward. Precomputed to avoid the costly non-linear scanline calculation (<a href="900F.html">calc_prev_scanline_addr</a> / <a href="901F.html">calc_next_scanline_addr</a>) on every rendered row at runtime.
+</div>
+<div class="paragraph">
+At load time contains BASIC system variables that are never used again after the game starts.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">left_col_addr_table</td>
+<td class="address-1"><span id="5c00"></span>5C00</td>
+<td class="instruction">DEFB $FF,$00</td>
+<td class="comment-1" rowspan="84">84 scanline VRAM addresses, entries 0 top to 83 bottom.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c02"></span>5C02</td>
+<td class="instruction">DEFB $1F,$30</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c04"></span>5C04</td>
+<td class="instruction">DEFB $0D,$05</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c06"></span>5C06</td>
+<td class="instruction">DEFB $23,$0D</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c08"></span>5C08</td>
+<td class="instruction">DEFB $0D,$23</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c0a"></span>5C0A</td>
+<td class="instruction">DEFB $05,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c0c"></span>5C0C</td>
+<td class="instruction">DEFB $00,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c0e"></span>5C0E</td>
+<td class="instruction">DEFB $16,$05</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c10"></span>5C10</td>
+<td class="instruction">DEFB $01,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c12"></span>5C12</td>
+<td class="instruction">DEFB $06,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c14"></span>5C14</td>
+<td class="instruction">DEFB $0B,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c16"></span>5C16</td>
+<td class="instruction">DEFB $01,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c18"></span>5C18</td>
+<td class="instruction">DEFB $01,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c1a"></span>5C1A</td>
+<td class="instruction">DEFB $06,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c1c"></span>5C1C</td>
+<td class="instruction">DEFB $10,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c1e"></span>5C1E</td>
+<td class="instruction">DEFB $00,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c20"></span>5C20</td>
+<td class="instruction">DEFB $00,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c22"></span>5C22</td>
+<td class="instruction">DEFB $00,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c24"></span>5C24</td>
+<td class="instruction">DEFB $00,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c26"></span>5C26</td>
+<td class="instruction">DEFB $00,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c28"></span>5C28</td>
+<td class="instruction">DEFB $00,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c2a"></span>5C2A</td>
+<td class="instruction">DEFB $00,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c2c"></span>5C2C</td>
+<td class="instruction">DEFB $00,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c2e"></span>5C2E</td>
+<td class="instruction">DEFB $00,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c30"></span>5C30</td>
+<td class="instruction">DEFB $00,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c32"></span>5C32</td>
+<td class="instruction">DEFB $00,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c34"></span>5C34</td>
+<td class="instruction">DEFB $00,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c36"></span>5C36</td>
+<td class="instruction">DEFB $00,$3C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c38"></span>5C38</td>
+<td class="instruction">DEFB $40,$1E</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c3a"></span>5C3A</td>
+<td class="instruction">DEFB $FF,$EC</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c3c"></span>5C3C</td>
+<td class="instruction">DEFB $01,$D0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c3e"></span>5C3E</td>
+<td class="instruction">DEFB $62,$52</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c40"></span>5C40</td>
+<td class="instruction">DEFB $FF,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c42"></span>5C42</td>
+<td class="instruction">DEFB $87,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c44"></span>5C44</td>
+<td class="instruction">DEFB $FF,$8C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c46"></span>5C46</td>
+<td class="instruction">DEFB $00,$01</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c48"></span>5C48</td>
+<td class="instruction">DEFB $07,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c4a"></span>5C4A</td>
+<td class="instruction">DEFB $00,$F7</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c4c"></span>5C4C</td>
+<td class="instruction">DEFB $5F,$0B</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c4e"></span>5C4E</td>
+<td class="instruction">DEFB $60,$26</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c50"></span>5C50</td>
+<td class="instruction">DEFB $5D,$26</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c52"></span>5C52</td>
+<td class="instruction">DEFB $5D,$3B</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c54"></span>5C54</td>
+<td class="instruction">DEFB $5D,$61</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c56"></span>5C56</td>
+<td class="instruction">DEFB $5F,$3A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c58"></span>5C58</td>
+<td class="instruction">DEFB $5D,$12</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c5a"></span>5C5A</td>
+<td class="instruction">DEFB $60,$15</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c5c"></span>5C5C</td>
+<td class="instruction">DEFB $60,$60</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c5e"></span>5C5E</td>
+<td class="instruction">DEFB $5F,$58</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c60"></span>5C60</td>
+<td class="instruction">DEFB $00,$1D</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c62"></span>5C62</td>
+<td class="instruction">DEFB $60,$1D</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c64"></span>5C64</td>
+<td class="instruction">DEFB $60,$1D</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c66"></span>5C66</td>
+<td class="instruction">DEFB $60,$2D</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c68"></span>5C68</td>
+<td class="instruction">DEFB $92,$5C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c6a"></span>5C6A</td>
+<td class="instruction">DEFB $10,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c6c"></span>5C6C</td>
+<td class="instruction">DEFB $00,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c6e"></span>5C6E</td>
+<td class="instruction">DEFB $FE,$FF</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c70"></span>5C70</td>
+<td class="instruction">DEFB $01,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c72"></span>5C72</td>
+<td class="instruction">DEFB $69,$D2</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c74"></span>5C74</td>
+<td class="instruction">DEFB $B6,$1A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c76"></span>5C76</td>
+<td class="instruction">DEFB $00,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c78"></span>5C78</td>
+<td class="instruction">DEFB $2A,$42</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c7a"></span>5C7A</td>
+<td class="instruction">DEFB $00,$58</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c7c"></span>5C7C</td>
+<td class="instruction">DEFB $FF,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c7e"></span>5C7E</td>
+<td class="instruction">DEFB $00,$21</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c80"></span>5C80</td>
+<td class="instruction">DEFB $00,$5B</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c82"></span>5C82</td>
+<td class="instruction">DEFB $21,$17</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c84"></span>5C84</td>
+<td class="instruction">DEFB $00,$40</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c86"></span>5C86</td>
+<td class="instruction">DEFB $E0,$50</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c88"></span>5C88</td>
+<td class="instruction">DEFB $21,$18</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c8a"></span>5C8A</td>
+<td class="instruction">DEFB $21,$17</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c8c"></span>5C8C</td>
+<td class="instruction">DEFB $01,$38</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c8e"></span>5C8E</td>
+<td class="instruction">DEFB $00,$38</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c90"></span>5C90</td>
+<td class="instruction">DEFB $00,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c92"></span>5C92</td>
+<td class="instruction">DEFB $00,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c94"></span>5C94</td>
+<td class="instruction">DEFB $00,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c96"></span>5C96</td>
+<td class="instruction">DEFB $00,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c98"></span>5C98</td>
+<td class="instruction">DEFB $00,$14</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c9a"></span>5C9A</td>
+<td class="instruction">DEFB $00,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c9c"></span>5C9C</td>
+<td class="instruction">DEFB $00,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5c9e"></span>5C9E</td>
+<td class="instruction">DEFB $0A,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5ca0"></span>5CA0</td>
+<td class="instruction">DEFB $00,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5ca2"></span>5CA2</td>
+<td class="instruction">DEFB $00,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5ca4"></span>5CA4</td>
+<td class="instruction">DEFB $00,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5ca6"></span>5CA6</td>
+<td class="instruction">DEFB $00,$00</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="5B00.html">5B00</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#5c00">Map</a></td>
+<td class="next">
+Next: <a href="5CA8.html">5CA8</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/23552.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

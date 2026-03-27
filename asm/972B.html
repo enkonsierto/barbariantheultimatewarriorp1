@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 972B</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="9708.html">9708</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#972b">Map</a></td>
+<td class="next">
+Next: <a href="976C.html">976C</a>
+</td>
+</tr>
+</table>
+<div class="description">972B: Game window row-by-row wipe to black.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="8D22.html">main_menu</a> and <a href="8F41.html">menu_fade_out</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="972b"></span>
+<div class="comments">
+<div class="paragraph">
+Clears the game window from top to bottom one tile row per 112 ms step, producing a visible wipe effect. Rows that share columns with the snake HUD are cleared via <a href="979B.html">clear_snake_row</a>, which preserves those columns; all other rows use <a href="978C.html">clear_row</a>, which clears all 28 tiles. The two bottom rows at attribute-map level are cleared separately via <a href="96E0.html">clear_attr_row</a>.
+</div>
+<div class="paragraph">
+INPUT: None. OUTPUT: None. DESTROYS A, BC, HL.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">sweep_transition</td>
+<td class="address-2"><span id="972b"></span>972B</td>
+<td class="instruction">LD HL,$40E2</td>
+<td class="comment-1" rowspan="1">Set HL to the first tile of the top game window row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="972e"></span>972E</td>
+<td class="instruction">LD B,$02</td>
+<td class="comment-1" rowspan="1">Set loop counter to 2.</td>
+</tr>
+<tr>
+<td class="asm-label">sweep_transition_0</td>
+<td class="address-2"><span id="9730"></span>9730</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Preserve loop counter before call.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9731"></span>9731</td>
+<td class="instruction">CALL <a href="979B.html">clear_snake_row</a></td>
+<td class="comment-1" rowspan="1">Clear one snake-edge row preserving HUD columns via <a href="979B.html">clear_snake_row</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9734"></span>9734</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore loop counter.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9735"></span>9735</td>
+<td class="instruction">DJNZ <a href="972B.html#9730">sweep_transition_0</a></td>
+<td class="comment-1" rowspan="1">Repeat for the top 2 snake-edge rows.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9737"></span>9737</td>
+<td class="instruction">LD B,$02</td>
+<td class="comment-1" rowspan="2">Set loop counter to 2.</td>
+</tr>
+<tr>
+<td class="asm-label">sweep_transition_1</td>
+<td class="address-2"><span id="9739"></span>9739</td>
+<td class="instruction">PUSH BC</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="973a"></span>973A</td>
+<td class="instruction">CALL <a href="978C.html">clear_row</a></td>
+<td class="comment-1" rowspan="2">Clear one full 28-tile row and wait 112 ms via <a href="978C.html">clear_row</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="973d"></span>973D</td>
+<td class="instruction">POP BC</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="973e"></span>973E</td>
+<td class="instruction">DJNZ <a href="972B.html#9739">sweep_transition_1</a></td>
+<td class="comment-1" rowspan="1">Repeat for the next 2 full rows.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9740"></span>9740</td>
+<td class="instruction">LD B,$03</td>
+<td class="comment-1" rowspan="2">Set loop counter to 3.</td>
+</tr>
+<tr>
+<td class="asm-label">sweep_transition_2</td>
+<td class="address-2"><span id="9742"></span>9742</td>
+<td class="instruction">PUSH BC</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9743"></span>9743</td>
+<td class="instruction">CALL <a href="979B.html">clear_snake_row</a></td>
+<td class="comment-1" rowspan="2">Clear one snake-edge row via <a href="979B.html">clear_snake_row</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9746"></span>9746</td>
+<td class="instruction">POP BC</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9747"></span>9747</td>
+<td class="instruction">DJNZ <a href="972B.html#9742">sweep_transition_2</a></td>
+<td class="comment-1" rowspan="1">Repeat for the next 3 snake-edge rows.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9749"></span>9749</td>
+<td class="instruction">LD B,$08</td>
+<td class="comment-1" rowspan="2">Set loop counter to 8.</td>
+</tr>
+<tr>
+<td class="asm-label">sweep_transition_3</td>
+<td class="address-2"><span id="974b"></span>974B</td>
+<td class="instruction">PUSH BC</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="974c"></span>974C</td>
+<td class="instruction">CALL <a href="978C.html">clear_row</a></td>
+<td class="comment-1" rowspan="2">Clear one full row and wait 112 ms via <a href="978C.html">clear_row</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="974f"></span>974F</td>
+<td class="instruction">POP BC</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9750"></span>9750</td>
+<td class="instruction">DJNZ <a href="972B.html#974b">sweep_transition_3</a></td>
+<td class="comment-1" rowspan="1">Repeat for 8 full rows.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9752"></span>9752</td>
+<td class="instruction">XOR A</td>
+<td class="comment-1" rowspan="1">A=0, black attribute value.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9753"></span>9753</td>
+<td class="instruction">LD HL,$5AC2</td>
+<td class="comment-1" rowspan="1">Set HL to the penultimate attribute row of the game window.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9756"></span>9756</td>
+<td class="instruction">LD BC,$1C01</td>
+<td class="comment-1" rowspan="1">B=28 (full row width), C=1 (single row).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9759"></span>9759</td>
+<td class="instruction">CALL <a href="96E0.html">clear_attr_row</a></td>
+<td class="comment-1" rowspan="1">Clear the penultimate attribute row to black via <a href="96E0.html">clear_attr_row</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="975c"></span>975C</td>
+<td class="instruction">CALL <a href="9BA6.html">waits_112ms</a></td>
+<td class="comment-1" rowspan="1">Wait 112 ms via <a href="9BA6.html">waits_112ms</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="975f"></span>975F</td>
+<td class="instruction">XOR A</td>
+<td class="comment-1" rowspan="1">A=0, black attribute value.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9760"></span>9760</td>
+<td class="instruction">LD HL,$5AE5</td>
+<td class="comment-1" rowspan="1">Set HL to the last attribute row of the game window.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9763"></span>9763</td>
+<td class="instruction">LD BC,$1601</td>
+<td class="comment-1" rowspan="1">B=22 (erasable tiles in the last partial row), C=1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9766"></span>9766</td>
+<td class="instruction">CALL <a href="96E0.html">clear_attr_row</a></td>
+<td class="comment-1" rowspan="1">Clear the last row attributes to black via <a href="96E0.html">clear_attr_row</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9769"></span>9769</td>
+<td class="instruction">JP <a href="9BA6.html">waits_112ms</a></td>
+<td class="comment-1" rowspan="1">Wait 112 ms and return; tail-calls <a href="9BA6.html">waits_112ms</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="9708.html">9708</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#972b">Map</a></td>
+<td class="next">
+Next: <a href="976C.html">976C</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/38699.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

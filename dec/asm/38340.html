@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 38340</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="38325.html">38325</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#38340">Map</a></td>
+<td class="next">
+Next: <a href="38367.html">38367</a>
+</td>
+</tr>
+</table>
+<div class="description">38340: Mirrors a tile horizontally in-place.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+For each scanline: reverses bits of the 3 bytes via table at <a href="23296.html">reversal_table</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="38340"></span>
+<div class="comments">
+<div class="paragraph">
+Called from <a href="38367.html">sprites_mirror_checker</a>, <a href="39258.html">draw_snakes_sprites</a> and <a href="38158.html">head_mirroring</a>.
+</div>
+<div class="paragraph">
+INPUT: B = scanline count. DE = tile address.
+</div>
+<div class="paragraph">
+OUTPUT: DE advanced past tile. Tile mirrored in-place. DESTROYS: AF, BC, HL.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">mirror_tile_inplace</td>
+<td class="address-2"><span id="38340"></span>38340</td>
+<td class="instruction">LD B,21</td>
+<td class="comment-1" rowspan="1">B=21h: full tile height.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="38342"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="39258.html">draw_snakes_sprites</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">mirror_tile_inplace_0</td>
+<td class="address-2"><span id="38342"></span>38342</td>
+<td class="instruction">LD H,91</td>
+<td class="comment-1" rowspan="1">HL base = bit-reversal table (<a href="23296.html">reversal_table</a>).</td>
+</tr>
+<tr>
+<td class="asm-label">mirror_tile_inplace_1</td>
+<td class="address-2"><span id="38344"></span>38344</td>
+<td class="instruction">LD A,(DE)</td>
+<td class="comment-1" rowspan="1">A = byte 0 index from tile.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38345"></span>38345</td>
+<td class="instruction">LD L,A</td>
+<td class="comment-1" rowspan="1">HL points to reversed byte 0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38346"></span>38346</td>
+<td class="instruction">LD C,(HL)</td>
+<td class="comment-1" rowspan="1">C = reversed byte 0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38347"></span>38347</td>
+<td class="instruction">INC DE</td>
+<td class="comment-1" rowspan="2">Next: byte 1 index.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38348"></span>38348</td>
+<td class="instruction">LD A,(DE)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38349"></span>38349</td>
+<td class="instruction">LD L,A</td>
+<td class="comment-1" rowspan="1">HL points to reversed byte 1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38350"></span>38350</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1">A = reversed byte 1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38351"></span>38351</td>
+<td class="instruction">LD (DE),A</td>
+<td class="comment-1" rowspan="1">Write reversed byte 1 in place.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38352"></span>38352</td>
+<td class="instruction">INC DE</td>
+<td class="comment-1" rowspan="2">Next: byte 2 index.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38353"></span>38353</td>
+<td class="instruction">LD A,(DE)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38354"></span>38354</td>
+<td class="instruction">LD L,A</td>
+<td class="comment-1" rowspan="1">HL points to reversed byte 2.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38355"></span>38355</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1">A = reversed byte 2.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38356"></span>38356</td>
+<td class="instruction">DEC DE</td>
+<td class="comment-1" rowspan="2">Back to byte 0 position.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38357"></span>38357</td>
+<td class="instruction">DEC DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38358"></span>38358</td>
+<td class="instruction">LD (DE),A</td>
+<td class="comment-1" rowspan="2">Write reversed byte 2 to byte 0 position.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38359"></span>38359</td>
+<td class="instruction">INC DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38360"></span>38360</td>
+<td class="instruction">INC DE</td>
+<td class="comment-1" rowspan="1">Advance to byte 2 position.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38361"></span>38361</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="1">Recover reversed byte 0 (in C).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38362"></span>38362</td>
+<td class="instruction">LD (DE),A</td>
+<td class="comment-1" rowspan="1">Write it to byte 2 position.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38363"></span>38363</td>
+<td class="instruction">INC DE</td>
+<td class="comment-1" rowspan="1">Advance DE to next scanline.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38364"></span>38364</td>
+<td class="instruction">DJNZ <a href="38340.html#38344">mirror_tile_inplace_1</a></td>
+<td class="comment-1" rowspan="1">Repeat for B scanlines.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38366"></span>38366</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="38325.html">38325</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#38340">Map</a></td>
+<td class="next">
+Next: <a href="38367.html">38367</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/95C4.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

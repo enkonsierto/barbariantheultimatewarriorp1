@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 8D74</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="8D22.html">8D22</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#8d74">Map</a></td>
+<td class="next">
+Next: <a href="8DFB.html">8DFB</a>
+</td>
+</tr>
+</table>
+<div class="description">8D74: One-player mode selector.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="8D22.html">main_menu</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="8d74"></span>
+<div class="comments">
+<div class="paragraph">
+Entered from main menu <a href="8D22.html">main_menu</a> when '1' key pressed.
+</div>
+<div class="paragraph">
+Replaces "0 DEMO" menu label with "0 START GAME", enables P1 energy loss, sets infinite time, configures P1 human/P2 CPU control.
+</div>
+<div class="paragraph">
+Then shows controller sub-menu (Sinclair2/Kempston/Keyboard) and jumps to main loop on selection.
+</div>
+<div class="paragraph">
+INPUT  None. OUTPUT None (tails to fadeout or key assignment). DESTROYS AF.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">one_player_mode</td>
+<td class="address-2"><span id="8d74"></span>8D74</td>
+<td class="instruction">LD A,$19</td>
+<td class="comment-1" rowspan="1">A=25: "START GAME" string index <a href="BE61.html">string_pointers_table</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d76"></span>8D76</td>
+<td class="instruction">LD ($BE9F),A</td>
+<td class="comment-1" rowspan="1">Patch <a href="BE9B.html#be9e">0_demo</a> from 28 ("0 DEMO") to 25 ("0 START GAME").</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d79"></span>8D79</td>
+<td class="instruction">XOR A</td>
+<td class="comment-1" rowspan="1">A=0 (NOP opcode).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d7a"></span>8D7A</td>
+<td class="instruction">LD ($99CB),A</td>
+<td class="comment-1" rowspan="1">Self-modify <a href="99C7.html#99cb">p1_energy_gate</a> RET Z-&gt;NOP: enables P1 energy depletion.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d7d"></span>8D7D</td>
+<td class="instruction">LD A,$FF</td>
+<td class="comment-1" rowspan="1">A=255.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d7f"></span>8D7F</td>
+<td class="instruction">LD ($B6D8),A</td>
+<td class="comment-1" rowspan="1">Set <a href="B6D8.html">timer_flag</a>=255 (infinite time, 1P mode).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d82"></span>8D82</td>
+<td class="instruction">LD A,($B559)</td>
+<td class="comment-1" rowspan="1">Load <a href="B559.html">p1_controller_type</a> (P1 control byte).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d85"></span>8D85</td>
+<td class="instruction">AND $7F</td>
+<td class="comment-1" rowspan="1">AND $7F: clear bit 7 (P1 human-controlled).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d87"></span>8D87</td>
+<td class="instruction">LD ($B559),A</td>
+<td class="comment-1" rowspan="1">Store back to <a href="B559.html">p1_controller_type</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d8a"></span>8D8A</td>
+<td class="instruction">LD A,($B562)</td>
+<td class="comment-1" rowspan="1">Load <a href="B562.html">p2_controller_type</a> (P2 control byte).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d8d"></span>8D8D</td>
+<td class="instruction">OR $80</td>
+<td class="comment-1" rowspan="1">OR $80: set bit 7 (P2 CPU-controlled).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d8f"></span>8D8F</td>
+<td class="instruction">LD ($B562),A</td>
+<td class="comment-1" rowspan="1">Store back to <a href="B562.html">p2_controller_type</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d92"></span>8D92</td>
+<td class="instruction">CALL <a href="8F41.html">menu_fade_out</a></td>
+<td class="comment-1" rowspan="1">Fade out via <a href="8F41.html">menu_fade_out</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d95"></span>8D95</td>
+<td class="instruction">LD HL,$4886</td>
+<td class="comment-1" rowspan="1">HL=18566: controller sub-menu position 1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d98"></span>8D98</td>
+<td class="instruction">LD DE,$BEA9</td>
+<td class="comment-1" rowspan="1">DE=<a href="BE9B.html#bea9">1_sinclair_joystick</a>: controller strings table.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d9b"></span>8D9B</td>
+<td class="instruction">CALL <a href="8CC5.html">draw_string</a></td>
+<td class="comment-1" rowspan="1">Draw first option via <a href="8CC5.html">draw_string</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d9e"></span>8D9E</td>
+<td class="instruction">LD HL,$48A6</td>
+<td class="comment-1" rowspan="1">HL=18598: position 2.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8da1"></span>8DA1</td>
+<td class="instruction">INC DE</td>
+<td class="comment-1" rowspan="1">Next string index.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8da2"></span>8DA2</td>
+<td class="instruction">CALL <a href="8CC5.html">draw_string</a></td>
+<td class="comment-1" rowspan="1">Draw second option.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8da5"></span>8DA5</td>
+<td class="instruction">LD HL,$48C6</td>
+<td class="comment-1" rowspan="1">HL=18630: position 3.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8da8"></span>8DA8</td>
+<td class="instruction">INC DE</td>
+<td class="comment-1" rowspan="1">Next string index.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8da9"></span>8DA9</td>
+<td class="instruction">CALL <a href="8CC5.html">draw_string</a></td>
+<td class="comment-1" rowspan="1">Draw third option.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8dac"></span>8DAC</td>
+<td class="instruction">CALL <a href="8F62.html">rainbow_animation</a></td>
+<td class="comment-1" rowspan="1">Rainbow animation <a href="8F62.html">rainbow_animation</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">one_player_mode_0</td>
+<td class="address-2"><span id="8daf"></span>8DAF</td>
+<td class="instruction">LD A,$24</td>
+<td class="comment-1" rowspan="1">Test '1' scancode 36.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8db1"></span>8DB1</td>
+<td class="instruction">CALL <a href="8C46.html">key_state_test</a></td>
+<td class="comment-1" rowspan="1">Check pressed via <a href="8C46.html">key_state_test</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8db4"></span>8DB4</td>
+<td class="instruction">JR NC,<a href="8D74.html#8dc6">one_player_mode_1</a></td>
+<td class="comment-1" rowspan="1">Jump to Sinclair2 if pressed.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8db6"></span>8DB6</td>
+<td class="instruction">LD A,$1C</td>
+<td class="comment-1" rowspan="1">Test '2' scancode 28 (Kempston).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8db8"></span>8DB8</td>
+<td class="instruction">CALL <a href="8C46.html">key_state_test</a></td>
+<td class="comment-1" rowspan="1">Check pressed.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8dbb"></span>8DBB</td>
+<td class="instruction">JR NC,<a href="8D74.html#8dd1">one_player_mode_2</a></td>
+<td class="comment-1" rowspan="1">Jump to Kempston if pressed.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8dbd"></span>8DBD</td>
+<td class="instruction">LD A,$14</td>
+<td class="comment-1" rowspan="1">Test '3' scancode 20 (Keyboard).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8dbf"></span>8DBF</td>
+<td class="instruction">CALL <a href="8C46.html">key_state_test</a></td>
+<td class="comment-1" rowspan="1">Check pressed.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8dc2"></span>8DC2</td>
+<td class="instruction">JR NC,<a href="8D74.html#8ddc">one_player_mode_3</a></td>
+<td class="comment-1" rowspan="1">Jump to keyboard setup if pressed.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8dc4"></span>8DC4</td>
+<td class="instruction">JR <a href="8D74.html#8daf">one_player_mode_0</a></td>
+<td class="comment-1" rowspan="1">No key pressed: loop back to animation+key test.</td>
+</tr>
+<tr>
+<td class="asm-label">one_player_mode_1</td>
+<td class="address-2"><span id="8dc6"></span>8DC6</td>
+<td class="instruction">LD A,$03</td>
+<td class="comment-1" rowspan="1">Sinclair2 path: A=3 (type 3, Sinclair Interface 2, port 2, keys 6-0).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8dc8"></span>8DC8</td>
+<td class="instruction">LD ($B559),A</td>
+<td class="comment-1" rowspan="1">Write controller type 3 to P1 state <a href="B559.html">p1_controller_type</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8dcb"></span>8DCB</td>
+<td class="instruction">CALL <a href="8F41.html">menu_fade_out</a></td>
+<td class="comment-1" rowspan="1">Fade out via <a href="8F41.html">menu_fade_out</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8dce"></span>8DCE</td>
+<td class="instruction">JP <a href="8D22.html#8d25">main_menu_0</a></td>
+<td class="comment-1" rowspan="1">Jump back to main menu loop <a href="8D22.html#8d25">main_menu_0</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">one_player_mode_2</td>
+<td class="address-2"><span id="8dd1"></span>8DD1</td>
+<td class="instruction">LD A,$05</td>
+<td class="comment-1" rowspan="1">Kempston path: A=5 (type 5, Kempston joystick, port 31).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8dd3"></span>8DD3</td>
+<td class="instruction">LD ($B559),A</td>
+<td class="comment-1" rowspan="1">Write controller type 5 to P1 state <a href="B559.html">p1_controller_type</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8dd6"></span>8DD6</td>
+<td class="instruction">CALL <a href="8F41.html">menu_fade_out</a></td>
+<td class="comment-1" rowspan="1">Fade out via <a href="8F41.html">menu_fade_out</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8dd9"></span>8DD9</td>
+<td class="instruction">JP <a href="8D22.html#8d25">main_menu_0</a></td>
+<td class="comment-1" rowspan="1">Jump back to main menu loop <a href="8D22.html#8d25">main_menu_0</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="8ddc"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="8E9C.html">two_player_mode</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">one_player_mode_3</td>
+<td class="address-2"><span id="8ddc"></span>8DDC</td>
+<td class="instruction">XOR A</td>
+<td class="comment-1" rowspan="1">Custom keyboard path: A=0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8ddd"></span>8DDD</td>
+<td class="instruction">LD ($B94F),A</td>
+<td class="comment-1" rowspan="1">Clear quit key scancode <a href="B94F.html">quit_scancode</a> (will be player-assigned).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8de0"></span>8DE0</td>
+<td class="instruction">LD ($B94E),A</td>
+<td class="comment-1" rowspan="1">Clear pause key scancode <a href="B94E.html">pause_scancode</a> (will be player-assigned).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8de3"></span>8DE3</td>
+<td class="instruction">LD IX,$B949</td>
+<td class="comment-1" rowspan="1">IX=<a href="B949.html">p1_keyboard_table</a>: P1 keyboard scancode table base.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8de7"></span>8DE7</td>
+<td class="instruction">LD A,$01</td>
+<td class="comment-1" rowspan="2">Write type 1 (P1 keyboard) to P1 state <a href="B559.html">p1_controller_type</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8de9"></span>8DE9</td>
+<td class="instruction">LD ($B559),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8dec"></span>8DEC</td>
+<td class="instruction">LD A,($B562)</td>
+<td class="comment-1" rowspan="2">Get <a href="B562.html">p2_controller_type</a> (P2 control byte) and sets as CPU-controlled (SET 7,A).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8def"></span>8DEF</td>
+<td class="instruction">SET 7,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8df1"></span>8DF1</td>
+<td class="instruction">LD ($B562),A</td>
+<td class="comment-1" rowspan="1">Store back to <a href="B562.html">p2_controller_type</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8df4"></span>8DF4</td>
+<td class="instruction">LD A,$01</td>
+<td class="comment-1" rowspan="2">Write "1 " to Menu String <a href="BE9B.html#beb8">player_header_1</a> so it will be printed "SELECT KEYS PLAYER1".</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8df6"></span>8DF6</td>
+<td class="instruction">LD ($BEB8),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8df9"></span>8DF9</td>
+<td class="instruction">JR <a href="8E0B.html">key_assign</a></td>
+<td class="comment-1" rowspan="1">Jump to shared key assignment loop <a href="8E0B.html">key_assign</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="8D22.html">8D22</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#8d74">Map</a></td>
+<td class="next">
+Next: <a href="8DFB.html">8DFB</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/36212.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

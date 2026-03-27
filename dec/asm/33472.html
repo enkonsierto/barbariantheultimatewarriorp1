@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at 33472</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="30112.html">30112</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#33472">Map</a></td>
+<td class="next">
+Next: <a href="33840.html">33840</a>
+</td>
+</tr>
+</table>
+<div class="description">33472: Snake sprite data.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="33472"></span>
+<div class="comments">
+<div class="paragraph">
+Four animation frames (1-byte header + 30 scanlines x 3 bytes each) used by <a href="39317.html">update_snake_frame_id</a> to animate the snake HUD when a fighter takes a hit. <a href="39367.html">energy_dec</a> sets the draw phase index in IY+7 bits 7-4 to 1 on impact; <a href="39317.html">update_snake_frame_id</a> advances
+</div>
+<div class="paragraph">
+it each frame through the 14-step ping-pong cycle (phases 0-13) via the pointer table at <a href="47528.html">snake_pointer_table</a>, resetting to idle (0) when complete.
+</div>
+<div class="paragraph">
+P1 snake (VRAM 16416) uses a horizontally mirrored copy via <a href="38340.html#38342">mirror_tile_inplace_0</a> + <a href="38340.html">mirror_tile_inplace</a>.
+</div>
+<div class="paragraph">
+P2 snake (VRAM 16445) uses the sprite in its natural orientation.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">snake_sprite_0</td>
+<td class="address-1"><span id="33472"></span>33472</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Snake Sprite 0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33473"></span>33473</td>
+<td class="instruction">DEFB 0,0,0</td>
+<td class="comment-1" rowspan="30"><img src="../../assets/snake/00.png"" alt="snake/00.png""/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33476"></span>33476</td>
+<td class="instruction">DEFB 0,0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33479"></span>33479</td>
+<td class="instruction">DEFB 0,0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33482"></span>33482</td>
+<td class="instruction">DEFB 0,0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33485"></span>33485</td>
+<td class="instruction">DEFB 0,0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33488"></span>33488</td>
+<td class="instruction">DEFB 0,0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33491"></span>33491</td>
+<td class="instruction">DEFB 0,63,192</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33494"></span>33494</td>
+<td class="instruction">DEFB 3,255,252</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33497"></span>33497</td>
+<td class="instruction">DEFB 0,255,240</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33500"></span>33500</td>
+<td class="instruction">DEFB 3,63,204</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33503"></span>33503</td>
+<td class="instruction">DEFB 3,255,252</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33506"></span>33506</td>
+<td class="instruction">DEFB 15,240,255</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33509"></span>33509</td>
+<td class="instruction">DEFB 12,15,3</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33512"></span>33512</td>
+<td class="instruction">DEFB 0,255,240</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33515"></span>33515</td>
+<td class="instruction">DEFB 0,63,192</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33518"></span>33518</td>
+<td class="instruction">DEFB 0,0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33521"></span>33521</td>
+<td class="instruction">DEFB 0,0,48</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33524"></span>33524</td>
+<td class="instruction">DEFB 0,1,80</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33527"></span>33527</td>
+<td class="instruction">DEFB 0,2,176</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33530"></span>33530</td>
+<td class="instruction">DEFB 0,3,248</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33533"></span>33533</td>
+<td class="instruction">DEFB 0,3,248</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33536"></span>33536</td>
+<td class="instruction">DEFB 0,1,248</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33539"></span>33539</td>
+<td class="instruction">DEFB 0,1,252</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33542"></span>33542</td>
+<td class="instruction">DEFB 0,0,252</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33545"></span>33545</td>
+<td class="instruction">DEFB 0,0,254</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33548"></span>33548</td>
+<td class="instruction">DEFB 0,0,126</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33551"></span>33551</td>
+<td class="instruction">DEFB 0,0,126</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33554"></span>33554</td>
+<td class="instruction">DEFB 0,0,127</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33557"></span>33557</td>
+<td class="instruction">DEFB 0,0,63</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33560"></span>33560</td>
+<td class="instruction">DEFB 0,0,63</td>
+</tr>
+<tr>
+<td class="asm-label">snake_sprite_1</td>
+<td class="address-1"><span id="33563"></span>33563</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Snake Sprite 1</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33564"></span>33564</td>
+<td class="instruction">DEFB 0,0,0</td>
+<td class="comment-1" rowspan="30"><img src="../../assets/snake/01.png"" alt="snake/01.png""/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33567"></span>33567</td>
+<td class="instruction">DEFB 0,0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33570"></span>33570</td>
+<td class="instruction">DEFB 0,0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33573"></span>33573</td>
+<td class="instruction">DEFB 0,0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33576"></span>33576</td>
+<td class="instruction">DEFB 0,63,192</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33579"></span>33579</td>
+<td class="instruction">DEFB 3,255,252</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33582"></span>33582</td>
+<td class="instruction">DEFB 0,255,240</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33585"></span>33585</td>
+<td class="instruction">DEFB 3,63,204</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33588"></span>33588</td>
+<td class="instruction">DEFB 3,240,252</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33591"></span>33591</td>
+<td class="instruction">DEFB 15,192,63</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33594"></span>33594</td>
+<td class="instruction">DEFB 12,192,51</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33597"></span>33597</td>
+<td class="instruction">DEFB 0,128,16</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33600"></span>33600</td>
+<td class="instruction">DEFB 1,6,8</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33603"></span>33603</td>
+<td class="instruction">DEFB 0,192,48</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33606"></span>33606</td>
+<td class="instruction">DEFB 0,240,248</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33609"></span>33609</td>
+<td class="instruction">DEFB 0,63,200</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33612"></span>33612</td>
+<td class="instruction">DEFB 0,15,8</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33615"></span>33615</td>
+<td class="instruction">DEFB 0,0,172</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33618"></span>33618</td>
+<td class="instruction">DEFB 0,0,92</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33621"></span>33621</td>
+<td class="instruction">DEFB 0,0,252</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33624"></span>33624</td>
+<td class="instruction">DEFB 0,0,60</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33627"></span>33627</td>
+<td class="instruction">DEFB 0,0,126</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33630"></span>33630</td>
+<td class="instruction">DEFB 0,0,126</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33633"></span>33633</td>
+<td class="instruction">DEFB 0,0,126</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33636"></span>33636</td>
+<td class="instruction">DEFB 0,0,126</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33639"></span>33639</td>
+<td class="instruction">DEFB 0,0,126</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33642"></span>33642</td>
+<td class="instruction">DEFB 0,0,62</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33645"></span>33645</td>
+<td class="instruction">DEFB 0,0,62</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33648"></span>33648</td>
+<td class="instruction">DEFB 0,0,62</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33651"></span>33651</td>
+<td class="instruction">DEFB 0,0,63</td>
+</tr>
+<tr>
+<td class="asm-label">snake_sprite_2</td>
+<td class="address-1"><span id="33654"></span>33654</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Snake Sprite 2</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33655"></span>33655</td>
+<td class="instruction">DEFB 0,0,0</td>
+<td class="comment-1" rowspan="30"><img src="../../assets/snake/02.png"" alt="snake/02.png""/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33658"></span>33658</td>
+<td class="instruction">DEFB 0,0,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33661"></span>33661</td>
+<td class="instruction">DEFB 3,63,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33664"></span>33664</td>
+<td class="instruction">DEFB 15,255,192</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33667"></span>33667</td>
+<td class="instruction">DEFB 15,255,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33670"></span>33670</td>
+<td class="instruction">DEFB 63,254,48</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33673"></span>33673</td>
+<td class="instruction">DEFB 60,60,240</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33676"></span>33676</td>
+<td class="instruction">DEFB 12,15,56</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33679"></span>33679</td>
+<td class="instruction">DEFB 14,15,248</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33682"></span>33682</td>
+<td class="instruction">DEFB 8,11,252</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33685"></span>33685</td>
+<td class="instruction">DEFB 8,136,252</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33688"></span>33688</td>
+<td class="instruction">DEFB 8,8,252</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33691"></span>33691</td>
+<td class="instruction">DEFB 0,32,62</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33694"></span>33694</td>
+<td class="instruction">DEFB 0,32,62</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33697"></span>33697</td>
+<td class="instruction">DEFB 0,0,50</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33700"></span>33700</td>
+<td class="instruction">DEFB 0,3,246</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33703"></span>33703</td>
+<td class="instruction">DEFB 0,255,202</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33706"></span>33706</td>
+<td class="instruction">DEFB 0,63,150</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33709"></span>33709</td>
+<td class="instruction">DEFB 0,0,47</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33712"></span>33712</td>
+<td class="instruction">DEFB 0,0,23</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33715"></span>33715</td>
+<td class="instruction">DEFB 0,0,15</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33718"></span>33718</td>
+<td class="instruction">DEFB 0,0,63</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33721"></span>33721</td>
+<td class="instruction">DEFB 0,0,63</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33724"></span>33724</td>
+<td class="instruction">DEFB 0,0,63</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33727"></span>33727</td>
+<td class="instruction">DEFB 0,0,63</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33730"></span>33730</td>
+<td class="instruction">DEFB 0,0,63</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33733"></span>33733</td>
+<td class="instruction">DEFB 0,0,63</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33736"></span>33736</td>
+<td class="instruction">DEFB 0,0,63</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33739"></span>33739</td>
+<td class="instruction">DEFB 0,0,63</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33742"></span>33742</td>
+<td class="instruction">DEFB 0,0,63</td>
+</tr>
+<tr>
+<td class="asm-label">snake_sprite_3</td>
+<td class="address-1"><span id="33745"></span>33745</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Snake Sprite 3</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33746"></span>33746</td>
+<td class="instruction">DEFB 12,252,0</td>
+<td class="comment-1" rowspan="31"><img src="../../assets/snake/03.png"" alt="snake/03.png""/></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33749"></span>33749</td>
+<td class="instruction">DEFB 63,255,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33752"></span>33752</td>
+<td class="instruction">DEFB 63,243,192</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33755"></span>33755</td>
+<td class="instruction">DEFB 255,195,192</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33758"></span>33758</td>
+<td class="instruction">DEFB 247,207,192</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33761"></span>33761</td>
+<td class="instruction">DEFB 195,131,192</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33764"></span>33764</td>
+<td class="instruction">DEFB 203,255,192</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33767"></span>33767</td>
+<td class="instruction">DEFB 195,63,240</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33770"></span>33770</td>
+<td class="instruction">DEFB 65,143,240</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33773"></span>33773</td>
+<td class="instruction">DEFB 65,3,240</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33776"></span>33776</td>
+<td class="instruction">DEFB 65,35,248</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33779"></span>33779</td>
+<td class="instruction">DEFB 0,0,56</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33782"></span>33782</td>
+<td class="instruction">DEFB 0,32,60</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33785"></span>33785</td>
+<td class="instruction">DEFB 0,0,60</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33788"></span>33788</td>
+<td class="instruction">DEFB 0,32,246</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33791"></span>33791</td>
+<td class="instruction">DEFB 0,3,202</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33794"></span>33794</td>
+<td class="instruction">DEFB 0,79,166</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33797"></span>33797</td>
+<td class="instruction">DEFB 0,143,86</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33800"></span>33800</td>
+<td class="instruction">DEFB 0,62,42</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33803"></span>33803</td>
+<td class="instruction">DEFB 3,248,23</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33806"></span>33806</td>
+<td class="instruction">DEFB 3,192,47</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33809"></span>33809</td>
+<td class="instruction">DEFB 0,0,63</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33812"></span>33812</td>
+<td class="instruction">DEFB 0,0,63</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33815"></span>33815</td>
+<td class="instruction">DEFB 0,0,63</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33818"></span>33818</td>
+<td class="instruction">DEFB 0,0,63</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33821"></span>33821</td>
+<td class="instruction">DEFB 0,0,63</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33824"></span>33824</td>
+<td class="instruction">DEFB 0,0,63</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33827"></span>33827</td>
+<td class="instruction">DEFB 0,0,63</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33830"></span>33830</td>
+<td class="instruction">DEFB 0,0,63</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33833"></span>33833</td>
+<td class="instruction">DEFB 0,0,63</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33836"></span>33836</td>
+<td class="instruction">DEFB 0,0,63</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="33839"></span>33839</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="30112.html">30112</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#33472">Map</a></td>
+<td class="next">
+Next: <a href="33840.html">33840</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/82C0.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

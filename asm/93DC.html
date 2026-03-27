@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 93DC</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="93D3.html">93D3</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#93dc">Map</a></td>
+<td class="next">
+Next: <a href="93EA.html">93EA</a>
+</td>
+</tr>
+</table>
+<div class="description">93DC: Round timer tick: decrement, refresh HUD and play sound.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Decrements <a href="B6D8.html">timer_flag</a> by 1, refreshes the timer display via <a href="8D09.html">update_time_display</a> and plays the tick sound via <a href="9BF6.html#9c1a">sound_round_end</a>.
+</div>
+<div class="paragraph">
+Called once per loop iteration by <a href="939F.html">p2_death_score_update</a> and <a href="93BB.html">p1_death_score_update</a> while draining the remaining time as bonus score.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="93dc"></span>
+<div class="comments">
+<div class="paragraph">
+INPUT: None. OUTPUT: Z set if the timer has reached 0, NZ if time remains. DESTROYS: AF.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">timer_tick</td>
+<td class="address-2"><span id="93dc"></span>93DC</td>
+<td class="instruction">DEC A</td>
+<td class="comment-1" rowspan="1">Load timer value from <a href="B6D8.html">timer_flag</a> and decrement by 1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="93dd"></span>93DD</td>
+<td class="instruction">LD ($B6D8),A</td>
+<td class="comment-1" rowspan="1">Write updated timer value back to <a href="B6D8.html">timer_flag</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="93e0"></span>93E0</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Preserve decremented value and flags across the HUD and sound calls.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="93e1"></span>93E1</td>
+<td class="instruction">CALL <a href="8D09.html">update_time_display</a></td>
+<td class="comment-1" rowspan="1">Refresh the timer display via <a href="8D09.html">update_time_display</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="93e4"></span>93E4</td>
+<td class="instruction">CALL <a href="9BF6.html#9c1a">sound_round_end</a></td>
+<td class="comment-1" rowspan="1">Play timer tick sound via <a href="9BF6.html#9c1a">sound_round_end</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="93e7"></span>93E7</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore timer value and flags.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="93e8"></span>93E8</td>
+<td class="instruction">OR A</td>
+<td class="comment-1" rowspan="1">Set Z if timer reached 0, NZ if time still remains.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="93e9"></span>93E9</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="93D3.html">93D3</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#93dc">Map</a></td>
+<td class="next">
+Next: <a href="93EA.html">93EA</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/37852.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

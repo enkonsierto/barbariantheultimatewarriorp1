@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at BC1E</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="BB66.html">BB66</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#bc1e">Map</a></td>
+<td class="next">
+Next: <a href="BC8D.html">BC8D</a>
+</td>
+</tr>
+</table>
+<div class="description">BC1E: Sounds Data</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="bc1e"></span>
+<div class="comments">
+<div class="paragraph">
+Data containing sounds played data. 0 = terminator byte.
+</div>
+<div class="paragraph">
+Called from <a href="8ACB.html">hit_processor</a> and <a href="92A0.html">anim_frame_stepper</a> and <a href="944C.html">goblin_kicks</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">sound_head_cut_data</td>
+<td class="address-1"><span id="bc1e"></span>BC1E</td>
+<td class="instruction">DEFB $11,$64,$01,$C8,$05,$4B,$91,$0D</td>
+<td class="comment-1" rowspan="3">Sound Head Cut Data <br /><audio controls="" src="../audio/head_cut.wav">
+<p>Your browser doesn't support HTML5 audio. Here is a <a href="../audio/head_cut.wav">link to the audio</a> instead.</p>
+</audio></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bc26"></span>BC26</td>
+<td class="instruction">DEFB $49,$04,$EC,$46,$AF,$0F,$35,$08</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bc2e"></span>BC2E</td>
+<td class="instruction">DEFB $5C,$07,$75,$06,$31,$00</td>
+</tr>
+<tr>
+<td class="asm-label">sound_tackle_data</td>
+<td class="address-1"><span id="bc34"></span>BC34</td>
+<td class="instruction">DEFB $46,$09,$37,$0F,$05,$09,$37,$0F</td>
+<td class="comment-1" rowspan="3">Sound Tackle Data <br /><audio controls="" src="../audio/tackle.wav">
+<p>Your browser doesn't support HTML5 audio. Here is a <a href="../audio/tackle.wav">link to the audio</a> instead.</p>
+</audio></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bc3c"></span>BC3C</td>
+<td class="instruction">DEFB $46,$09,$19,$0F,$05,$09,$37,$0F</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bc44"></span>BC44</td>
+<td class="instruction">DEFB $46,$09,$37,$00</td>
+</tr>
+<tr>
+<td class="asm-label">sound_kick_data</td>
+<td class="address-1"><span id="bc48"></span>BC48</td>
+<td class="instruction">DEFB $E6,$CD,$FF,$BE,$CA,$D2,$F0,$B9</td>
+<td class="comment-1" rowspan="2">Sound Kick Data <br /><audio controls="" src="../audio/kick.wav">
+<p>Your browser doesn't support HTML5 audio. Here is a <a href="../audio/kick.wav">link to the audio</a> instead.</p>
+</audio></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bc50"></span>BC50</td>
+<td class="instruction">DEFB $EB,$00</td>
+</tr>
+<tr>
+<td class="asm-label">sound_slash_data</td>
+<td class="address-1"><span id="bc52"></span>BC52</td>
+<td class="instruction">DEFB $F0,$E8,$E0,$D8,$D0,$C8,$C0,$B8</td>
+<td class="comment-1" rowspan="4">Sound Slash Data <br /><audio controls="" src="../audio/slash.wav">
+<p>Your browser doesn't support HTML5 audio. Here is a <a href="../audio/slash.wav">link to the audio</a> instead.</p>
+</audio></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bc5a"></span>BC5A</td>
+<td class="instruction">DEFB $B0,$A8,$A0,$98,$90,$88,$80,$78</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bc62"></span>BC62</td>
+<td class="instruction">DEFB $70,$68,$60,$58,$50,$48,$40,$38</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bc6a"></span>BC6A</td>
+<td class="instruction">DEFB $30,$28,$20,$18,$10,$08,$00</td>
+</tr>
+<tr>
+<td class="asm-label">sound_guard_1_data</td>
+<td class="address-1"><span id="bc71"></span>BC71</td>
+<td class="instruction">DEFB $84,$9A,$BB,$A5,$94,$AC,$A5,$94</td>
+<td class="comment-1" rowspan="2">Sound Guard 1 Data <br /><audio controls="" src="../audio/guard_1.wav">
+<p>Your browser doesn't support HTML5 audio. Here is a <a href="../audio/guard_1.wav">link to the audio</a> instead.</p>
+</audio></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bc79"></span>BC79</td>
+<td class="instruction">DEFB $AD,$00</td>
+</tr>
+<tr>
+<td class="asm-label">sound_guard_2_data</td>
+<td class="address-1"><span id="bc7b"></span>BC7B</td>
+<td class="instruction">DEFB $20,$62,$4B,$17,$62,$2F,$3B,$53</td>
+<td class="comment-1" rowspan="2">Sound Guard 2 Data <br /><audio controls="" src="../audio/guard_2.wav">
+<p>Your browser doesn't support HTML5 audio. Here is a <a href="../audio/guard_2.wav">link to the audio</a> instead.</p>
+</audio></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="bc83"></span>BC83</td>
+<td class="instruction">DEFB $1B,$00</td>
+</tr>
+<tr>
+<td class="asm-label">round_end_data</td>
+<td class="address-1"><span id="bc85"></span>BC85</td>
+<td class="instruction">DEFB $F0,$F0,$F0,$F0,$F0,$F0,$F0,$00</td>
+<td class="comment-1" rowspan="1">Sound Round End Data <br /><audio controls="" src="../audio/end_round.wav">
+<p>Your browser doesn't support HTML5 audio. Here is a <a href="../audio/end_round.wav">link to the audio</a> instead.</p>
+</audio></td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="BB66.html">BB66</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#bc1e">Map</a></td>
+<td class="next">
+Next: <a href="BC8D.html">BC8D</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/48158.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

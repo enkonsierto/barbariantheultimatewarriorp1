@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 9127</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="90FA.html">90FA</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#9127">Map</a></td>
+<td class="next">
+Next: <a href="9162.html">9162</a>
+</td>
+</tr>
+</table>
+<div class="description">9127: Renders a 3-byte-wide sprite tile over 21 scanlines using AND masking.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Per scanline: saves 3 framebuffer bytes to AND-mask scratch (<a href="B95F.html">mask_scratch_buffer</a>), loads mask from tile data via <a href="9055.html">left_edge_renderer</a>, draws sprite pixels via <a href="908C.html">right_edge_renderer</a>, then ANDs with scratch mask for transparency.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="9127"></span>
+<div class="comments">
+<div class="paragraph">
+Framebuffer/tile pointers use alternate register bank (EXX) so <a href="908C.html">right_edge_renderer</a> auto-advances to next scanline.
+</div>
+<div class="paragraph">
+INPUT: B = scanlines (21), HL = framebuffer address, DE = tile data pointer.
+</div>
+<div class="paragraph">
+OUTPUT: None. DESTROYS: AF,BC,DE,HL (and shadows).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">tile_renderer</td>
+<td class="address-2"><span id="9127"></span>9127</td>
+<td class="instruction">LD B,$15</td>
+<td class="comment-1" rowspan="1">B = 21 (full tile height).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="9129"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="9162.html">comp_tile_dispatcher</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">tile_renderer_0</td>
+<td class="address-2"><span id="9129"></span>9129</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">save B (scanlines remaining).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="912a"></span>912A</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="2">save HL (framebuffer), DE (tile ptr).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="912b"></span>912B</td>
+<td class="instruction">PUSH DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="912c"></span>912C</td>
+<td class="instruction">EXX</td>
+<td class="comment-1" rowspan="1">EXX: framebuffer HL/tile DE -&gt; alternate registers.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="912d"></span>912D</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="1">DE = tile data (recovered).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="912e"></span>912E</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">HL = framebuffer (recovered).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="912f"></span>912F</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">re-save HL for AND step (<a href="9127.html#914f">914F</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9130"></span>9130</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="6">save 3 background bytes to AND-mask scratch (<a href="B95F.html">mask_scratch_buffer</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9131"></span>9131</td>
+<td class="instruction">LD ($B95F),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9134"></span>9134</td>
+<td class="instruction">INC L</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9135"></span>9135</td>
+<td class="instruction">LD A,(HL)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9136"></span>9136</td>
+<td class="instruction">LD ($B960),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9139"></span>9139</td>
+<td class="instruction">INC L</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="913a"></span>913A</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1">A = framebuffer byte 2</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="913b"></span>913B</td>
+<td class="instruction">LD ($B961),A</td>
+<td class="comment-1" rowspan="1">A save to scratch buffer+2 (<a href="B95F.html">mask_scratch_buffer</a>+2)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="913e"></span>913E</td>
+<td class="instruction">DEC L</td>
+<td class="comment-1" rowspan="2">DEC L x2: restore HL to start of 3-byte sequence</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="913f"></span>913F</td>
+<td class="instruction">DEC L</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9140"></span>9140</td>
+<td class="instruction">EXX</td>
+<td class="comment-1" rowspan="1">EXX: back to main registers. HL'/DE' hold framebuffer/tile pointers.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9141"></span>9141</td>
+<td class="instruction">LD HL,$B95F</td>
+<td class="comment-1" rowspan="1">HL = mask scratch buffer (<a href="B95F.html">mask_scratch_buffer</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9144"></span>9144</td>
+<td class="instruction">CALL <a href="9055.html">left_edge_renderer</a></td>
+<td class="comment-1" rowspan="1"><a href="9055.html">left_edge_renderer</a>: load AND mask from tile data into scratch buffer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9147"></span>9147</td>
+<td class="instruction">EXX</td>
+<td class="comment-1" rowspan="1">EXX: activate HL=framebuffer, DE=tile for <a href="908C.html">right_edge_renderer</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9148"></span>9148</td>
+<td class="instruction">CALL <a href="908C.html">right_edge_renderer</a></td>
+<td class="comment-1" rowspan="1"><a href="908C.html">right_edge_renderer</a>: draw one scanline of sprite pixels to framebuffer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="914b"></span>914B</td>
+<td class="instruction">EXX</td>
+<td class="comment-1" rowspan="1">EXX: back to main registers (now point to next scanline).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="914c"></span>914C</td>
+<td class="instruction">LD HL,$B95F</td>
+<td class="comment-1" rowspan="1">HL = scratch buffer (reload).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="914f"></span>914F</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="1">DE = framebuffer address of the scanline just rendered.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9150"></span>9150</td>
+<td class="instruction">LD A,(DE)</td>
+<td class="comment-1" rowspan="3">framebuffer byte 0 (w/sprite); AND scratch byte 0 (mask); restore transparent areas</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9151"></span>9151</td>
+<td class="instruction">AND (HL)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9152"></span>9152</td>
+<td class="instruction">LD (DE),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9153"></span>9153</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="2">next byte</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9154"></span>9154</td>
+<td class="instruction">INC E</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9155"></span>9155</td>
+<td class="instruction">LD A,(DE)</td>
+<td class="comment-1" rowspan="3">framebuffer byte 1; AND scratch byte 1; restore transparent areas</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9156"></span>9156</td>
+<td class="instruction">AND (HL)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9157"></span>9157</td>
+<td class="instruction">LD (DE),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9158"></span>9158</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="2">next byte</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9159"></span>9159</td>
+<td class="instruction">INC E</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="915a"></span>915A</td>
+<td class="instruction">LD A,(DE)</td>
+<td class="comment-1" rowspan="3">framebuffer byte 2; AND scratch byte 2; restore transparent areas</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="915b"></span>915B</td>
+<td class="instruction">AND (HL)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="915c"></span>915C</td>
+<td class="instruction">LD (DE),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="915d"></span>915D</td>
+<td class="instruction">EXX</td>
+<td class="comment-1" rowspan="1">restore HL=framebuffer, DE=tile ptr (next scanline)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="915e"></span>915E</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">recover B=scanlines remaining</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="915f"></span>915F</td>
+<td class="instruction">DJNZ <a href="9127.html#9129">tile_renderer_0</a></td>
+<td class="comment-1" rowspan="1">copied one scanline. Repeat for all scanlines</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9161"></span>9161</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">tile rendering complete</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="90FA.html">90FA</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#9127">Map</a></td>
+<td class="next">
+Next: <a href="9162.html">9162</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/37159.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

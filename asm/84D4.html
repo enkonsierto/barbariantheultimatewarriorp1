@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 84D4</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="84D0.html">84D0</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#84d4">Map</a></td>
+<td class="next">
+Next: <a href="84E6.html">84E6</a>
+</td>
+</tr>
+</table>
+<div class="description">84D4: Melody counter still running; check bass counter independently.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Reached when the melody counter (E) has not yet expired. Checks the bass counter (L) independently so both channels can change phase at different times within the same loop iteration.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">melody_running</td>
+<td class="address-2"><span id="84d4"></span>84D4</td>
+<td class="instruction">JR Z,<a href="84D4.html#84d4">melody_running</a></td>
+<td class="comment-1" rowspan="1">Dead code, Z is always clear on entry; never branches.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="84d6"></span>84D6</td>
+<td class="instruction">EX AF,AF'</td>
+<td class="comment-1" rowspan="1">Swaps with alternate registers.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="84d7"></span>84D7</td>
+<td class="instruction">DEC L</td>
+<td class="comment-1" rowspan="1">Decrements bass counter.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="84d8"></span>84D8</td>
+<td class="instruction">JP Z,<a href="8477.html#84c5">music_engine_3</a></td>
+<td class="comment-1" rowspan="1">If L = 0, jumps to <a href="8477.html#84c5">music_engine_3</a> (end of bass half-cycle).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="84db"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="8477.html">music_engine</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">melody_running_0</td>
+<td class="address-2"><span id="84db"></span>84DB</td>
+<td class="instruction">OUT ($FE),A</td>
+<td class="comment-1" rowspan="1">Sends state to beeper.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="84dd"></span>84DD</td>
+<td class="instruction">NOP</td>
+<td class="comment-1" rowspan="2">NOPs for timing adjustment.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="84de"></span>84DE</td>
+<td class="instruction">NOP</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="84df"></span>84DF</td>
+<td class="instruction">DJNZ <a href="8477.html#84b5">music_engine_1</a></td>
+<td class="comment-1" rowspan="1">Decrements B and returns to main loop <a href="8477.html#84b5">music_engine_1</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="84e1"></span>84E1</td>
+<td class="instruction">INC C</td>
+<td class="comment-1" rowspan="1">Increments duration counter.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="84e2"></span>84E2</td>
+<td class="instruction">JP NZ,<a href="8477.html#84b7">music_engine_2</a></td>
+<td class="comment-1" rowspan="1">If C != 0, continues (jumps to <a href="8477.html#84b7">music_engine_2</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="84e5"></span>84E5</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Returns.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="84D0.html">84D0</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#84d4">Map</a></td>
+<td class="next">
+Next: <a href="84E6.html">84E6</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/34004.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

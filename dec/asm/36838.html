@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 36838</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="36822.html">36822</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#36838">Map</a></td>
+<td class="next">
+Next: <a href="36879.html">36879</a>
+</td>
+</tr>
+</table>
+<div class="description">36838: Set character movement.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="36822.html">pos_energy_reset</a>, <a href="37536.html">anim_frame_stepper</a>, <a href="37701.html">init_goblin</a>, <a href="37772.html">post_fight_setup</a>, <a href="37866.html">decap_setup</a>, <a href="39194.html">force_apply_moves</a>, <a href="39367.html">energy_dec</a>, <a href="39617.html">combat_loop</a>, <a href="39968.html">tackle_side_swap</a> and <a href="40077.html">stop_mov_and_mirror</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="36838"></span>
+<div class="comments">
+<div class="paragraph">
+Changes and stores the active movement ID for the character pointed by IY (<a href="36776.html">reset_p1_state_block</a> or <a href="36793.html">reset_p2_state_block</a>).
+</div>
+<div class="paragraph">
+Updates the mirror flag, stores the new frame data pointer and stores it.
+</div>
+<div class="paragraph">
+INPUT: A = new movement ID. IY = character state block.
+</div>
+<div class="paragraph">
+OUTPUT: IY = character state block with updated mirror flag (IY+2), frame pointer (IY+4, IY+5) initial frame index (IY+8). DESTROYS: AF, BC.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">set_char_moves</td>
+<td class="address-2"><span id="36838"></span>36838</td>
+<td class="instruction">LD B,(IY+6)</td>
+<td class="comment-1" rowspan="3">Load current movement ID from IY+6 into B; compare with A. Return if equal (no change).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36841"></span>36841</td>
+<td class="instruction">CP B</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36842"></span>36842</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="36843"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routine at <a href="37536.html">anim_frame_stepper</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">set_char_moves_0</td>
+<td class="address-2"><span id="36843"></span>36843</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="2">Preserve HL and A.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36844"></span>36844</td>
+<td class="instruction">PUSH AF</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36845"></span>36845</td>
+<td class="instruction">CALL <a href="39245.html">get_moves_properties</a></td>
+<td class="comment-1" rowspan="1">Call <a href="39245.html">get_moves_properties</a>: reads movement properties byte from table at <a href="44755.html">44755</a> using A as index.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36848"></span>36848</td>
+<td class="instruction">LD B,(IY+2)</td>
+<td class="comment-1" rowspan="4">Load IY+2 (mirror/flags) into B; AND result with bit 7 only; merge with B; store back to IY+2.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36851"></span>36851</td>
+<td class="instruction">AND 128</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36853"></span>36853</td>
+<td class="instruction">OR B</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36854"></span>36854</td>
+<td class="instruction">LD (IY+2),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36857"></span>36857</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Recover A (new movement ID).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36858"></span>36858</td>
+<td class="instruction">LD (IY+6),A</td>
+<td class="comment-1" rowspan="1">Store new movement ID in IY+6.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36861"></span>36861</td>
+<td class="instruction">LD HL,44421</td>
+<td class="comment-1" rowspan="1">Load <a href="44421.html">mov_ptr_table</a> (movement frame pointer table) into HL.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36864"></span>36864</td>
+<td class="instruction">CALL <a href="38304.html">solve_pointer</a></td>
+<td class="comment-1" rowspan="1">Call <a href="38304.html">solve_pointer</a>: resolve 2-byte pointer from table using A as index; result in HL.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36867"></span>36867</td>
+<td class="instruction">LD (IY+4),L</td>
+<td class="comment-1" rowspan="2">Store resolved frame pointer low byte in IY+4, high byte in IY+5.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36870"></span>36870</td>
+<td class="instruction">LD (IY+5),H</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36873"></span>36873</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="2">Read first byte of frame data into A; store as initial frame index in IY+8.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36874"></span>36874</td>
+<td class="instruction">LD (IY+8),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36877"></span>36877</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">Recover HL.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="36878"></span>36878</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="36822.html">36822</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#36838">Map</a></td>
+<td class="next">
+Next: <a href="36879.html">36879</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/8FE6.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

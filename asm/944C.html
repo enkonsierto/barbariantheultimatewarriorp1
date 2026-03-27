@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 944C</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="9438.html">9438</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#944c">Map</a></td>
+<td class="next">
+Next: <a href="946D.html">946D</a>
+</td>
+</tr>
+</table>
+<div class="description">944C: Goblin kicks the severed head off-screen.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="9AC1.html">combat_loop</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="944c"></span>
+<div class="comments">
+<div class="paragraph">
+Called from <a href="9AC1.html">combat_loop</a> when the goblin X position matches the head screen column.
+</div>
+<div class="paragraph">
+Rewinds the tile sequence pointer by 16: reads the current pointer from <a href="B6D9.html#b6db">head_frame_seq</a>, subtracts 16 to recover the original sequence base (<a href="B6F3.html">p1_head_tile_seq</a> P1 or <a href="B705.html">p2_head_tile_seq</a> P2), and passes it to <a href="9438.html#943e">head_reactivate</a> as BC. This restarts the head tile animation from frame 0 for the kick arc.
+</div>
+<div class="paragraph">
+Switches the trajectory to <a href="B729.html#b7ed">kicked_traj_data</a> (kicked-head bounce), which opens with a sharp upward arc (6 scanlines up per frame, control byte bit 0 = move-up).
+</div>
+<div class="paragraph">
+INPUT: B = Goblin X position. OUTPUT None. DESTROYS: AF, DE, HL.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">goblin_kicks</td>
+<td class="address-2"><span id="944c"></span>944C</td>
+<td class="instruction">LD A,($B6DA)</td>
+<td class="comment-1" rowspan="3">Guard: A = <a href="B6D9.html#b6da">head_state_flag</a> (head state flag); RET Z if 0 (head inactive).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="944f"></span>944F</td>
+<td class="instruction">OR A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9450"></span>9450</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9451"></span>9451</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Preserve goblin X position.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9452"></span>9452</td>
+<td class="instruction">CALL <a href="9BF6.html">sound_tackle</a></td>
+<td class="comment-1" rowspan="2">Plays sound tick.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9455"></span>9455</td>
+<td class="instruction">XOR A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9456"></span>9456</td>
+<td class="instruction">LD HL,($B6DB)</td>
+<td class="comment-1" rowspan="1">Load current tile sequence pointer from <a href="B6D9.html#b6db">head_frame_seq</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9459"></span>9459</td>
+<td class="instruction">AND A</td>
+<td class="comment-1" rowspan="1">Clear carry before subtraction.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="945a"></span>945A</td>
+<td class="instruction">LD BC,$0010</td>
+<td class="comment-1" rowspan="1">BC = 16 (number of frames elapsed since head spawned).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="945d"></span>945D</td>
+<td class="instruction">SBC HL,BC</td>
+<td class="comment-1" rowspan="1">Rewind pointer to start of tile sequence (base address of the original sequence).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="945f"></span>945F</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Preserve rewound pointer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9460"></span>9460</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">BC = rewound tile sequence base (<a href="B6F3.html">p1_head_tile_seq</a> P1 or <a href="B705.html">p2_head_tile_seq</a> P2).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9461"></span>9461</td>
+<td class="instruction">LD DE,$B7ED</td>
+<td class="comment-1" rowspan="1">DE = <a href="B729.html#b7ed">kicked_traj_data</a> kicked-head bounce trajectory, will be written to <a href="B6D9.html#b6dd">head_traj_ptr</a> by <a href="9438.html#943e">head_reactivate</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9464"></span>9464</td>
+<td class="instruction">CALL <a href="9438.html#943e">head_reactivate</a></td>
+<td class="comment-1" rowspan="1">Re-activates head via <a href="9438.html#943e">head_reactivate</a> with rewound tile sequence and kick trajectory.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9467"></span>9467</td>
+<td class="instruction">XOR A</td>
+<td class="comment-1" rowspan="2"><a href="B6D9.html">head_state</a> = 0: reset head direction to right, kicked off-screen right.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9468"></span>9468</td>
+<td class="instruction">LD ($B6D9),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="946b"></span>946B</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore goblin X position.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="946c"></span>946C</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="9438.html">9438</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#944c">Map</a></td>
+<td class="next">
+Next: <a href="946D.html">946D</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/37964.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 95A0</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="954C.html">954C</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#95a0">Map</a></td>
+<td class="next">
+Next: <a href="95AE.html">95AE</a>
+</td>
+</tr>
+</table>
+<div class="description">95A0: Generic 16-bit pointer lookup.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="8A82.html">change_stage_ptr</a>, <a href="8BB5.html">character_ai_engine</a>, <a href="8CD5.html">word_addr_solver</a>, <a href="8FE6.html">set_char_moves</a>, <a href="926E.html">sprite_dispatcher</a>, <a href="992B.html">moves_solver</a> and <a href="9995.html">update_snake_frame_id</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="95a0"></span>
+<div class="comments">
+<div class="paragraph">
+Reads a pointer from a table given a index in A. Adds A*2 to HL and reads the 2-byte entry.
+</div>
+<div class="paragraph">
+INPUT: A = index. HL = table base address. OUTPUT: HL = resolved pointer. DESTROYS: AF, DE, HL.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">solve_pointer</td>
+<td class="address-2"><span id="95a0"></span>95A0</td>
+<td class="instruction">PUSH DE</td>
+<td class="comment-1" rowspan="2">Save table base (HL) on the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95a1"></span>95A1</td>
+<td class="instruction">PUSH HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95a2"></span>95A2</td>
+<td class="instruction">LD L,A</td>
+<td class="comment-1" rowspan="3">HL = A * 2 (byte offset into the pointer table; each entry is 2 bytes).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95a3"></span>95A3</td>
+<td class="instruction">LD H,$00</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95a5"></span>95A5</td>
+<td class="instruction">ADD HL,HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95a6"></span>95A6</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="1">DE = table base.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95a7"></span>95A7</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1">HL = table base + offset, points to the target entry.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95a8"></span>95A8</td>
+<td class="instruction">LD E,(HL)</td>
+<td class="comment-1" rowspan="3">DE = 16-bit pointer from table entry.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95a9"></span>95A9</td>
+<td class="instruction">INC HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95aa"></span>95AA</td>
+<td class="instruction">LD D,(HL)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95ab"></span>95AB</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">Restore HL (table base).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95ac"></span>95AC</td>
+<td class="instruction">EX DE,HL</td>
+<td class="comment-1" rowspan="1">Swap DE and HL: HL = resolved pointer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="95ad"></span>95AD</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="954C.html">954C</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#95a0">Map</a></td>
+<td class="next">
+Next: <a href="95AE.html">95AE</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/38304.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>
