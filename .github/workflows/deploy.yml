@@ -13,17 +13,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Instalar Skoolkit 9.6
-        run: pip install skoolkit==9.6
-
-      - name: Recrear estructura ../skoolkit-9.6/
-        run: |
-          mkdir -p ../skoolkit-9.6
-          curl -sL https://github.com/skoolkid/skoolkit/archive/refs/tags/9.6.tar.gz \
-            | tar -xz --strip-components=1 -C ../skoolkit-9.6
+      - name: Instalar dependencias
+        run: pip install skoolkit==9.6 art
 
       - name: Construir HTML
-        run: make html HTML_OPTIONS="-toOa"
+        env:
+          SKOOLKIT_HOME: ${{ github.workspace }}/../skoolkit-9.6
+        run: |
+          mkdir -p ../skoolkit-9.6/tools
+          curl -sL https://github.com/skoolkid/skoolkit/archive/refs/tags/9.6.tar.gz \
+            | tar -xz --strip-components=1 -C ../skoolkit-9.6
+          make html HTML_OPTIONS="-toOa"
 
       - name: Publicar en gh-pages
         uses: peaceiris/actions-gh-pages@v4
