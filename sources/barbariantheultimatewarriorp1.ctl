@@ -3826,7 +3826,7 @@ N 46467 Example: [1,82] means "1 tile with attribute 82".
 N 46467 Each row ends with 255 marker.
 N 46467 Format per row: [count, attr, count, attr, ..., 255]
 N 46467 Graphics bytes are in #R26752 for Stage 1 and #R30112 for Stage 2.
-  46467 #HTML(<span>Background 2 Attributes.</span></br>)#IMG(bg/bg1_attrs.png)
+  46467 #HTML(<span>Background 2 Attributes.</span></br>)#IMG(bg/bg2_attrs.png)
 @ 46614 label=bg_1_attr_data
   46614 #HTML(<span>Background 1 Attributes.</span></br>)#IMG(bg/bg1_attrs.png)
 @ 46747 label=hit_indicator_frame_table
