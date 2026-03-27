@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 99C7</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="9995.html">9995</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#99c7">Map</a></td>
+<td class="next">
+Next: <a href="9A2C.html">9A2C</a>
+</td>
+</tr>
+</table>
+<div class="description">99C7: Energy decrement, bar display and KO detection.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="8FD6.html">pos_energy_reset</a>, <a href="938C.html">post_fight_setup</a> and <a href="9A5E.html">collision_solver</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="99c7"></span>
+<div class="comments">
+<div class="paragraph">
+Called by <a href="9A5E.html">collision_solver</a> after a hit connects with a non-zero knockback type.
+</div>
+<div class="paragraph">
+Decrements the energy value stored in the low nibble of IY+7 (range 0-13).
+</div>
+<div class="paragraph">
+If energy underflows (was 0, DEC wraps to 255), triggers KO sequence: sets movement 27 (death) on the loser and movement 36 (victory pose) on the winner, then forces the energy display to show the empty bar.
+</div>
+<div class="paragraph">
+SELF-MODIFYING TARGET: the instruction at <a href="99C7.html#99cb">p1_energy_gate</a> is patched from RET Z to NOP by <a href="8D74.html">one_player_mode</a> and <a href="8E9C.html">two_player_mode</a> on game start. In the unpatched binary it prevents P1 from ever losing energy (demo/attract mode protection).
+</div>
+<div class="paragraph">
+INPUT: IY = defender state block (<a href="B559.html">p1_controller_type</a> P1 or <a href="B562.html">p2_controller_type</a> P2).
+</div>
+<div class="paragraph">
+OUTPUT: None. DESTROYS: AF, BC, DE, HL.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">energy_dec</td>
+<td class="address-2"><span id="99c7"></span>99C7</td>
+<td class="instruction">LD A,IYl</td>
+<td class="comment-1" rowspan="1">Load character type to determine if this is P1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="99c9"></span>99C9</td>
+<td class="instruction">CP $59</td>
+<td class="comment-1" rowspan="1">P1 check - fall through to energy gate if P1.</td>
+</tr>
+<tr>
+<td class="asm-label">p1_energy_gate</td>
+<td class="address-1"><span id="99cb"></span>99CB</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">SELF-MODIFYING CODE TARGET. Patched to NOP on game start; as shipped, RET Z skips P1 energy loss entirely.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="99cc"></span>99CC</td>
+<td class="instruction">LD A,(IY+$07)</td>
+<td class="comment-1" rowspan="1">Load packed energy/phase byte from IY+7.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="99cf"></span>99CF</td>
+<td class="instruction">AND $0F</td>
+<td class="comment-1" rowspan="1">Isolate the current energy value.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="99d1"></span>99D1</td>
+<td class="instruction">DEC A</td>
+<td class="comment-1" rowspan="1">Decrement energy.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="99d2"></span>99D2</td>
+<td class="instruction">CP $FF</td>
+<td class="comment-1" rowspan="1">Energy underflowed - jump to KO sequence.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="99d4"></span>99D4</td>
+<td class="instruction">JR Z,<a href="99C7.html#9a0a">energy_dec_4</a></td>
+<td class="comment-1" rowspan="1">Jump to KO sequence if underflow.</td>
+</tr>
+<tr>
+<td class="asm-label">energy_dec_0</td>
+<td class="address-2"><span id="99d6"></span>99D6</td>
+<td class="instruction">OR $10</td>
+<td class="comment-1" rowspan="1">Activate energy bar redraw cycle for this character.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="99d8"></span>99D8</td>
+<td class="instruction">LD (IY+$07),A</td>
+<td class="comment-1" rowspan="1">Write updated energy byte back to IY+7.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="99db"></span>
+<div class="comments">
+<div class="paragraph">
+Redraws the 3-chars energy bar at column 0 (player 1) or 29 (P2/P2).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="99db"></span>99DB</td>
+<td class="instruction">AND $0F</td>
+<td class="comment-1" rowspan="1">Convert energy to a segment display index.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="99dd"></span>99DD</td>
+<td class="instruction">SRL A</td>
+<td class="comment-1" rowspan="1">Halve to get the 3-segment bar index (0-6).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="99df"></span>99DF</td>
+<td class="instruction">LD HL,$B6EB</td>
+<td class="comment-1" rowspan="1">Base of energy bar attribute data <a href="B6EB.html">energy_bar_attrs</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="99e2"></span>99E2</td>
+<td class="instruction">CALL <a href="95AE.html">get_byte_value</a></td>
+<td class="comment-1" rowspan="1">Read display byte for this segment via <a href="95AE.html">get_byte_value</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="99e5"></span>99E5</td>
+<td class="instruction">EX AF,AF'</td>
+<td class="comment-1" rowspan="1">Save display byte across the address calculation.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="99e6"></span>99E6</td>
+<td class="instruction">LD H,$40</td>
+<td class="comment-1" rowspan="1">Set attribute page base.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="99e8"></span>99E8</td>
+<td class="instruction">LD A,IYl</td>
+<td class="comment-1" rowspan="1">Reload character type.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="99ea"></span>99EA</td>
+<td class="instruction">CP $59</td>
+<td class="comment-1" rowspan="2">Jump to P2 bar address if not P1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="99ec"></span>99EC</td>
+<td class="instruction">JR NZ,<a href="99C7.html#99f2">energy_dec_1</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="99ee"></span>99EE</td>
+<td class="instruction">LD L,$00</td>
+<td class="comment-1" rowspan="1">P1 energy bar column - left HUD.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="99f0"></span>99F0</td>
+<td class="instruction">JR <a href="99C7.html#99f4">energy_dec_2</a></td>
+<td class="comment-1" rowspan="1">Jump to shared draw.</td>
+</tr>
+<tr>
+<td class="asm-label">energy_dec_1</td>
+<td class="address-2"><span id="99f2"></span>99F2</td>
+<td class="instruction">LD L,$1D</td>
+<td class="comment-1" rowspan="1">P2 energy bar column - right HUD.</td>
+</tr>
+<tr>
+<td class="asm-label">energy_dec_2</td>
+<td class="address-2"><span id="99f4"></span>99F4</td>
+<td class="instruction">LD B,$03</td>
+<td class="comment-1" rowspan="1">Draw 3 bar segments.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="99f6"></span>99F6</td>
+<td class="instruction">EX AF,AF'</td>
+<td class="comment-1" rowspan="1">Restore display byte.</td>
+</tr>
+<tr>
+<td class="asm-label">energy_dec_3</td>
+<td class="address-2"><span id="99f7"></span>99F7</td>
+<td class="instruction">LD C,A</td>
+<td class="comment-1" rowspan="1">Copy display byte for segment extraction.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="99f8"></span>99F8</td>
+<td class="instruction">AND $03</td>
+<td class="comment-1" rowspan="1">Extract first segment type (bits 0-1).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="99fa"></span>99FA</td>
+<td class="instruction">ADD A,$3A</td>
+<td class="comment-1" rowspan="1">Convert to UDG ASCII code for this segment shape.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="99fc"></span>99FC</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Preserve loop state.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="99fd"></span>99FD</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Preserve screen address.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="99fe"></span>99FE</td>
+<td class="instruction">CALL <a href="8C9C.html">draw_character</a></td>
+<td class="comment-1" rowspan="1">Draw segment glyph via <a href="8C9C.html">draw_character</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a01"></span>9A01</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">Restore screen address.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a02"></span>9A02</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore loop state.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a03"></span>9A03</td>
+<td class="instruction">INC L</td>
+<td class="comment-1" rowspan="1">Advance to next column.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a04"></span>9A04</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="1">Reload display byte.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a05"></span>9A05</td>
+<td class="instruction">RRA</td>
+<td class="comment-1" rowspan="1">Shift to next segment field.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a06"></span>9A06</td>
+<td class="instruction">RRA</td>
+<td class="comment-1" rowspan="1">Shift again to align to the next 2-bit field.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a07"></span>9A07</td>
+<td class="instruction">DJNZ <a href="99C7.html#99f7">energy_dec_3</a></td>
+<td class="comment-1" rowspan="1">Repeat for all 3 segments.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a09"></span>9A09</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return - energy decremented and bar redrawn.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="9a0a"></span>
+<div class="comments">
+<div class="paragraph">
+If energy underflows from 0 to 255 (DEC A wraps), triggers the KO sequence.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">energy_dec_4</td>
+<td class="address-2"><span id="9a0a"></span>9A0A</td>
+<td class="instruction">LD A,$1B</td>
+<td class="comment-1" rowspan="1">KO - apply death movement to loser.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a0c"></span>9A0C</td>
+<td class="instruction">CALL <a href="8FE6.html">set_char_moves</a></td>
+<td class="comment-1" rowspan="1">Apply movement 27 via <a href="8FE6.html">set_char_moves</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a0f"></span>9A0F</td>
+<td class="instruction">PUSH IY</td>
+<td class="comment-1" rowspan="1">Preserve loser state block.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a11"></span>9A11</td>
+<td class="instruction">LD A,IYl</td>
+<td class="comment-1" rowspan="1">Load loser character type.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a13"></span>9A13</td>
+<td class="instruction">CP $59</td>
+<td class="comment-1" rowspan="1">Was loser P1?</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a15"></span>9A15</td>
+<td class="instruction">JR Z,<a href="99C7.html#9a1d">energy_dec_5</a></td>
+<td class="comment-1" rowspan="1">Yes - winner is P2, select P2 state block.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a17"></span>9A17</td>
+<td class="instruction">LD IY,$B559</td>
+<td class="comment-1" rowspan="1">P1 block - winner when loser was P2.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a1b"></span>9A1B</td>
+<td class="instruction">JR <a href="99C7.html#9a21">energy_dec_6</a></td>
+<td class="comment-1" rowspan="1">Jump to apply victory movement.</td>
+</tr>
+<tr>
+<td class="asm-label">energy_dec_5</td>
+<td class="address-2"><span id="9a1d"></span>9A1D</td>
+<td class="instruction">LD IY,$B562</td>
+<td class="comment-1" rowspan="1">P2 block - winner when loser was P1.</td>
+</tr>
+<tr>
+<td class="asm-label">energy_dec_6</td>
+<td class="address-2"><span id="9a21"></span>9A21</td>
+<td class="instruction">LD A,$24</td>
+<td class="comment-1" rowspan="1">Apply victory pose movement 36 to winner.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a23"></span>9A23</td>
+<td class="instruction">CALL <a href="8FE6.html">set_char_moves</a></td>
+<td class="comment-1" rowspan="1">Apply movement 36 via <a href="8FE6.html">set_char_moves</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a26"></span>9A26</td>
+<td class="instruction">POP IY</td>
+<td class="comment-1" rowspan="1">Restore loser state block.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a28"></span>9A28</td>
+<td class="instruction">LD A,$10</td>
+<td class="comment-1" rowspan="1">Set display value for empty bar.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9a2a"></span>9A2A</td>
+<td class="instruction">JR <a href="99C7.html#99d6">energy_dec_0</a></td>
+<td class="comment-1" rowspan="1">Jump back to redraw bar as empty.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="9995.html">9995</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#99c7">Map</a></td>
+<td class="next">
+Next: <a href="9A2C.html">9A2C</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/39367.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Game status buffer entry at 33864</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-g">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Game status buffer</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="33840.html">33840</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#33864">Map</a></td>
+<td class="next">
+Next: <a href="33876.html">33876</a>
+</td>
+</tr>
+</table>
+<div class="description">33864: Music engine state buffers.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+12-byte working area for the 2-channel beeper music engine. Used by <a href="33911.html">music_engine</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="33864"></span>
+<div class="comments">
+<div class="paragraph">
+The loop-pointer slots at <a href="33864.html#33869">melody_loop_ptr</a> and <a href="33864.html#33873">bass_loop_ptr</a> are unused pointers where <a href="33840.html">play_music</a> would store a fixed restart address. Superseded by <a href="33903.html">restart_music</a>, which reads the restart address inline from the music data stream.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">melody_note</td>
+<td class="address-1"><span id="33864"></span>33864</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Current melody note index; used by <a href="33889.html">note_to_period_converter</a> to look up period in <a href="34052.html">note_table</a></td>
+</tr>
+<tr>
+<td class="asm-label">bass_note</td>
+<td class="address-1"><span id="33865"></span>33865</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Current bass note index; used by <a href="33889.html">note_to_period_converter</a></td>
+</tr>
+<tr>
+<td class="asm-label">beeper_state</td>
+<td class="address-1"><span id="33866"></span>33866</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">Speaker output bit state, 0 or 16; toggled each half-cycle by <a href="33911.html">music_engine</a></td>
+</tr>
+<tr>
+<td class="asm-label">melody_ptr</td>
+<td class="address-1"><span id="33867"></span>33867</td>
+<td class="instruction">DEFW 60000</td>
+<td class="comment-1" rowspan="1">Current read position in melody sequence <a href="34105.html">melody_data</a>; updated by <a href="33876.html">select_music_pointer</a></td>
+</tr>
+<tr>
+<td class="asm-label">melody_loop_ptr</td>
+<td class="address-1"><span id="33869"></span>33869</td>
+<td class="instruction">DEFW <a href="34105.html#34106">melody_data_0</a></td>
+<td class="comment-1" rowspan="1">- UNUSED. Melody loop-back address; never written in the final build</td>
+</tr>
+<tr>
+<td class="asm-label">bass_ptr</td>
+<td class="address-1"><span id="33871"></span>33871</td>
+<td class="instruction">DEFW 61000</td>
+<td class="comment-1" rowspan="1">Current read position in bass sequence <a href="34671.html">bass_data</a>; updated by <a href="33876.html">select_music_pointer</a></td>
+</tr>
+<tr>
+<td class="asm-label">bass_loop_ptr</td>
+<td class="address-1"><span id="33873"></span>33873</td>
+<td class="instruction">DEFW <a href="34671.html#34672">34672</a></td>
+<td class="comment-1" rowspan="1">- UNUSED. Bass loop-back address; never written in the final build</td>
+</tr>
+<tr>
+<td class="asm-label">note_duration</td>
+<td class="address-1"><span id="33875"></span>33875</td>
+<td class="instruction">DEFB 240</td>
+<td class="comment-1" rowspan="1">Duration counter for the current note; loaded each note by <a href="33911.html">music_engine</a></td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="33840.html">33840</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#33864">Map</a></td>
+<td class="next">
+Next: <a href="33876.html">33876</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/8448.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

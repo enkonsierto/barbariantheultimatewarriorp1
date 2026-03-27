@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at B9A8</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B99E.html">B99E</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b9a8">Map</a></td>
+<td class="next">
+Next: <a href="B9C6.html">B9C6</a>
+</td>
+</tr>
+</table>
+<div class="description">B9A8: Snake animation pointer table.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Table of 14 active 16-bit pointers to snake sprite frames in <a href="82C0.html">snake_sprite_0</a>, indexed by the energy bar draw phase (bits 7-4 of IY+7). Forms a ping-pong cycle through 4 frames: 1-1-1-2-3-3-4-4-3-3-2-2-1-1
+</div>
+<div class="paragraph">
+Used by <a href="9995.html">update_snake_frame_id</a> via <a href="95A0.html">solve_pointer</a> to resolve the frame pointer for each phase.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">snake_pointer_table</td>
+<td class="address-1"><span id="b9a8"></span>B9A8</td>
+<td class="instruction">DEFW <a href="82C0.html">snake_sprite_0</a></td>
+<td class="comment-1" rowspan="3">Phase 0-2  -&gt; <a href="82C0.html">snake_sprite_0</a> snake frame 1 (idle)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b9aa"></span>B9AA</td>
+<td class="instruction">DEFW <a href="82C0.html">snake_sprite_0</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b9ac"></span>B9AC</td>
+<td class="instruction">DEFW <a href="82C0.html">snake_sprite_0</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b9ae"></span>B9AE</td>
+<td class="instruction">DEFW <a href="82C0.html#831b">snake_sprite_1</a></td>
+<td class="comment-1" rowspan="1">Phase 3    -&gt; <a href="82C0.html#831b">snake_sprite_1</a> snake frame 2</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b9b0"></span>B9B0</td>
+<td class="instruction">DEFW <a href="82C0.html#8376">snake_sprite_2</a></td>
+<td class="comment-1" rowspan="2">Phase 4-5  -&gt; <a href="82C0.html#8376">snake_sprite_2</a> snake frame 3</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b9b2"></span>B9B2</td>
+<td class="instruction">DEFW <a href="82C0.html#8376">snake_sprite_2</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b9b4"></span>B9B4</td>
+<td class="instruction">DEFW <a href="82C0.html#83d1">snake_sprite_3</a></td>
+<td class="comment-1" rowspan="2">Phase 6-7  -&gt; <a href="82C0.html#83d1">snake_sprite_3</a> snake frame 4 (peak)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b9b6"></span>B9B6</td>
+<td class="instruction">DEFW <a href="82C0.html#83d1">snake_sprite_3</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b9b8"></span>B9B8</td>
+<td class="instruction">DEFW <a href="82C0.html#8376">snake_sprite_2</a></td>
+<td class="comment-1" rowspan="2">Phase 8-9  -&gt; <a href="82C0.html#8376">snake_sprite_2</a> snake frame 3</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b9ba"></span>B9BA</td>
+<td class="instruction">DEFW <a href="82C0.html#8376">snake_sprite_2</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b9bc"></span>B9BC</td>
+<td class="instruction">DEFW <a href="82C0.html#831b">snake_sprite_1</a></td>
+<td class="comment-1" rowspan="2">Phase 10-11-&gt; <a href="82C0.html#831b">snake_sprite_1</a> snake frame 2</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b9be"></span>B9BE</td>
+<td class="instruction">DEFW <a href="82C0.html#831b">snake_sprite_1</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b9c0"></span>B9C0</td>
+<td class="instruction">DEFW <a href="82C0.html">snake_sprite_0</a></td>
+<td class="comment-1" rowspan="2">Phase 12-13-&gt; <a href="82C0.html">snake_sprite_0</a> snake frame 1 (idle)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b9c2"></span>B9C2</td>
+<td class="instruction">DEFW <a href="82C0.html">snake_sprite_0</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b9c4"></span>B9C4</td>
+<td class="instruction">DEFW <a href="82C0.html">snake_sprite_0</a></td>
+<td class="comment-1" rowspan="1">Entry 14 is never accessed by <a href="9995.html">update_snake_frame_id</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B99E.html">B99E</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b9a8">Map</a></td>
+<td class="next">
+Next: <a href="B9C6.html">B9C6</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/47528.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

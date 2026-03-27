@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at B8E1</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B877.html">B877</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b8e1">Map</a></td>
+<td class="next">
+Next: <a href="B945.html">B945</a>
+</td>
+</tr>
+</table>
+<div class="description">B8E1: Per-frame overlay position table.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+One byte per P2 animation frame. Encodes the framebuffer offset for the overlay relative to the P2's tile:
+</div>
+<div class="paragraph">
+bits 0-5 = scanline offset downward from framebuffer row 94 (0-63 lines).
+</div>
+<div class="paragraph">
+bits 6-7 = fine column offset rightward from P2 X tile (0-3 tiles).
+</div>
+<div class="paragraph">
+When P2 is mirrored (<a href="B562.html#b564">p2_mirror_flags</a> bit 0 set), <a href="954C.html">p2_overlay_tile</a> inverts the column offset as 6-L before adding to the X tile.
+</div>
+<div class="paragraph">
+Indexed by P2 frame index <a href="B562.html#b56a">p2_frame_index</a>. Read by <a href="954C.html">p2_overlay_tile</a> via <a href="95AE.html">get_byte_value</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">p2_overlay_pos_table</td>
+<td class="address-1"><span id="b8e1"></span>B8E1</td>
+<td class="instruction">DEFB $94,$94,$94,$94,$55,$55,$55,$55</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b8e9"></span>B8E9</td>
+<td class="instruction">DEFB $4A,$41,$67,$69,$67,$5B,$0E,$00</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b8f1"></span>B8F1</td>
+<td class="instruction">DEFB $CD,$00,$00,$00,$00,$55,$56,$55</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b8f9"></span>B8F9</td>
+<td class="instruction">DEFB $55,$53,$95,$14,$14,$15,$D5,$95</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b901"></span>B901</td>
+<td class="instruction">DEFB $95,$00,$D5,$00,$00,$00,$00,$00</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b909"></span>B909</td>
+<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$56</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b911"></span>B911</td>
+<td class="instruction">DEFB $56,$56,$55,$94,$94,$94,$94,$94</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b919"></span>B919</td>
+<td class="instruction">DEFB $4A,$69,$69,$5B,$53,$55,$55,$55</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b921"></span>B921</td>
+<td class="instruction">DEFB $55,$55,$53,$95,$56,$95,$14,$55</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b929"></span>B929</td>
+<td class="instruction">DEFB $95,$95,$55,$55,$15,$3F,$3F,$6B</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b931"></span>B931</td>
+<td class="instruction">DEFB $94,$55,$55,$55,$55,$56,$00,$3A</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b939"></span>B939</td>
+<td class="instruction">DEFB $00,$00,$3A,$00,$00,$94,$0E,$00</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b941"></span>B941</td>
+<td class="instruction">DEFB $67,$94,$94,$94</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B877.html">B877</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b8e1">Map</a></td>
+<td class="next">
+Next: <a href="B945.html">B945</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/47329.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

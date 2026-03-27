@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 9BA6</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="9B93.html">9B93</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#9ba6">Map</a></td>
+<td class="next">
+Next: <a href="9BB0.html">9BB0</a>
+</td>
+</tr>
+</table>
+<div class="description">9BA6: 112 ms delay loop.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="8ABA.html">pause_handler_routine</a>, <a href="8C61.html">catch_key</a>, <a href="8E0B.html">key_assign</a>, <a href="8F41.html">menu_fade_out</a>, <a href="8F62.html">rainbow_animation</a>, <a href="93D3.html">post_drain_wait</a>, <a href="972B.html">sweep_transition</a>, <a href="978C.html">clear_row</a>, <a href="979B.html">clear_snake_row</a> and <a href="97C1.html">paints_stage_screen</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="9ba6"></span>
+<div class="comments">
+<div class="paragraph">
+Busy-wait timing routine used by menu and animation code. Runs a nested loop over B and C to burn a fixed number of T-states, roughly one frame at 50 Hz.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">waits_112ms</td>
+<td class="address-2"><span id="9ba6"></span>9BA6</td>
+<td class="instruction">LD BC,$6060</td>
+<td class="comment-1" rowspan="1">Load BC with the loop counters (B=96, C96).</td>
+</tr>
+<tr>
+<td class="asm-label">waits_112ms_0</td>
+<td class="address-2"><span id="9ba9"></span>9BA9</td>
+<td class="instruction">DEC B</td>
+<td class="comment-1" rowspan="1">Inner loop: decrement B.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9baa"></span>9BAA</td>
+<td class="instruction">JR NZ,<a href="9BA6.html#9ba9">waits_112ms_0</a></td>
+<td class="comment-1" rowspan="1">If B is not zero, repeat the inner loop.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9bac"></span>9BAC</td>
+<td class="instruction">DEC C</td>
+<td class="comment-1" rowspan="1">Outer loop: decrement C.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9bad"></span>9BAD</td>
+<td class="instruction">JR NZ,<a href="9BA6.html#9ba9">waits_112ms_0</a></td>
+<td class="comment-1" rowspan="1">If C is not zero, restart the inner loop.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9baf"></span>9BAF</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return after both counters have reached zero (after 9216 loops).</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="9B93.html">9B93</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#9ba6">Map</a></td>
+<td class="next">
+Next: <a href="9BB0.html">9BB0</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/39846.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

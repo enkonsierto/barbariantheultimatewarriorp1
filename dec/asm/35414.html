@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 35414</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="35381.html">35381</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#35414">Map</a></td>
+<td class="next">
+Next: <a href="35426.html">35426</a>
+</td>
+</tr>
+</table>
+<div class="description">35414: Sets infinite time or not.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Sets the timer depending if there are two or one (human) players.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="35414"></span>
+<div class="comments">
+<div class="paragraph">
+Called on each game restart via <a href="35240.html#35288">35288</a>. If <a href="46808.html">timer_flag</a> is already 255 (initial value on load, or 1P/demo mode), returns immediately.
+</div>
+<div class="paragraph">
+Otherwise writes 101 to <a href="46808.html">timer_flag</a> for 2P mode: the extra counts above 90 compensate for the timer decrement between menu selection and game start, so the HUD reads 90 when combat begins.
+</div>
+<div class="paragraph">
+Subsequent rounds bypass this routine and load 90 directly via <a href="36508.html#36519">36519</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">set_infinite_time</td>
+<td class="address-2"><span id="35414"></span>35414</td>
+<td class="instruction">LD A,(46808)</td>
+<td class="comment-1" rowspan="1">Load round timer <a href="46808.html">timer_flag</a> into A.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35417"></span>35417</td>
+<td class="instruction">CP 255</td>
+<td class="comment-1" rowspan="1">If 255, already in infinite time mode; return.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35419"></span>35419</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35420"></span>35420</td>
+<td class="instruction">LD A,101</td>
+<td class="comment-1" rowspan="1">A = 101: 2 Player mode.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35422"></span>35422</td>
+<td class="instruction">LD (46808),A</td>
+<td class="comment-1" rowspan="1">Later 90 will be written in the <a href="46808.html">timer_flag</a> via <a href="36508.html#36519">36519</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35425"></span>35425</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="35381.html">35381</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#35414">Map</a></td>
+<td class="next">
+Next: <a href="35426.html">35426</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/8A56.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

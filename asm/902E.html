@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 902E</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="901F.html">901F</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#902e">Map</a></td>
+<td class="next">
+Next: <a href="9055.html">9055</a>
+</td>
+</tr>
+</table>
+<div class="description">902E: Tile render engine.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="9249.html">draw_single_tile</a>, <a href="94D7.html">render_head_tile</a> and <a href="94F9.html">shadow_head</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="902e"></span>
+<div class="comments">
+<div class="paragraph">
+Reads one tile control byte from the source address and dispatches to one of four renderers based on its bit fields.
+</div>
+<div class="paragraph">
+Control byte: bit 7 = composite tile flag; bits 1-0 = render mode (00 direct copy, 11 AND-mask overlay, 01/10 edge mask); bit 6 = mirror flag, swaps left and right edge renderers when set.
+</div>
+<div class="paragraph">
+INPUT: DE = tile data address. HL = framebuffer destination address. OUT: None. DESTROYS: AF, B, C.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">tile_render_engine</td>
+<td class="address-2"><span id="902e"></span>902E</td>
+<td class="instruction">LD A,(DE)</td>
+<td class="comment-1" rowspan="2">Reads the control byte from the tile source and advances the address.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="902f"></span>902F</td>
+<td class="instruction">INC E</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9030"></span>9030</td>
+<td class="instruction">BIT 7,A</td>
+<td class="comment-1" rowspan="2">Bit 7 set: composite tile - dispatches to <a href="9162.html">comp_tile_dispatcher</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9032"></span>9032</td>
+<td class="instruction">JP NZ,<a href="9162.html">comp_tile_dispatcher</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9035"></span>9035</td>
+<td class="instruction">LD C,A</td>
+<td class="comment-1" rowspan="4">Isolates bits 1-0; dispatches to AND-mask overlay (<a href="9127.html">tile_renderer</a>) if bits 1-0 are 11.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9036"></span>9036</td>
+<td class="instruction">AND $03</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9038"></span>9038</td>
+<td class="instruction">CP $03</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="903a"></span>903A</td>
+<td class="instruction">JP Z,<a href="9127.html">tile_renderer</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="903d"></span>903D</td>
+<td class="instruction">OR A</td>
+<td class="comment-1" rowspan="2">Dispatches to direct-copy renderer (<a href="91D3.html">direct_copy_tile_renderer</a>) if bits 1-0 are 00.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="903e"></span>903E</td>
+<td class="instruction">JP Z,<a href="91D3.html">direct_copy_tile_renderer</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9041"></span>9041</td>
+<td class="instruction">LD A,C</td>
+<td class="comment-1" rowspan="4">Restores the control byte; if the mirror flag (bit 6) is set, flips bits 1-0 to swap left and right edge renderers.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9042"></span>9042</td>
+<td class="instruction">BIT 6,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9044"></span>9044</td>
+<td class="instruction">JR Z,<a href="902E.html#9048">tile_render_engine_0</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9046"></span>9046</td>
+<td class="instruction">XOR $03</td>
+</tr>
+<tr>
+<td class="asm-label">tile_render_engine_0</td>
+<td class="address-2"><span id="9048"></span>9048</td>
+<td class="instruction">BIT 0,A</td>
+<td class="comment-1" rowspan="2">Bit 0 set: dispatches to the AND-mask loop renderer (<a href="9084.html">right_edge_loop</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="904a"></span>904A</td>
+<td class="instruction">JP NZ,<a href="9084.html">right_edge_loop</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="904d"></span>904D</td>
+<td class="instruction">LD B,$15</td>
+<td class="comment-1" rowspan="1">B=21 (scanline counter)</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="904f"></span>
+<div class="comments">
+<div class="paragraph">
+Left-edge AND-mask renderer loop (21 scanlines).
+</div>
+<div class="paragraph">
+Outer loop for the left-edge AND-mask tile renderer. Calls <a href="9055.html">left_edge_renderer</a> 21 times (B=21), once per scanline of the tile.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">left_edge_loop</td>
+<td class="address-2"><span id="904f"></span>904F</td>
+<td class="instruction">CALL <a href="9055.html">left_edge_renderer</a></td>
+<td class="comment-1" rowspan="1">Render one scanline via <a href="9055.html">left_edge_renderer</a> (left-edge AND-mask renderer)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9052"></span>9052</td>
+<td class="instruction">DJNZ <a href="902E.html#904f">left_edge_loop</a></td>
+<td class="comment-1" rowspan="1">Loop 21 times</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9054"></span>9054</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="901F.html">901F</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#902e">Map</a></td>
+<td class="next">
+Next: <a href="9055.html">9055</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/36910.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

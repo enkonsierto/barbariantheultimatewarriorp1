@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 39916</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="39906.html">39906</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#39916">Map</a></td>
+<td class="next">
+Next: <a href="39926.html">39926</a>
+</td>
+</tr>
+</table>
+<div class="description">39916: Beeper LOW phase.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="39897.html">beeper_emit</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="39916"></span>
+<div class="comments">
+<div class="paragraph">
+B-iteration delay then OUT (254),0 to drive speaker LOW.
+</div>
+<div class="paragraph">
+INPUT:  B = number of delay iterations. DESTROYS: AF, B.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">beep_low_phase</td>
+<td class="address-2"><span id="39916"></span>39916</td>
+<td class="instruction">NOP</td>
+<td class="comment-1" rowspan="4">NOP x3 + DJNZ timing loop, B iterations.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39917"></span>39917</td>
+<td class="instruction">NOP</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39918"></span>39918</td>
+<td class="instruction">NOP</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39919"></span>39919</td>
+<td class="instruction">DJNZ <a href="39916.html#39916">beep_low_phase</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39921"></span>39921</td>
+<td class="instruction">LD A,0</td>
+<td class="comment-1" rowspan="2">A = 0; drive speaker LOW via OUT 254,A.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39923"></span>39923</td>
+<td class="instruction">OUT (254),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39925"></span>39925</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="39906.html">39906</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#39916">Map</a></td>
+<td class="next">
+Next: <a href="39926.html">39926</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/9BEC.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

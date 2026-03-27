@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 48896</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="48795.html">48795</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#48896">Map</a></td>
+<td class="next">
+Next: <a href="49046.html">49046</a>
+</td>
+</tr>
+</table>
+<div class="description">48896: Game Start Routine</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Called by <a href="35240.html#35244">35244</a>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="48896"></span>
+<div class="comments">
+<div class="paragraph">
+This area will be deleted by <a href="38494.html">i_v_t_generator</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">game_start</td>
+<td class="address-2"><span id="48896"></span>48896</td>
+<td class="instruction">XOR A</td>
+<td class="comment-1" rowspan="1">A = 0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48897"></span>48897</td>
+<td class="instruction">OUT (254),A</td>
+<td class="comment-1" rowspan="1">Border Black</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48899"></span>48899</td>
+<td class="instruction">SET 7,A</td>
+<td class="comment-1" rowspan="3">Set 128 (character controlled by CPU) to the address <a href="46425.html">p1_controller_type</a> and <a href="46434.html">p2_controller_type</a>. (Player 1 and 2 respectively).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48901"></span>48901</td>
+<td class="instruction">LD (46425),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48904"></span>48904</td>
+<td class="instruction">LD (46434),A</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="48907"></span>
+<div class="comments">
+<div class="paragraph">
+Copies the UDG table.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">copy_font_table</td>
+<td class="address-1"><span id="48907"></span>48907</td>
+<td class="instruction">LD HL,26112</td>
+<td class="comment-1" rowspan="4">Copy the fonts at <a href="26112.html">font_table</a> to the UDG address <a href="23720.html">udg_font_addr</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48910"></span>48910</td>
+<td class="instruction">LD DE,23720</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48913"></span>48913</td>
+<td class="instruction">LD BC,344</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48916"></span>48916</td>
+<td class="instruction">LDIR</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="48918"></span>
+<div class="comments">
+<div class="paragraph">
+Deletes the hud (where the text "Palace Software" in the loading screen is written.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48918"></span>48918</td>
+<td class="instruction">LD B,16</td>
+<td class="comment-1" rowspan="1">Blanks the 16-tile score and time HUD area.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48920"></span>48920</td>
+<td class="instruction">LD HL,16552</td>
+<td class="comment-1" rowspan="1">Points HL to the first HUD tile at 16552.</td>
+</tr>
+<tr>
+<td class="asm-label">game_start_0</td>
+<td class="address-2"><span id="48923"></span>48923</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="2">Saves BC and HL.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48924"></span>48924</td>
+<td class="instruction">PUSH BC</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48925"></span>48925</td>
+<td class="instruction">LD A,58</td>
+<td class="comment-1" rowspan="1">Loads ASCII 58 as the blank tile index.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48927"></span>48927</td>
+<td class="instruction">CALL <a href="35996.html">draw_character</a></td>
+<td class="comment-1" rowspan="1">Draws one tile via <a href="35996.html">draw_character</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48930"></span>48930</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="2">Restores BC and HL.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48931"></span>48931</td>
+<td class="instruction">POP HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48932"></span>48932</td>
+<td class="instruction">INC L</td>
+<td class="comment-1" rowspan="1">Advances HL to the next HUD tile.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48933"></span>48933</td>
+<td class="instruction">DJNZ <a href="48896.html#48923">game_start_0</a></td>
+<td class="comment-1" rowspan="1">Repeats 16 times.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="48935"></span>
+<div class="comments">
+<div class="paragraph">
+Copies the 100 bytes of <a href="49046.html">x_delta_table</a> to <a href="49152.html#61568">61568</a>. This area will be deleted by <a href="38494.html">i_v_t_generator</a>.
+</div>
+<div class="paragraph">
+NOTE: destination <a href="49152.html#61568">61568</a> initially contains Barbarian tile data (unused tiles 194-195 of the sprite tileset at <a href="49152.html#49216">49216</a>).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48935"></span>48935</td>
+<td class="instruction">LD HL,49046</td>
+<td class="comment-1" rowspan="4">Copies <a href="49046.html">x_delta_table</a> to <a href="49152.html#61568">61568</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48938"></span>48938</td>
+<td class="instruction">LD DE,61568</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48941"></span>48941</td>
+<td class="instruction">LD BC,100</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48944"></span>48944</td>
+<td class="instruction">LDIR</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="48946"></span>
+<div class="comments">
+<div class="paragraph">
+Builds the bit-reversal lookup table at <a href="23296.html">reversal_table</a> (256 entries). Each entry maps a byte value to its horizontally mirrored equivalent (bits reversed). Used by <a href="39258.html">draw_snakes_sprites</a> to horizontally mirror sprite tile data before blitting, avoiding per-pixel bit manipulation at render time.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">reversal_table_generator</td>
+<td class="address-1"><span id="48946"></span>48946</td>
+<td class="instruction">LD HL,23296</td>
+<td class="comment-1" rowspan="1">Points HL to the bit-reversal table <a href="23296.html">reversal_table</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48949"></span>48949</td>
+<td class="instruction">XOR A</td>
+<td class="comment-1" rowspan="3">Initialises A 0 and B 0 as byte counter; C holds the value to reverse.</td>
+</tr>
+<tr>
+<td class="asm-label">game_start_1</td>
+<td class="address-2"><span id="48950"></span>48950</td>
+<td class="instruction">LD B,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48951"></span>48951</td>
+<td class="instruction">LD C,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48952"></span>48952</td>
+<td class="instruction">SRL C</td>
+<td class="comment-1" rowspan="1">Shifts the least significant bit of C into the carry flag.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48954"></span>48954</td>
+<td class="instruction">RLA</td>
+<td class="comment-1" rowspan="1">Rotates carry into A, building the reversed byte from MSB to LSB.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48955"></span>48955</td>
+<td class="instruction">SRL C</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48957"></span>48957</td>
+<td class="instruction">RLA</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48958"></span>48958</td>
+<td class="instruction">SRL C</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48960"></span>48960</td>
+<td class="instruction">RLA</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48961"></span>48961</td>
+<td class="instruction">SRL C</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48963"></span>48963</td>
+<td class="instruction">RLA</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48964"></span>48964</td>
+<td class="instruction">SRL C</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48966"></span>48966</td>
+<td class="instruction">RLA</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48967"></span>48967</td>
+<td class="instruction">SRL C</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48969"></span>48969</td>
+<td class="instruction">RLA</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48970"></span>48970</td>
+<td class="instruction">SRL C</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48972"></span>48972</td>
+<td class="instruction">RLA</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48973"></span>48973</td>
+<td class="instruction">SRL C</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48975"></span>48975</td>
+<td class="instruction">RLA</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48976"></span>48976</td>
+<td class="instruction">LD (HL),A</td>
+<td class="comment-1" rowspan="1">Writes the completed reversed byte to the table.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48977"></span>48977</td>
+<td class="instruction">LD A,B</td>
+<td class="comment-1" rowspan="2">Increments the counter. B and C both hold the new value for the next iteration.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48978"></span>48978</td>
+<td class="instruction">INC A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48979"></span>48979</td>
+<td class="instruction">JR Z,<a href="48896.html#48984">game_start_2</a></td>
+<td class="comment-1" rowspan="1">Counter reached 255; 256 entries written, jump to <a href="48896.html#48984">game_start_2</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48981"></span>48981</td>
+<td class="instruction">LD L,A</td>
+<td class="comment-1" rowspan="1">Advances HL to the next table entry.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48982"></span>48982</td>
+<td class="instruction">JR <a href="48896.html#48950">game_start_1</a></td>
+<td class="comment-1" rowspan="1">Loops back for the next byte.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="48984"></span>
+<div class="comments">
+<div class="paragraph">
+Builds the left-column scanline address table at <a href="23552.html">left_col_addr_table</a> (84 entries, 23552-23718). Uses SP as a fast write pointer: sets SP to 23720 and PUSHes each scanline address while walking upward from the bottom-left of the game window. On return, SP is restored from the saved value.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">game_start_2</td>
+<td class="address-2"><span id="48984"></span>48984</td>
+<td class="instruction">LD (46452),SP</td>
+<td class="comment-1" rowspan="1">Saves the current stack pointer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48988"></span>48988</td>
+<td class="instruction">LD SP,23720</td>
+<td class="comment-1" rowspan="1">Redirects SP to <a href="23720.html">udg_font_addr</a> top of the table area.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48991"></span>48991</td>
+<td class="instruction">LD HL,22434</td>
+<td class="comment-1" rowspan="1">Points HL to the bottom-left of the game window, first scanline of column 0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48994"></span>48994</td>
+<td class="instruction">LD B,84</td>
+<td class="comment-1" rowspan="1">B 84, one iteration per scanline entry.</td>
+</tr>
+<tr>
+<td class="asm-label">game_start_3</td>
+<td class="address-2"><span id="48996"></span>48996</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Pushes the scanline address to the table via SP.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48997"></span>48997</td>
+<td class="instruction">DEC H</td>
+<td class="comment-1" rowspan="1">Steps HL up one scanline via <a href="36879.html">calc_prev_scanline_addr</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48998"></span>48998</td>
+<td class="instruction">LD A,H</td>
+<td class="comment-1" rowspan="1">Tests if H has crossed a tile boundary lower 3 bits of H equal to 7.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="48999"></span>48999</td>
+<td class="instruction">CPL</td>
+<td class="comment-1" rowspan="2">Inverts A and checks the 3 least significant bits for 0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="49000"></span>49000</td>
+<td class="instruction">AND 7</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="49002"></span>49002</td>
+<td class="instruction">JR NZ,<a href="48896.html#49014">game_start_4</a></td>
+<td class="comment-1" rowspan="1">Tile boundary not crossed, address is ready, jump to loop end.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="49004"></span>49004</td>
+<td class="instruction">LD A,L</td>
+<td class="comment-1" rowspan="1">Tile boundary crossed, calculate the row above.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="49005"></span>49005</td>
+<td class="instruction">SUB 32</td>
+<td class="comment-1" rowspan="2">Decrements L by 32 to step up one tile row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="49007"></span>49007</td>
+<td class="instruction">LD L,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="49008"></span>49008</td>
+<td class="instruction">JR C,<a href="48896.html#49014">game_start_4</a></td>
+<td class="comment-1" rowspan="1">If carry set, the screen third changed, address is correct.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="49010"></span>49010</td>
+<td class="instruction">LD A,H</td>
+<td class="comment-1" rowspan="3">If no carry, corrects H by adding 8.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="49011"></span>49011</td>
+<td class="instruction">ADD A,8</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="49013"></span>49013</td>
+<td class="instruction">LD H,A</td>
+</tr>
+<tr>
+<td class="asm-label">game_start_4</td>
+<td class="address-2"><span id="49014"></span>49014</td>
+<td class="instruction">DJNZ <a href="48896.html#48996">game_start_3</a></td>
+<td class="comment-1" rowspan="1">Decrements B and loops for the next entry.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="49016"></span>49016</td>
+<td class="instruction">LD SP,(46452)</td>
+<td class="comment-1" rowspan="1">Restores the original stack pointer.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="49020"></span>
+<div class="comments">
+<div class="paragraph">
+Sets the interrupt table and mode. The routine will overwrite itself from <a href="48896.html">game_start</a> to 49152.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="49020"></span>49020</td>
+<td class="instruction">LD HL,48896</td>
+<td class="comment-1" rowspan="1">Sets <a href="48896.html">game_start</a> to HL. The starting of the Interrtupt Vector Table.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="49023"></span>49023</td>
+<td class="instruction">LD C,240</td>
+<td class="comment-1" rowspan="1">Save 240 (F0) to compound the jump address (F0F0).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="49025"></span>49025</td>
+<td class="instruction">LD A,191</td>
+<td class="comment-1" rowspan="2">Copy 191 (BF) to I. The vector table will go from 0xBF00(48896) to 0xBFFF(49151).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="49027"></span>49027</td>
+<td class="instruction">LD I,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="49029"></span>49029</td>
+<td class="instruction">IM 2</td>
+<td class="comment-1" rowspan="1">Sets Interrupt mode 2.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="49031"></span>49031</td>
+<td class="instruction">LD A,195</td>
+<td class="comment-1" rowspan="4">Writes "JP/C3(191) <a href="38500.html">int_serv_routine</a>" at the address 61680 (F0F0).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="49033"></span>49033</td>
+<td class="instruction">LD (61680),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="49036"></span>49036</td>
+<td class="instruction">LD DE,38500</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="49039"></span>49039</td>
+<td class="instruction">LD (61681),DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="49043"></span>49043</td>
+<td class="instruction">JP <a href="38494.html">i_v_t_generator</a></td>
+<td class="comment-1" rowspan="1">Jumps to <a href="38494.html">i_v_t_generator</a>. We move, so the running code won't be affected by the overwritting.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="48795.html">48795</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#48896">Map</a></td>
+<td class="next">
+Next: <a href="49046.html">49046</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/BF00.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

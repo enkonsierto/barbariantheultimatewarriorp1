@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 9B93</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="9AC1.html">9AC1</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#9b93">Map</a></td>
+<td class="next">
+Next: <a href="9BA6.html">9BA6</a>
+</td>
+</tr>
+</table>
+<div class="description">9B93: Per-frame character update.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Called from <a href="9AC1.html">combat_loop</a> for each fighter with IY pointing to their state block.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="9b93"></span>
+<div class="comments">
+<div class="paragraph">
+Returns immediately if IY+0=0 (inactive) or <a href="B973.html">frame_counter_hit</a> non-zero (3-frame cycle skip, see <a href="9C9C.html">frame_counter_hit_inc</a>).
+</div>
+<div class="paragraph">
+INPUT: IY = character state block. OUTPUT: None. DESTROYS: AF, BC, HL.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">char_frame_update</td>
+<td class="address-2"><span id="9b93"></span>9B93</td>
+<td class="instruction">LD A,(IY+$00)</td>
+<td class="comment-1" rowspan="1">Load fighter block state.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9b96"></span>9B96</td>
+<td class="instruction">OR A</td>
+<td class="comment-1" rowspan="2">Return if zero (inactive).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9b97"></span>9B97</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9b98"></span>9B98</td>
+<td class="instruction">LD A,($B973)</td>
+<td class="comment-1" rowspan="1">Load <a href="B973.html">frame_counter_hit</a> (hit-detection skip counter)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9b9b"></span>9B9B</td>
+<td class="instruction">OR A</td>
+<td class="comment-1" rowspan="2">Return if non-zero (frame skip).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9b9c"></span>9B9C</td>
+<td class="instruction">RET NZ</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9b9d"></span>9B9D</td>
+<td class="instruction">CALL <a href="98F4.html">input_gated_moves</a></td>
+<td class="comment-1" rowspan="1">Process input/movement transition.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9ba0"></span>9BA0</td>
+<td class="instruction">CALL <a href="92A0.html">anim_frame_stepper</a></td>
+<td class="comment-1" rowspan="1">Advance frame pointer, trigger frame events.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9ba3"></span>9BA3</td>
+<td class="instruction">JP <a href="986C.html">x_update_and_tackle_gate</a></td>
+<td class="comment-1" rowspan="1">Tail-call to <a href="986C.html">x_update_and_tackle_gate</a> and returns directly to <a href="9AC1.html">combat_loop</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="9AC1.html">9AC1</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#9b93">Map</a></td>
+<td class="next">
+Next: <a href="9BA6.html">9BA6</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/39827.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

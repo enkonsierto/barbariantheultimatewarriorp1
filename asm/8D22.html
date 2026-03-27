@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 8D22</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="8D09.html">8D09</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#8d22">Map</a></td>
+<td class="next">
+Next: <a href="8D74.html">8D74</a>
+</td>
+</tr>
+</table>
+<div class="description">8D22: Main Menu loop</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="89A8.html">entry_point</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="8d22"></span>
+<div class="comments">
+<div class="paragraph">
+Draws the main menu text and runs the rainbow colour animation loop until a valid option key (0-3) is pressed.
+</div>
+<div class="paragraph">
+On selection jumps to the corresponding game mode: 0=demo, 1=1P, 2=2P, 3=developer info screen.
+</div>
+<div class="paragraph">
+INPUT  None. OUTPUT None (tail-calls game mode entry points).
+</div>
+<div class="paragraph">
+DESTROYS AF, BC, DE, HL.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">main_menu</td>
+<td class="address-2"><span id="8d22"></span>8D22</td>
+<td class="instruction">CALL <a href="972B.html">sweep_transition</a></td>
+<td class="comment-1" rowspan="1">Fade out any previous screen content to black via <a href="972B.html">sweep_transition</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="8d25"></span>
+<div class="comments">
+<div class="paragraph">
+This entry point is used by the routines at <a href="8D74.html">one_player_mode</a>, <a href="8E0B.html">key_assign</a> and <a href="8E9C.html">two_player_mode</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">main_menu_0</td>
+<td class="address-2"><span id="8d25"></span>8D25</td>
+<td class="instruction">LD HL,$4845</td>
+<td class="comment-1" rowspan="1">Set HL to the top menu text position 18501.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d28"></span>8D28</td>
+<td class="instruction">LD DE,$BE9B</td>
+<td class="comment-1" rowspan="1">Point DE to the first menu string pointer <a href="BE9B.html">select_option</a> ("SELECT OPTION").</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d2b"></span>8D2B</td>
+<td class="instruction">CALL <a href="8CC5.html">draw_string</a></td>
+<td class="comment-1" rowspan="1">Draw the string via <a href="8CC5.html">draw_string</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d2e"></span>8D2E</td>
+<td class="instruction">LD HL,$4886</td>
+<td class="comment-1" rowspan="1">Advance to next line position 18566.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d31"></span>8D31</td>
+<td class="instruction">INC DE</td>
+<td class="comment-1" rowspan="1">Advance to next string pointer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d32"></span>8D32</td>
+<td class="instruction">CALL <a href="8CC5.html">draw_string</a></td>
+<td class="comment-1" rowspan="1">Draw "0 DEMO".</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d35"></span>8D35</td>
+<td class="instruction">LD HL,$48A6</td>
+<td class="comment-1" rowspan="1">Advance to next line 18598.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d38"></span>8D38</td>
+<td class="instruction">INC DE</td>
+<td class="comment-1" rowspan="1">Advance to next string.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d39"></span>8D39</td>
+<td class="instruction">CALL <a href="8CC5.html">draw_string</a></td>
+<td class="comment-1" rowspan="1">Draw "1 ONE PLAYER".</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d3c"></span>8D3C</td>
+<td class="instruction">LD HL,$48C6</td>
+<td class="comment-1" rowspan="1">Advance to next line 18630.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d3f"></span>8D3F</td>
+<td class="instruction">INC DE</td>
+<td class="comment-1" rowspan="1">Advance to next string.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d40"></span>8D40</td>
+<td class="instruction">CALL <a href="8CC5.html">draw_string</a></td>
+<td class="comment-1" rowspan="1">Draw "2 TWO PLAYER".</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d43"></span>8D43</td>
+<td class="instruction">CALL <a href="8F62.html">rainbow_animation</a></td>
+<td class="comment-1" rowspan="1">Run the rainbow animation <a href="8F62.html">rainbow_animation</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">main_menu_1</td>
+<td class="address-2"><span id="8d46"></span>8D46</td>
+<td class="instruction">CALL <a href="8430.html">play_music</a></td>
+<td class="comment-1" rowspan="1">Play music and wait for any key via <a href="8430.html">play_music</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d49"></span>8D49</td>
+<td class="instruction">LD A,$23</td>
+<td class="comment-1" rowspan="2">Test for '0' key scancode 35 via <a href="8C46.html">key_state_test</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d4b"></span>8D4B</td>
+<td class="instruction">CALL <a href="8C46.html">key_state_test</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d4e"></span>8D4E</td>
+<td class="instruction">JP NC,<a href="8F41.html">menu_fade_out</a></td>
+<td class="comment-1" rowspan="1">Jump to demo mode <a href="8F41.html">menu_fade_out</a> if pressed.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d51"></span>8D51</td>
+<td class="instruction">LD A,$24</td>
+<td class="comment-1" rowspan="2">Test for '1' key scancode 36.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d53"></span>8D53</td>
+<td class="instruction">CALL <a href="8C46.html">key_state_test</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d56"></span>8D56</td>
+<td class="instruction">JR NC,<a href="8D74.html">one_player_mode</a></td>
+<td class="comment-1" rowspan="1">Jump to 1P mode <a href="8D74.html">one_player_mode</a> if pressed.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d58"></span>8D58</td>
+<td class="instruction">LD A,$1C</td>
+<td class="comment-1" rowspan="2">Test for '2' key scancode 28.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d5a"></span>8D5A</td>
+<td class="instruction">CALL <a href="8C46.html">key_state_test</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d5d"></span>8D5D</td>
+<td class="instruction">JP NC,<a href="8E9C.html">two_player_mode</a></td>
+<td class="comment-1" rowspan="1">Jump to 2P mode <a href="8E9C.html">two_player_mode</a> if pressed.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d60"></span>8D60</td>
+<td class="instruction">LD A,$14</td>
+<td class="comment-1" rowspan="2">Test for '3' key scancode 20.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d62"></span>8D62</td>
+<td class="instruction">CALL <a href="8C46.html">key_state_test</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d65"></span>8D65</td>
+<td class="instruction">JR C,<a href="8D22.html#8d46">main_menu_1</a></td>
+<td class="comment-1" rowspan="1">Loop back if not pressed.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d67"></span>8D67</td>
+<td class="instruction">LD HL,$4845</td>
+<td class="comment-1" rowspan="1">For option 3: set HL back to top position 18501.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d6a"></span>8D6A</td>
+<td class="instruction">PUSH DE</td>
+<td class="comment-1" rowspan="1">Preserve DE.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d6b"></span>8D6B</td>
+<td class="instruction">LD DE,$BE16</td>
+<td class="comment-1" rowspan="1">Point DE to developer string <a href="BDB1.html#be16">BE16</a> ("FINAL V8:5&gt;11&gt;87").</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d6e"></span>8D6E</td>
+<td class="instruction">CALL <a href="8CB6.html">draw_word</a></td>
+<td class="comment-1" rowspan="1">Draw it via <a href="8CB6.html">draw_word</a> (overwrites "SELECT OPTION").</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d71"></span>8D71</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="1">Restore DE.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8d72"></span>8D72</td>
+<td class="instruction">JR <a href="8D22.html#8d46">main_menu_1</a></td>
+<td class="comment-1" rowspan="1">Loop back to animation and key wait.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="8D09.html">8D09</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#8d22">Map</a></td>
+<td class="next">
+Next: <a href="8D74.html">8D74</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/36130.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

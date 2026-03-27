@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Unused RAM at 46871</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-u">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Unused</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="46853.html">46853</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#46871">Map</a></td>
+<td class="next">
+Next: <a href="46887.html">46887</a>
+</td>
+</tr>
+</table>
+<div class="description">46871: Final boss spell tile sequence (unused).</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Tile index sequence alternating IDs 18 and 22, resolved against sprite bank base <a href="40192.html">other_sprites</a>. Belongs to the final boss projectile spell attack, present in another version of the game. The final boss does not appear in this build and this sequence is not referenced by any runtime code.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="46871"></span>
+<div class="comments">
+<div class="paragraph">
+Dead data retained from another game version. Format identical to <a href="46835.html">p1_head_tile_seq</a> and <a href="46853.html">p2_head_tile_seq</a> (tile IDs + sentinel 255).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46871"></span>46871</td>
+<td class="instruction">DEFB 18,22,18,22,18,22,18,22</td>
+<td class="comment-1" rowspan="2">Tile IDs: 18,22 alternating (spell projectile animation frames).</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46879"></span>46879</td>
+<td class="instruction">DEFB 18,22,18,22,18,22,18</td>
+</tr>
+<tr>
+<td class="address-1"><span id="46886"></span>46886</td>
+<td class="instruction">DEFB 255</td>
+<td class="comment-1" rowspan="1">Sentinel 255: end of sequence.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="46853.html">46853</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#46871">Map</a></td>
+<td class="next">
+Next: <a href="46887.html">46887</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/B717.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

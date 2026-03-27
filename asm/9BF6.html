@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 9BF6</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="9BEC.html">9BEC</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#9bf6">Map</a></td>
+<td class="next">
+Next: <a href="9C20.html">9C20</a>
+</td>
+</tr>
+</table>
+<div class="description">9BF6: Combat Sound Effects List.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="8ACB.html">hit_processor</a>, <a href="92A0.html">anim_frame_stepper</a> and <a href="944C.html">goblin_kicks</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="9bf6"></span>
+<div class="comments">
+<div class="paragraph">
+Loads IX with the sound data pointer for this event and plays it via <a href="9BCD.html">beeper_engine</a>. Then returns to the caller routine.
+</div>
+<div class="paragraph">
+INPUT: A = sound index. OUTPUT: None. DESTROYS: AF, BC, DE, HL, IX.
+</div>
+<div class="paragraph">
+Sound: kick
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">sound_tackle</td>
+<td class="address-2"><span id="9bf6"></span>9BF6</td>
+<td class="instruction">LD IX,$BC34</td>
+<td class="comment-1" rowspan="2">Points to sound data <a href="BC1E.html#bc34">sound_tackle_data</a> and plays it.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9bfa"></span>9BFA</td>
+<td class="instruction">JR <a href="9BCD.html">beeper_engine</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="9bfc"></span>
+<div class="comments">
+<div class="paragraph">
+Sound: tackle
+</div>
+<div class="paragraph">
+Called from <a href="8ACB.html">hit_processor</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">sound_kick</td>
+<td class="address-2"><span id="9bfc"></span>9BFC</td>
+<td class="instruction">LD IX,$BC48</td>
+<td class="comment-1" rowspan="2">Points to sound data <a href="BC1E.html#bc48">sound_kick_data</a> and plays it.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c00"></span>9C00</td>
+<td class="instruction">JR <a href="9BCD.html">beeper_engine</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="9c02"></span>
+<div class="comments">
+<div class="paragraph">
+Sound: slash
+</div>
+<div class="paragraph">
+Called from <a href="8ACB.html">hit_processor</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">sound_slash</td>
+<td class="address-2"><span id="9c02"></span>9C02</td>
+<td class="instruction">LD IX,$BC52</td>
+<td class="comment-1" rowspan="2">Points to sound data <a href="BC1E.html#bc52">sound_slash_data</a> and plays it.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c06"></span>9C06</td>
+<td class="instruction">JR <a href="9BCD.html">beeper_engine</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="9c08"></span>
+<div class="comments">
+<div class="paragraph">
+Sound: Head Cut
+</div>
+<div class="paragraph">
+Called from <a href="8ABA.html">pause_handler_routine</a>, <a href="8ACB.html">hit_processor</a> and <a href="8C61.html">catch_key</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">sound_head_cut</td>
+<td class="address-2"><span id="9c08"></span>9C08</td>
+<td class="instruction">LD IX,$BC1E</td>
+<td class="comment-1" rowspan="2">Points to sound data <a href="BC1E.html">sound_head_cut_data</a> and plays it.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c0c"></span>9C0C</td>
+<td class="instruction">JR <a href="9BCD.html">beeper_engine</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="9c0e"></span>
+<div class="comments">
+<div class="paragraph">
+Sound: guard 1
+</div>
+<div class="paragraph">
+Called from <a href="8ACB.html">hit_processor</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">sound_guard_1</td>
+<td class="address-2"><span id="9c0e"></span>9C0E</td>
+<td class="instruction">LD IX,$BC71</td>
+<td class="comment-1" rowspan="2">Points to sound data <a href="BC1E.html#bc71">sound_guard_1_data</a> and plays it.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c12"></span>9C12</td>
+<td class="instruction">JR <a href="9BCD.html">beeper_engine</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="9c14"></span>
+<div class="comments">
+<div class="paragraph">
+Sound: guard 2
+</div>
+<div class="paragraph">
+Called from <a href="8ACB.html">hit_processor</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">sound_guard_2</td>
+<td class="address-2"><span id="9c14"></span>9C14</td>
+<td class="instruction">LD IX,$BC7B</td>
+<td class="comment-1" rowspan="2">Points to sound data <a href="BC1E.html#bc7b">sound_guard_2_data</a> and plays it.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c18"></span>9C18</td>
+<td class="instruction">JR <a href="9BCD.html">beeper_engine</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="9c1a"></span>
+<div class="comments">
+<div class="paragraph">
+Sound: round end.
+</div>
+<div class="paragraph">
+Plays when the post-fight score sequence runs.
+</div>
+<div class="paragraph">
+Called from <a href="93DC.html">timer_tick</a> (post-fight handler, score + time HUD update). NOT part of the in-combat sounds, dispatch chain in <a href="8ACB.html">hit_processor</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">sound_round_end</td>
+<td class="address-2"><span id="9c1a"></span>9C1A</td>
+<td class="instruction">LD IX,$BC85</td>
+<td class="comment-1" rowspan="2">Points to sound data <a href="BC1E.html#bc85">round_end_data</a> plays it.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9c1e"></span>9C1E</td>
+<td class="instruction">JR <a href="9BCD.html">beeper_engine</a></td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="9BEC.html">9BEC</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#9bf6">Map</a></td>
+<td class="next">
+Next: <a href="9C20.html">9C20</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/39926.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

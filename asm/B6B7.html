@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at B6B7</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B69B.html">B69B</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b6b7">Map</a></td>
+<td class="next">
+Next: <a href="B6D3.html">B6D3</a>
+</td>
+</tr>
+</table>
+<div class="description">B6B7: Score award frame table.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+3-byte entries: (attacker_frame_id, score_low, score_high).
+</div>
+<div class="paragraph">
+If IY+8 matches attacker_frame_id, adds DE score delta to <a href="B945.html">p1_score</a> (P1) or R47431 (P2), depending on IYl: 89=P1 barbarian, 98=P2 barbarian.
+</div>
+<div class="paragraph">
+Searched by <a href="8ACB.html">hit_processor</a> via <a href="95B5.html">find_hit_section</a>. Terminated by sentinel 0x80.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="b6b7"></span>
+<div class="comments">
+<div class="paragraph">
+Called after the hit indicator phase in <a href="8ACB.html">hit_processor</a>. Same search pattern as <a href="B69B.html">hit_indicator_frame_table</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">score_award_frame_table</td>
+<td class="address-1"><span id="b6b7"></span>B6B7</td>
+<td class="instruction">DEFB $05,$32,$00</td>
+<td class="comment-1" rowspan="1">Frame 5 (<a href="AAFC.html#ab1f">AB1F</a>), 50 points</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b6ba"></span>B6BA</td>
+<td class="instruction">DEFB $07,$32,$00</td>
+<td class="comment-1" rowspan="1">Frame 7 (<a href="AAFC.html#ab1f">AB1F</a>), 50 points</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b6bd"></span>B6BD</td>
+<td class="instruction">DEFB $0C,$32,$00</td>
+<td class="comment-1" rowspan="1">Frame 12 (<a href="AAFC.html#ab51">AB51</a>), 50 points</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b6c0"></span>B6C0</td>
+<td class="instruction">DEFB $17,$C8,$00</td>
+<td class="comment-1" rowspan="1">Frame 23 (<a href="AAFC.html#ab98">AB98</a>), 200 points</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b6c3"></span>B6C3</td>
+<td class="instruction">DEFB $1A,$F4,$01</td>
+<td class="comment-1" rowspan="1">Frame 26 (<a href="AAFC.html#abad">ABAD</a>), 500 points</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b6c6"></span>B6C6</td>
+<td class="instruction">DEFB $1C,$64,$00</td>
+<td class="comment-1" rowspan="1">Frame 28 (<a href="AAFC.html#abbc">ABBC</a>), 100 points</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b6c9"></span>B6C9</td>
+<td class="instruction">DEFB $20,$64,$00</td>
+<td class="comment-1" rowspan="1">Frame 32 (<a href="AAFC.html#abd8">ABD8</a>), 100 points</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b6cc"></span>B6CC</td>
+<td class="instruction">DEFB $22,$C8,$00</td>
+<td class="comment-1" rowspan="1">Frame 34 (<a href="AAFC.html#abe4">ABE4</a>), 200 points</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b6cf"></span>B6CF</td>
+<td class="instruction">DEFB $43,$C8,$00</td>
+<td class="comment-1" rowspan="1">Frame 67 (<a href="AAFC.html#abad">ABAD</a>), 200 points</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b6d2"></span>B6D2</td>
+<td class="instruction">DEFB $80</td>
+<td class="comment-1" rowspan="1">Terminator.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B69B.html">B69B</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b6b7">Map</a></td>
+<td class="next">
+Next: <a href="B6D3.html">B6D3</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/46775.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

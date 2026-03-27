@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at AD85</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-w">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="AC9D.html">AC9D</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#ad85">Map</a></td>
+<td class="next">
+Next: <a href="ADD5.html">ADD5</a>
+</td>
+</tr>
+</table>
+<div class="description">AD85: Movement animation pointer table.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+40 entries (0-39), 2 bytes each. Points to animation chains in <a href="AC9D.html">barb_ptr_table</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="ad85"></span>
+<div class="comments">
+<div class="paragraph">
+Array of 2-byte LE pointers indexed by movement ID.
+</div>
+<div class="paragraph">
+Each pointer targets the frame sequence for that movement.
+</div>
+<div class="paragraph">
+Read by <a href="8FE6.html">set_char_moves</a> after updating IY+6 (movement ID).
+</div>
+<div class="paragraph">
+Result stored in IY+4,IY+5 as frame sequence start pointer.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">mov_ptr_table</td>
+<td class="address-1"><span id="ad85"></span>AD85</td>
+<td class="instruction">DEFW <a href="ADD5.html">frame_seq</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ad87"></span>AD87</td>
+<td class="instruction">DEFW <a href="ADD5.html#adea">$ADEA</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ad89"></span>AD89</td>
+<td class="instruction">DEFW <a href="ADD5.html#adef">$ADEF</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ad8b"></span>AD8B</td>
+<td class="instruction">DEFW <a href="ADD5.html#adf4">$ADF4</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ad8d"></span>AD8D</td>
+<td class="instruction">DEFW <a href="ADD5.html#adf9">$ADF9</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ad8f"></span>AD8F</td>
+<td class="instruction">DEFW <a href="ADD5.html#adfe">$ADFE</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ad91"></span>AD91</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae04">$AE04</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ad93"></span>AD93</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae06">$AE06</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ad95"></span>AD95</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae0e">$AE0E</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ad97"></span>AD97</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae17">$AE17</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ad99"></span>AD99</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae1d">$AE1D</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ad9b"></span>AD9B</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae20">$AE20</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ad9d"></span>AD9D</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae26">$AE26</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ad9f"></span>AD9F</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae2b">$AE2B</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ada1"></span>ADA1</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae2f">$AE2F</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ada3"></span>ADA3</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae35">$AE35</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ada5"></span>ADA5</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae39">$AE39</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ada7"></span>ADA7</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae3d">$AE3D</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="ada9"></span>ADA9</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae42">$AE42</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="adab"></span>ADAB</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae47">$AE47</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="adad"></span>ADAD</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae54">$AE54</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="adaf"></span>ADAF</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae56">$AE56</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="adb1"></span>ADB1</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae58">$AE58</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="adb3"></span>ADB3</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae5a">$AE5A</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="adb5"></span>ADB5</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae5c">$AE5C</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="adb7"></span>ADB7</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae5e">$AE5E</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="adb9"></span>ADB9</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae63">$AE63</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="adbb"></span>ADBB</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae67">$AE67</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="adbd"></span>ADBD</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae74">$AE74</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="adbf"></span>ADBF</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae83">$AE83</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="adc1"></span>ADC1</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae8b">$AE8B</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="adc3"></span>ADC3</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae8e">$AE8E</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="adc5"></span>ADC5</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae96">$AE96</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="adc7"></span>ADC7</td>
+<td class="instruction">DEFW <a href="ADD5.html#ae9e">$AE9E</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="adc9"></span>ADC9</td>
+<td class="instruction">DEFW <a href="ADD5.html#aea6">$AEA6</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="adcb"></span>ADCB</td>
+<td class="instruction">DEFW <a href="ADD5.html#aeab">$AEAB</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="adcd"></span>ADCD</td>
+<td class="instruction">DEFW <a href="ADD5.html#aeb7">$AEB7</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="adcf"></span>ADCF</td>
+<td class="instruction">DEFW <a href="ADD5.html#aec2">$AEC2</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="add1"></span>ADD1</td>
+<td class="instruction">DEFW <a href="ADD5.html#aec4">$AEC4</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="add3"></span>ADD3</td>
+<td class="instruction">DEFW <a href="ADD5.html#aed1">$AED1</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="AC9D.html">AC9D</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#ad85">Map</a></td>
+<td class="next">
+Next: <a href="ADD5.html">ADD5</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/44421.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 921C</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="920B.html">920B</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#921c">Map</a></td>
+<td class="next">
+Next: <a href="9249.html">9249</a>
+</td>
+</tr>
+</table>
+<div class="description">921C: Draws 4 rows of 3 tiles each from the sprite frame data.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="926E.html">sprite_dispatcher</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="921c"></span>
+<div class="comments">
+<div class="paragraph">
+HL is set to the framebuffer base for the character's current X tile position row. H=94 (framebuffer init), L=IY+3 (X tile).
+</div>
+<div class="paragraph">
+Each of the 4 rows renders 3 tiles via <a href="9249.html">draw_single_tile</a> draw single tile, then advancing the framebuffer pointer by 663 bytes 21 scanlines x 32-byte stride to the next row.
+</div>
+<div class="paragraph">
+If the mirror flag IY2 bit 0 is set, adds an extra 2 to the column offset C before each row of tiles and 4 more between rows for right-side alignment.
+</div>
+<div class="paragraph">
+INPUT: DE = frame address. HL framebuffer row, L=IY+3 (X tile). C = initial column offset from frame data. IX = DE+1 tile index array.
+</div>
+<div class="paragraph">
+OUTPUT: None. DESTROYS: AF, BC, DE, HL, IX
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">draws_4_x_3_tiles</td>
+<td class="address-2"><span id="921c"></span>921C</td>
+<td class="instruction">LD B,$04</td>
+<td class="comment-1" rowspan="1">B=4 outer loop counter, one iteration per sprite row 4 rows total.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="921e"></span>921E</td>
+<td class="instruction">LD A,(DE)</td>
+<td class="comment-1" rowspan="2">Loads column offset from first frame data byte post-column into C.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="921f"></span>921F</td>
+<td class="instruction">LD C,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9220"></span>9220</td>
+<td class="instruction">INC DE</td>
+<td class="comment-1" rowspan="1">Advances DE past column offset byte, now points to tile index array.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9221"></span>9221</td>
+<td class="instruction">PUSH DE</td>
+<td class="comment-1" rowspan="2">Saves DE tile index array start on stack, loads into IX for single-tile rendering.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9222"></span>9222</td>
+<td class="instruction">POP IX</td>
+</tr>
+<tr>
+<td class="asm-label">4x3_outer_loop</td>
+<td class="address-2"><span id="9224"></span>9224</td>
+<td class="instruction">LD A,(IY+$02)</td>
+<td class="comment-1" rowspan="1">Loads IY2 mirror flags.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9227"></span>9227</td>
+<td class="instruction">BIT 0,A</td>
+<td class="comment-1" rowspan="1">Tests mirror flag bit 0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9229"></span>9229</td>
+<td class="instruction">JR Z,<a href="921C.html#922d">4x3_inner_loop</a></td>
+<td class="comment-1" rowspan="1">Mirror inactive or adjustment complete: C ready for first tile of row (<a href="921C.html#922d">4x3_inner_loop</a>)..</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="922b"></span>922B</td>
+<td class="instruction">INC C</td>
+<td class="comment-1" rowspan="2">Mirror active: increments C by 2 for right-side column adjustment before row</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="922c"></span>922C</td>
+<td class="instruction">INC C</td>
+</tr>
+<tr>
+<td class="asm-label">4x3_inner_loop</td>
+<td class="address-2"><span id="922d"></span>922D</td>
+<td class="instruction">CALL <a href="9249.html">draw_single_tile</a></td>
+<td class="comment-1" rowspan="1">Draws first tile of row via <a href="9249.html">draw_single_tile</a> using current C offset.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9230"></span>9230</td>
+<td class="instruction">CALL <a href="9249.html">draw_single_tile</a></td>
+<td class="comment-1" rowspan="1">Draws second tile of row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9233"></span>9233</td>
+<td class="instruction">CALL <a href="9249.html">draw_single_tile</a></td>
+<td class="comment-1" rowspan="1">Draws third tile of row, completing one sprite row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9236"></span>9236</td>
+<td class="instruction">LD DE,$0297</td>
+<td class="comment-1" rowspan="2">Advances framebuffer HL by 663 bytes 21 scanlines to next sprite row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9239"></span>9239</td>
+<td class="instruction">ADD HL,DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="923a"></span>923A</td>
+<td class="instruction">DEC B</td>
+<td class="comment-1" rowspan="1">Decrements row counter B.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="923b"></span>923B</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Repeats for all 4 rows until B=0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="923c"></span>923C</td>
+<td class="instruction">LD A,(IY+$02)</td>
+<td class="comment-1" rowspan="1">Loads mirror flag.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="923f"></span>923F</td>
+<td class="instruction">BIT 0,A</td>
+<td class="comment-1" rowspan="1">Tests mirror flag again.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9241"></span>9241</td>
+<td class="instruction">JR Z,<a href="921C.html#9224">4x3_outer_loop</a></td>
+<td class="comment-1" rowspan="1">Mirror inactive: Jumps to <a href="921C.html#9224">4x3_outer_loop</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9243"></span>9243</td>
+<td class="instruction">INC C</td>
+<td class="comment-1" rowspan="5">Mirror active: adds 4 to C for inter-row right-side adjustment.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9244"></span>9244</td>
+<td class="instruction">INC C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9245"></span>9245</td>
+<td class="instruction">INC C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9246"></span>9246</td>
+<td class="instruction">INC C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9247"></span>9247</td>
+<td class="instruction">JR <a href="921C.html#9224">4x3_outer_loop</a></td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="920B.html">920B</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#921c">Map</a></td>
+<td class="next">
+Next: <a href="9249.html">9249</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/37404.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

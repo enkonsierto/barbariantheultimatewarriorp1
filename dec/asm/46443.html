@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Game status buffer entry at 46443</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-g">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Game status buffer</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="46434.html">46434</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#46443">Map</a></td>
+<td class="next">
+Next: <a href="46452.html">46452</a>
+</td>
+</tr>
+</table>
+<div class="description">46443: Goblin state block.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="46443"></span>
+<div class="comments">
+<div class="paragraph">
+IY points here in <a href="37701.html">init_goblin</a>. <a href="36838.html">set_char_moves</a> writes IY+2, IY+4, IY+5, IY+6, IY+8.
+</div>
+<div class="paragraph">
+IY+0: 0=goblin inactive (cleared by <a href="39617.html">combat_loop</a> when X=29), 255=active (set by <a href="37701.html">init_goblin</a>).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">goblin_state_block</td>
+<td class="address-1"><span id="46443"></span>46443</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">IY+0: Active flag (0=inactive, 255=active).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="46444"></span>46444</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">IY+1: Input state byte. Unused for goblin.</td>
+</tr>
+<tr>
+<td class="asm-label">goblin_mirror_flags</td>
+<td class="address-1"><span id="46445"></span>46445</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">IY+2: Mirror and control flags (bit 0=facing direction, bit 7=non-controllable).</td>
+</tr>
+<tr>
+<td class="asm-label">goblin_x_pos</td>
+<td class="address-1"><span id="46446"></span>46446</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">IY+3: X tile position. Also used as frame counter by <a href="39617.html">combat_loop</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">goblin_frame_ptr</td>
+<td class="address-1"><span id="46447"></span>46447</td>
+<td class="instruction">DEFW <a href="44501.html#44522">44522</a></td>
+<td class="comment-1" rowspan="1">IY+4+5: Frame data pointer.</td>
+</tr>
+<tr>
+<td class="asm-label">goblin_movement_id</td>
+<td class="address-1"><span id="46449"></span>46449</td>
+<td class="instruction">DEFB 1</td>
+<td class="comment-1" rowspan="1">IY+6: Current movement ID (30=goblin entrance).</td>
+</tr>
+<tr>
+<td class="asm-label">goblin_energy_byte</td>
+<td class="address-1"><span id="46450"></span>46450</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">IY+7: Energy byte. Unused for goblin.</td>
+</tr>
+<tr>
+<td class="asm-label">goblin_frame_index</td>
+<td class="address-1"><span id="46451"></span>46451</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">IY+8: Current frame index byte.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="46434.html">46434</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#46443">Map</a></td>
+<td class="next">
+Next: <a href="46452.html">46452</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/B56B.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

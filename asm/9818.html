@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 9818</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="97F2.html">97F2</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#9818">Map</a></td>
+<td class="next">
+Next: <a href="9827.html">9827</a>
+</td>
+</tr>
+</table>
+<div class="description">9818: Copy one tile row from stage background directly to screen.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="97C1.html">paints_stage_screen</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="9818"></span>
+<div class="comments">
+<div class="paragraph">
+Copies all 8 scanlines of a 28-tile-wide row from the stage background graphics to the ZX Spectrum screen VRAM. Called from <a href="97C1.html">paints_stage_screen</a> to paint the stage row by row during screen transitions.
+</div>
+<div class="paragraph">
+INPUT: DE = stage background source address. HL = VRAM destination address, top scanline of the target tile row.
+</div>
+<div class="paragraph">
+OUTPUT: HL = VRAM address of the next tile row below. DE = advanced by 224 bytes (28 bytes x 8 scanlines).
+</div>
+<div class="paragraph">
+DESTROYS AF, B.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">copy_bg_row</td>
+<td class="address-2"><span id="9818"></span>9818</td>
+<td class="instruction">LD B,$08</td>
+<td class="comment-1" rowspan="1">Sets the scanline counter to 8, one iteration per scanline of the tile row.</td>
+</tr>
+<tr>
+<td class="asm-label">copy_bg_row_0</td>
+<td class="address-2"><span id="981a"></span>981A</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="2">Saves the loop counter and the address for the current scanline.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="981b"></span>981B</td>
+<td class="instruction">PUSH HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="981c"></span>981C</td>
+<td class="instruction">CALL <a href="9827.html">copy_bg_scanline</a></td>
+<td class="comment-1" rowspan="1">Copies one 28-byte scanline from the stage background to VRAM via <a href="9827.html">copy_bg_scanline</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="981f"></span>981F</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">Restores the VRAM address to the start of the current scanline.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9820"></span>9820</td>
+<td class="instruction">CALL <a href="901F.html">calc_next_scanline_addr</a></td>
+<td class="comment-1" rowspan="1">Advances the VRAM pointer to the next scanline via <a href="901F.html">calc_next_scanline_addr</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9823"></span>9823</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restores the loop counter.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9824"></span>9824</td>
+<td class="instruction">DJNZ <a href="9818.html#981a">copy_bg_row_0</a></td>
+<td class="comment-1" rowspan="1">Repeats for all 8 scanlines of the tile row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9826"></span>9826</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Returns once the full tile row has been copied.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="97F2.html">97F2</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#9818">Map</a></td>
+<td class="next">
+Next: <a href="9827.html">9827</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/38936.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

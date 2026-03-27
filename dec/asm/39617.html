@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 39617</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="39518.html">39518</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#39617">Map</a></td>
+<td class="next">
+Next: <a href="39827.html">39827</a>
+</td>
+</tr>
+</table>
+<div class="description">39617: Main combat loop.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="35240.html">entry_point</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="39617"></span>
+<div class="comments">
+<div class="paragraph">
+Executed once per frame during active combat. Handles input, animation, rendering and death exit for both fighters and the goblin.
+</div>
+<div class="paragraph">
+Frame processing order:
+</div>
+<div class="paragraph">
+1. Compute horizontal fighter distance via <a href="39856.html">calc_distance</a>, stored in <a href="46834.html">fighter_distance</a>.
+</div>
+<div class="paragraph">
+2. Dispatch input or AI for P2 then P1 via <a href="35713.html">input_ai_dispatcher</a>.
+</div>
+<div class="paragraph">
+3. Update animation, movement and X position for P2 then P1 via <a href="39827.html">char_frame_update</a>.
+</div>
+<div class="paragraph">
+4. Draw P1 and P2 sprites via <a href="37486.html">sprite_dispatcher</a>; Z-order determined by movement properties bit 0.
+</div>
+<div class="paragraph">
+5. Draw the P2 overlay tile via <a href="38220.html">p2_overlay_tile</a>.
+</div>
+<div class="paragraph">
+6. If the goblin (<a href="46443.html">goblin_state_block</a>) is inactive, return immediately. Otherwise advance and draw it via <a href="37536.html">anim_frame_stepper</a> and <a href="37486.html">sprite_dispatcher</a>, skipping the frame advance if the skip counter (<a href="47475.html">frame_counter_hit</a>) is non-zero.
+</div>
+<div class="paragraph">
+7. Death check: if P1 holds movement 8 or 27, set P2 to movement 19 (victory) with IY=P1 as the dying character. Otherwise set P1 to movement 19 with IY=P2 as the dying character.
+</div>
+<div class="paragraph">
+8. Goblin sync and exit: when the goblin's X tile reaches 29, deactivate the goblin and select exit animation 29, 31, 32 or 33 based on mirror flag and movement ID.
+</div>
+<div class="paragraph">
+Movement IDs: 8 = decapitation death, 27 = standard death, 19 = victory pose.
+</div>
+<div class="paragraph">
+INPUT: None. OUTPUT: None. Framebuffer, character state blocks and <a href="46834.html">fighter_distance</a> updated in place.
+</div>
+<div class="paragraph">
+DESTROYS: AF, BC, DE, HL, IY, IX.
+</div>
+<div class="paragraph">
+Frame processing: compute fighter distance, dispatch input or AI for both characters, update animation and X position, draw sprites in Z-order, draw P2 overlay tile, and advance and draw the goblin if active.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">combat_loop</td>
+<td class="address-2"><span id="39617"></span>39617</td>
+<td class="instruction">CALL <a href="39856.html">calc_distance</a></td>
+<td class="comment-1" rowspan="1">Compute fighter distance and store in <a href="46834.html">fighter_distance</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39620"></span>39620</td>
+<td class="instruction">LD IY,46434</td>
+<td class="comment-1" rowspan="2">Point IY at P2 state block and dispatch input or AI for P2.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39624"></span>39624</td>
+<td class="instruction">CALL <a href="35713.html">input_ai_dispatcher</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39627"></span>39627</td>
+<td class="instruction">CALL <a href="39827.html">char_frame_update</a></td>
+<td class="comment-1" rowspan="1">Update P2 frame, movement and X position.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39630"></span>39630</td>
+<td class="instruction">LD IY,46425</td>
+<td class="comment-1" rowspan="2">Point IY at P1 state block and dispatch input or AI for P1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39634"></span>39634</td>
+<td class="instruction">CALL <a href="35713.html">input_ai_dispatcher</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39637"></span>39637</td>
+<td class="instruction">CALL <a href="39827.html">char_frame_update</a></td>
+<td class="comment-1" rowspan="1">Update P1 frame, movement and X position.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39640"></span>39640</td>
+<td class="instruction">LD A,(46431)</td>
+<td class="comment-1" rowspan="2">Load P1 movement ID and read its properties byte via <a href="39245.html">get_moves_properties</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39643"></span>39643</td>
+<td class="instruction">CALL <a href="39245.html">get_moves_properties</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39646"></span>39646</td>
+<td class="instruction">BIT 0,A</td>
+<td class="comment-1" rowspan="1">Test draw-order flag (bit 0 of the properties byte).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39648"></span>39648</td>
+<td class="instruction">LD IY,46425</td>
+<td class="comment-1" rowspan="6">If bit clear, draw P1 then P2 (P2 on top). If bit set, draw P2 only here (P1 draws on top at <a href="39617.html#39674">39674</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39652"></span>39652</td>
+<td class="instruction">PUSH IY</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39654"></span>39654</td>
+<td class="instruction">CALL Z,<a href="37486.html">sprite_dispatcher</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39657"></span>39657</td>
+<td class="instruction">LD IY,46434</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39661"></span>39661</td>
+<td class="instruction">CALL NZ,<a href="37486.html">sprite_dispatcher</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39664"></span>39664</td>
+<td class="instruction">CALL Z,<a href="37486.html">sprite_dispatcher</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39667"></span>39667</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Save draw-order flag.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39668"></span>39668</td>
+<td class="instruction">CALL <a href="38220.html">p2_overlay_tile</a></td>
+<td class="comment-1" rowspan="1">Draw P2 overlay tile.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39671"></span>39671</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore draw-order flag.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39672"></span>39672</td>
+<td class="instruction">POP IY</td>
+<td class="comment-1" rowspan="1">Restore P1 state block pointer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39674"></span>39674</td>
+<td class="instruction">CALL NZ,<a href="37486.html">sprite_dispatcher</a></td>
+<td class="comment-1" rowspan="1">Draw-order bit set: draw P1 sprite on top.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39677"></span>39677</td>
+<td class="instruction">LD IY,46443</td>
+<td class="comment-1" rowspan="1">Point IY at the goblin state block.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39681"></span>39681</td>
+<td class="instruction">LD A,(IY+0)</td>
+<td class="comment-1" rowspan="1">Load goblin active flag.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39684"></span>39684</td>
+<td class="instruction">OR A</td>
+<td class="comment-1" rowspan="1">Test if zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39685"></span>39685</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Return if goblin is inactive.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39686"></span>39686</td>
+<td class="instruction">LD A,(47475)</td>
+<td class="comment-1" rowspan="1">Load frame skip counter.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39689"></span>39689</td>
+<td class="instruction">OR A</td>
+<td class="comment-1" rowspan="1">Test if non-zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39690"></span>39690</td>
+<td class="instruction">JP NZ,<a href="37486.html">sprite_dispatcher</a></td>
+<td class="comment-1" rowspan="1">Skip counter active: draw current goblin frame without advancing animation.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39693"></span>39693</td>
+<td class="instruction">LD A,(IY+3)</td>
+<td class="comment-1" rowspan="1">Load goblin X tile counter.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39696"></span>39696</td>
+<td class="instruction">INC A</td>
+<td class="comment-1" rowspan="1">Increment X tile counter.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39697"></span>39697</td>
+<td class="instruction">AND 31</td>
+<td class="comment-1" rowspan="1">Wrap to 0-31.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39699"></span>39699</td>
+<td class="instruction">LD (IY+3),A</td>
+<td class="comment-1" rowspan="1">Write updated X tile counter back.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39702"></span>39702</td>
+<td class="instruction">CALL <a href="37536.html">anim_frame_stepper</a></td>
+<td class="comment-1" rowspan="1">Advance goblin animation frame.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39705"></span>39705</td>
+<td class="instruction">CALL <a href="37486.html">sprite_dispatcher</a></td>
+<td class="comment-1" rowspan="1">Draw goblin sprite.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="39708"></span>
+<div class="comments">
+<div class="paragraph">
+Death check: if P1 holds movement 8 or 27, assign victory (movement 19) to P2 with P1 as the dying character; otherwise assign victory to P1 with P2 as the dying character.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39708"></span>39708</td>
+<td class="instruction">LD IY,46425</td>
+<td class="comment-1" rowspan="1">Point IY at P1 state block for death check.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39712"></span>39712</td>
+<td class="instruction">LD A,(IY+6)</td>
+<td class="comment-1" rowspan="1">Load P1 current movement ID.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39715"></span>39715</td>
+<td class="instruction">CP 8</td>
+<td class="comment-1" rowspan="1">Is P1 in the decapitation death animation (movement 8)?</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39717"></span>39717</td>
+<td class="instruction">JR Z,<a href="39617.html#39725">combat_loop_0</a></td>
+<td class="comment-1" rowspan="1">Yes: take the P1 dying path.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39719"></span>39719</td>
+<td class="instruction">CP 27</td>
+<td class="comment-1" rowspan="1">Is P1 in the standard death animation (movement 27)?</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39721"></span>39721</td>
+<td class="instruction">JR Z,<a href="39617.html#39725">combat_loop_0</a></td>
+<td class="comment-1" rowspan="1">Yes: take the P1 dying path.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39723"></span>39723</td>
+<td class="instruction">JR <a href="39617.html#39740">combat_loop_1</a></td>
+<td class="comment-1" rowspan="1">P1 not dying: take the P2 dying path.</td>
+</tr>
+<tr>
+<td class="asm-label">combat_loop_0</td>
+<td class="address-2"><span id="39725"></span>39725</td>
+<td class="instruction">LD IY,46434</td>
+<td class="comment-1" rowspan="2">P1 dying: point IY at P2 and load A=19 for victory.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39729"></span>39729</td>
+<td class="instruction">LD A,19</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39731"></span>39731</td>
+<td class="instruction">CALL <a href="36838.html">set_char_moves</a></td>
+<td class="comment-1" rowspan="1">Apply movement 19 victory to P2 via <a href="36838.html">set_char_moves</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39734"></span>39734</td>
+<td class="instruction">LD IY,46425</td>
+<td class="comment-1" rowspan="1">Point IY back at P1 state block (dying character).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39738"></span>39738</td>
+<td class="instruction">JR <a href="39617.html#39749">combat_loop_2</a></td>
+<td class="comment-1" rowspan="1">Jump to position check.</td>
+</tr>
+<tr>
+<td class="asm-label">combat_loop_1</td>
+<td class="address-2"><span id="39740"></span>39740</td>
+<td class="instruction">LD A,19</td>
+<td class="comment-1" rowspan="1">P2 dying: load A=19 for victory.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39742"></span>39742</td>
+<td class="instruction">CALL <a href="36838.html">set_char_moves</a></td>
+<td class="comment-1" rowspan="1">Apply movement 19 victory to P1 via <a href="36838.html">set_char_moves</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39745"></span>39745</td>
+<td class="instruction">LD IY,46434</td>
+<td class="comment-1" rowspan="1">Point IY at P2 state block (dying character) for position check.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="39749"></span>
+<div class="comments">
+<div class="paragraph">
+Goblin sync and exit: synchronise goblin step-over with the dying character body, trigger the flying head final phase, and when the goblin X tile reaches 29 deactivate it and select the exit animation based on mirror flag and movement ID.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">combat_loop_2</td>
+<td class="address-2"><span id="39749"></span>39749</td>
+<td class="instruction">LD B,(IY+3)</td>
+<td class="comment-1" rowspan="1">Load dying character's X tile position into B.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39752"></span>39752</td>
+<td class="instruction">LD A,7</td>
+<td class="comment-1" rowspan="1">Load constant 7 for sync offset.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39754"></span>39754</td>
+<td class="instruction">ADD A,B</td>
+<td class="comment-1" rowspan="1">Add X tile to compute goblin sync threshold (X+7).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39755"></span>39755</td>
+<td class="instruction">LD B,A</td>
+<td class="comment-1" rowspan="1">Save sync threshold in B.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39756"></span>39756</td>
+<td class="instruction">LD A,(46446)</td>
+<td class="comment-1" rowspan="1">Load goblin X tile position from <a href="46443.html#46446">goblin_x_pos</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39759"></span>39759</td>
+<td class="instruction">CP B</td>
+<td class="comment-1" rowspan="1">Compare goblin X tile with sync threshold.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39760"></span>39760</td>
+<td class="instruction">JR NZ,<a href="39617.html#39765">combat_loop_3</a></td>
+<td class="comment-1" rowspan="1">No match: skip body nudge, jump to head sync check.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="39762"></span>
+<div class="comments">
+<div class="paragraph">
+Goblin step-over sync fires when <a href="46443.html#46446">goblin_x_pos</a> matches <a href="46809.html#46815">head_screen_addr</a> AND 31 - 1 AND 31. Triggers once as the goblin steps over the landed head, launching it rightward.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39762"></span>39762</td>
+<td class="instruction">INC (IY+3)</td>
+<td class="comment-1" rowspan="1">Sync match: nudge dying character X position by 1 for body alignment.</td>
+</tr>
+<tr>
+<td class="asm-label">combat_loop_3</td>
+<td class="address-2"><span id="39765"></span>39765</td>
+<td class="instruction">LD B,A</td>
+<td class="comment-1" rowspan="1">Preserve goblin X tile position in B.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39766"></span>39766</td>
+<td class="instruction">LD A,(46815)</td>
+<td class="comment-1" rowspan="1">Load low byte of head framebuffer address from <a href="46809.html#46815">head_screen_addr</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39769"></span>39769</td>
+<td class="instruction">AND 31</td>
+<td class="comment-1" rowspan="1">Extract screen column (0-31).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39771"></span>39771</td>
+<td class="instruction">DEC A</td>
+<td class="comment-1" rowspan="1">Offset by 1 to align with goblin X tracking.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39772"></span>39772</td>
+<td class="instruction">AND 31</td>
+<td class="comment-1" rowspan="1">Wrap to 0-31 column range.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39774"></span>39774</td>
+<td class="instruction">CP B</td>
+<td class="comment-1" rowspan="1">Compare adjusted head column with goblin X tile.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39775"></span>39775</td>
+<td class="instruction">CALL Z,<a href="37964.html">goblin_kicks</a></td>
+<td class="comment-1" rowspan="1">Match: trigger flying head final-phase update via <a href="37964.html">goblin_kicks</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39778"></span>39778</td>
+<td class="instruction">LD A,B</td>
+<td class="comment-1" rowspan="1">Reload goblin X tile position into A.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39779"></span>39779</td>
+<td class="instruction">CP 29</td>
+<td class="comment-1" rowspan="1">Test if goblin X tile has reached 29 (body exits the screen).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39781"></span>39781</td>
+<td class="instruction">RET NZ</td>
+<td class="comment-1" rowspan="1">Not yet: return, fight sequence continues.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39782"></span>39782</td>
+<td class="instruction">XOR A</td>
+<td class="comment-1" rowspan="2">Goblin X reached 29: deactivate goblin by clearing <a href="46443.html">goblin_state_block</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39783"></span>39783</td>
+<td class="instruction">LD (46443),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39786"></span>39786</td>
+<td class="instruction">LD A,(IY+2)</td>
+<td class="comment-1" rowspan="1">Load the dying character's mirror flag byte.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39789"></span>39789</td>
+<td class="instruction">BIT 0,A</td>
+<td class="comment-1" rowspan="1">Test bit 0: is the character mirrored (facing left)?</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39791"></span>39791</td>
+<td class="instruction">JR Z,<a href="39617.html#39810">combat_loop_5</a></td>
+<td class="comment-1" rowspan="1">Not mirrored: jump to <a href="39617.html#39810">combat_loop_5</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="39793"></span>
+<div class="comments">
+<div class="paragraph">
+Exit animation selection when mirrored (facing left): movement 27 (death): exit 32 (drag left, mirrored); movement 8 (decapitation): exit 29 (drag left mirrored with decap).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39793"></span>39793</td>
+<td class="instruction">LD A,(IY+6)</td>
+<td class="comment-1" rowspan="1">Mirrored: load dying character's movement ID.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39796"></span>39796</td>
+<td class="instruction">CP 27</td>
+<td class="comment-1" rowspan="1">Is it movement 27 (standard death)?</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39798"></span>39798</td>
+<td class="instruction">JR Z,<a href="39617.html#39805">combat_loop_4</a></td>
+<td class="comment-1" rowspan="1">Yes: jump to <a href="39617.html#39805">combat_loop_4</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39800"></span>39800</td>
+<td class="instruction">LD A,29</td>
+<td class="comment-1" rowspan="2">No (decapitation): apply drag-left (mirrored) with decap exit animation (29) via <a href="36838.html">set_char_moves</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39802"></span>39802</td>
+<td class="instruction">JP <a href="36838.html">set_char_moves</a></td>
+</tr>
+<tr>
+<td class="asm-label">combat_loop_4</td>
+<td class="address-2"><span id="39805"></span>39805</td>
+<td class="instruction">LD A,32</td>
+<td class="comment-1" rowspan="2">Standard death mirrored: apply drag-left (mirrored) exit animation (32) via <a href="36838.html">set_char_moves</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39807"></span>39807</td>
+<td class="instruction">JP <a href="36838.html">set_char_moves</a></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="39810"></span>
+<div class="comments">
+<div class="paragraph">
+Exit animation selection when not mirrored (facing right): movement 27 (death): exit 33 (drag right); movement 8 (decapitation): exit 31 (drag right with decap).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">combat_loop_5</td>
+<td class="address-2"><span id="39810"></span>39810</td>
+<td class="instruction">LD A,(IY+6)</td>
+<td class="comment-1" rowspan="1">Not mirrored: load dying character's movement ID.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39813"></span>39813</td>
+<td class="instruction">CP 27</td>
+<td class="comment-1" rowspan="1">Is it movement 27 (standard death)?</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39815"></span>39815</td>
+<td class="instruction">JR Z,<a href="39617.html#39822">combat_loop_6</a></td>
+<td class="comment-1" rowspan="1">Yes: jump to <a href="39617.html#39822">combat_loop_6</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39817"></span>39817</td>
+<td class="instruction">LD A,31</td>
+<td class="comment-1" rowspan="2">No (decapitation): apply drag-right with decap exit animation (31) via <a href="36838.html">set_char_moves</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39819"></span>39819</td>
+<td class="instruction">JP <a href="36838.html">set_char_moves</a></td>
+</tr>
+<tr>
+<td class="asm-label">combat_loop_6</td>
+<td class="address-2"><span id="39822"></span>39822</td>
+<td class="instruction">LD A,33</td>
+<td class="comment-1" rowspan="2">Standard death not mirrored: apply drag-right exit animation (33) via <a href="36838.html">set_char_moves</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39824"></span>39824</td>
+<td class="instruction">JP <a href="36838.html">set_char_moves</a></td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="39518.html">39518</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#39617">Map</a></td>
+<td class="next">
+Next: <a href="39827.html">39827</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/9AC1.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

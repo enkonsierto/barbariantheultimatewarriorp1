@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 38367</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="38340.html">38340</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#38367">Map</a></td>
+<td class="next">
+Next: <a href="38412.html">38412</a>
+</td>
+</tr>
+</table>
+<div class="description">38367: Sprites mirror checker and correcter.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="37486.html">sprite_dispatcher</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="38367"></span>
+<div class="comments">
+<div class="paragraph">
+Check the 12 tiles of a sprite if needs to be mirrored and do it if required.
+</div>
+<div class="paragraph">
+Mirror correction: for each active tile, 3x RLA on the low byte of DE extracts the tile orientation bit and compares it with IY+2 bit 0 (mirror flag). If they mismatch, bit 6 of the tile index is flipped (XOR 64) and <a href="38340.html">mirror_tile_inplace</a> mirrors the tile pixel data in-place.
+</div>
+<div class="paragraph">
+INPUT: IX = Current sprite shapes table. HL = frame data pointer (index 1). IY = character state block.
+</div>
+<div class="paragraph">
+OUTPUT: None. Framebuffer at H=0x5B updated in place. DESTROYS: AF, BC, DE, HL, IX.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">sprites_mirror_checker</td>
+<td class="address-2"><span id="38367"></span>38367</td>
+<td class="instruction">LD B,12</td>
+<td class="comment-1" rowspan="1">B=12 tiles to draw.</td>
+</tr>
+<tr>
+<td class="asm-label">sprites_mirror_checker_0</td>
+<td class="address-2"><span id="38369"></span>38369</td>
+<td class="instruction">LD A,(IX+0)</td>
+<td class="comment-1" rowspan="1">Read slot byte from shapes table via IX+0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38372"></span>38372</td>
+<td class="instruction">INC A</td>
+<td class="comment-1" rowspan="1">INC A: test for empty slot (255 wraps to 0).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38373"></span>38373</td>
+<td class="instruction">JR Z,<a href="38367.html#38407">sprites_mirror_checker_1</a></td>
+<td class="comment-1" rowspan="1">Continue to the next tile shape without changing anything else.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="38375"></span>
+<div class="comments">
+<div class="paragraph">
+Normal path. Check orientation and paint mirrored if required.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38375"></span>38375</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="2">Read tile index from (HL). Advance HL past tile index.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38376"></span>38376</td>
+<td class="instruction">INC HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38377"></span>38377</td>
+<td class="instruction">CALL <a href="37355.html">resolve_tile_address</a></td>
+<td class="comment-1" rowspan="1">Call <a href="37355.html">resolve_tile_address</a> into DE.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38380"></span>38380</td>
+<td class="instruction">LD A,(IY+2)</td>
+<td class="comment-1" rowspan="1">Read mirror flag from IY+2, isolate bit 0 into C.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38383"></span>38383</td>
+<td class="instruction">AND 1</td>
+<td class="comment-1" rowspan="2">Store mirror flag bit in C.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38385"></span>38385</td>
+<td class="instruction">LD C,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38386"></span>38386</td>
+<td class="instruction">LD A,(DE)</td>
+<td class="comment-1" rowspan="1">Load low byte of DE (tile orientation byte).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38387"></span>38387</td>
+<td class="instruction">RLA</td>
+<td class="comment-1" rowspan="1">Shift orientation bit towards bit 0 (RLA x1).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38388"></span>38388</td>
+<td class="instruction">RLA</td>
+<td class="comment-1" rowspan="1">Shift orientation bit towards bit 0 (RLA x2).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38389"></span>38389</td>
+<td class="instruction">RLA</td>
+<td class="comment-1" rowspan="1">Shift orientation bit towards bit 0 (RLA x3).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38390"></span>38390</td>
+<td class="instruction">AND 1</td>
+<td class="comment-1" rowspan="1">Isolate bit 0: tile orientation flag.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38392"></span>38392</td>
+<td class="instruction">CP C</td>
+<td class="comment-1" rowspan="1">Compare tile orientation with character mirror flag.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38393"></span>38393</td>
+<td class="instruction">JR Z,<a href="38367.html#38407">sprites_mirror_checker_1</a></td>
+<td class="comment-1" rowspan="1">Orientation matches - tile already correct, skip mirroring.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38395"></span>38395</td>
+<td class="instruction">LD A,(DE)</td>
+<td class="comment-1" rowspan="1">Orientation mismatch - reload tile index.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38396"></span>38396</td>
+<td class="instruction">XOR 64</td>
+<td class="comment-1" rowspan="1">Flip orientation bit (64) to match it with the new orientation.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38398"></span>38398</td>
+<td class="instruction">LD (DE),A</td>
+<td class="comment-1" rowspan="1">Write corrected tile index back to DE.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38399"></span>38399</td>
+<td class="instruction">INC E</td>
+<td class="comment-1" rowspan="1">Advance to tile pixel data.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38400"></span>38400</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="2">Preserve HL and BC across mirror call.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38401"></span>38401</td>
+<td class="instruction">PUSH BC</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38402"></span>38402</td>
+<td class="instruction">CALL <a href="38340.html">mirror_tile_inplace</a></td>
+<td class="comment-1" rowspan="1">Mirror tile pixel data in-place via <a href="38340.html">mirror_tile_inplace</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38405"></span>38405</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="2">Restore BC and HL.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38406"></span>38406</td>
+<td class="instruction">POP HL</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="38407"></span>
+<div class="comments">
+<div class="paragraph">
+Empty slot path: skip draw.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">sprites_mirror_checker_1</td>
+<td class="address-2"><span id="38407"></span>38407</td>
+<td class="instruction">INC IX</td>
+<td class="comment-1" rowspan="1">Advance IX to next slot.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38409"></span>38409</td>
+<td class="instruction">DJNZ <a href="38367.html#38369">sprites_mirror_checker_0</a></td>
+<td class="comment-1" rowspan="1">Decrement loop counter, repeat for all 12 slots.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38411"></span>38411</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="38340.html">38340</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#38367">Map</a></td>
+<td class="next">
+Next: <a href="38412.html">38412</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/95DF.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

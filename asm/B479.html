@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at B479</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B410.html">B410</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b479">Map</a></td>
+<td class="next">
+Next: <a href="B4E4.html">B4E4</a>
+</td>
+</tr>
+</table>
+<div class="description">B479: Hit section: attacker frame 67.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Hitbox active when attacker animation frame index = 67. Pairs: (defender_frame, hit_type index into <a href="B4E4.html">hit_type_table</a>). Terminated by 0xFF.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="b479"></span>
+<div class="comments">
+<div class="paragraph">
+Goblin stomp/grab frame. Exclusively type 7 (fall+kick+dmg/any) on all matched defender frames.
+</div>
+<div class="paragraph">
+Any range (dist0-3): widest distance coverage of all hit sections.
+</div>
+<div class="paragraph">
+Used by <a href="9A2C.html">hit_detection</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">hit_frame_67</td>
+<td class="address-1"><span id="b479"></span>B479</td>
+<td class="instruction">DEFB $00,$25,$01,$25,$02,$25,$03,$25</td>
+<td class="comment-1" rowspan="1">fr0:fall+kick+dmg/any fr1:fall+kick+dmg/any fr2:fall+kick+dmg/any fr3:fall+kick+dmg/any</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b481"></span>B481</td>
+<td class="instruction">DEFB $04,$25,$05,$26,$06,$26,$07,$25</td>
+<td class="comment-1" rowspan="1">fr4:fall+kick+dmg/any fr5:fall+kick+dmg/any fr6:fall+kick+dmg/any fr7:fall+kick+dmg/any</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b489"></span>B489</td>
+<td class="instruction">DEFB $08,$24,$09,$25,$0D,$25,$0E,$25</td>
+<td class="comment-1" rowspan="1">fr10:fall+kick+dmg/any fr11:fall+kick+dmg/any fr13:fall+kick+dmg/any fr14:fall+kick+dmg/any</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b491"></span>B491</td>
+<td class="instruction">DEFB $0F,$24,$10,$24,$15,$24,$16,$25</td>
+<td class="comment-1" rowspan="1">fr15:fall+kick+dmg/any fr16:fall+kick+dmg/any fr21:fall+kick+dmg/any fr22:fall+kick+dmg/any</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b499"></span>B499</td>
+<td class="instruction">DEFB $17,$25,$18,$24,$19,$24,$1B,$02</td>
+<td class="comment-1" rowspan="1">fr23:fall+kick+dmg/any fr24:fall+kick+dmg/any fr25:fall+kick+dmg/any fr26:fall+kick+dmg/any</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b4a1"></span>B4A1</td>
+<td class="instruction">DEFB $1B,$0D,$1C,$02,$1C,$0D,$1F,$24</td>
+<td class="comment-1" rowspan="1">fr27:fall+kick+dmg/any fr28:fall+kick+dmg/any fr31:fall+kick+dmg/any fr32:fall+kick+dmg/any</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b4a9"></span>B4A9</td>
+<td class="instruction">DEFB $27,$25,$28,$25,$31,$25,$32,$25</td>
+<td class="comment-1" rowspan="1">fr50:fall+kick+dmg/any fr51:fall+kick+dmg/any fr52:fall+kick+dmg/any fr53:fall+kick+dmg/any</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b4b1"></span>B4B1</td>
+<td class="instruction">DEFB $33,$25,$34,$25,$35,$25,$36,$25</td>
+<td class="comment-1" rowspan="1">fr54:fall+kick+dmg/any fr55:fall+kick+dmg/any fr57:fall+kick+dmg/any fr58:fall+kick+dmg/any</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b4b9"></span>B4B9</td>
+<td class="instruction">DEFB $37,$25,$3B,$24,$3C,$25,$3D,$25</td>
+<td class="comment-1" rowspan="1">fr59:fall+kick+dmg/any fr60:fall+kick+dmg/any fr61:fall+kick+dmg/any fr65:fall+kick+dmg/any</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b4c1"></span>B4C1</td>
+<td class="instruction">DEFB $3F,$25,$40,$25,$41,$25,$42,$25</td>
+<td class="comment-1" rowspan="1">fr66:fall+kick+dmg/any fr67:fall+kick+dmg/any fr68:fall+kick+dmg/any fr69:fall+kick+dmg/any</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b4c9"></span>B4C9</td>
+<td class="instruction">DEFB $43,$06,$44,$25,$46,$26,$47,$25</td>
+<td class="comment-1" rowspan="1">fr72:fall+kick+dmg/any fr73:fall+kick+dmg/any fr74:fall+kick+dmg/any fr75:fall+kick+dmg/any</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b4d1"></span>B4D1</td>
+<td class="instruction">DEFB $48,$25,$4B,$25,$50,$25,$51,$24</td>
+<td class="comment-1" rowspan="1">fr80:fall+kick+dmg/any fr81:fall+kick+dmg/any fr82:fall+kick+dmg/any fr83:fall+kick+dmg/any</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b4d9"></span>B4D9</td>
+<td class="instruction">DEFB $52,$25,$53,$25,$54,$25,$55,$26</td>
+<td class="comment-1" rowspan="1">fr84:fall+kick+dmg/any fr85:fall+kick+dmg/any fr88:fall+kick+dmg/any fr96:fall+kick+dmg/any</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b4e1"></span>B4E1</td>
+<td class="instruction">DEFB $58</td>
+<td class="comment-1" rowspan="1">End-of-section terminator (0xFF).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="b4e2"></span>B4E2</td>
+<td class="instruction">DEFB $25,$FF</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B410.html">B410</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b479">Map</a></td>
+<td class="next">
+Next: <a href="B4E4.html">B4E4</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/46201.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

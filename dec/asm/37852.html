@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 37852</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="37843.html">37843</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#37852">Map</a></td>
+<td class="next">
+Next: <a href="37866.html">37866</a>
+</td>
+</tr>
+</table>
+<div class="description">37852: Round timer tick: decrement, refresh HUD and play sound.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Decrements <a href="46808.html">timer_flag</a> by 1, refreshes the timer display via <a href="36105.html">update_time_display</a> and plays the tick sound via <a href="39926.html#39962">sound_round_end</a>.
+</div>
+<div class="paragraph">
+Called once per loop iteration by <a href="37791.html">p2_death_score_update</a> and <a href="37819.html">p1_death_score_update</a> while draining the remaining time as bonus score.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="37852"></span>
+<div class="comments">
+<div class="paragraph">
+INPUT: None. OUTPUT: Z set if the timer has reached 0, NZ if time remains. DESTROYS: AF.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">timer_tick</td>
+<td class="address-2"><span id="37852"></span>37852</td>
+<td class="instruction">DEC A</td>
+<td class="comment-1" rowspan="1">Load timer value from <a href="46808.html">timer_flag</a> and decrement by 1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37853"></span>37853</td>
+<td class="instruction">LD (46808),A</td>
+<td class="comment-1" rowspan="1">Write updated timer value back to <a href="46808.html">timer_flag</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37856"></span>37856</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Preserve decremented value and flags across the HUD and sound calls.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37857"></span>37857</td>
+<td class="instruction">CALL <a href="36105.html">update_time_display</a></td>
+<td class="comment-1" rowspan="1">Refresh the timer display via <a href="36105.html">update_time_display</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37860"></span>37860</td>
+<td class="instruction">CALL <a href="39926.html#39962">sound_round_end</a></td>
+<td class="comment-1" rowspan="1">Play timer tick sound via <a href="39926.html#39962">sound_round_end</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37863"></span>37863</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore timer value and flags.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37864"></span>37864</td>
+<td class="instruction">OR A</td>
+<td class="comment-1" rowspan="1">Set Z if timer reached 0, NZ if time still remains.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37865"></span>37865</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="37843.html">37843</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#37852">Map</a></td>
+<td class="next">
+Next: <a href="37866.html">37866</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/93DC.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 8BB5</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="8B81.html">8B81</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#8bb5">Map</a></td>
+<td class="next">
+Next: <a href="8BF1.html">8BF1</a>
+</td>
+</tr>
+</table>
+<div class="description">8BB5: Character AI engine.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Called by <a href="8B81.html">input_ai_dispatcher</a> with A = extra state byte (<a href="B562.html#b56a">p2_frame_index</a> for P1, <a href="B559.html#b561">p1_frame_index</a> for P2) and IY pointing to the active character state block.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="8bb5"></span>
+<div class="comments">
+<div class="paragraph">
+Performs a 4-step lookup chain:
+</div>
+<div class="paragraph">
+1. extra state -&gt; AI profile block (<a href="BAB6.html">ai_profile_0</a>) via pointer table <a href="BA02.html">ai_profile_table</a>.
+</div>
+<div class="paragraph">
+2. Fighter distance (<a href="B6F2.html">fighter_distance</a>) -&gt; profile column 0-7 via <a href="B9DA.html">second_ai_state_table</a>.
+</div>
+<div class="paragraph">
+3. Profile column -&gt; movement block ID (0-22) -&gt; 8-byte row in <a href="BB66.html">ai_movement_table</a> (x8 offset).
+</div>
+<div class="paragraph">
+4. R register (pseudo-random, masked 0-31) + fight counter (<a href="B9C6.html">fight_counter</a>) -&gt; difficulty entry (<a href="B9C7.html">ai_difficulty_table</a>) -&gt; subindex (0-7) -&gt; movement ID from <a href="BB66.html">ai_movement_table</a>.
+</div>
+<div class="paragraph">
+Maps the movement ID to a key-state bitmask and stores it in IY+1 so the movement engine sees it as real input.
+</div>
+<div class="paragraph">
+IN  A = extra state byte. IY = character state block.
+</div>
+<div class="paragraph">
+OUT (IY+1) = AI-generated key state bitmask.
+</div>
+<div class="paragraph">
+DESTROYS AF, BC, DE, HL.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">character_ai_engine</td>
+<td class="address-2"><span id="8bb5"></span>8BB5</td>
+<td class="instruction">LD HL,$BA02</td>
+<td class="comment-1" rowspan="1">HL = profile pointer table base <a href="BA02.html">ai_profile_table</a>. A = extra state index.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8bb8"></span>8BB8</td>
+<td class="instruction">CALL <a href="95A0.html">solve_pointer</a></td>
+<td class="comment-1" rowspan="1">Resolve AI profile pointer via <a href="95A0.html">solve_pointer</a>; HL = profile block address in <a href="BAB6.html">ai_profile_0</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8bbb"></span>8BBB</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Preserve profile block pointer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8bbc"></span>8BBC</td>
+<td class="instruction">LD A,($B6F2)</td>
+<td class="comment-1" rowspan="1">A = fighter distance <a href="B6F2.html">fighter_distance</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8bbf"></span>8BBF</td>
+<td class="instruction">LD HL,$B9DA</td>
+<td class="comment-1" rowspan="1">HL = secondary AI state-to-column table <a href="B9DA.html">second_ai_state_table</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8bc2"></span>8BC2</td>
+<td class="instruction">CALL <a href="95AE.html">get_byte_value</a></td>
+<td class="comment-1" rowspan="1">Map distance to profile column (0-7) via <a href="95AE.html">get_byte_value</a>; A = column index.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8bc5"></span>8BC5</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">Restore profile block pointer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8bc6"></span>8BC6</td>
+<td class="instruction">CALL <a href="95AE.html">get_byte_value</a></td>
+<td class="comment-1" rowspan="1">Read movement block ID from profile at column A via <a href="95AE.html">get_byte_value</a>; A = block ID (0-22).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8bc9"></span>8BC9</td>
+<td class="instruction">LD DE,$0008</td>
+<td class="comment-1" rowspan="1">DE = 8 (byte stride per block in <a href="BB66.html">ai_movement_table</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8bcc"></span>8BCC</td>
+<td class="instruction">CALL <a href="8C88.html">bin_multiply</a></td>
+<td class="comment-1" rowspan="1">HL = A * 8 via <a href="8C88.html">bin_multiply</a>; byte offset into the movement selection table.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8bcf"></span>8BCF</td>
+<td class="instruction">LD DE,$BB66</td>
+<td class="comment-1" rowspan="1">DE = movement table base <a href="BB66.html">ai_movement_table</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8bd2"></span>8BD2</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1">HL = table base + offset; points to the selected 8-byte movement block.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8bd3"></span>8BD3</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Preserve movement block pointer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8bd4"></span>8BD4</td>
+<td class="instruction">LD A,R</td>
+<td class="comment-1" rowspan="1">A = R register; pseudo-random source.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8bd6"></span>8BD6</td>
+<td class="instruction">AND $1F</td>
+<td class="comment-1" rowspan="1">Mask A to 0-31; random index into the difficulty entry.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8bd8"></span>8BD8</td>
+<td class="instruction">PUSH AF</td>
+<td class="comment-1" rowspan="1">Preserve random value.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8bd9"></span>8BD9</td>
+<td class="instruction">LD A,($B9C6)</td>
+<td class="comment-1" rowspan="1">A = fight counter <a href="B9C6.html">fight_counter</a> (0-7); difficulty level index.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8bdc"></span>8BDC</td>
+<td class="instruction">LD HL,$B9C7</td>
+<td class="comment-1" rowspan="1">HL = difficulty table base <a href="B9C7.html">ai_difficulty_table</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8bdf"></span>8BDF</td>
+<td class="instruction">CALL <a href="95A0.html">solve_pointer</a></td>
+<td class="comment-1" rowspan="1">Resolve difficulty entry pointer for this fight level via <a href="95A0.html">solve_pointer</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8be2"></span>8BE2</td>
+<td class="instruction">POP AF</td>
+<td class="comment-1" rowspan="1">Restore random value.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8be3"></span>8BE3</td>
+<td class="instruction">CALL <a href="95AE.html">get_byte_value</a></td>
+<td class="comment-1" rowspan="1">Index into difficulty entry using random value via <a href="95AE.html">get_byte_value</a>; A = subindex (0-7).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8be6"></span>8BE6</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">Restore movement block pointer.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8be7"></span>8BE7</td>
+<td class="instruction">CALL <a href="95AE.html">get_byte_value</a></td>
+<td class="comment-1" rowspan="1">Read movement ID from block at subindex A via <a href="95AE.html">get_byte_value</a>; A = movement ID.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8bea"></span>8BEA</td>
+<td class="instruction">CALL <a href="98E6.html">input_mirror_correcter</a></td>
+<td class="comment-1" rowspan="1">Mirror movement ID if necessary, via <a href="98E6.html">input_mirror_correcter</a> (input-class table <a href="B962.html">input_lookup_table</a>, mirror-corrected for IY+2 bit 0).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8bed"></span>8BED</td>
+<td class="instruction">LD (IY+$01),A</td>
+<td class="comment-1" rowspan="1">Store AI key bitmask in (IY+1).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8bf0"></span>8BF0</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="8B81.html">8B81</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#8bb5">Map</a></td>
+<td class="next">
+Next: <a href="8BF1.html">8BF1</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/35765.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

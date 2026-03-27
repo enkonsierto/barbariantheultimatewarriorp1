@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 38220</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="38216.html">38216</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#38220">Map</a></td>
+<td class="next">
+Next: <a href="38304.html">38304</a>
+</td>
+</tr>
+</table>
+<div class="description">38220: Player 2 overlay tile renderer.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Composites a single extra tile on top of the P2 sprite each frame to visually differentiate P2 from P1, which share the same base sprite bank.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="38220"></span>
+<div class="comments">
+<div class="paragraph">
+<a href="47223.html">p2_overlay_tile_table</a> holds a 1-byte-per-frame overlay tile index (0-52 = tile, 255 = no draw) choosen from (<a href="40192.html">other_sprites</a>)
+</div>
+<div class="paragraph">
+<a href="47329.html">p2_overlay_pos_table</a> holds a 1-byte-per-frame position table: bits 0-5 = scanline offset down from row 94; bits 6-7 (after 2x RLCA) = column offset 0-3 right of P2 X tile, inverted as 6-L when P2 is mirrored.
+</div>
+<div class="paragraph">
+The overlay state block at <a href="46817.html">p2_overlay_block_state</a> mirrors the layout of the head state block at <a href="46809.html">head_state</a>, letting <a href="38103.html">render_head_tile</a> and <a href="38158.html">head_mirroring</a> serve both.
+</div>
+<div class="paragraph">
+INPUT: None. OUTPUT: None. DESTROYS: AF, B, DE, HL, IX.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">p2_overlay_tile</td>
+<td class="address-2"><span id="38220"></span>38220</td>
+<td class="instruction">LD A,(46434)</td>
+<td class="comment-1" rowspan="3">Guard: return if <a href="46434.html">p2_controller_type</a> is zero (never true during normal gameplay).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38223"></span>38223</td>
+<td class="instruction">OR A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38224"></span>38224</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38225"></span>38225</td>
+<td class="instruction">LD A,(46437)</td>
+<td class="comment-1" rowspan="3">Load P2 X tile (<a href="46434.html#46437">p2_x_pos</a>) and framebuffer row base (H = 94) into DE.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38228"></span>38228</td>
+<td class="instruction">LD E,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38229"></span>38229</td>
+<td class="instruction">LD D,94</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38231"></span>38231</td>
+<td class="instruction">LD A,(46442)</td>
+<td class="comment-1" rowspan="1">Load P2 frame index (<a href="46434.html#46442">p2_frame_index</a>) for table lookups.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38234"></span>38234</td>
+<td class="instruction">PUSH DE</td>
+<td class="comment-1" rowspan="1">Save DE on stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38235"></span>38235</td>
+<td class="instruction">LD HL,47329</td>
+<td class="comment-1" rowspan="2">Fetch position byte for this frame from <a href="47329.html">p2_overlay_pos_table</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38238"></span>38238</td>
+<td class="instruction">CALL <a href="38318.html">get_byte_value</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38241"></span>38241</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="1">Restore DE.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38242"></span>38242</td>
+<td class="instruction">LD L,A</td>
+<td class="comment-1" rowspan="1">Save full position byte in L.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38243"></span>38243</td>
+<td class="instruction">AND 63</td>
+<td class="comment-1" rowspan="2">Extract scanline offset (bits 0-5) into H.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38245"></span>38245</td>
+<td class="instruction">LD H,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38246"></span>38246</td>
+<td class="instruction">LD A,L</td>
+<td class="comment-1" rowspan="1">Restore full position byte from L.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38247"></span>38247</td>
+<td class="instruction">AND 192</td>
+<td class="comment-1" rowspan="3">Extract column offset (bits 6-7) and shift to bits 0-1 via 2x RLCA.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38249"></span>38249</td>
+<td class="instruction">RLCA</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38250"></span>38250</td>
+<td class="instruction">RLCA</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38251"></span>38251</td>
+<td class="instruction">LD L,A</td>
+<td class="comment-1" rowspan="1">L = column offset (0-3).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38252"></span>38252</td>
+<td class="instruction">LD A,(46436)</td>
+<td class="comment-1" rowspan="2">Read P2 mirror flag (<a href="46434.html#46436">p2_mirror_flags</a> bit 0).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38255"></span>38255</td>
+<td class="instruction">AND 1</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38257"></span>38257</td>
+<td class="instruction">LD (46817),A</td>
+<td class="comment-1" rowspan="1">Store P2 mirror flag in overlay state block (<a href="46817.html">p2_overlay_block_state</a> IX+0) for <a href="38103.html">render_head_tile</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38260"></span>38260</td>
+<td class="instruction">JR Z,<a href="38220.html#38266">p2_overlay_tile_0</a></td>
+<td class="comment-1" rowspan="1">Not mirrored - column offset unchanged.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38262"></span>38262</td>
+<td class="instruction">LD A,6</td>
+<td class="comment-1" rowspan="3">Mirrored - invert as 6-L so overlay aligns on the correct side.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38264"></span>38264</td>
+<td class="instruction">SUB L</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38265"></span>38265</td>
+<td class="instruction">LD L,A</td>
+</tr>
+<tr>
+<td class="asm-label">p2_overlay_tile_0</td>
+<td class="address-2"><span id="38266"></span>38266</td>
+<td class="instruction">LD A,E</td>
+<td class="comment-1" rowspan="3">Add column offset to P2 X tile; final framebuffer column into E.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38267"></span>38267</td>
+<td class="instruction">ADD A,L</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38268"></span>38268</td>
+<td class="instruction">LD E,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38269"></span>38269</td>
+<td class="instruction">LD B,H</td>
+<td class="comment-1" rowspan="2">B = scanline offset (H); EX DE,HL sets HL = framebuffer base (H = 94, L = column).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38270"></span>38270</td>
+<td class="instruction">EX DE,HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38271"></span>38271</td>
+<td class="instruction">LD DE,32</td>
+<td class="comment-1" rowspan="3">Walk HL down B scanlines (stride 32 each); HL is now the exact framebuffer destination.</td>
+</tr>
+<tr>
+<td class="asm-label">p2_overlay_tile_1</td>
+<td class="address-2"><span id="38274"></span>38274</td>
+<td class="instruction">ADD HL,DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38275"></span>38275</td>
+<td class="instruction">DJNZ <a href="38220.html#38274">p2_overlay_tile_1</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38277"></span>38277</td>
+<td class="instruction">LD (46823),HL</td>
+<td class="comment-1" rowspan="1">Store framebuffer destination in overlay state block (<a href="46817.html#46823">46823</a>, IX+6,7) for <a href="38103.html">render_head_tile</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38280"></span>38280</td>
+<td class="instruction">LD A,(46442)</td>
+<td class="comment-1" rowspan="5">Reload P2 frame index; compute tile index address from <a href="47223.html">p2_overlay_tile_table</a> + frame index.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38283"></span>38283</td>
+<td class="instruction">LD E,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38284"></span>38284</td>
+<td class="instruction">LD D,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38286"></span>38286</td>
+<td class="instruction">LD HL,47219</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38289"></span>38289</td>
+<td class="instruction">ADD HL,DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38290"></span>38290</td>
+<td class="instruction">LD (46819),HL</td>
+<td class="comment-1" rowspan="1">Store tile sequence pointer in overlay state block (<a href="46817.html#46819">46819</a>, IX+2,3) for <a href="38103.html">render_head_tile</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38293"></span>38293</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1">Read tile index for this frame.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38294"></span>38294</td>
+<td class="instruction">CP 255</td>
+<td class="comment-1" rowspan="1">255 = no overlay tile this frame.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38296"></span>38296</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Return if no tile to draw.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38297"></span>38297</td>
+<td class="instruction">LD IX,46817</td>
+<td class="comment-1" rowspan="1">IX = <a href="46817.html">p2_overlay_block_state</a>, point to P2 overlay state block.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38301"></span>38301</td>
+<td class="instruction">JP <a href="38103.html">render_head_tile</a></td>
+<td class="comment-1" rowspan="1">Tail-call <a href="38103.html">render_head_tile</a> to blit tile using shared head/overlay draw path.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="38216.html">38216</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#38220">Map</a></td>
+<td class="next">
+Next: <a href="38304.html">38304</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/954C.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

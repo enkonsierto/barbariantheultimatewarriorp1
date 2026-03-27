@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at AED3</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="ADD5.html">ADD5</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#aed3">Map</a></td>
+<td class="next">
+Next: <a href="AEFB.html">AEFB</a>
+</td>
+</tr>
+</table>
+<div class="description">AED3: Movement flags table</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+One byte per movement ID (0-39). Bit flags controlling combat activation, interruptibility and draw order.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="aed3"></span>
+<div class="comments">
+<div class="paragraph">
+Bit 7: combat-active (1=in-combat movement);
+</div>
+<div class="paragraph">
+Bit 6: non-interruptible (input ignored);
+</div>
+<div class="paragraph">
+Bit 0: draw on top (when overlapping).
+</div>
+<div class="paragraph">
+Bits 1-5 always 0. Read on movement change for state flags (IY+2 bit 7) and render priority.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aed3"></span>AED3</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">mv0 idle:          0x00 pre-combat</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aed4"></span>AED4</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">mv1 walk forward:   0x00 pre-combat</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aed5"></span>AED5</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">mv2 walk backward:  0x00 pre-combat</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aed6"></span>AED6</td>
+<td class="instruction">DEFB $81</td>
+<td class="comment-1" rowspan="1">mv3 sword spin:     0x81 combat-active, draw-top</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aed7"></span>AED7</td>
+<td class="instruction">DEFB $80</td>
+<td class="comment-1" rowspan="1">mv4 jump:           0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aed8"></span>AED8</td>
+<td class="instruction">DEFB $81</td>
+<td class="comment-1" rowspan="1">mv5 crouch slash:   0x81 combat-active, draw-top</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aed9"></span>AED9</td>
+<td class="instruction">DEFB $80</td>
+<td class="comment-1" rowspan="1">mv6 crouch:         0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aeda"></span>AEDA</td>
+<td class="instruction">DEFB $81</td>
+<td class="comment-1" rowspan="1">mv7 headcut move:   0x81 combat-active, draw-top</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aedb"></span>AEDB</td>
+<td class="instruction">DEFB $C1</td>
+<td class="comment-1" rowspan="1">mv8 death decap:    0xC1 combat-active, non-interruptible, draw-top</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aedc"></span>AEDC</td>
+<td class="instruction">DEFB $81</td>
+<td class="comment-1" rowspan="1">mv9 fwd slash:      0x81 combat-active, draw-top</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aedd"></span>AEDD</td>
+<td class="instruction">DEFB $80</td>
+<td class="comment-1" rowspan="1">mv10 guard1:        0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aede"></span>AEDE</td>
+<td class="instruction">DEFB $81</td>
+<td class="comment-1" rowspan="1">mv11 top slash:     0x81 combat-active, draw-top</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aedf"></span>AEDF</td>
+<td class="instruction">DEFB $80</td>
+<td class="comment-1" rowspan="1">mv12 kick:          0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aee0"></span>AEE0</td>
+<td class="instruction">DEFB $80</td>
+<td class="comment-1" rowspan="1">mv13 damage recv:   0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aee1"></span>AEE1</td>
+<td class="instruction">DEFB $81</td>
+<td class="comment-1" rowspan="1">mv14 overhead slash:0x81 combat-active, draw-top</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aee2"></span>AEE2</td>
+<td class="instruction">DEFB $80</td>
+<td class="comment-1" rowspan="1">mv15 headbutt:      0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aee3"></span>AEE3</td>
+<td class="instruction">DEFB $80</td>
+<td class="comment-1" rowspan="1">mv16 guard2:        0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aee4"></span>AEE4</td>
+<td class="instruction">DEFB $80</td>
+<td class="comment-1" rowspan="1">mv17 roll forward:  0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aee5"></span>AEE5</td>
+<td class="instruction">DEFB $80</td>
+<td class="comment-1" rowspan="1">mv18 roll backward: 0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aee6"></span>AEE6</td>
+<td class="instruction">DEFB $C0</td>
+<td class="comment-1" rowspan="1">mv19 victory:       0xC0 combat-active, non-interruptible</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aee7"></span>AEE7</td>
+<td class="instruction">DEFB $80</td>
+<td class="comment-1" rowspan="1">mv20 crouch stand:  0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aee8"></span>AEE8</td>
+<td class="instruction">DEFB $80</td>
+<td class="comment-1" rowspan="1">mv21 crouch strike: 0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aee9"></span>AEE9</td>
+<td class="instruction">DEFB $80</td>
+<td class="comment-1" rowspan="1">mv22 guard2b:       0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aeea"></span>AEEA</td>
+<td class="instruction">DEFB $80</td>
+<td class="comment-1" rowspan="1">mv23 crouch b:      0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aeeb"></span>AEEB</td>
+<td class="instruction">DEFB $80</td>
+<td class="comment-1" rowspan="1">mv24 rollback b:    0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aeec"></span>AEEC</td>
+<td class="instruction">DEFB $80</td>
+<td class="comment-1" rowspan="1">mv25 fall:          0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aeed"></span>AEED</td>
+<td class="instruction">DEFB $C0</td>
+<td class="comment-1" rowspan="1">mv26 goblin a:      0xC0 combat-active, non-interruptible</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aeee"></span>AEEE</td>
+<td class="instruction">DEFB $C1</td>
+<td class="comment-1" rowspan="1">mv27 death:         0xC1 combat-active, non-interruptible, draw-top</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aeef"></span>AEEF</td>
+<td class="instruction">DEFB $C0</td>
+<td class="comment-1" rowspan="1">mv28 arena enter:   0xC0 combat-active, non-interruptible</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aef0"></span>AEF0</td>
+<td class="instruction">DEFB $C1</td>
+<td class="comment-1" rowspan="1">mv29 drag L decap:  0xC1 combat-active, non-interruptible, draw-top</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aef1"></span>AEF1</td>
+<td class="instruction">DEFB $81</td>
+<td class="comment-1" rowspan="1">mv30 goblin b:      0x81 combat-active, draw-top</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aef2"></span>AEF2</td>
+<td class="instruction">DEFB $C1</td>
+<td class="comment-1" rowspan="1">mv31 drag R decap:  0xC1 combat-active, non-interruptible, draw-top</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aef3"></span>AEF3</td>
+<td class="instruction">DEFB $C1</td>
+<td class="comment-1" rowspan="1">mv32 drag L:        0xC1 combat-active, non-interruptible, draw-top</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aef4"></span>AEF4</td>
+<td class="instruction">DEFB $C1</td>
+<td class="comment-1" rowspan="1">mv33 drag R:        0xC1 combat-active, non-interruptible, draw-top</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aef5"></span>AEF5</td>
+<td class="instruction">DEFB $C0</td>
+<td class="comment-1" rowspan="1">mv34 change side:   0xC0 combat-active, non-interruptible</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aef6"></span>AEF6</td>
+<td class="instruction">DEFB $C0</td>
+<td class="comment-1" rowspan="1">mv35 walk unused:   0xC0 combat-active, non-interruptible</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aef7"></span>AEF7</td>
+<td class="instruction">DEFB $C0</td>
+<td class="comment-1" rowspan="1">mv36 win seq:       0xC0 combat-active, non-interruptible</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aef8"></span>AEF8</td>
+<td class="instruction">DEFB $C0</td>
+<td class="comment-1" rowspan="1">mv37 stand:         0xC0 combat-active, non-interruptible</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aef9"></span>AEF9</td>
+<td class="instruction">DEFB $C0</td>
+<td class="comment-1" rowspan="1">mv38 goblin c:      0xC0 combat-active, non-interruptible</td>
+</tr>
+<tr>
+<td class="address-1"><span id="aefa"></span>AEFA</td>
+<td class="instruction">DEFB $C0</td>
+<td class="comment-1" rowspan="1">mv39 endgame:       0xC0 combat-active, non-interruptible</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="ADD5.html">ADD5</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#aed3">Map</a></td>
+<td class="next">
+Next: <a href="AEFB.html">AEFB</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/44755.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 39518</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="39468.html">39468</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#39518">Map</a></td>
+<td class="next">
+Next: <a href="39617.html">39617</a>
+</td>
+</tr>
+</table>
+<div class="description">39518: Hit range validation and combat event dispatch.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="39468.html">hit_detection</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="39518"></span>
+<div class="comments">
+<div class="paragraph">
+Called by <a href="39468.html">hit_detection</a> when attacker and defender frame states match a hit table entry. Validates the hit by comparing <a href="46834.html">fighter_distance</a> fighter distance against the four packed range values in byte 0 of the <a href="46308.html">hit_type_table</a>  indexed by hit type. If no range matches, the hit is silently ignored.
+</div>
+<div class="paragraph">
+On a valid hit, byte 1 gives the defender reaction movement ID (255 = no change), applied via <a href="39194.html">force_apply_moves</a>. Byte 2 high nibble gives the combat event type stored in <a href="46803.html">pending_sound_index</a>. Byte 2 low nibble gives the knockback type passed
+</div>
+<div class="paragraph">
+to <a href="39367.html">energy_dec</a> to decrement energy.
+</div>
+<div class="paragraph">
+INPUT: HL = pointer into hit section pair (defender frame ID, hit type index). IX = attacker state block, IY defender state block.
+</div>
+<div class="paragraph">
+OUTPUT: None. DESTROYS: AF, BC, DE, HL.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">collision_solver</td>
+<td class="address-2"><span id="39518"></span>39518</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Preserve HL.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39519"></span>39519</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Advance to hit type index byte.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39520"></span>39520</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="2">Read hit type index.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39521"></span>39521</td>
+<td class="instruction">LD E,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39522"></span>39522</td>
+<td class="instruction">LD D,0</td>
+<td class="comment-1" rowspan="1">Zero-extend index to 16 bits.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39524"></span>39524</td>
+<td class="instruction">LD HL,46308</td>
+<td class="comment-1" rowspan="1">HL base of hit type parameter table <a href="46308.html">hit_type_table</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39527"></span>39527</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="3">Select the 3-byte entry for this hit type.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39528"></span>39528</td>
+<td class="instruction">ADD HL,DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39529"></span>39529</td>
+<td class="instruction">ADD HL,DE</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="39530"></span>
+<div class="comments">
+<div class="paragraph">
+Range validation - byte 0 contains four packed 2-bit range fields.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39530"></span>39530</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1">Read byte 0 - four packed range values.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39531"></span>39531</td>
+<td class="instruction">AND 3</td>
+<td class="comment-1" rowspan="3">Extract range field 0 and compare against fighter distance <a href="46834.html">fighter_distance</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39533"></span>39533</td>
+<td class="instruction">LD C,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39534"></span>39534</td>
+<td class="instruction">LD A,(46834)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39537"></span>39537</td>
+<td class="instruction">CP C</td>
+<td class="comment-1" rowspan="2">Match - jump to valid-hit path at <a href="39518.html#39580">collision_solver_0</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39538"></span>39538</td>
+<td class="instruction">JR Z,<a href="39518.html#39580">collision_solver_0</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39540"></span>39540</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="5">Extract range field 1 and compare against fighter distance.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39541"></span>39541</td>
+<td class="instruction">AND 12</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39543"></span>39543</td>
+<td class="instruction">RRCA</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39544"></span>39544</td>
+<td class="instruction">RRCA</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39545"></span>39545</td>
+<td class="instruction">LD C,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39546"></span>39546</td>
+<td class="instruction">LD A,(46834)</td>
+<td class="comment-1" rowspan="1">Match - jump to <a href="39518.html#39580">collision_solver_0</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39549"></span>39549</td>
+<td class="instruction">CP C</td>
+<td class="comment-1" rowspan="4">Extract range field 2 and compare against fighter distance.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39550"></span>39550</td>
+<td class="instruction">JR Z,<a href="39518.html#39580">collision_solver_0</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39552"></span>39552</td>
+<td class="instruction">LD A,(HL)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39553"></span>39553</td>
+<td class="instruction">AND 48</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39555"></span>39555</td>
+<td class="instruction">RRCA</td>
+<td class="comment-1" rowspan="3">Match - jump to <a href="39518.html#39580">collision_solver_0</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39556"></span>39556</td>
+<td class="instruction">RRCA</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39557"></span>39557</td>
+<td class="instruction">RRCA</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39558"></span>39558</td>
+<td class="instruction">RRCA</td>
+<td class="comment-1" rowspan="5">Extract range field 3 and compare against fighter distance.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39559"></span>39559</td>
+<td class="instruction">LD C,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39560"></span>39560</td>
+<td class="instruction">LD A,(46834)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39563"></span>39563</td>
+<td class="instruction">CP C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39564"></span>39564</td>
+<td class="instruction">JR Z,<a href="39518.html#39580">collision_solver_0</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39566"></span>39566</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="5">Match - jump to <a href="39518.html#39580">collision_solver_0</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39567"></span>39567</td>
+<td class="instruction">AND 192</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39569"></span>39569</td>
+<td class="instruction">RLCA</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39570"></span>39570</td>
+<td class="instruction">RLCA</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39571"></span>39571</td>
+<td class="instruction">LD C,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39572"></span>39572</td>
+<td class="instruction">LD A,(46834)</td>
+<td class="comment-1" rowspan="3">No range matched - hit misses silently.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39575"></span>39575</td>
+<td class="instruction">CP C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39576"></span>39576</td>
+<td class="instruction">JR Z,<a href="39518.html#39580">collision_solver_0</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39578"></span>39578</td>
+<td class="instruction">JR <a href="39518.html#39615">collision_solver_3</a></td>
+<td class="comment-1" rowspan="1">Jump to exit at <a href="39518.html#39615">collision_solver_3</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="39580"></span>
+<div class="comments">
+<div class="paragraph">
+Valid hit - apply defender reaction movement (byte 1).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">collision_solver_0</td>
+<td class="address-2"><span id="39580"></span>39580</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Advance to reaction movement field.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39581"></span>39581</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="2">Movement ID 255 means no reaction - skip.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39582"></span>39582</td>
+<td class="instruction">CP 255</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39584"></span>39584</td>
+<td class="instruction">JR Z,<a href="39518.html#39591">collision_solver_1</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="39518.html#39591">collision_solver_1</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39586"></span>39586</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="3">Apply defender reaction movement via <a href="39194.html">force_apply_moves</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39587"></span>39587</td>
+<td class="instruction">CALL <a href="39194.html">force_apply_moves</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39590"></span>39590</td>
+<td class="instruction">POP HL</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="39591"></span>
+<div class="comments">
+<div class="paragraph">
+Combat event dispatch - byte 2 high nibble.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">collision_solver_1</td>
+<td class="address-2"><span id="39591"></span>39591</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Advance to combat event / knockback byte.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39592"></span>39592</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1">Read byte 2.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39593"></span>39593</td>
+<td class="instruction">AND 240</td>
+<td class="comment-1" rowspan="1">Isolate event type (high nibble).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39595"></span>39595</td>
+<td class="instruction">OR A</td>
+<td class="comment-1" rowspan="2">Event type 0 - skip storage.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39596"></span>39596</td>
+<td class="instruction">JR Z,<a href="39518.html#39609">collision_solver_2</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39598"></span>39598</td>
+<td class="instruction">RRCA</td>
+<td class="comment-1" rowspan="4">Shift event type to low nibble.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39599"></span>39599</td>
+<td class="instruction">RRCA</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39600"></span>39600</td>
+<td class="instruction">RRCA</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39601"></span>39601</td>
+<td class="instruction">RRCA</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39602"></span>39602</td>
+<td class="instruction">LD (46803),A</td>
+<td class="comment-1" rowspan="1">Store event type in <a href="46803.html">pending_sound_index</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39605"></span>39605</td>
+<td class="instruction">LD (46804),IX</td>
+<td class="comment-1" rowspan="1">Store attacker state block pointer in <a href="46804.html">attacker_block_ptr</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="39609"></span>
+<div class="comments">
+<div class="paragraph">
+Knockback and energy decrement - byte 2 low nibble.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">collision_solver_2</td>
+<td class="address-2"><span id="39609"></span>39609</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="2">Isolate knockback type (low nibble).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39610"></span>39610</td>
+<td class="instruction">AND 15</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39612"></span>39612</td>
+<td class="instruction">CALL NZ,<a href="39367.html">energy_dec</a></td>
+<td class="comment-1" rowspan="1">Non-zero knockback - decrement defender energy via <a href="39367.html">energy_dec</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">collision_solver_3</td>
+<td class="address-2"><span id="39615"></span>39615</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">Restore HL.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39616"></span>39616</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="39468.html">39468</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#39518">Map</a></td>
+<td class="next">
+Next: <a href="39617.html">39617</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/9A5E.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 37791</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="37772.html">37772</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#37791">Map</a></td>
+<td class="next">
+Next: <a href="37819.html">37819</a>
+</td>
+</tr>
+</table>
+<div class="description">37791: P2-death score update and time drain loop.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Called by <a href="37714.html">p1_wins_seq</a> (P1-wins sequence) after P2 has been defeated.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="37791"></span>
+<div class="comments">
+<div class="paragraph">
+MODE 1P/DEMO (<a href="46808.html">timer_flag</a>=255): jumps immediately to <a href="35487.html">post_fight_handler</a> end-of-match handler without touching the score. The timer is never decremented.
+</div>
+<div class="paragraph">
+MODE 2P (<a href="46808.html">timer_flag</a>=0..90): awards 10 points to P1 score (<a href="47429.html">p1_score</a>) and refreshes the score display via <a href="35426.html">paint_score</a>, then calls <a href="37852.html">timer_tick</a> to decrement the timer by 1 and update the HUD. Loops until <a href="37852.html">timer_tick</a> returns Z (<a href="46808.html">timer_flag</a> has reached 0), then falls through to <a href="37843.html">post_drain_wait</a>.
+</div>
+<div class="paragraph">
+Each iteration awards +10 to P1 and drains 1 timer unit, so the total bonus equals remaining_time * 10.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">p2_death_score_update</td>
+<td class="address-2"><span id="37791"></span>37791</td>
+<td class="instruction">LD A,(46808)</td>
+<td class="comment-1" rowspan="1">Read the round timer (<a href="46808.html">timer_flag</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37794"></span>37794</td>
+<td class="instruction">CP 255</td>
+<td class="comment-1" rowspan="1">Is it 255 (1P/demo mode - infinite time)?</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37796"></span>37796</td>
+<td class="instruction">JP Z,<a href="35487.html">post_fight_handler</a></td>
+<td class="comment-1" rowspan="1">Yes - jump to <a href="35487.html">post_fight_handler</a> end-of-match handler without scoring.</td>
+</tr>
+<tr>
+<td class="asm-label">p2_death_score_update_0</td>
+<td class="address-2"><span id="37799"></span>37799</td>
+<td class="instruction">LD HL,(47429)</td>
+<td class="comment-1" rowspan="1">HL = current P1 score (<a href="47429.html">p1_score</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37802"></span>37802</td>
+<td class="instruction">LD DE,10</td>
+<td class="comment-1" rowspan="1">DE = 10 points to add.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37805"></span>37805</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1">HL = score + 10.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37806"></span>37806</td>
+<td class="instruction">LD (47429),HL</td>
+<td class="comment-1" rowspan="1">Write updated score back to <a href="47429.html">p1_score</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37809"></span>37809</td>
+<td class="instruction">CALL <a href="35426.html">paint_score</a></td>
+<td class="comment-1" rowspan="1">Refresh P1 score display via <a href="35426.html">paint_score</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37812"></span>37812</td>
+<td class="instruction">CALL <a href="37852.html">timer_tick</a></td>
+<td class="comment-1" rowspan="1">Decrement timer by 1 and update HUD via <a href="37852.html">timer_tick</a>. Returns Z if timer=0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37815"></span>37815</td>
+<td class="instruction">JR NZ,<a href="37791.html#37799">p2_death_score_update_0</a></td>
+<td class="comment-1" rowspan="1">Timer not zero - loop back to award another +10.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37817"></span>37817</td>
+<td class="instruction">JR <a href="37843.html">post_drain_wait</a></td>
+<td class="comment-1" rowspan="1">Timer exhausted - fall through to <a href="37843.html">post_drain_wait</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="37772.html">37772</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#37791">Map</a></td>
+<td class="next">
+Next: <a href="37819.html">37819</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/939F.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Game status buffer entry at B559</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-g">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Game status buffer</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B4E4.html">B4E4</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b559">Map</a></td>
+<td class="next">
+Next: <a href="B562.html">B562</a>
+</td>
+</tr>
+</table>
+<div class="description">B559: Player 1 state block.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+9-byte structure used by all combat routines.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="b559"></span>
+<div class="comments">
+<div class="paragraph">
+Written by <a href="8FD6.html">pos_energy_reset</a> (init), <a href="8FE6.html">set_char_moves</a> (movement change), <a href="99C7.html">energy_dec</a> (energy), <a href="8B81.html">input_ai_dispatcher</a> (input).
+</div>
+<div class="paragraph">
+IY+0 controller type: 1=P1 keyboard <a href="B949.html">p1_keyboard_table</a>, 2=P2 keyboard <a href="B950.html">p2_keyboard_table</a> (Sinclair 2 defaults), 3=Sinclair2 fixed <a href="B955.html">sinclair_joystick_2_table</a> (keys 6-0), 4=Sinclair1 fixed <a href="B95A.html">sinclair_joystick_1_table</a> (keys 1-5), 5=Kempston port 31. Bit 7 set=CPU-controlled.
+</div>
+<div class="paragraph">
+Character type is implicitly IYl (low byte of IY base address: 89=P1, 98=P2, 107=goblin).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">p1_controller_type</td>
+<td class="address-1"><span id="b559"></span>B559</td>
+<td class="instruction">DEFB $01</td>
+<td class="comment-1" rowspan="1">IY+0: Controller type (0=inactive, 1-5=human, bit 7 set=CPU).</td>
+</tr>
+<tr>
+<td class="asm-label">p1_input_state</td>
+<td class="address-1"><span id="b55a"></span>B55A</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">IY+1: Input state bitmask (bits 0-4: Right, Left, Down, Up, Fire).</td>
+</tr>
+<tr>
+<td class="asm-label">p1_mirror_flags</td>
+<td class="address-1"><span id="b55b"></span>B55B</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">IY+2: Mirror and priority flags (bit 0=facing left, bit 7=draw priority).</td>
+</tr>
+<tr>
+<td class="asm-label">p1_x_pos</td>
+<td class="address-1"><span id="b55c"></span>B55C</td>
+<td class="instruction">DEFB $04</td>
+<td class="comment-1" rowspan="1">IY+3: X tile position (0-29).</td>
+</tr>
+<tr>
+<td class="asm-label">p1_frame_ptr</td>
+<td class="address-1"><span id="b55d"></span>B55D</td>
+<td class="instruction">DEFW <a href="ADD5.html">frame_seq</a></td>
+<td class="comment-1" rowspan="1">IY+4+5: Frame data pointer.</td>
+</tr>
+<tr>
+<td class="asm-label">p1_movement_id</td>
+<td class="address-1"><span id="b55f"></span>B55F</td>
+<td class="instruction">DEFB $01</td>
+<td class="comment-1" rowspan="1">IY+6: Current movement ID (1-37).</td>
+</tr>
+<tr>
+<td class="asm-label">p1_energy_byte</td>
+<td class="address-1"><span id="b560"></span>B560</td>
+<td class="instruction">DEFB $06</td>
+<td class="comment-1" rowspan="1">IY+7: Energy nibbles (bits 0-3=current energy 0-13, bits 4-7=display update flag).</td>
+</tr>
+<tr>
+<td class="asm-label">p1_frame_index</td>
+<td class="address-1"><span id="b561"></span>B561</td>
+<td class="instruction">DEFB $00</td>
+<td class="comment-1" rowspan="1">IY+8: Current frame index byte (read from frame data pointer).</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="B4E4.html">B4E4</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#b559">Map</a></td>
+<td class="next">
+Next: <a href="B562.html">B562</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/46425.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

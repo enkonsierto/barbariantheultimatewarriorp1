@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 8430</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="82C0.html">82C0</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#8430">Map</a></td>
+<td class="next">
+Next: <a href="8448.html">8448</a>
+</td>
+</tr>
+</table>
+<div class="description">8430: Music player.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="8D22.html">main_menu</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="8430"></span>
+<div class="comments">
+<div class="paragraph">
+Title screen music player. Resets the melody and bass to the start, plays the music in loop and returns when a key is pressed.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">play_music</td>
+<td class="address-2"><span id="8430"></span>8430</td>
+<td class="instruction">LD HL,$8539</td>
+<td class="comment-1" rowspan="2">Saves <a href="8539.html">melody_data</a> (the main melody address) in position <a href="8448.html#844b">melody_ptr</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8433"></span>8433</td>
+<td class="instruction">LD ($844B),HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8436"></span>8436</td>
+<td class="instruction">LD HL,$876F</td>
+<td class="comment-1" rowspan="2">Saves <a href="876F.html">bass_data</a> (the bass melody address) in position <a href="8448.html#844f">bass_ptr</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8439"></span>8439</td>
+<td class="instruction">LD ($844F),HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="843c"></span>843C</td>
+<td class="instruction">DI</td>
+<td class="comment-1" rowspan="1">Disable interrupts.</td>
+</tr>
+<tr>
+<td class="asm-label">play_music_0</td>
+<td class="address-2"><span id="843d"></span>843D</td>
+<td class="instruction">CALL <a href="8477.html">music_engine</a></td>
+<td class="comment-1" rowspan="1">Plays Music.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8440"></span>8440</td>
+<td class="instruction">CALL $028E</td>
+<td class="comment-1" rowspan="1">Keyboard ROM Routine. (Returns the key pressed in register E).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8443"></span>8443</td>
+<td class="instruction">INC E</td>
+<td class="comment-1" rowspan="2">If E = 255 no key was pressed and returns.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8444"></span>8444</td>
+<td class="instruction">JR Z,<a href="8430.html#843d">play_music_0</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8446"></span>8446</td>
+<td class="instruction">EI</td>
+<td class="comment-1" rowspan="1">Enable interrupts.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8447"></span>8447</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Returns.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="82C0.html">82C0</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#8430">Map</a></td>
+<td class="next">
+Next: <a href="8448.html">8448</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/33840.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

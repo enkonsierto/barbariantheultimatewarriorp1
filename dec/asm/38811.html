@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 38811</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="38796.html">38796</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#38811">Map</a></td>
+<td class="next">
+Next: <a href="38849.html">38849</a>
+</td>
+</tr>
+</table>
+<div class="description">38811: Clear one game-window row preserving snake edge columns.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="38699.html">sweep_transition</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="38811"></span>
+<div class="comments">
+<div class="paragraph">
+Variant of <a href="38796.html">clear_row</a> for tile rows that share pixel columns with the snake border. Iterates 8 scanlines via <a href="38790.html">single_scanline_clear</a>, which skips the leftmost column. For both snake edge columns only the paper bits in the attribute are cleared to black, keeping the ink colour intact. Tail-calls <a href="39846.html">waits_112ms</a> for the 112 ms inter-row pause.
+</div>
+<div class="paragraph">
+INPUT: HL = VRAM address of the first scanline of the tile row to clear. OUTPUT: HL = VRAM address of the first scanline of the next tile row. DESTROYS: A, B, DE.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">clear_snake_row</td>
+<td class="address-2"><span id="38811"></span>38811</td>
+<td class="instruction">LD B,8</td>
+<td class="comment-1" rowspan="1">B=8, one iteration per scanline within the tile row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38813"></span>38813</td>
+<td class="instruction">CALL <a href="38781.html">get_attr_address</a></td>
+<td class="comment-1" rowspan="1">Derive the attribute page high byte for the leftmost column via <a href="38781.html">get_attr_address</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38816"></span>38816</td>
+<td class="instruction">LD E,L</td>
+<td class="comment-1" rowspan="2">Form the full attribute address for the left snake column in DE.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38817"></span>38817</td>
+<td class="instruction">LD D,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38818"></span>38818</td>
+<td class="instruction">LD A,(DE)</td>
+<td class="comment-1" rowspan="3">Read the left snake column attribute, clear its paper bits to black and write it back.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38819"></span>38819</td>
+<td class="instruction">AND 199</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38821"></span>38821</td>
+<td class="instruction">LD (DE),A</td>
+</tr>
+<tr>
+<td class="asm-label">clear_snake_row_0</td>
+<td class="address-2"><span id="38822"></span>38822</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Preserve the loop counter.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38823"></span>38823</td>
+<td class="instruction">CALL <a href="38790.html">single_scanline_clear</a></td>
+<td class="comment-1" rowspan="1">Clear the 26 central tile columns for this scanline via <a href="38790.html">single_scanline_clear</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38826"></span>38826</td>
+<td class="instruction">CALL <a href="36895.html">calc_next_scanline_addr</a></td>
+<td class="comment-1" rowspan="1">Advance HL to the next scanline via <a href="36895.html">calc_next_scanline_addr</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38829"></span>38829</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore the loop counter.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38830"></span>38830</td>
+<td class="instruction">DJNZ <a href="38811.html#38822">clear_snake_row_0</a></td>
+<td class="comment-1" rowspan="1">Repeat for all 8 scanlines of the tile row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38832"></span>38832</td>
+<td class="instruction">CALL <a href="38781.html">get_attr_address</a></td>
+<td class="comment-1" rowspan="1">Derive the attribute page high byte from the current HL position via <a href="38781.html">get_attr_address</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38835"></span>38835</td>
+<td class="instruction">LD E,L</td>
+<td class="comment-1" rowspan="2">Form the attribute address of the first column of the next tile row in DE.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38836"></span>38836</td>
+<td class="instruction">LD D,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38837"></span>38837</td>
+<td class="instruction">DEC DE</td>
+<td class="comment-1" rowspan="5">Step DE back 5 bytes to reach the rightmost column (column 27) of the current tile row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38838"></span>38838</td>
+<td class="instruction">DEC DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38839"></span>38839</td>
+<td class="instruction">DEC DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38840"></span>38840</td>
+<td class="instruction">DEC DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38841"></span>38841</td>
+<td class="instruction">DEC DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38842"></span>38842</td>
+<td class="instruction">LD A,(DE)</td>
+<td class="comment-1" rowspan="2">Read the right snake column attribute and clear its paper bits to black.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38843"></span>38843</td>
+<td class="instruction">AND 199</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38845"></span>38845</td>
+<td class="instruction">LD (DE),A</td>
+<td class="comment-1" rowspan="1">Write the updated attribute back to the right snake column.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38846"></span>38846</td>
+<td class="instruction">JP <a href="39846.html">waits_112ms</a></td>
+<td class="comment-1" rowspan="1">Tail-call <a href="39846.html">waits_112ms</a> to wait 112 ms before returning.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="38796.html">38796</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#38811">Map</a></td>
+<td class="next">
+Next: <a href="38849.html">38849</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/979B.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

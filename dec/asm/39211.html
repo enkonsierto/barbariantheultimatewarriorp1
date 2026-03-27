@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 39211</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="39194.html">39194</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#39211">Map</a></td>
+<td class="next">
+Next: <a href="39245.html">39245</a>
+</td>
+</tr>
+</table>
+<div class="description">39211: Movement transition resolver.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Called from <a href="39156.html">input_gated_moves</a> with the mirror-adjusted key state in A.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="39211"></span>
+<div class="comments">
+<div class="paragraph">
+Performs a two-level table lookup to find the candidate movement ID:
+</div>
+<div class="paragraph">
+Level 1: maps the lower 4 direction bits of the key state to an input class (0-8) via <a href="47458.html">input_lookup_table</a>, collapsing 16 combos into 9 meaningful classes.
+</div>
+<div class="paragraph">
+Level 2: uses the Fire button (IY+1 bit 4) to select the transition table - <a href="44795.html">no_fire_transition_table</a> (no fire: walks, crouches, rolls) or <a href="44795.html#44851">fire_transition_table</a> (fire: attacks) - then resolves a pointer for the current movement ID and reads the resulting movement ID at the input class offset.
+</div>
+<div class="paragraph">
+Returns 255 if no transition is defined for the current input/movement combination.
+</div>
+<div class="paragraph">
+INPUT: A = adjusted key state. IY = character state block.
+</div>
+<div class="paragraph">
+OUTPUT: A = new movement ID, or 255 if no transition applies. DESTROYS: AF, DE, HL.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">moves_solver</td>
+<td class="address-2"><span id="39211"></span>39211</td>
+<td class="instruction">AND 15</td>
+<td class="comment-1" rowspan="1">Strip the Fire bit; keep only the 4 direction bits.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39213"></span>39213</td>
+<td class="instruction">LD HL,47458</td>
+<td class="comment-1" rowspan="2">Look up the input class index (0-8) for this direction combination via <a href="47458.html">input_lookup_table</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39216"></span>39216</td>
+<td class="instruction">CALL <a href="38318.html">get_byte_value</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39219"></span>39219</td>
+<td class="instruction">LD E,A</td>
+<td class="comment-1" rowspan="2">Store the input class as a 16-bit offset for the pointer walk.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39220"></span>39220</td>
+<td class="instruction">LD D,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39222"></span>39222</td>
+<td class="instruction">BIT 4,(IY+1)</td>
+<td class="comment-1" rowspan="2">Fire pressed - jump to attack transition table at <a href="39211.html#39233">moves_solver_0</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39226"></span>39226</td>
+<td class="instruction">JR NZ,<a href="39211.html#39233">moves_solver_0</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39228"></span>39228</td>
+<td class="instruction">LD HL,44795</td>
+<td class="comment-1" rowspan="1">Fire not pressed - select the movement transition pointer table <a href="44795.html">no_fire_transition_table</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39231"></span>39231</td>
+<td class="instruction">JR <a href="39211.html#39236">moves_solver_1</a></td>
+<td class="comment-1" rowspan="1">Skip to shared table resolution.</td>
+</tr>
+<tr>
+<td class="asm-label">moves_solver_0</td>
+<td class="address-2"><span id="39233"></span>39233</td>
+<td class="instruction">LD HL,44851</td>
+<td class="comment-1" rowspan="1">Fire pressed - select the attack transition pointer table <a href="44795.html#44851">fire_transition_table</a>.</td>
+</tr>
+<tr>
+<td class="asm-label">moves_solver_1</td>
+<td class="address-2"><span id="39236"></span>39236</td>
+<td class="instruction">LD A,(IY+6)</td>
+<td class="comment-1" rowspan="2">Resolve the 2-byte transition row pointer for the current movement ID via <a href="38304.html">solve_pointer</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39239"></span>39239</td>
+<td class="instruction">CALL <a href="38304.html">solve_pointer</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39242"></span>39242</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1">Advance the pointer by the input class offset to reach the target transition entry.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39243"></span>39243</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="2">Read and return the resulting movement ID.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39244"></span>39244</td>
+<td class="instruction">RET</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="39194.html">39194</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#39211">Map</a></td>
+<td class="next">
+Next: <a href="39245.html">39245</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/992B.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 35910</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="35878.html">35878</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#35910">Map</a></td>
+<td class="next">
+Next: <a href="35937.html">35937</a>
+</td>
+</tr>
+</table>
+<div class="description">35910: Key state tester</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routines at <a href="35240.html">entry_point</a>, <a href="35514.html">pause_handler_routine</a>, <a href="35825.html">human_input_reader</a>, <a href="36130.html">main_menu</a>, <a href="36212.html">one_player_mode</a> and <a href="36508.html">two_player_mode</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="35910"></span>
+<div class="comments">
+<div class="paragraph">
+Converts the scancode and returns if the key is pressed or not in the carry flag.
+</div>
+<div class="paragraph">
+INPUT: A the scancode.
+</div>
+<div class="paragraph">
+OUTPUT: Current key state in the carry flag (1 released, 0 pressed).
+</div>
+<div class="paragraph">
+DESTROYS: A, BC, carry.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">key_state_test</td>
+<td class="address-2"><span id="35910"></span>35910</td>
+<td class="instruction">LD C,A</td>
+<td class="comment-1" rowspan="1">C scancode to test.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35911"></span>35911</td>
+<td class="instruction">AND 7</td>
+<td class="comment-1" rowspan="2">Extract row index bits 5-3 add 1 to get 1-based row number in A and B.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35913"></span>35913</td>
+<td class="instruction">INC A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35914"></span>35914</td>
+<td class="instruction">LD B,A</td>
+<td class="comment-1" rowspan="1">B row number used as shift counter.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35915"></span>35915</td>
+<td class="instruction">SRL C</td>
+<td class="comment-1" rowspan="3">Shift row bits into the low position to isolate the row index in A.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35917"></span>35917</td>
+<td class="instruction">SRL C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35919"></span>35919</td>
+<td class="instruction">SRL C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35921"></span>35921</td>
+<td class="instruction">LD A,5</td>
+<td class="comment-1" rowspan="2">Extract column index bits 2-0 into A.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35923"></span>35923</td>
+<td class="instruction">SUB C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35924"></span>35924</td>
+<td class="instruction">LD C,A</td>
+<td class="comment-1" rowspan="1">C column index bit position within the row byte.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35925"></span>35925</td>
+<td class="instruction">LD A,254</td>
+<td class="comment-1" rowspan="1">Form keyboard port high byte for this row 0xFE base.</td>
+</tr>
+<tr>
+<td class="asm-label">key_state_test_0</td>
+<td class="address-2"><span id="35927"></span>35927</td>
+<td class="instruction">RRCA</td>
+<td class="comment-1" rowspan="2">Shift row mask B times to select the correct keyboard half-row port address.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35928"></span>35928</td>
+<td class="instruction">DJNZ <a href="35910.html#35927">key_state_test_0</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35930"></span>35930</td>
+<td class="instruction">IN A,(254)</td>
+<td class="comment-1" rowspan="1">Read 5-key state from the ULA keyboard port into A.</td>
+</tr>
+<tr>
+<td class="asm-label">key_state_test_1</td>
+<td class="address-2"><span id="35932"></span>35932</td>
+<td class="instruction">RRA</td>
+<td class="comment-1" rowspan="3">Shift right C times to place the target key bit into the carry flag.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35933"></span>35933</td>
+<td class="instruction">DEC C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35934"></span>35934</td>
+<td class="instruction">JR NZ,<a href="35910.html#35932">key_state_test_1</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="35936"></span>35936</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Returns with carry set key released, carry clear key pressed.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="35878.html">35878</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#35910">Map</a></td>
+<td class="next">
+Next: <a href="35937.html">35937</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/8C46.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

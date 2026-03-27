@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at 44755</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="44501.html">44501</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#44755">Map</a></td>
+<td class="next">
+Next: <a href="44795.html">44795</a>
+</td>
+</tr>
+</table>
+<div class="description">44755: Movement flags table</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+One byte per movement ID (0-39). Bit flags controlling combat activation, interruptibility and draw order.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="44755"></span>
+<div class="comments">
+<div class="paragraph">
+Bit 7: combat-active (1=in-combat movement);
+</div>
+<div class="paragraph">
+Bit 6: non-interruptible (input ignored);
+</div>
+<div class="paragraph">
+Bit 0: draw on top (when overlapping).
+</div>
+<div class="paragraph">
+Bits 1-5 always 0. Read on movement change for state flags (IY+2 bit 7) and render priority.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44755"></span>44755</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">mv0 idle:          0x00 pre-combat</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44756"></span>44756</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">mv1 walk forward:   0x00 pre-combat</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44757"></span>44757</td>
+<td class="instruction">DEFB 0</td>
+<td class="comment-1" rowspan="1">mv2 walk backward:  0x00 pre-combat</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44758"></span>44758</td>
+<td class="instruction">DEFB 129</td>
+<td class="comment-1" rowspan="1">mv3 sword spin:     0x81 combat-active, draw-top</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44759"></span>44759</td>
+<td class="instruction">DEFB 128</td>
+<td class="comment-1" rowspan="1">mv4 jump:           0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44760"></span>44760</td>
+<td class="instruction">DEFB 129</td>
+<td class="comment-1" rowspan="1">mv5 crouch slash:   0x81 combat-active, draw-top</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44761"></span>44761</td>
+<td class="instruction">DEFB 128</td>
+<td class="comment-1" rowspan="1">mv6 crouch:         0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44762"></span>44762</td>
+<td class="instruction">DEFB 129</td>
+<td class="comment-1" rowspan="1">mv7 headcut move:   0x81 combat-active, draw-top</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44763"></span>44763</td>
+<td class="instruction">DEFB 193</td>
+<td class="comment-1" rowspan="1">mv8 death decap:    0xC1 combat-active, non-interruptible, draw-top</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44764"></span>44764</td>
+<td class="instruction">DEFB 129</td>
+<td class="comment-1" rowspan="1">mv9 fwd slash:      0x81 combat-active, draw-top</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44765"></span>44765</td>
+<td class="instruction">DEFB 128</td>
+<td class="comment-1" rowspan="1">mv10 guard1:        0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44766"></span>44766</td>
+<td class="instruction">DEFB 129</td>
+<td class="comment-1" rowspan="1">mv11 top slash:     0x81 combat-active, draw-top</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44767"></span>44767</td>
+<td class="instruction">DEFB 128</td>
+<td class="comment-1" rowspan="1">mv12 kick:          0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44768"></span>44768</td>
+<td class="instruction">DEFB 128</td>
+<td class="comment-1" rowspan="1">mv13 damage recv:   0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44769"></span>44769</td>
+<td class="instruction">DEFB 129</td>
+<td class="comment-1" rowspan="1">mv14 overhead slash:0x81 combat-active, draw-top</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44770"></span>44770</td>
+<td class="instruction">DEFB 128</td>
+<td class="comment-1" rowspan="1">mv15 headbutt:      0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44771"></span>44771</td>
+<td class="instruction">DEFB 128</td>
+<td class="comment-1" rowspan="1">mv16 guard2:        0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44772"></span>44772</td>
+<td class="instruction">DEFB 128</td>
+<td class="comment-1" rowspan="1">mv17 roll forward:  0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44773"></span>44773</td>
+<td class="instruction">DEFB 128</td>
+<td class="comment-1" rowspan="1">mv18 roll backward: 0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44774"></span>44774</td>
+<td class="instruction">DEFB 192</td>
+<td class="comment-1" rowspan="1">mv19 victory:       0xC0 combat-active, non-interruptible</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44775"></span>44775</td>
+<td class="instruction">DEFB 128</td>
+<td class="comment-1" rowspan="1">mv20 crouch stand:  0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44776"></span>44776</td>
+<td class="instruction">DEFB 128</td>
+<td class="comment-1" rowspan="1">mv21 crouch strike: 0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44777"></span>44777</td>
+<td class="instruction">DEFB 128</td>
+<td class="comment-1" rowspan="1">mv22 guard2b:       0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44778"></span>44778</td>
+<td class="instruction">DEFB 128</td>
+<td class="comment-1" rowspan="1">mv23 crouch b:      0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44779"></span>44779</td>
+<td class="instruction">DEFB 128</td>
+<td class="comment-1" rowspan="1">mv24 rollback b:    0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44780"></span>44780</td>
+<td class="instruction">DEFB 128</td>
+<td class="comment-1" rowspan="1">mv25 fall:          0x80 combat-active</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44781"></span>44781</td>
+<td class="instruction">DEFB 192</td>
+<td class="comment-1" rowspan="1">mv26 goblin a:      0xC0 combat-active, non-interruptible</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44782"></span>44782</td>
+<td class="instruction">DEFB 193</td>
+<td class="comment-1" rowspan="1">mv27 death:         0xC1 combat-active, non-interruptible, draw-top</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44783"></span>44783</td>
+<td class="instruction">DEFB 192</td>
+<td class="comment-1" rowspan="1">mv28 arena enter:   0xC0 combat-active, non-interruptible</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44784"></span>44784</td>
+<td class="instruction">DEFB 193</td>
+<td class="comment-1" rowspan="1">mv29 drag L decap:  0xC1 combat-active, non-interruptible, draw-top</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44785"></span>44785</td>
+<td class="instruction">DEFB 129</td>
+<td class="comment-1" rowspan="1">mv30 goblin b:      0x81 combat-active, draw-top</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44786"></span>44786</td>
+<td class="instruction">DEFB 193</td>
+<td class="comment-1" rowspan="1">mv31 drag R decap:  0xC1 combat-active, non-interruptible, draw-top</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44787"></span>44787</td>
+<td class="instruction">DEFB 193</td>
+<td class="comment-1" rowspan="1">mv32 drag L:        0xC1 combat-active, non-interruptible, draw-top</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44788"></span>44788</td>
+<td class="instruction">DEFB 193</td>
+<td class="comment-1" rowspan="1">mv33 drag R:        0xC1 combat-active, non-interruptible, draw-top</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44789"></span>44789</td>
+<td class="instruction">DEFB 192</td>
+<td class="comment-1" rowspan="1">mv34 change side:   0xC0 combat-active, non-interruptible</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44790"></span>44790</td>
+<td class="instruction">DEFB 192</td>
+<td class="comment-1" rowspan="1">mv35 walk unused:   0xC0 combat-active, non-interruptible</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44791"></span>44791</td>
+<td class="instruction">DEFB 192</td>
+<td class="comment-1" rowspan="1">mv36 win seq:       0xC0 combat-active, non-interruptible</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44792"></span>44792</td>
+<td class="instruction">DEFB 192</td>
+<td class="comment-1" rowspan="1">mv37 stand:         0xC0 combat-active, non-interruptible</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44793"></span>44793</td>
+<td class="instruction">DEFB 192</td>
+<td class="comment-1" rowspan="1">mv38 goblin c:      0xC0 combat-active, non-interruptible</td>
+</tr>
+<tr>
+<td class="address-1"><span id="44794"></span>44794</td>
+<td class="instruction">DEFB 192</td>
+<td class="comment-1" rowspan="1">mv39 endgame:       0xC0 combat-active, non-interruptible</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="44501.html">44501</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#44755">Map</a></td>
+<td class="next">
+Next: <a href="44795.html">44795</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/AED3.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

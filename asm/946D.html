@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 946D</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="944C.html">944C</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#946d">Map</a></td>
+<td class="next">
+Next: <a href="94D7.html">94D7</a>
+</td>
+</tr>
+</table>
+<div class="description">946D: Flying head animator.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Called once per frame from the main game loop via <a href="89A8.html#89f7">89F7</a>.
+</div>
+<div class="paragraph">
+Moves and renders the severed head using the 8-byte state block at <a href="B6D9.html">head_state</a>, addressed via IX.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="946d"></span>
+<div class="comments">
+<div class="paragraph">
+Movement control data: 2-byte pairs (control byte, magnitude). Bit 0 = move up (<a href="9539.html">move_scanl_up</a>), bit 1 = move down (<a href="952F.html">move_scanl_down</a>). Pointer at IX+4,5 advances 2 bytes per frame.
+</div>
+<div class="paragraph">
+Tile sequence at IX+2,3 advances 1 byte per frame. When the byte value is 255, INC A wraps to 0 and triggers <a href="9524.html">mark_head_landed</a>: sets <a href="B6D9.html#b6da">head_state_flag</a>=255 (landed), unblocking goblin spawn in <a href="9322.html">goblin_entry</a>.
+</div>
+<div class="paragraph">
+After horizontal movement, column byte (L AND 31) is checked against 0, 1 and 29. Any edge column triggers <a href="952A.html">deactivate_head</a>: sets <a href="B6D9.html#b6da">head_state_flag</a>=0 (fully inactive).
+</div>
+<div class="paragraph">
+Landed path: <a href="B6D9.html#b6da">head_state_flag</a>=255, INC A wraps to 0, JR Z jumps to <a href="94D7.html">render_head_tile</a> skipping all movement logic. The head is redrawn in place each frame until <a href="944C.html">goblin_kicks</a> re-activates it.
+</div>
+<div class="paragraph">
+IN None. OUT None. DESTROYS AF, BC, DE, HL, IX.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">head_animator</td>
+<td class="address-2"><span id="946d"></span>946D</td>
+<td class="instruction">LD IX,$B6D9</td>
+<td class="comment-1" rowspan="1">IX = <a href="B6D9.html">head_state</a> head state block base.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9471"></span>9471</td>
+<td class="instruction">LD A,(IX+$01)</td>
+<td class="comment-1" rowspan="1">A = <a href="B6D9.html#b6da">head_state_flag</a> state byte.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9474"></span>9474</td>
+<td class="instruction">OR A</td>
+<td class="comment-1" rowspan="1">Test if inactive (state = 0).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9475"></span>9475</td>
+<td class="instruction">RET Z</td>
+<td class="comment-1" rowspan="1">Return if inactive.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9476"></span>9476</td>
+<td class="instruction">INC A</td>
+<td class="comment-1" rowspan="1">INC A: wraps 255 (landed) to 0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9477"></span>9477</td>
+<td class="instruction">JR Z,<a href="94D7.html">render_head_tile</a></td>
+<td class="comment-1" rowspan="1">Landed: jump to draw-only path at <a href="94D7.html">render_head_tile</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9479"></span>9479</td>
+<td class="instruction">CALL <a href="94F9.html">shadow_head</a></td>
+<td class="comment-1" rowspan="1">Bouncing: draw ground shadow via <a href="94F9.html">shadow_head</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="947c"></span>947C</td>
+<td class="instruction">CALL <a href="94D7.html">render_head_tile</a></td>
+<td class="comment-1" rowspan="1">Draw head tile at current position via <a href="94D7.html">render_head_tile</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="947f"></span>947F</td>
+<td class="instruction">LD L,(IX+$04)</td>
+<td class="comment-1" rowspan="2">HL = IX+4,5 (movement control pointer, <a href="B6D9.html#b6dd">head_traj_ptr</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9482"></span>9482</td>
+<td class="instruction">LD H,(IX+$05)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9485"></span>9485</td>
+<td class="instruction">LD C,(HL)</td>
+<td class="comment-1" rowspan="1">C = control byte (bit 0=up, bit 1=down).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9486"></span>9486</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Advance past control byte.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9487"></span>9487</td>
+<td class="instruction">LD B,(HL)</td>
+<td class="comment-1" rowspan="1">B = magnitude (scanlines to move this frame).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9488"></span>9488</td>
+<td class="instruction">LD L,(IX+$06)</td>
+<td class="comment-1" rowspan="2">HL = IX+6,7 (current framebuffer address, <a href="B6D9.html#b6df">head_screen_addr</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="948b"></span>948B</td>
+<td class="instruction">LD H,(IX+$07)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="948e"></span>948E</td>
+<td class="instruction">BIT 0,C</td>
+<td class="comment-1" rowspan="1">Bit 0 set: move up.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9490"></span>9490</td>
+<td class="instruction">CALL NZ,<a href="9539.html">move_scanl_up</a></td>
+<td class="comment-1" rowspan="1">Move up B scanlines via <a href="9539.html">move_scanl_up</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9493"></span>9493</td>
+<td class="instruction">BIT 1,C</td>
+<td class="comment-1" rowspan="1">Bit 1 set: move down.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9495"></span>9495</td>
+<td class="instruction">CALL NZ,<a href="952F.html">move_scanl_down</a></td>
+<td class="comment-1" rowspan="1">Move down B scanlines via <a href="952F.html">move_scanl_down</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="9498"></span>9498</td>
+<td class="instruction">LD A,(IX+$00)</td>
+<td class="comment-1" rowspan="1">A = IX+0 direction flag.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="949b"></span>949B</td>
+<td class="instruction">CP $01</td>
+<td class="comment-1" rowspan="1">Direction = left?</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="949d"></span>949D</td>
+<td class="instruction">CALL Z,<a href="9544.html">move_col_left</a></td>
+<td class="comment-1" rowspan="1">Yes: DEC L (move one column left) via <a href="9544.html">move_col_left</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="94a0"></span>94A0</td>
+<td class="instruction">CALL NZ,<a href="9548.html">move_col_right</a></td>
+<td class="comment-1" rowspan="1">No: INC L (move one column right) via <a href="9548.html">move_col_right</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="94a3"></span>94A3</td>
+<td class="instruction">LD (IX+$06),L</td>
+<td class="comment-1" rowspan="2">Store updated framebuffer address back to IX+6,7 (<a href="B6D9.html#b6df">head_screen_addr</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="94a6"></span>94A6</td>
+<td class="instruction">LD (IX+$07),H</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="94a9"></span>94A9</td>
+<td class="instruction">LD A,L</td>
+<td class="comment-1" rowspan="1">Read column byte from updated framebuffer address (L).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="94aa"></span>94AA</td>
+<td class="instruction">AND $1F</td>
+<td class="comment-1" rowspan="1">Mask to 5 bits to get screen column (0-31).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="94ac"></span>94AC</td>
+<td class="instruction">OR A</td>
+<td class="comment-1" rowspan="1">Column = 0: left edge, deactivate.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="94ad"></span>94AD</td>
+<td class="instruction">JR Z,<a href="952A.html">deactivate_head</a></td>
+<td class="comment-1" rowspan="1">Deactivate via <a href="952A.html">deactivate_head</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="94af"></span>94AF</td>
+<td class="instruction">CP $01</td>
+<td class="comment-1" rowspan="1">Column = 1: near left edge, deactivate.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="94b1"></span>94B1</td>
+<td class="instruction">JR Z,<a href="952A.html">deactivate_head</a></td>
+<td class="comment-1" rowspan="1">Deactivate via <a href="952A.html">deactivate_head</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="94b3"></span>94B3</td>
+<td class="instruction">CP $1D</td>
+<td class="comment-1" rowspan="1">Column = 29: right edge, deactivate.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="94b5"></span>94B5</td>
+<td class="instruction">JR Z,<a href="952A.html">deactivate_head</a></td>
+<td class="comment-1" rowspan="1">Deactivate via <a href="952A.html">deactivate_head</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="94b7"></span>94B7</td>
+<td class="instruction">LD L,(IX+$02)</td>
+<td class="comment-1" rowspan="2">HL = IX+2,3 (tile animation sequence pointer, <a href="B6D9.html#b6db">head_frame_seq</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="94ba"></span>94BA</td>
+<td class="instruction">LD H,(IX+$03)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="94bd"></span>94BD</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="1">Advance sequence pointer by 1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="94be"></span>94BE</td>
+<td class="instruction">LD A,(HL)</td>
+<td class="comment-1" rowspan="1">A = current tile index byte.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="94bf"></span>94BF</td>
+<td class="instruction">INC A</td>
+<td class="comment-1" rowspan="1">INC A: test for end-of-sequence sentinel (255 wraps to 0).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="94c0"></span>94C0</td>
+<td class="instruction">JR Z,<a href="9524.html">mark_head_landed</a></td>
+<td class="comment-1" rowspan="1">Sentinel: mark head as landed via <a href="9524.html">mark_head_landed</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="94c2"></span>94C2</td>
+<td class="instruction">LD (IX+$02),L</td>
+<td class="comment-1" rowspan="2">Store updated tile sequence pointer back to IX+2,3 (<a href="B6D9.html#b6db">head_frame_seq</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="94c5"></span>94C5</td>
+<td class="instruction">LD (IX+$03),H</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="94c8"></span>94C8</td>
+<td class="instruction">LD L,(IX+$04)</td>
+<td class="comment-1" rowspan="2">HL = IX+4,5 (movement control pointer, <a href="B6D9.html#b6dd">head_traj_ptr</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="94cb"></span>94CB</td>
+<td class="instruction">LD H,(IX+$05)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="94ce"></span>94CE</td>
+<td class="instruction">INC HL</td>
+<td class="comment-1" rowspan="2">Advance movement control pointer past the consumed pair (2 bytes).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="94cf"></span>94CF</td>
+<td class="instruction">INC HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="94d0"></span>94D0</td>
+<td class="instruction">LD (IX+$04),L</td>
+<td class="comment-1" rowspan="2">Store updated movement control pointer back to IX+4,5 (<a href="B6D9.html#b6dd">head_traj_ptr</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="94d3"></span>94D3</td>
+<td class="instruction">LD (IX+$05),H</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="94d6"></span>94D6</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="944C.html">944C</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#946d">Map</a></td>
+<td class="next">
+Next: <a href="94D7.html">94D7</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/37997.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

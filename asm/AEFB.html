@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Data at AEFB</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-w">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="AED3.html">AED3</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#aefb">Map</a></td>
+<td class="next">
+Next: <a href="AF6B.html">AF6B</a>
+</td>
+</tr>
+</table>
+<div class="description">AEFB: Movement transition pointer tables.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Two adjacent 28-entry sub-tables, 2 bytes per entry (little-endian), one per movement ID 0-27. Each entry is a pointer to a 9-byte transition row in <a href="AF6B.html">st_free</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="aefb"></span>
+<div class="comments">
+<div class="paragraph">
+Both tables are indexed by movement ID via <a href="95A0.html">solve_pointer</a>, called from <a href="992B.html">moves_solver</a>.
+</div>
+<div class="paragraph">
+Each pointed row holds one movement ID per input class (0-8) from <a href="B962.html">input_lookup_table</a>. 255 means no transition is defined for that input class.
+</div>
+<div class="paragraph">
+Multiple movement IDs may share the same row pointer when their transition profiles are identical.
+</div>
+<div class="paragraph">
+Movement IDs 28-39 are absent: all are either non-interruptible or goblin-only and never reach <a href="992B.html">moves_solver</a> via <a href="98F4.html">input_gated_moves</a>.
+</div>
+<div class="paragraph">
+No-fire table: selected by <a href="992B.html">moves_solver</a> when Fire (IY+1 bit 4) is not pressed. Covers movement IDs 0-27.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">no_fire_transition_table</td>
+<td class="address-1"><span id="aefb"></span>AEFB</td>
+<td class="instruction">DEFW <a href="AF6B.html">st_free</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aefd"></span>AEFD</td>
+<td class="instruction">DEFW <a href="AF6B.html">st_free</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="aeff"></span>AEFF</td>
+<td class="instruction">DEFW <a href="AF6B.html">st_free</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af01"></span>AF01</td>
+<td class="instruction">DEFW <a href="AF6B.html">st_free</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af03"></span>AF03</td>
+<td class="instruction">DEFW <a href="AF6B.html">st_free</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af05"></span>AF05</td>
+<td class="instruction">DEFW <a href="AF6B.html#af74">st_cr_slash</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af07"></span>AF07</td>
+<td class="instruction">DEFW <a href="AF6B.html#af7d">st_crouching</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af09"></span>AF09</td>
+<td class="instruction">DEFW <a href="AF6B.html#af86">st_free2</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af0b"></span>AF0B</td>
+<td class="instruction">DEFW <a href="AF6B.html#af8f">st_combat</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af0d"></span>AF0D</td>
+<td class="instruction">DEFW <a href="AF6B.html#af86">st_free2</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af0f"></span>AF0F</td>
+<td class="instruction">DEFW <a href="AF6B.html#af98">st_guard1</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af11"></span>AF11</td>
+<td class="instruction">DEFW <a href="AF6B.html">st_free</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af13"></span>AF13</td>
+<td class="instruction">DEFW <a href="AF6B.html">st_free</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af15"></span>AF15</td>
+<td class="instruction">DEFW <a href="AF6B.html#af8f">st_combat</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af17"></span>AF17</td>
+<td class="instruction">DEFW <a href="AF6B.html">st_free</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af19"></span>AF19</td>
+<td class="instruction">DEFW <a href="AF6B.html">st_free</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af1b"></span>AF1B</td>
+<td class="instruction">DEFW <a href="AF6B.html">st_free</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af1d"></span>AF1D</td>
+<td class="instruction">DEFW <a href="AF6B.html#afa1">st_roll_fwd</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af1f"></span>AF1F</td>
+<td class="instruction">DEFW <a href="AF6B.html#af8f">st_combat</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af21"></span>AF21</td>
+<td class="instruction">DEFW <a href="AF6B.html#af8f">st_combat</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af23"></span>AF23</td>
+<td class="instruction">DEFW <a href="AF6B.html#af8f">st_combat</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af25"></span>AF25</td>
+<td class="instruction">DEFW <a href="AF6B.html#af8f">st_combat</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af27"></span>AF27</td>
+<td class="instruction">DEFW <a href="AF6B.html">st_free</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af29"></span>AF29</td>
+<td class="instruction">DEFW <a href="AF6B.html#afaa">st_crouch_lock</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af2b"></span>AF2B</td>
+<td class="instruction">DEFW <a href="AF6B.html#afb3">st_roll_bk</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af2d"></span>AF2D</td>
+<td class="instruction">DEFW <a href="AF6B.html">st_free</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af2f"></span>AF2F</td>
+<td class="instruction">DEFW <a href="AF6B.html#af8f">st_combat</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af31"></span>AF31</td>
+<td class="instruction">DEFW <a href="AF6B.html#af8f">st_combat</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="af33"></span>
+<div class="comments">
+<div class="paragraph">
+Fire-pressed table: selected by <a href="992B.html">moves_solver</a> when Fire (IY+1 bit 4) is pressed. Covers movement IDs 0-27.
+</div>
+<div class="paragraph">
+Non-interruptible movements (bit 6 of <a href="AED3.html">AED3</a> set) are filtered out by <a href="98F4.html">input_gated_moves</a> before <a href="992B.html">moves_solver</a> is called and never index this table.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">fire_transition_table</td>
+<td class="address-1"><span id="af33"></span>AF33</td>
+<td class="instruction">DEFW <a href="AF6B.html#afbc">st_attack</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af35"></span>AF35</td>
+<td class="instruction">DEFW <a href="AF6B.html#afbc">st_attack</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af37"></span>AF37</td>
+<td class="instruction">DEFW <a href="AF6B.html#afbc">st_attack</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af39"></span>AF39</td>
+<td class="instruction">DEFW <a href="AF6B.html#afbc">st_attack</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af3b"></span>AF3B</td>
+<td class="instruction">DEFW <a href="AF6B.html#afbc">st_attack</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af3d"></span>AF3D</td>
+<td class="instruction">DEFW <a href="AF6B.html#afc5">st_cr_attack</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af3f"></span>AF3F</td>
+<td class="instruction">DEFW <a href="AF6B.html#afc5">st_cr_attack</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af41"></span>AF41</td>
+<td class="instruction">DEFW <a href="AF6B.html#afbc">st_attack</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af43"></span>AF43</td>
+<td class="instruction">DEFW <a href="AF6B.html#afbc">st_attack</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af45"></span>AF45</td>
+<td class="instruction">DEFW <a href="AF6B.html#afbc">st_attack</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af47"></span>AF47</td>
+<td class="instruction">DEFW <a href="AF6B.html#afbc">st_attack</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af49"></span>AF49</td>
+<td class="instruction">DEFW <a href="AF6B.html#afbc">st_attack</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af4b"></span>AF4B</td>
+<td class="instruction">DEFW <a href="AF6B.html#afbc">st_attack</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af4d"></span>AF4D</td>
+<td class="instruction">DEFW <a href="AF6B.html#afbc">st_attack</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af4f"></span>AF4F</td>
+<td class="instruction">DEFW <a href="AF6B.html#afbc">st_attack</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af51"></span>AF51</td>
+<td class="instruction">DEFW <a href="AF6B.html#afbc">st_attack</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af53"></span>AF53</td>
+<td class="instruction">DEFW <a href="AF6B.html#afbc">st_attack</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af55"></span>AF55</td>
+<td class="instruction">DEFW <a href="AF6B.html#afa1">st_roll_fwd</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af57"></span>AF57</td>
+<td class="instruction">DEFW <a href="AF6B.html#afbc">st_attack</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af59"></span>AF59</td>
+<td class="instruction">DEFW <a href="AF6B.html#afbc">st_attack</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af5b"></span>AF5B</td>
+<td class="instruction">DEFW <a href="AF6B.html#afbc">st_attack</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af5d"></span>AF5D</td>
+<td class="instruction">DEFW <a href="AF6B.html#afbc">st_attack</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af5f"></span>AF5F</td>
+<td class="instruction">DEFW <a href="AF6B.html#afbc">st_attack</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af61"></span>AF61</td>
+<td class="instruction">DEFW <a href="AF6B.html#afce">st_locked_atk</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af63"></span>AF63</td>
+<td class="instruction">DEFW <a href="AF6B.html#afbc">st_attack</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af65"></span>AF65</td>
+<td class="instruction">DEFW <a href="AF6B.html#afbc">st_attack</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af67"></span>AF67</td>
+<td class="instruction">DEFW <a href="AF6B.html#afbc">st_attack</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="af69"></span>AF69</td>
+<td class="instruction">DEFW <a href="AF6B.html#afbc">st_attack</a></td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="AED3.html">AED3</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#aefb">Map</a></td>
+<td class="next">
+Next: <a href="AF6B.html">AF6B</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/44795.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

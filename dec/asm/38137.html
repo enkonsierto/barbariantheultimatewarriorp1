@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 38137</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="38103.html">38103</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#38137">Map</a></td>
+<td class="next">
+Next: <a href="38158.html">38158</a>
+</td>
+</tr>
+</table>
+<div class="description">38137: Flying head ground shadow renderer.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="37997.html">head_animator</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="38137"></span>
+<div class="comments">
+<div class="paragraph">
+Draws a ground shadow for the flying head each frame. Calculates the shadow VRAM address from the current head column (<a href="46809.html#46815">head_screen_addr</a>) and the ground row, then calls <a href="36910.html">tile_render_engine</a> to blit the shadow tile (<a href="40192.html#40576">40576</a>).
+</div>
+<div class="paragraph">
+INPUT: None. OUTPUT: None. DESTROYS: AF, DE, HL.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">shadow_head</td>
+<td class="address-2"><span id="38137"></span>38137</td>
+<td class="instruction">LD A,(46434)</td>
+<td class="comment-1" rowspan="3">Guard: return if <a href="46434.html">p2_controller_type</a> is zero (never true during normal gameplay).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38140"></span>38140</td>
+<td class="instruction">OR A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38141"></span>38141</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38142"></span>38142</td>
+<td class="instruction">LD DE,40576</td>
+<td class="comment-1" rowspan="1">Load head shadow tile source address (<a href="40192.html#40576">40576</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38145"></span>38145</td>
+<td class="instruction">LD A,(46815)</td>
+<td class="comment-1" rowspan="1">Read current head column from framebuffer address (<a href="46809.html#46815">head_screen_addr</a>).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38148"></span>38148</td>
+<td class="instruction">AND 31</td>
+<td class="comment-1" rowspan="2">Build VRAM column byte: got the equivalent address in the ground.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38150"></span>38150</td>
+<td class="instruction">OR 224</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38152"></span>38152</td>
+<td class="instruction">LD H,101</td>
+<td class="comment-1" rowspan="2">Complete VRAM address in HL.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38154"></span>38154</td>
+<td class="instruction">LD L,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="38155"></span>38155</td>
+<td class="instruction">JP <a href="36910.html">tile_render_engine</a></td>
+<td class="comment-1" rowspan="1">Tail-call <a href="36910.html">tile_render_engine</a> to render the shadow tile.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="38103.html">38103</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#38137">Map</a></td>
+<td class="next">
+Next: <a href="38158.html">38158</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/94F9.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

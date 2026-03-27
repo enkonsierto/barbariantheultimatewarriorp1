@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 8C88</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="8C61.html">8C61</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#8c88">Map</a></td>
+<td class="next">
+Next: <a href="8C9C.html">8C9C</a>
+</td>
+</tr>
+</table>
+<div class="description">8C88: Binary multiplier. Computes HL = A * DE.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="8BB5.html">character_ai_engine</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="8c88"></span>
+<div class="comments">
+<div class="paragraph">
+General-purpose 8bits * 16bits unsigned multiply using shift-and-add.
+</div>
+<div class="paragraph">
+Iterates 8 times, one per bit of A LSB first. If the current bit is set, adds DE to the HL accumulator. DE is left-shifted each iteration to track the positional value of each bit.
+</div>
+<div class="paragraph">
+Called from <a href="8BB5.html">character_ai_engine</a> with DE=8 to compute a byte offset into the AI movement table <a href="BB66.html">ai_movement_table</a> (effective result: HL = A * 8).
+</div>
+<div class="paragraph">
+INPUT  A  = multiplicand (8-bit unsigned), DE = multiplier (16-bit unsigned).
+</div>
+<div class="paragraph">
+OUTPUT HL = A * DE (16-bit result).
+</div>
+<div class="paragraph">
+DESTROYS HL, DE, B.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">bin_multiply</td>
+<td class="address-2"><span id="8c88"></span>8C88</td>
+<td class="instruction">LD HL,$0000</td>
+<td class="comment-1" rowspan="3">HL = 0 (result accumulator). Test A; return immediately if A = 0.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c8b"></span>8C8B</td>
+<td class="instruction">OR A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c8c"></span>8C8C</td>
+<td class="instruction">RET Z</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c8d"></span>8C8D</td>
+<td class="instruction">LD B,$08</td>
+<td class="comment-1" rowspan="1">B = 8 (bit counter, one iteration per bit of A).</td>
+</tr>
+<tr>
+<td class="asm-label">bin_multiply_0</td>
+<td class="address-2"><span id="8c8f"></span>8C8F</td>
+<td class="instruction">SRL A</td>
+<td class="comment-1" rowspan="2">Shift A right; bit 0 into carry. If carry clear, skip addition.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c91"></span>8C91</td>
+<td class="instruction">JP NC,<a href="8C88.html#8c95">bin_multiply_1</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c94"></span>8C94</td>
+<td class="instruction">ADD HL,DE</td>
+<td class="comment-1" rowspan="1">Bit was set: add current positional value DE to accumulator HL.</td>
+</tr>
+<tr>
+<td class="asm-label">bin_multiply_1</td>
+<td class="address-2"><span id="8c95"></span>8C95</td>
+<td class="instruction">SLA E</td>
+<td class="comment-1" rowspan="2">Left-shift DE (SLA E / RL D) to advance to next bit position.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c97"></span>8C97</td>
+<td class="instruction">RL D</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c99"></span>8C99</td>
+<td class="instruction">DJNZ <a href="8C88.html#8c8f">bin_multiply_0</a></td>
+<td class="comment-1" rowspan="1">Repeat for all 8 bits.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="8c9b"></span>8C9B</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return with HL = A * DE.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="8C61.html">8C61</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#8c88">Map</a></td>
+<td class="next">
+Next: <a href="8C9C.html">8C9C</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/35976.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 37317</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="37296.html">37296</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#37317">Map</a></td>
+<td class="next">
+Next: <a href="37331.html">37331</a>
+</td>
+</tr>
+</table>
+<div class="description">37317: Composite tile pointer resolver.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Converts a composite tile index A (0-63) into a pointer BC to its definition byte sequence in <a href="48269.html">48269</a>, via the 2-byte pointer table at <a href="48433.html">composite_tile_pointers</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="37317"></span>
+<div class="comments">
+<div class="paragraph">
+Gets the word offset into <a href="48433.html">composite_tile_pointers</a>, reads the little-endian pointer at that entry and returns it in BC.
+</div>
+<div class="paragraph">
+INPUT A composite tile index (0-63, derived from control byte AND 0x3F). HL framebuffer address (preserved unchanged). OUTPUT BC pointer to definition bytes in <a href="48269.html">48269</a>. DESTROYS AF, BC.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">comptile_ptr_resolver</td>
+<td class="address-2"><span id="37317"></span>37317</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="1">Saves framebuffer address.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37318"></span>37318</td>
+<td class="instruction">ADD A,A</td>
+<td class="comment-1" rowspan="1">Computes 2-byte offset into pointer table.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37319"></span>37319</td>
+<td class="instruction">LD C,A</td>
+<td class="comment-1" rowspan="3">Forms full offset from low byte.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37320"></span>37320</td>
+<td class="instruction">LD B,0</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37322"></span>37322</td>
+<td class="instruction">LD HL,48433</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37325"></span>37325</td>
+<td class="instruction">ADD HL,BC</td>
+<td class="comment-1" rowspan="1">Locates table (<a href="48433.html">composite_tile_pointers</a>) entry for this index.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37326"></span>37326</td>
+<td class="instruction">LD C,(HL)</td>
+<td class="comment-1" rowspan="3">Reads pointer into BC.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37327"></span>37327</td>
+<td class="instruction">INC HL</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37328"></span>37328</td>
+<td class="instruction">LD B,(HL)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37329"></span>37329</td>
+<td class="instruction">POP HL</td>
+<td class="comment-1" rowspan="1">Restores framebuffer address.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="37330"></span>37330</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Returns with pointer in BC.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="37296.html">37296</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#37317">Map</a></td>
+<td class="next">
+Next: <a href="37331.html">37331</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/91C5.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

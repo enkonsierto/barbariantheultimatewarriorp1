@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 979B</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="978C.html">978C</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#979b">Map</a></td>
+<td class="next">
+Next: <a href="97C1.html">97C1</a>
+</td>
+</tr>
+</table>
+<div class="description">979B: Clear one game-window row preserving snake edge columns.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="972B.html">sweep_transition</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="979b"></span>
+<div class="comments">
+<div class="paragraph">
+Variant of <a href="978C.html">clear_row</a> for tile rows that share pixel columns with the snake border. Iterates 8 scanlines via <a href="9786.html">single_scanline_clear</a>, which skips the leftmost column. For both snake edge columns only the paper bits in the attribute are cleared to black, keeping the ink colour intact. Tail-calls <a href="9BA6.html">waits_112ms</a> for the 112 ms inter-row pause.
+</div>
+<div class="paragraph">
+INPUT: HL = VRAM address of the first scanline of the tile row to clear. OUTPUT: HL = VRAM address of the first scanline of the next tile row. DESTROYS: A, B, DE.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">clear_snake_row</td>
+<td class="address-2"><span id="979b"></span>979B</td>
+<td class="instruction">LD B,$08</td>
+<td class="comment-1" rowspan="1">B=8, one iteration per scanline within the tile row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="979d"></span>979D</td>
+<td class="instruction">CALL <a href="977D.html">get_attr_address</a></td>
+<td class="comment-1" rowspan="1">Derive the attribute page high byte for the leftmost column via <a href="977D.html">get_attr_address</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="97a0"></span>97A0</td>
+<td class="instruction">LD E,L</td>
+<td class="comment-1" rowspan="2">Form the full attribute address for the left snake column in DE.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="97a1"></span>97A1</td>
+<td class="instruction">LD D,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="97a2"></span>97A2</td>
+<td class="instruction">LD A,(DE)</td>
+<td class="comment-1" rowspan="3">Read the left snake column attribute, clear its paper bits to black and write it back.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="97a3"></span>97A3</td>
+<td class="instruction">AND $C7</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="97a5"></span>97A5</td>
+<td class="instruction">LD (DE),A</td>
+</tr>
+<tr>
+<td class="asm-label">clear_snake_row_0</td>
+<td class="address-2"><span id="97a6"></span>97A6</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Preserve the loop counter.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="97a7"></span>97A7</td>
+<td class="instruction">CALL <a href="9786.html">single_scanline_clear</a></td>
+<td class="comment-1" rowspan="1">Clear the 26 central tile columns for this scanline via <a href="9786.html">single_scanline_clear</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="97aa"></span>97AA</td>
+<td class="instruction">CALL <a href="901F.html">calc_next_scanline_addr</a></td>
+<td class="comment-1" rowspan="1">Advance HL to the next scanline via <a href="901F.html">calc_next_scanline_addr</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="97ad"></span>97AD</td>
+<td class="instruction">POP BC</td>
+<td class="comment-1" rowspan="1">Restore the loop counter.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="97ae"></span>97AE</td>
+<td class="instruction">DJNZ <a href="979B.html#97a6">clear_snake_row_0</a></td>
+<td class="comment-1" rowspan="1">Repeat for all 8 scanlines of the tile row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="97b0"></span>97B0</td>
+<td class="instruction">CALL <a href="977D.html">get_attr_address</a></td>
+<td class="comment-1" rowspan="1">Derive the attribute page high byte from the current HL position via <a href="977D.html">get_attr_address</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="97b3"></span>97B3</td>
+<td class="instruction">LD E,L</td>
+<td class="comment-1" rowspan="2">Form the attribute address of the first column of the next tile row in DE.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="97b4"></span>97B4</td>
+<td class="instruction">LD D,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="97b5"></span>97B5</td>
+<td class="instruction">DEC DE</td>
+<td class="comment-1" rowspan="5">Step DE back 5 bytes to reach the rightmost column (column 27) of the current tile row.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="97b6"></span>97B6</td>
+<td class="instruction">DEC DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="97b7"></span>97B7</td>
+<td class="instruction">DEC DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="97b8"></span>97B8</td>
+<td class="instruction">DEC DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="97b9"></span>97B9</td>
+<td class="instruction">DEC DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="97ba"></span>97BA</td>
+<td class="instruction">LD A,(DE)</td>
+<td class="comment-1" rowspan="2">Read the right snake column attribute and clear its paper bits to black.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="97bb"></span>97BB</td>
+<td class="instruction">AND $C7</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="97bd"></span>97BD</td>
+<td class="instruction">LD (DE),A</td>
+<td class="comment-1" rowspan="1">Write the updated attribute back to the right snake column.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="97be"></span>97BE</td>
+<td class="instruction">JP <a href="9BA6.html">waits_112ms</a></td>
+<td class="comment-1" rowspan="1">Tail-call <a href="9BA6.html">waits_112ms</a> to wait 112 ms before returning.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="978C.html">978C</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#979b">Map</a></td>
+<td class="next">
+Next: <a href="97C1.html">97C1</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../dec/asm/38811.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

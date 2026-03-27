@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Game status buffer</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="GameStatusBuffer">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Game status buffer</td>
+</tr>
+</table>
+<div class="map-intro"></div>
+<table class="map">
+<tr>
+<th>Address</th>
+<th class="map-length">Length</th>
+<th>Description</th>
+</tr>
+<tr>
+<td class="map-g"><span id="24066"></span><a href="../asm/24066.html">24066</a></td>
+<td class="map-length">2046</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/24066.html">Framebuffer</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+This whole area will be filled with the framebuffer (24066-26751). Overwritten by <a href="../asm/38547.html">copy_bg_to_frmbuff</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="26456"></span><a href="../asm/26456.html">26456</a></td>
+<td class="map-length">296</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/26456.html">Framebuffer (cont.)</a></div>
+<div class="map-entry-desc">
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="33864"></span><a href="../asm/33864.html">33864</a></td>
+<td class="map-length">12</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/33864.html">Music engine state buffers.</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+12-byte working area for the 2-channel beeper music engine. Used by <a href="../asm/33911.html">music_engine</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="46425"></span><a href="../asm/46425.html">46425</a></td>
+<td class="map-length">9</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/46425.html">Player 1 state block.</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+9-byte structure used by all combat routines.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="46434"></span><a href="../asm/46434.html">46434</a></td>
+<td class="map-length">9</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/46434.html">Player 2 state block.</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+9-byte structure used by all combat routines.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="46443"></span><a href="../asm/46443.html">46443</a></td>
+<td class="map-length">9</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/46443.html">Goblin state block.</a></div>
+<div class="map-entry-desc">
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="46452"></span><a href="../asm/46452.html">46452</a></td>
+<td class="map-length">2</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/46452.html">Saved stack pointer.</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+2-byte LE copy of SP redirecting SP to the VRAM address table <a href="../asm/23552.html">left_col_addr_table</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="46454"></span><a href="../asm/46454.html">46454</a></td>
+<td class="map-length">1</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/46454.html">Active Background index.</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+0=Background 1 (graphics <a href="../asm/26752.html">stage_1_bg</a>, attrs <a href="../asm/46467.html#46614">bg_1_attr_data</a>), 1=Background 2 (graphics <a href="../asm/30112.html">stage_2_bg</a>, attrs <a href="../asm/46467.html">bg_2_attr_data</a>).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="46803"></span><a href="../asm/46803.html">46803</a></td>
+<td class="map-length">1</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/46803.html">Pending combat sound index.</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+Stores the index of the combat sound triggered this frame.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="46804"></span><a href="../asm/46804.html">46804</a></td>
+<td class="map-length">2</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/46804.html">Attacker state block pointer.</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+2-byte pointer to the attacker's character state block.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="46806"></span><a href="../asm/46806.html">46806</a></td>
+<td class="map-length">2</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/46806.html">Hit indicator screen address.</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+2-byte VRAM address where the hit indicator glyph will be drawn.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="46808"></span><a href="../asm/46808.html">46808</a></td>
+<td class="map-length">1</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/46808.html">Timer Flag.</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+In this address the time is stored (in 2 players mode). If the value is 255 we are in 1 Player or Demo mode (and we got infinite time).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="46809"></span><a href="../asm/46809.html">46809</a></td>
+<td class="map-length">8</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/46809.html">Flying head state block.</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+Initialised by <a href="../asm/37944.html">head_init</a> on decapitation (<a href="../asm/46809.html">head_state</a> + <a href="../asm/46809.html#46810">head_state_flag</a> + <a href="../asm/46809.html#46811">head_frame_seq</a> + <a href="../asm/46809.html#46813">head_traj_ptr</a> + <a href="../asm/46809.html#46815">head_screen_addr</a>).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="46817"></span><a href="../asm/46817.html">46817</a></td>
+<td class="map-length">8</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/46817.html">Player 2 overlay state block.</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+9-byte block reusing the same layout as the head state block at <a href="../asm/46809.html">head_state</a>, allowing <a href="../asm/38103.html">render_head_tile</a> and <a href="../asm/38158.html">head_mirroring</a> to serve both renderers without modification.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="46834"></span><a href="../asm/46834.html">46834</a></td>
+<td class="map-length">1</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/46834.html">Horizontal distance between fighters.</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+Computed by <a href="../asm/39856.html">calc_distance</a> as absolute difference of tile X positions.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="47429"></span><a href="../asm/47429.html">47429</a></td>
+<td class="map-length">2</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/47429.html">Player 1 score buffer.</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+In this address the player's 1 score is stored.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="47431"></span><a href="../asm/47431.html">47431</a></td>
+<td class="map-length">2</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/47431.html">Player 2 score buffer.</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+In this address the player's 2 score is stored.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="47433"></span><a href="../asm/47433.html">47433</a></td>
+<td class="map-length">5</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/47433.html">P1 keyboard scancode table.</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+5-byte table: Fire, Up, Down, Left, Right scancodes for P1 (controller type 1).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="47438"></span><a href="../asm/47438.html">47438</a></td>
+<td class="map-length">1</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/47438.html">Pause key Scancode Buffer</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+Pause Scancode Buffer only configurable when choosing keyboard.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="47439"></span><a href="../asm/47439.html">47439</a></td>
+<td class="map-length">1</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/47439.html">Quit Scancode Buffer</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+Quit scancode buffer only configurable when choosing keyboard.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="47440"></span><a href="../asm/47440.html">47440</a></td>
+<td class="map-length">5</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/47440.html">P2 keyboard scancode table.</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+5-byte table: Fire, Up, Down, Left, Right scancodes for P2 (controller type 2).
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="47455"></span><a href="../asm/47455.html">47455</a></td>
+<td class="map-length">3</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/47455.html">Mask scratch buffer</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+Temporary 3-byte copy of framebuffer bytes before AND-masking for sprite transparency. Written by <a href="../asm/37159.html">tile_renderer</a>. Read by <a href="../asm/37159.html#37200">37200</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="47474"></span><a href="../asm/47474.html">47474</a></td>
+<td class="map-length">1</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/47474.html">ISR frame counter</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+Incremented each interrupt (50 Hz PAL). When it reaches 9 it is reset to 0.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="47475"></span><a href="../asm/47475.html">47475</a></td>
+<td class="map-length">1</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/47475.html">2-frame animation and hit-detection gate counter.</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+Incremented each frame by <a href="../asm/40092.html">frame_counter_hit_inc</a>. Cycles 0-1-0-1.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="map-g"><span id="47558"></span><a href="../asm/47558.html">47558</a></td>
+<td class="map-length">1</td>
+<td class="map-g-desc">
+<div class="map-entry-title-11"><a class="map-entry-title" href="../asm/47558.html">Fight counter.</a></div>
+<div class="map-entry-desc">
+<div class="paragraph">
+Tracks how many combats have been played in the current session. Range 0-7.
+</div>
+</div>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../buffers/gbuffer.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Barbarian the Ultimate Warrior P1: Routine at 39317</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-barbarian.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-plum.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="39258.html">39258</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#39317">Map</a></td>
+<td class="next">
+Next: <a href="39367.html">39367</a>
+</td>
+</tr>
+</table>
+<div class="description">39317: Snake animation phase stepper.</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Used by the routine at <a href="39258.html">draw_snakes_sprites</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="39317"></span>
+<div class="comments">
+<div class="paragraph">
+Advances the draw phase index in the high nibble of IY+7 by 1 each call, leaving the current energy value in the low nibble intact.
+</div>
+<div class="paragraph">
+When the index reaches 14 the animation cycle is complete and it resets to 0 (idle). Uses the resulting index to resolve a pointer to the corresponding snake sprite frame via the table at <a href="47528.html">snake_pointer_table</a>.
+</div>
+<div class="paragraph">
+IY+7 byte layout: bits 7-4 draw phase (0 idle, 1-13 active, 14-&gt;0 wrap); bits 3-0 current energy value (0-13).
+</div>
+<div class="paragraph">
+INPUT: IY = character state block (<a href="46425.html">p1_controller_type</a> P1 or <a href="46434.html">p2_controller_type</a> P2).
+</div>
+<div class="paragraph">
+OUTPUT: A = first byte of the snake sprite frame. DE = pointer to the next byte.
+</div>
+<div class="paragraph">
+DESTROYS: AF, BC, DE, HL.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">update_snake_frame_id</td>
+<td class="address-2"><span id="39317"></span>39317</td>
+<td class="instruction">LD A,(IY+7)</td>
+<td class="comment-1" rowspan="1">Load packed energy/phase byte from IY+7.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39320"></span>39320</td>
+<td class="instruction">AND 240</td>
+<td class="comment-1" rowspan="7">Extract the draw phase index from the high nibble and advance it by 1.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39322"></span>39322</td>
+<td class="instruction">RLCA</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39323"></span>39323</td>
+<td class="instruction">RLCA</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39324"></span>39324</td>
+<td class="instruction">RLCA</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39325"></span>39325</td>
+<td class="instruction">RLCA</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39326"></span>39326</td>
+<td class="instruction">INC A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39327"></span>39327</td>
+<td class="instruction">LD B,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39328"></span>39328</td>
+<td class="instruction">RRCA</td>
+<td class="comment-1" rowspan="5">Shift the incremented index back to the high nibble position.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39329"></span>39329</td>
+<td class="instruction">RRCA</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39330"></span>39330</td>
+<td class="instruction">RRCA</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39331"></span>39331</td>
+<td class="instruction">RRCA</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39332"></span>39332</td>
+<td class="instruction">LD C,A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39333"></span>39333</td>
+<td class="instruction">LD A,(IY+7)</td>
+<td class="comment-1" rowspan="4">Merge the updated phase index with the preserved energy nibble and write back to IY+7.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39336"></span>39336</td>
+<td class="instruction">AND 15</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39338"></span>39338</td>
+<td class="instruction">OR C</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39339"></span>39339</td>
+<td class="instruction">LD (IY+7),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39342"></span>39342</td>
+<td class="instruction">LD A,B</td>
+<td class="comment-1" rowspan="2">Check whether the 14-step animation cycle has completed.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39343"></span>39343</td>
+<td class="instruction">CP 14</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39345"></span>39345</td>
+<td class="instruction">JR NZ,<a href="39317.html#39356">update_snake_frame_id_0</a></td>
+<td class="comment-1" rowspan="1">Cycle not complete - jump to table lookup with the current phase index.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39347"></span>39347</td>
+<td class="instruction">LD A,(IY+7)</td>
+<td class="comment-1" rowspan="3">Cycle complete - clear the phase index in IY+7, resetting the bar to idle.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39350"></span>39350</td>
+<td class="instruction">AND 15</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39352"></span>39352</td>
+<td class="instruction">LD (IY+7),A</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39355"></span>39355</td>
+<td class="instruction">XOR A</td>
+<td class="comment-1" rowspan="1">Use index 0 to address the idle-state table entry.</td>
+</tr>
+<tr>
+<td class="asm-label">update_snake_frame_id_0</td>
+<td class="address-2"><span id="39356"></span>39356</td>
+<td class="instruction">LD HL,47528</td>
+<td class="comment-1" rowspan="1">Load snake animation pointer table base <a href="47528.html">snake_pointer_table</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39359"></span>39359</td>
+<td class="instruction">CALL <a href="38304.html">solve_pointer</a></td>
+<td class="comment-1" rowspan="1">Resolve the sprite frame pointer for the current phase index via <a href="38304.html">solve_pointer</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39362"></span>39362</td>
+<td class="instruction">PUSH HL</td>
+<td class="comment-1" rowspan="4">Transfer the frame pointer, load the first sprite byte, and advance past it.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39363"></span>39363</td>
+<td class="instruction">POP DE</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39364"></span>39364</td>
+<td class="instruction">LD A,(DE)</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39365"></span>39365</td>
+<td class="instruction">INC E</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="39366"></span>39366</td>
+<td class="instruction">RET</td>
+<td class="comment-1" rowspan="1">Return.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="39258.html">39258</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#39317">Map</a></td>
+<td class="next">
+Next: <a href="39367.html">39367</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1987 Palace Software.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 9.6.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/enkonsierto/barbariantheultimatewarriorp1/">Source code</a>.</div>
+<div><a href="../../asm/9995.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>
