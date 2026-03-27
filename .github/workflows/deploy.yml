@@ -23,7 +23,7 @@ jobs:
           mkdir -p ../skoolkit-9.6/tools
           curl -sL https://github.com/skoolkid/skoolkit/archive/refs/tags/9.6.tar.gz \
             | tar -xz --strip-components=1 -C ../skoolkit-9.6
-          make html HTML_OPTIONS="-T barbarian -T plum -T wide -toOa"
+          make html HTML_OPTIONS="-T plum -T wide -T barbarian -toOa"
 
       - name: Listar build
         run: |
