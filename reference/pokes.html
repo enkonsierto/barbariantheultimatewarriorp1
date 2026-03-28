@@ -30,16 +30,22 @@ gtag('config', 'G-75RERFCHBG');
 <div class="box box-1">
 <div class="box-title">Infinite Energy</div>
 <div class="paragraph">
-Player 1 has infinite energy.
+POKE <a href="../asm/8D74.html#8d7a">8D7C</a>,00
 </div>
 <div class="paragraph">
-POKE 36220 0 (<a href="../asm/8D74.html#8d7a">8D7A</a>): LD (99CB),A > LD (CB),A (tries to write in the ROM zone = does nothing).
+<code>LD (99CB),A > LD (CB),A</code><br \> (tries to write in the ROM zone = does nothing).
 </div>
 <div class="paragraph">
-POKE 36516 0 (<a href="../asm/8E9C.html#8ea2">8EA2</a>): LD (99CB),A > LD (CB),A (tries to write in the ROM zone = does nothing).
+POKE <a href="../asm/8E9C.html#8ea2">8EA4</a>,00
 </div>
 <div class="paragraph">
-POKE 39371 200 (<a href="../asm/99C7.html#99cb">p1_energy_gate</a>): If the code was ever patched to NOP, this poke restores RET Z, so P1 never decrements its energy.
+<code>LD (99CB),A > LD (CB),A</code><br \> (tries to write in the ROM zone = does nothing).
+</div>
+<div class="paragraph">
+POKE <a href="../asm/99C7.html#99cb">99CB</a>,C8
+</div>
+<div class="paragraph">
+If this poke was applied later after setting the controls, (when <a href="../asm/99C7.html#99cb">p1_energy_gate</a> was patched to NOP), this poke restores RET Z, so P1 never decrements its energy.
 </div>
 <div class="paragraph">
 Those pokes avoid the self-modify patch that enables the P1 depletion.
