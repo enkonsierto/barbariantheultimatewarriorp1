@@ -8,8 +8,8 @@ Created using [SkoolKit](https://skoolkit.ca) and [SkoolKit-Scaffolding](https:/
 
 Browse the latest release:
 
-* [Barbarian the Ultimate Warrior P1 disassembly](https://enkonsierto.github.io/barbariantheultimatewarriorp1/) (hexadecimal)
-* [Barbarian the Ultimate Warrior P1 disassembly](https://enkonsierto.github.io/barbariantheultimatewarriorp1/dec/) (decimal)
+* [Barbarian the Ultimate Warrior P1 disassembly](https://enkorsan.github.io/barbariantheultimatewarriorp1/) (hexadecimal)
+* [Barbarian the Ultimate Warrior P1 disassembly](https://enkorsan.github.io/barbariantheultimatewarriorp1/dec/) (decimal)
 
 To build the current development version, first either install SkoolKit, or
 make a clone of the [SkoolKit repository](https://github.com/skoolkid/skoolkit)
